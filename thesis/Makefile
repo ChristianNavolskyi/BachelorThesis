@@ -13,10 +13,10 @@
 	  @echo "This target needs remaking: default = [$<]"
 	  @echo "Do you really use GNU-Make?"
 
-MAINFILE       := diplarb
+MAINFILE       := BachelorThesis
 TITLEPAGE      := titelseite
 TEXSOURCES     := $(wildcard *.tex)
-BIBSRCFILES    := $(wildcard *.bib) 
+BIBSRCFILES    := $(wildcard *.bib)
 BBLFILES       := $(subst bib,bbl,$(BIBSRCFILES))
 AUXFILES       := $(subst tex,aux,$(TEXSOURCES))
 SCRIPTDIR      := scripts
@@ -56,7 +56,7 @@ double: $(MAINFILE).tex
 index: $(MAINFILE).ind
 
 #makeindex kann keine 8-bit Umlaute richtig sortieren! :-(
-#deswegen setzen wir sie für makeindex einfach nochmal um
+#deswegen setzen wir sie fï¿½r makeindex einfach nochmal um
 $(MAINFILE).ind: $(MAINFILE).idx $(MAINFILE).ist
 	- mv $(MAINFILE).idx $(MAINFILE).idx.orig
 	- $(SCRIPTDIR)/recodetexumlaut <$(MAINFILE).idx.orig >$(MAINFILE).idx
@@ -77,6 +77,7 @@ fullrun: $(MAINFILE).tex $(TEXSOURCES)
 	- pdflatex $(MAINFILE)
 	- $(MAKE) index
 	- pdflatex $(MAINFILE)
+	- make clean
 
 zipps: $(MAINFILE).pdf
 	       gzip -p $(MAINFILE).pdf
@@ -87,12 +88,12 @@ clean:
 
 archive:
 	- @ echo "Making archive..."
-	- gtar -czvf $(MAINFILE).tar.gz $(SOURCES)  images/*.pdf logos/*.pdf Makefile 
+	- gtar -czvf $(MAINFILE).tar.gz $(SOURCES)  images/*.pdf logos/*.pdf Makefile
 	- @ echo "Archive ready."
 
 dist:
 	- @ echo "Making distribution..."
-	- tar --exclude .svn -czvf wissdoctemplate.tar.gz $(DISTFILES) 
+	- tar --exclude .svn -czvf wissdoctemplate.tar.gz $(DISTFILES)
 	- mkdir wissdoc; cd wissdoc; tar -xzvf ../wissdoctemplate.tar.gz;\
 	  cd ..; tar -czvf wissdoctemplate.tar.gz wissdoc; rm -rf wissdoc
 	- @ echo "Archive ready."
