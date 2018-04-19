@@ -1,3 +1,12 @@
+# Hardware
+- cpu
+  - Intel Core i7-3770K @ 3.5GHz
+- GPU
+  - NVIDIA GeForce GTX 670
+- RAM
+  - 16GB
+  - 1600MHz
+
 # Software
 ## multiRunner
 - save folder size of database
