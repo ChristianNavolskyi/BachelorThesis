@@ -8,16 +8,7 @@
   - 1600MHz
 
 # Software
-## multiRunner
-- save folder size of database
-- don't remove file but insert stamp at beginning
-
-## HDRProcessor
-- Process measurements with hdrhistogram
-
 ## Core
-- read all properties in GraphWorkload (field = null)
-- Scalability for generation of data
 - Update will always create new value/cannot be recorded
 
 ## database-binding implementation mapping
@@ -29,31 +20,15 @@ Key has special position as it must be enough to look up a node/edge.
 
 Labels or Id you have to consider reading them again from the database
 
-How has the API be made to fit into our structure AND WHY (Design)
+How has the API be implemented to fit into our structure AND WHY (Design)
 
 ## Neo4j
-Looking up edges (relationships) is not directly supported.
+Looking up edges (relationships) is not directly supported without index.
 
 ## Sparksee
 Maximum Size of values is 2048 Characters (2KB)
-add changed to feature
-remove sparksee-binding
-recreate sparksee-binding from new feature
-check dependencies for rebase
-rebase
-
-## Configurations
-- Datasets should be distinguishable
-- Where are the results stored?
-- everything possible with only nodes
-
-## Running script for multiple workloads and other options
-- organise results per database
-- Script to specify runs
-- evaluate hdr files
 
 # Thesis structure
-
 ## Evaluation
 - Comparison with other paper result
 
@@ -65,7 +40,6 @@ System load (mem, cpu etc.)
 
 
 # Papers
-
 ## How Well du Graph-Processing Platforms Perform?
 Table 1 - good example of how to show measurements
 
