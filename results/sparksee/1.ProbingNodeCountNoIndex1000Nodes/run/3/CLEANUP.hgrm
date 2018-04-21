@@ -1,0 +1,9 @@
+#[Overall percentile distribution between 0.000 and <Infinite> seconds (relative to StartTime)]
+#[StartTime: 1524284396.455 (seconds since epoch), Sat Apr 21 06:19:56 CEST 2018]
+       Value     Percentile TotalCount 1/(1-Percentile)
+
+     209.663 0.000000000000          1           1.00
+     209.663 1.000000000000          1
+#[Mean    =      209.600, StdDeviation   =        0.000]
+#[Max     =      209.663, Total count    =            1]
+#[Buckets =            8, SubBuckets     =         2048]
