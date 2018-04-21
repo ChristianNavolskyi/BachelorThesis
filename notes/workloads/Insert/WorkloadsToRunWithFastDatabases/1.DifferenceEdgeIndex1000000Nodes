@@ -1,18 +1,18 @@
 workload=com.yahoo.ycsb.workloads.GraphWorkload
 
 recordcount=1
-operationcount=10000
+operationcount=1000000
 
 productsperorder=1
 componentsperproduct=1
 testparametercount=1
-fieldlength=100
+fieldlength=10
 
 insertproportion=1
 readproportion=0
 updateproportion=0
 
-onlynodes=false
+onlynodes=true
 
 neo4j.index=true
 orientdb.index=true

@@ -6,7 +6,7 @@ operationcount=10000
 productsperorder=1
 componentsperproduct=1
 testparametercount=1
-fieldlength=100
+fieldlength=1000
 
 insertproportion=1
 readproportion=0

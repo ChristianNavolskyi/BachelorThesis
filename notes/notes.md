@@ -6,6 +6,9 @@
 - RAM
   - 16GB
   - 1600MHz
+- Storage
+  - 400GB Partition of 2TB drive
+  - 
 
 # Software
 ## Core
