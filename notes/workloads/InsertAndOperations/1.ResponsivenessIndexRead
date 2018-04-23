@@ -1,6 +1,6 @@
 workload=com.yahoo.ycsb.workloads.GraphWorkload
 
-recordcount=1
+recordcount=
 operationcount=
 
 productsperorder=
