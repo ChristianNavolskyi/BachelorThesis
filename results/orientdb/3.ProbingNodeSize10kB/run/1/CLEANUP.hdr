@@ -1,0 +1,6 @@
+#[Logging for: CLEANUP]
+#[Histogram log format version 1.1]
+#[StartTime: 1524485321.876 (seconds since epoch), Mon Apr 23 14:08:41 CEST 2018]
+"StartTimestamp","Interval_Length","Interval_Max","Interval_Compressed_Histogram"
+0.000,0.010,0.000,HISTggAAACJ42pNpmdzIwMCkwQABzFCaEUoz2X9gGAWjgFjACADy+AMV
+0.010,0.026,0.000,HISTggAAAB142pNpmdzIwMDAwQABzFCaEUoz2X9gQAEAYqkC8g==

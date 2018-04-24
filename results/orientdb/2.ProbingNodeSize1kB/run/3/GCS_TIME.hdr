@@ -1,0 +1,6 @@
+#[Logging for: GCS_TIME]
+#[Histogram log format version 1.1]
+#[StartTime: 1524452863.375 (seconds since epoch), Mon Apr 23 05:07:43 CEST 2018]
+"StartTimestamp","Interval_Length","Interval_Max","Interval_Compressed_Histogram"
+0.000,7.563,0.000,HISTggAAACV42pNpmdzIwMAkwQABzFCaEUoz2X9gQAaMDKNgFCClBwCgOQMG
+7.563,0.037,0.000,HISTggAAAB142pNpmdzIwMDAwQABzFCaEUoz2X9gQAEAYqkC8g==

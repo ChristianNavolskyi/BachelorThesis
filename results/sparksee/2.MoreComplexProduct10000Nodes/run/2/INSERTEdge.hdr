@@ -1,0 +1,6 @@
+#[Logging for: INSERTEdge]
+#[Histogram log format version 1.1]
+#[StartTime: 1524409707.950 (seconds since epoch), Sun Apr 22 17:08:27 CEST 2018]
+"StartTimestamp","Interval_Length","Interval_Max","Interval_Compressed_Histogram"
+0.000,1.900,0.001,HISTggAAARR42u2XvUoDQRRGZ/Ynu7DBuMafBEQLielsU6SwDVgJthZ5jlSCla2PY21j7WsIPoJFvjQfDGzEgJBzmsPcubN7Z+/swp4/vz6FcLMIa3I5ytntd4D/Tyn35IH8oTZO1NZW8QeN52sXj1qucXmndZ/Ke9O4L78o/iWPdN13eSUv5Xt5Jl/LU/lKvpCHto9L+djmT+SxfCg3lj+yvFO5tftUsvYZanuuPYtX5truv6nzQD6yeGPxM9vHwOKt1dEk6qoT9W/qzOw9z80+73mFnb/C8nwc/LuSiKeIf7S+63xM+LfX3xWxY/3b1pl13H8MsA/QZ/oL9Ak4XwCcGwAAAAAAAAD+8wEAAAAAAGDP/x9/AB4GDqA=
+1.900,0.028,0.000,HISTggAAAB142pNpmdzIwMDAwQABzFCaEUoz2X9gQAEAYqkC8g==

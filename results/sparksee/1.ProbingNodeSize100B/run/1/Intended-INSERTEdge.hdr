@@ -1,0 +1,6 @@
+#[Logging for: Intended-INSERTEdge]
+#[Histogram log format version 1.1]
+#[StartTime: 1524383062.746 (seconds since epoch), Sun Apr 22 09:44:22 CEST 2018]
+"StartTimestamp","Interval_Length","Interval_Max","Interval_Compressed_Histogram"
+0.000,2.134,0.001,HISTggAAASB42u2WzWrCQBSFZ/JnSmqjRkQhmxShpduC4Mql4MK1ryPkBcQnELr0GbrqI/gg3XbVLnJm0QNDtT+I9Hybj9ybmbmZmWRS1tu1MdW9aQhhCwezVyMuD7d+EdyCJ0hjVcMn+NA4eW+cvjSOd8jXcA/bYg+v0N8bvMA4z/AGXsLzz3WYR3gK38EVXd/CI3gA5/AVxQu4C/fhMfwAl9T+Gs7IbfjGM6+ufULxhPrpUN0d8pCes0f1F3R/Qe1yT72uvtRTd0bvf0p5Fw/IEe07F48pHnvy3J8l+/b1sfnv3v9b75/9Yfuv4pbmzze+b559/Z66HubI57Unxv/6+/jfzgNxWfNite5CCKFzRgghhBBC6L9LCCGE0Pl+/no+AM3DEW0=
+2.134,0.023,0.000,HISTggAAAB142pNpmdzIwMDAwQABzFCaEUoz2X9gQAEAYqkC8g==

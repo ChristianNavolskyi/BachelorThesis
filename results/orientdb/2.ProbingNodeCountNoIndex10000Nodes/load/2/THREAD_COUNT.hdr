@@ -1,7 +1,7 @@
 #[Logging for: THREAD_COUNT]
 #[Histogram log format version 1.1]
-#[StartTime: 1524292223.876 (seconds since epoch), Sat Apr 21 08:30:23 CEST 2018]
+#[StartTime: 1524434609.258 (seconds since epoch), Mon Apr 23 00:03:29 CEST 2018]
 "StartTimestamp","Interval_Length","Interval_Max","Interval_Compressed_Histogram"
 0.009,9.987,0.000,HISTggAAAB942pNpmdzIwMCgwAABzFCaEUoz2X9gIAYwAgCvcgML
-9.996,5.710,0.000,HISTggAAACF42pNpmdzIwMDgwAABzFCaEUoz2X9goATAzGEEABzqAyw=
-15.706,0.039,0.000,HISTggAAAB142pNpmdzIwMDAwQABzFCaEUoz2X9gQAEAYqkC8g==
+9.996,8.107,0.000,HISTggAAACF42pNpmdzIwMDgwAABzFCaEUoz2X9goATAzGEEABzqAyw=
+18.103,0.043,0.000,HISTggAAAB142pNpmdzIwMDAwQABzFCaEUoz2X9gQAEAYqkC8g==

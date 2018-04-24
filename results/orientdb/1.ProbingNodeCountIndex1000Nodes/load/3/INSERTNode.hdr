@@ -1,6 +1,6 @@
 #[Logging for: INSERTNode]
 #[Histogram log format version 1.1]
-#[StartTime: 1524264039.663 (seconds since epoch), Sat Apr 21 00:40:39 CEST 2018]
+#[StartTime: 1524367144.986 (seconds since epoch), Sun Apr 22 05:19:04 CEST 2018]
 "StartTimestamp","Interval_Length","Interval_Max","Interval_Compressed_Histogram"
-0.000,0.021,0.004,HISTggAAAEt42u3FMRGAMBAAsP+rgBrAC07qhTsc1Bwy6qAMz46BZMlxzytiPFHad1Z9nysAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOBPvh3GBS0=
-0.021,0.029,0.000,HISTggAAAB142pNpmdzIwMDAwQABzFCaEUoz2X9gQAEAYqkC8g==
+0.000,0.022,0.004,HISTggAAAEl42u3FQQ2AMBAAsLtMwAzgBRmzwpdkDjA6B+NxqCDtp8d87ohxRWnfWfV9rgAAAAAAAAAAAAAAAAAAAAAAAAAAAIC/yRe2WgTG
+0.022,0.030,0.000,HISTggAAAB142pNpmdzIwMDAwQABzFCaEUoz2X9gQAEAYqkC8g==
