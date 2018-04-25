@@ -23,9 +23,6 @@ Industrial Data als Use case
 Anna implementieren oder in Related Work
 
 
-EasyK3nnw0rtBox
-
-
 ## Analysis
 
 ## Design
