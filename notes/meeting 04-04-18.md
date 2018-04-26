@@ -1,8 +1,7 @@
 # General
-
 "Graphzeichenprogramme" raussuchen
 
-Hochaufgelöste Grafiken verwenden, am besten Vektorgrafiken
+Use high quality graphics, best would be vector graphics
 
 ## Spell checking
 - Hammingway editor
@@ -10,22 +9,27 @@ Hochaufgelöste Grafiken verwenden, am besten Vektorgrafiken
 - Schreibberatung im HoC
 
 ## Melden wenn
-- Resultate
-- oder Table of Contents erweitert
+- Results
+- extend Table of Contents
 
 # Thesis
-Mehr Unterpunkte bei allem
-
 ## Introduction
-Industrial Data als Use case
+- Industrial Data as Use case
 
 ## Background
-Anna implementieren oder in Related Work
+- Implement Anna oder in Related Work
 
+### Industrial Data
+- __Maybe small example graph__
 
 ## Analysis
+- __More detailed example graph to show structure__
+- __Activity diagram of YCSB before my changes__
 
 ## Design
+- __Activity diagram with my changes to show the procedure of the benchmark__
+- __Visualise creation of data__
+
 System architekture (Design - Bauplan)
 - Software - Warum so, weil Benchmark so
   - Wie an das Bestehende anbinden
@@ -41,11 +45,12 @@ System architekture (Design - Bauplan)
 Aktivitätsdiagramm für Ablauf des Benchmark
 
 ## Implementation
-Klassendiagramm in Implementierung
-
-Welche Parameter gibt es zum Verstellen
+- __Class diagram with my implementation__
+- Available parameters and what they do
+  - __Graph(s) to visualise changes by parameters__
 
 ## Evaluation
+- __Visualise generic benchmark run (with multi-db-runner.sh)__
 Zeitspanne abbilden
 
 Alle Daten am Anfang laden könnte Probleme machen mit zu viel Daten

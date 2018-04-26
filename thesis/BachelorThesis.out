@@ -1,0 +1,104 @@
+\BOOKMARK [0][]{Contents.0}{Contents}{}% 1
+\BOOKMARK [0][]{chapter.1}{1 Introduction}{}% 2
+\BOOKMARK [1][-]{section.1.1}{1.1 Problem Statement}{chapter.1}% 3
+\BOOKMARK [2][-]{subsection.1.1.1}{1.1.1 Use Case - Industry 4.0}{section.1.1}% 4
+\BOOKMARK [3][-]{subsubsection.1.1.1.1}{1.1.1.1 Inserting Data}{subsection.1.1.1}% 5
+\BOOKMARK [3][-]{subsubsection.1.1.1.2}{1.1.1.2 Reading Data}{subsection.1.1.1}% 6
+\BOOKMARK [1][-]{section.1.2}{1.2 Question}{chapter.1}% 7
+\BOOKMARK [1][-]{section.1.3}{1.3 Methodology}{chapter.1}% 8
+\BOOKMARK [1][-]{section.1.4}{1.4 Goal of this Thesis}{chapter.1}% 9
+\BOOKMARK [1][-]{section.1.5}{1.5 Structure}{chapter.1}% 10
+\BOOKMARK [0][]{chapter.2}{2 Background \046 Related Work}{}% 11
+\BOOKMARK [1][-]{section.2.1}{2.1 Industrial Data}{chapter.2}% 12
+\BOOKMARK [1][-]{section.2.2}{2.2 Graphs}{chapter.2}% 13
+\BOOKMARK [1][-]{section.2.3}{2.3 Graph Databases}{chapter.2}% 14
+\BOOKMARK [2][-]{subsection.2.3.1}{2.3.1 Triple Stores}{section.2.3}% 15
+\BOOKMARK [3][-]{subsubsection.2.3.1.1}{2.3.1.1 Apache Jena}{subsection.2.3.1}% 16
+\BOOKMARK [2][-]{subsection.2.3.2}{2.3.2 Document Stores}{section.2.3}% 17
+\BOOKMARK [3][-]{subsubsection.2.3.2.1}{2.3.2.1 OrientDB}{subsection.2.3.2}% 18
+\BOOKMARK [2][-]{subsection.2.3.3}{2.3.3 Graph Stores}{section.2.3}% 19
+\BOOKMARK [3][-]{subsubsection.2.3.3.1}{2.3.3.1 Neo4j}{subsection.2.3.3}% 20
+\BOOKMARK [3][-]{subsubsection.2.3.3.2}{2.3.3.2 Sparksee}{subsection.2.3.3}% 21
+\BOOKMARK [1][-]{section.2.4}{2.4 Graph Database Benchmarks}{chapter.2}% 22
+\BOOKMARK [2][-]{subsection.2.4.1}{2.4.1 LDBC: Graphalytics}{section.2.4}% 23
+\BOOKMARK [2][-]{subsection.2.4.2}{2.4.2 XGDBench}{section.2.4}% 24
+\BOOKMARK [2][-]{subsection.2.4.3}{2.4.3 YCSB}{section.2.4}% 25
+\BOOKMARK [1][-]{section.2.5}{2.5 Related Work}{chapter.2}% 26
+\BOOKMARK [2][-]{subsection.2.5.1}{2.5.1 Graph Database: Anna}{section.2.5}% 27
+\BOOKMARK [2][-]{subsection.2.5.2}{2.5.2 TODO: Add more}{section.2.5}% 28
+\BOOKMARK [0][]{chapter.3}{3 Analysis}{}% 29
+\BOOKMARK [1][-]{section.3.1}{3.1 Data}{chapter.3}% 30
+\BOOKMARK [2][-]{subsection.3.1.1}{3.1.1 Data Structure NOTE: Here or in Design?}{section.3.1}% 31
+\BOOKMARK [2][-]{subsection.3.1.2}{3.1.2 Data Amount}{section.3.1}% 32
+\BOOKMARK [1][-]{section.3.2}{3.2 Workloads}{chapter.3}% 33
+\BOOKMARK [2][-]{subsection.3.2.1}{3.2.1 Inserting Data into the Database}{section.3.2}% 34
+\BOOKMARK [2][-]{subsection.3.2.2}{3.2.2 Retrieving Data from the Database}{section.3.2}% 35
+\BOOKMARK [1][-]{section.3.3}{3.3 Benchmark - YCSB}{chapter.3}% 36
+\BOOKMARK [0][]{chapter.4}{4 Design}{}% 37
+\BOOKMARK [1][-]{section.4.1}{4.1 Data Structure}{chapter.4}% 38
+\BOOKMARK [1][-]{section.4.2}{4.2 Workloads}{chapter.4}% 39
+\BOOKMARK [2][-]{subsection.4.2.1}{4.2.1 Inserting}{section.4.2}% 40
+\BOOKMARK [2][-]{subsection.4.2.2}{4.2.2 Production Simulation}{section.4.2}% 41
+\BOOKMARK [2][-]{subsection.4.2.3}{4.2.3 Reading under load}{section.4.2}% 42
+\BOOKMARK [1][-]{section.4.3}{4.3 Extension of the Benchmark}{chapter.4}% 43
+\BOOKMARK [2][-]{subsection.4.3.1}{4.3.1 Generating a Dataset}{section.4.3}% 44
+\BOOKMARK [3][-]{subsubsection.4.3.1.1}{4.3.1.1 Storing the Dataset}{subsection.4.3.1}% 45
+\BOOKMARK [3][-]{subsubsection.4.3.1.2}{4.3.1.2 Restoring the Dataset}{subsection.4.3.1}% 46
+\BOOKMARK [2][-]{subsection.4.3.2}{4.3.2 Graph Workload}{section.4.3}% 47
+\BOOKMARK [2][-]{subsection.4.3.3}{4.3.3 Bindings}{section.4.3}% 48
+\BOOKMARK [3][-]{subsubsection.4.3.3.1}{4.3.3.1 Apache Jena}{subsection.4.3.3}% 49
+\BOOKMARK [3][-]{subsubsection.4.3.3.2}{4.3.3.2 Neo4j}{subsection.4.3.3}% 50
+\BOOKMARK [3][-]{subsubsection.4.3.3.3}{4.3.3.3 OrientDB}{subsection.4.3.3}% 51
+\BOOKMARK [3][-]{subsubsection.4.3.3.4}{4.3.3.4 Sparksee}{subsection.4.3.3}% 52
+\BOOKMARK [0][]{chapter.5}{5 Implementation of your Project}{}% 53
+\BOOKMARK [1][-]{section.5.1}{5.1 Graph Workload}{chapter.5}% 54
+\BOOKMARK [2][-]{subsection.5.1.1}{5.1.1 Parameters}{section.5.1}% 55
+\BOOKMARK [1][-]{section.5.2}{5.2 Graph Data Generator}{chapter.5}% 56
+\BOOKMARK [2][-]{subsection.5.2.1}{5.2.1 Parameters}{section.5.2}% 57
+\BOOKMARK [2][-]{subsection.5.2.2}{5.2.2 Graph Data Creator}{section.5.2}% 58
+\BOOKMARK [2][-]{subsection.5.2.3}{5.2.3 Graph Data Recreator}{section.5.2}% 59
+\BOOKMARK [1][-]{section.5.3}{5.3 Graph Database Bindings}{chapter.5}% 60
+\BOOKMARK [2][-]{subsection.5.3.1}{5.3.1 Apache Jena}{section.5.3}% 61
+\BOOKMARK [2][-]{subsection.5.3.2}{5.3.2 Neo4j}{section.5.3}% 62
+\BOOKMARK [2][-]{subsection.5.3.3}{5.3.3 OrientDB}{section.5.3}% 63
+\BOOKMARK [2][-]{subsection.5.3.4}{5.3.4 Sparksee}{section.5.3}% 64
+\BOOKMARK [0][]{chapter.6}{6 Evaluation}{}% 65
+\BOOKMARK [1][-]{section.6.1}{6.1 Objective}{chapter.6}% 66
+\BOOKMARK [1][-]{section.6.2}{6.2 Setup}{chapter.6}% 67
+\BOOKMARK [2][-]{subsection.6.2.1}{6.2.1 Hardware}{section.6.2}% 68
+\BOOKMARK [2][-]{subsection.6.2.2}{6.2.2 Software}{section.6.2}% 69
+\BOOKMARK [1][-]{section.6.3}{6.3 ExecutionNOTE: Scripts to run all benchmarks successively}{chapter.6}% 70
+\BOOKMARK [1][-]{section.6.4}{6.4 Maximum Load}{chapter.6}% 71
+\BOOKMARK [2][-]{subsection.6.4.1}{6.4.1 Probing Node CountNOTE: Comparing indexed to not indexed}{section.6.4}% 72
+\BOOKMARK [3][-]{subsubsection.6.4.1.1}{6.4.1.1 Results}{subsection.6.4.1}% 73
+\BOOKMARK [3][-]{subsubsection.6.4.1.2}{6.4.1.2 Discussion}{subsection.6.4.1}% 74
+\BOOKMARK [2][-]{subsection.6.4.2}{6.4.2 Probing Node SizeNOTE: See change over increasing node size}{section.6.4}% 75
+\BOOKMARK [3][-]{subsubsection.6.4.2.1}{6.4.2.1 Results}{subsection.6.4.2}% 76
+\BOOKMARK [3][-]{subsubsection.6.4.2.2}{6.4.2.2 Discussion}{subsection.6.4.2}% 77
+\BOOKMARK [1][-]{section.6.5}{6.5 Throughput}{chapter.6}% 78
+\BOOKMARK [2][-]{subsection.6.5.1}{6.5.1 Difference without Edges}{section.6.5}% 79
+\BOOKMARK [3][-]{subsubsection.6.5.1.1}{6.5.1.1 Results}{subsection.6.5.1}% 80
+\BOOKMARK [3][-]{subsubsection.6.5.1.2}{6.5.1.2 Discussion}{subsection.6.5.1}% 81
+\BOOKMARK [2][-]{subsection.6.5.2}{6.5.2 Product ComplexityNOTE: More child nodes.}{section.6.5}% 82
+\BOOKMARK [3][-]{subsubsection.6.5.2.1}{6.5.2.1 Results}{subsection.6.5.2}% 83
+\BOOKMARK [3][-]{subsubsection.6.5.2.2}{6.5.2.2 Discussion}{subsection.6.5.2}% 84
+\BOOKMARK [2][-]{subsection.6.5.3}{6.5.3 Production SuitabilityNOTE: Testing production like workload}{section.6.5}% 85
+\BOOKMARK [3][-]{subsubsection.6.5.3.1}{6.5.3.1 Results}{subsection.6.5.3}% 86
+\BOOKMARK [3][-]{subsubsection.6.5.3.2}{6.5.3.2 Discussion}{subsection.6.5.3}% 87
+\BOOKMARK [1][-]{section.6.6}{6.6 Responsiveness}{chapter.6}% 88
+\BOOKMARK [2][-]{subsection.6.6.1}{6.6.1 Reading under load}{section.6.6}% 89
+\BOOKMARK [3][-]{subsubsection.6.6.1.1}{6.6.1.1 Results}{subsection.6.6.1}% 90
+\BOOKMARK [3][-]{subsubsection.6.6.1.2}{6.6.1.2 Discussion}{subsection.6.6.1}% 91
+\BOOKMARK [2][-]{subsection.6.6.2}{6.6.2 Scanning under load}{section.6.6}% 92
+\BOOKMARK [3][-]{subsubsection.6.6.2.1}{6.6.2.1 Results}{subsection.6.6.2}% 93
+\BOOKMARK [3][-]{subsubsection.6.6.2.2}{6.6.2.2 Discussion}{subsection.6.6.2}% 94
+\BOOKMARK [0][]{chapter.7}{7 Conclusion and Future Work}{}% 95
+\BOOKMARK [1][-]{section.7.1}{7.1 Conclusion}{chapter.7}% 96
+\BOOKMARK [2][-]{subsection.7.1.1}{7.1.1 Suitability}{section.7.1}% 97
+\BOOKMARK [2][-]{subsection.7.1.2}{7.1.2 General Performance of Databases}{section.7.1}% 98
+\BOOKMARK [1][-]{section.7.2}{7.2 Future Work}{chapter.7}% 99
+\BOOKMARK [2][-]{subsection.7.2.1}{7.2.1 More Bindings}{section.7.2}% 100
+\BOOKMARK [2][-]{subsection.7.2.2}{7.2.2 Concurrency}{section.7.2}% 101
+\BOOKMARK [2][-]{subsection.7.2.3}{7.2.3 Other input methodsNOTE: I only used native Java APIs, to directly test the database.}{section.7.2}% 102
+\BOOKMARK [2][-]{subsection.7.2.4}{7.2.4 WorkloadsTODO: what kind?}{section.7.2}% 103
+\BOOKMARK [0][]{chapter.8}{8 Summary}{}% 104
