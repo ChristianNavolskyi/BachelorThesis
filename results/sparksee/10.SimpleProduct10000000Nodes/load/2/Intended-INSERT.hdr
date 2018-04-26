@@ -1,0 +1,6 @@
+#[Logging for: Intended-INSERT]
+#[Histogram log format version 1.1]
+#[StartTime: 1524639952.603 (seconds since epoch), Wed Apr 25 09:05:52 CEST 2018]
+"StartTimestamp","Interval_Length","Interval_Max","Interval_Compressed_Histogram"
+0.000,0.332,0.001,HISTggAAADd42u3FQQ2AMBQFsPfBxkJwMm0kczCjk8CBuaC9tI35JNedz7mv/dFXAAAAAAAAAPiPegFsvwMp
+0.332,0.020,0.000,HISTggAAAB142pNpmdzIwMDAwQABzFCaEUoz2X9gQAEAYqkC8g==

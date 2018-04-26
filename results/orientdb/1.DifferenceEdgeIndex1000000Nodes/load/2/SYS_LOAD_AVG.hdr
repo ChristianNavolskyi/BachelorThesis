@@ -1,0 +1,7 @@
+#[Logging for: SYS_LOAD_AVG]
+#[Histogram log format version 1.1]
+#[StartTime: 1524640376.305 (seconds since epoch), Wed Apr 25 09:12:56 CEST 2018]
+"StartTimestamp","Interval_Length","Interval_Max","Interval_Compressed_Histogram"
+0.001,9.993,0.000,HISTggAAAB542pNpmdzIwMAgwAABzFCaEUoz2X9gwAYYAXvCAvs=
+9.994,7.419,0.000,HISTggAAAB542pNpmdzIwMAgwAABzFCaEUoz2X9gwAaYAHvDAvw=
+17.413,0.037,0.000,HISTggAAAB142pNpmdzIwMDAwQABzFCaEUoz2X9gQAEAYqkC8g==
