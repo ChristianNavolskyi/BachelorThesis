@@ -1,0 +1,7 @@
+#[Logging for: READNode]
+#[Histogram log format version 1.1]
+#[StartTime: 1524826790.637 (seconds since epoch), Fri Apr 27 12:59:50 CEST 2018]
+"StartTimestamp","Interval_Length","Interval_Max","Interval_Compressed_Histogram"
+0.000,8.345,0.000,HISTggAAALl42u1VSQ4CMQyzU0DiMD/gL1z5FhI/4KM8gQOdSyQraRmhDmouVjups3nay+N5B5YbPlYqsqJdX5i2f6PYLw4PAo+Oh+7cWfCsa6t4Ejzm/OH2TejT89Plq+JR9MWC+BR+DNbWWS+D7ybyifiY1EfWn0HeSOab1W903pJ1IdCj8i9Cj619RaOO2Fk3v8Rs/CgvdM6/VSf8EQ8774Gt7u/R3xdu/H+MVt/e5ze6rma/5tz+Sj9vAS0EDA==
+8.345,1.781,0.000,HISTggAAAFt42pNpmdzIwMC6gAECmKE0I5Rmsv/AMAoGH2BCjyc0PgcaDZNnx6GeGc18Rhz2MhKQZyBSnlh9uOxjojD8GMkMb2r7d6DTD7XUDbT/GSlUN1jjj2h/AQApCgPL
+10.126,0.030,0.000,HISTggAAAB142pNpmdzIwMDAwQABzFCaEUoz2X9gQAEAYqkC8g==

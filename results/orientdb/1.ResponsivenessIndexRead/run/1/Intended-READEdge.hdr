@@ -1,0 +1,7 @@
+#[Logging for: Intended-READEdge]
+#[Histogram log format version 1.1]
+#[StartTime: 1524826790.436 (seconds since epoch), Fri Apr 27 12:59:50 CEST 2018]
+"StartTimestamp","Interval_Length","Interval_Max","Interval_Compressed_Histogram"
+0.000,8.593,0.000,HISTggAAALx42u1WQQ7CQAicoY3x5gf8i1e/ZeIP/KhP6MGuBxIyuKKxZudCoMDSGbrp8Xq7AIczHphWy9Xa6Y6B7YEi3nSeA/+pv4s3uwvqGvauHqLf7J5bMAcCP8qDm9P3pYgzmMuS/JrQI6sbxFwI+KHgK+tnMXXuI4QeKp8vnqf6RHmW7NerL4J7GG/yUX1/ZPcfIr93P7L7xuT5VfxU1/NL3y2L35P4bdiH5qziixvnd2DgH/6XBwZK92wBM+UD+Q==
+8.593,1.757,0.000,HISTggAAAEx42pNpmdzIwMDBAAXMUJoRSjPZf2AYBUMHsEFpVjQ+M5o4K5o+RjQ+Ew5xYgHjAPmfcZDHDyOd9DPSKFwYR7PYKBgFIw4wAgDR8wMc
+10.350,0.024,0.000,HISTggAAAB142pNpmdzIwMDAwQABzFCaEUoz2X9gQAEAYqkC8g==
