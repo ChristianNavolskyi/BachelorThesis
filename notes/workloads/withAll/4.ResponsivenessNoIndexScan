@@ -6,14 +6,13 @@ operationcount=10000
 productsperorder=1
 componentsperproduct=1
 testparametercount=1
-fieldlength=1000000
+fieldlength=50
 
-insertproportion=1
+insertproportion=95
+scanproportion=5
 readproportion=0
 updateproportion=0
 
-onlynodes=false
+maxscanlength=100
 
-neo4j.index=true
-orientdb.index=true
-sparksee.index=true
+onlynodes=false

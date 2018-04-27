@@ -6,10 +6,13 @@ operationcount=100000
 productsperorder=1
 componentsperproduct=1
 testparametercount=1
-fieldlength=10
+fieldlength=50
 
-insertproportion=1
+insertproportion=95
+scanproportion=5
 readproportion=0
 updateproportion=0
 
-onlynodes=true
+maxscanlength=100
+
+onlynodes=false

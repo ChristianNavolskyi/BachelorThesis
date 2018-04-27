@@ -1,15 +1,15 @@
 workload=com.yahoo.ycsb.workloads.GraphWorkload
 
 recordcount=1
-operationcount=10000
+operationcount=100000
 
 productsperorder=1
 componentsperproduct=1
 testparametercount=1
-fieldlength=1000000
+fieldlength=50
 
-insertproportion=1
-readproportion=0
+insertproportion=95
+readproportion=5
 updateproportion=0
 
 onlynodes=false
