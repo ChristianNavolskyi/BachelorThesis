@@ -1,0 +1,4 @@
+#[Logging for: INITIALISE]
+#[Histogram log format version 1.1]
+#[StartTime: 1524782059.368 (seconds since epoch), Fri Apr 27 00:34:19 CEST 2018]
+"StartTimestamp","Interval_Length","Interval_Max","Interval_Compressed_Histogram"
