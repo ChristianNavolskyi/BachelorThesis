@@ -1,0 +1,9 @@
+#[Logging for: READEdge]
+#[Histogram log format version 1.1]
+#[StartTime: 1524893044.582 (seconds since epoch), Sat Apr 28 07:24:04 CEST 2018]
+"StartTimestamp","Interval_Length","Interval_Max","Interval_Compressed_Histogram"
+0.000,8.351,0.000,HISTggAAALt42u1UwQ0CMQxzEuDBDOzCl7WQ2IBFGeEeHB9LltMK0AnhT9SojZPYd6fb/QocL3ii1hhrzPMDf2wPSTpxHqQnhL47yu8p/7p3YF8I/mjeKzGXe5/0PkW9oHwNvktzDsGTQgfQXjnC1Fd1QLpFs+800fms6y83h+onjO8dn4PaTzX1zqY/FS8Mj5o3Bn1bpk6XLyf/T7N1sum3UXT7cP7tnmNyb4Hvovudjtb7VJ9bRfwYz9v7XgBb+gQo
+8.351,9.981,0.000,HISTggAAAL142u3UMQ7CMAwFUNsNbShiAAmJAQlxDCauwMwNGDkCEjdg5ZAcoQM/y5csizB0oF6emjp2HUXdPZ53kXyWTzRQoZ3e8g9R5u1gD5fwAC/wBW/wCo9wD7dw47iivnO4hgkuYAszfV9P+Znqlmej9Y7WyznMqF9L+Ynk/XyPOJ/zGqc/PxvlG8lhjsmpp848GtwbT3PyJagf9ZWgrgTnUbtfv3yvlfu1sn7tXLX/i7H7yUjzTzHFT/d5ANoMBxI=
+18.332,9.996,0.000,HISTggAAAIt42uXSuQ2AMAwFUDsk3BQUdIghWICeko2QmAAKVmMMRqDgV1+KOAoa0jw5sRNLTj0to0iwybkCqNB0u/xpGZjCCvZwhTMcYAsbWMAShjCGCYxIR/kZ1eUUR9Qv51uaq9C+0rkhLcXquc9QzP+I31NPHdc7T39K+eq5Ry/m/fRcb9a9zf/8vx/tYwbX
+28.328,4.745,0.000,HISTggAAAHN42pNpmdzIwMCWwAABzFCaEUoz2X9gGI4A7j8ozQ6lBaC0I5ROhtLxaHwnKK0IpSWgNDeU5kCjWaE0CxqfGU2cCUc8oLsblzgLAfXo/iYULoTMIeQudMBMQB26OBOR5hIyh9rphl7pcxSMgpEAGAG0pQWh
+33.073,0.030,0.000,HISTggAAAB142pNpmdzIwMDAwQABzFCaEUoz2X9gQAEAYqkC8g==

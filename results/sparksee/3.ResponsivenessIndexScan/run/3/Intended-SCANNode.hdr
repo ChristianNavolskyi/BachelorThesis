@@ -1,0 +1,6 @@
+#[Logging for: Intended-SCANNode]
+#[Histogram log format version 1.1]
+#[StartTime: 1524875612.219 (seconds since epoch), Sat Apr 28 02:33:32 CEST 2018]
+"StartTimestamp","Interval_Length","Interval_Max","Interval_Compressed_Histogram"
+0.000,5.032,0.007,HISTggAAAQF42u3bS2rDMBAAUH2cfu5Q6FF6qV6gkAMUetHeoF3EK8EwVmxKSt7bDBKSGGkse5O8nL8+Snn/LBd9jfUSXn/evgt/r06Ob0M8rfF5jQ9D/+Man4Z5dWgvSbsFebckz5LMH9tj/5KMb0GM8uvB+ZUkn5qcR1bXPrnvbN2+cd/R+CU5p5rkd+28rP7XajvvWT2ov+ysb1S3cb3TxrqP6/agndWjTdZv9rxrkld0HtE9rsl7KFq3B+e09XmoG5/Lo+9F3XlvZvM/+vtXd97TW/uOH/1+u9V9AwAAAAAAAAAAcF/8ng0AAAAAAAAAAAAAAAAAAP4//xsGgDv43v8CYugGCA==
+5.032,0.036,0.000,HISTggAAAB142pNpmdzIwMDAwQABzFCaEUoz2X9gQAEAYqkC8g==

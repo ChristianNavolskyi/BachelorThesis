@@ -1,0 +1,7 @@
+#[Logging for: Intended-SCAN]
+#[Histogram log format version 1.1]
+#[StartTime: 1524866108.725 (seconds since epoch), Fri Apr 27 23:55:08 CEST 2018]
+"StartTimestamp","Interval_Length","Interval_Max","Interval_Compressed_Histogram"
+0.000,8.699,0.010,HISTggAAAaZ42u3cMVLDMBCFYT9zDe6SszFDQc/lOAY3gAIqCpI4tqSVv7/xZIaxpd331ruOyfPr+8uyvH0sPzz9HvNzuHxdPhcAAABgNtL4vBFyAID7gjwAJ/RL+FgdPMG603n91edQ65x7nxE/+xlwXSniGzqBvI4/j2AMnf09z2pOKrXe0HOX9a0LgKN8Ptt8cGu9Nve7v8tzveecVfqxVuvMnZ/xf1zEq4YfMphuzKt94hu60Z9OHI80vm7kbWpdp/h+j+rb9jrv2uh6a6f6cdS80fu+PHo9G/05eDrpbW/9rA/qNFeOvX2TneJ97e+zsW7ttZ88mI+94p6N6703LkfroJWfbs3XUetIIz8eXc/TqX4c5Yd02lce9GE2+n6Uua3a92ijza/eG2nbv43eb/fSXXbqb2fT79Z+q6r/qtSr0d5Lqf5eSa//S2jdL47WP42W/0yqs9Hnnluff+AcfXDV663yeqq5bNa4t35vTn0Xtxb7ojO6qLhPv0/Az8BZ/c7n54qHfMsffYkbwF8AAHUeoCv5hfgCUG8AQN0C+A8An9erH/kGK3YGjg==
+8.699,6.141,0.012,HISTggAAAal42u3cTU4DMQyG4XG4Bgdh17MhsWXFRbkBCJUtQm0mqeM872Y2o+nE/vzZ89fnt4/X43h/Oa48/W7jurl8XT4PPJ4QAgCAPiWeAMAf+THkBV16oZ816laeQA/YTSd0rn8AVX0jxNu61OWf+4k/evRER/Qx0tfpSlxmrJeP0Yu6BYB6/VU/gHlFXAC6Qq9eYhGdhbqF/IlzkfO493kU3fXlJ+j7IecRyY8bxXVfrc75YG3flt/b5gT9iW/+0E66DxA3+m6om63mrtXqqPc7iLPnjlhcv5H8d1qx644oVo+j+9x//awl0cWj7itlm+vboPPOOpdk96VZcY/Busqig9a5vl6/W8Wvq8w1+vUe11erXGdFsXVnyWv27+tHzQO+4z03jtGpu1nzcfa+lrW+Imkd3+u7nqPPmZNjUb2vMn+vpt8YXOfZnu9Esv2Pk+K5qk+O8qPZvrL6fLL7exNt8nqzzENn62eX58/Z36PJXrer6rvafYmqc+3ovMVmetk1//KIkTqhLwDgn/JFL/QOqE+ALuv/X4X33uYeP8QR6g3iDAC1/Pkb8CAF3Q==
+14.840,0.040,0.000,HISTggAAAB142pNpmdzIwMDAwQABzFCaEUoz2X9gQAEAYqkC8g==

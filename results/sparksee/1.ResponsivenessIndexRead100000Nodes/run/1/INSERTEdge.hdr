@@ -1,0 +1,7 @@
+#[Logging for: INSERTEdge]
+#[Histogram log format version 1.1]
+#[StartTime: 1524893087.061 (seconds since epoch), Sat Apr 28 07:24:47 CEST 2018]
+"StartTimestamp","Interval_Length","Interval_Max","Interval_Compressed_Histogram"
+0.001,9.713,0.002,HISTggAAAYJ42u2XvUoDQRRGZ2ezEiPBH9AQtTBBLFXUxiKmUKzEQixFxMKf3sYyEPICPoDv4BvY2Vpb24qPYDFfmgvDboyo0XOaw+zMzr1792Z3s9i96zjXenKBVE5k3353MHp4eUyekHd0e+91u5eCs5aWPwSXn3XaZnD1KnjuILj+Fly7DV54DW4+Bjf2NH8UPHUsN4IrneBSU+meKa8XuScrvlM+7kY+ly/kQ7ktr8vL8oa8Km/J2/K+fCJfyqfytdyVe+a4rs/tymvyilyXZ+WaXDV5zhj358flihlXzfp5eVqeNOvsOJPLZl/7HMhMXyWm35JI/7nIOl+wf2Pn2Txi8WPxYtdRlCQnfvLJ/ZOc/PyAcdKcffsuRcaZGacF58vmuI+sSwesU9H7nVcXX7APfE6fuwHnh+2ronH9kPGH7WP3RXX4r/t/d71/ex5/tU+A+gMAAPz170ngOwsA+P3+ZJ2oF/AcAAAA4D3Je5nrBQAAAAAA/hcAAAAAAIzk9/cHYk0ZWg==
+9.714,7.201,0.003,HISTggAAAUt42u3YzUoCYRSH8ffMjPlRloF9gbmN7AKENi4CC4LoErqEuoSgTeu23UAEXVvQylUt3r8tDgwzBek0Pr/NQ86o4ztHRxs8PN2HcH0TolS1mK3PyXvA6krUlnqpvmpcBrGdbuzeW+zoPHb4HLsz0jy9xPa0vT2OzSYau5k6VW/VUz3vh6rbw4U6336iHqm7rm01U9dcg9s+f91d9zyP6p16pZ6pej3hWD10x7GvHqjbas8dZ1NtuOMy1zRnvw11U+27v9fVTs76NNz6WMFxWMEcpSXnrujxyu5nP5x3++X9yj7uf+GuA99zmLntScF59vdLcvZb1PrYks+fLXjOqv6+WDaryfu1bp8/dVt/gPnGX82LMe+VXCer6DoBXL/4XQAw5wAArkcAAIDvDeB8gPMKAAAAgN8pAAAAAAAAAMri/3MAsGKf+19T6xHD
+16.915,0.030,0.000,HISTggAAAB142pNpmdzIwMDAwQABzFCaEUoz2X9gQAEAYqkC8g==

@@ -1,0 +1,7 @@
+#[Logging for: READEdge]
+#[Histogram log format version 1.1]
+#[StartTime: 1524893133.609 (seconds since epoch), Sat Apr 28 07:25:33 CEST 2018]
+"StartTimestamp","Interval_Length","Interval_Max","Interval_Compressed_Histogram"
+0.000,9.738,0.000,HISTggAAAJ142pNpmdzIwMD6gwECmKE0I5Rmsv/AMAqoBxhx8LmgtBCUNoLSqVC6BUpvgNKboPQqKL0DSu+D0gVQ2glKK0NpaSgtCqV5oDQvlOaD0pxQmgNKs6LR7Gh8JrT0A5NnQRNnQ6OZ0dQx4aCZcfDR7WfEQTPgsIcZhzvR7WfAYQ8LkfGOy33MZKYbQuKkqmOksj5K88UoGCTlFQB31gpd
+9.738,6.873,0.000,HISTggAAAGl42pNpmdzIwMDyggECmKE0I5Rmsv/AMApoD1igNDuUVoLStlA6CUovgNLNUDoRSsdAaQcobQ6l9aG0LJQWhtJcUJoVzX4WNHcx4qCJBbjUMxGpn4mAenLdxTRI4p1xNOkPKsAIAFXzB38=
+16.611,0.025,0.000,HISTggAAAB142pNpmdzIwMDAwQABzFCaEUoz2X9gQAEAYqkC8g==

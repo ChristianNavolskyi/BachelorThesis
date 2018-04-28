@@ -1,0 +1,9 @@
+#[Logging for: USED_MEM_MB]
+#[Histogram log format version 1.1]
+#[StartTime: 1524893243.340 (seconds since epoch), Sat Apr 28 07:27:23 CEST 2018]
+"StartTimestamp","Interval_Length","Interval_Max","Interval_Compressed_Histogram"
+0.000,10.007,0.000,HISTggAAAB942pNpmdzIwMBwggECmKE0I5Rmsv/AMJwAIwBHFwOz
+10.007,9.985,0.000,HISTggAAACd42pNpmdzIwMBqwQABzFCaEUoz2X9gGAWjYBSMglFAOmAEAMZsAyg=
+19.992,9.997,0.000,HISTggAAACZ42pNpmdzIwMCyggECmKE0I5Rmsv/AMApGwSgYBUMBMAIAE7EDlw==
+29.989,9.534,0.001,HISTggAAADx42pNpmdzIwCCgwAABzFCaEUoz2X9gGAWjYBSMglEwCgYKMI4GwSgYBaNgFIyCUTAKRsHgap8BAGAhAxw=
+39.523,0.031,0.000,HISTggAAAB142pNpmdzIwMDAwQABzFCaEUoz2X9gQAEAYqkC8g==

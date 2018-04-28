@@ -1,0 +1,355 @@
+/usr/lib/jvm/java-8-oracle/bin/java -Xmx16G -classpath /home/christian/Documents/BachelorThesis/YCSB/conf:/home/christian/Documents/BachelorThesis/YCSB/core/target/core-0.14.0-SNAPSHOT.jar:/home/christian/Documents/BachelorThesis/YCSB/core/target/dependency/HdrHistogram-2.1.4.jar:/home/christian/Documents/BachelorThesis/YCSB/core/target/dependency/gson-2.8.2.jar:/home/christian/Documents/BachelorThesis/YCSB/core/target/dependency/htrace-core4-4.1.0-incubating.jar:/home/christian/Documents/BachelorThesis/YCSB/core/target/dependency/jackson-core-asl-1.9.4.jar:/home/christian/Documents/BachelorThesis/YCSB/core/target/dependency/jackson-mapper-asl-1.9.4.jar:/home/christian/Documents/BachelorThesis/YCSB/orientdb/target/orientdb-binding-0.14.0-SNAPSHOT.jar:/home/christian/Documents/BachelorThesis/YCSB/orientdb/target/dependency/HdrHistogram-2.1.4.jar:/home/christian/Documents/BachelorThesis/YCSB/orientdb/target/dependency/activation-1.1.jar:/home/christian/Documents/BachelorThesis/YCSB/orientdb/target/dependency/blueprints-core-2.6.0.jar:/home/christian/Documents/BachelorThesis/YCSB/orientdb/target/dependency/commons-beanutils-1.7.0.jar:/home/christian/Documents/BachelorThesis/YCSB/orientdb/target/dependency/commons-beanutils-core-1.8.0.jar:/home/christian/Documents/BachelorThesis/YCSB/orientdb/target/dependency/commons-collections-3.2.2.jar:/home/christian/Documents/BachelorThesis/YCSB/orientdb/target/dependency/commons-configuration-1.6.jar:/home/christian/Documents/BachelorThesis/YCSB/orientdb/target/dependency/commons-digester-1.8.jar:/home/christian/Documents/BachelorThesis/YCSB/orientdb/target/dependency/commons-lang-2.4.jar:/home/christian/Documents/BachelorThesis/YCSB/orientdb/target/dependency/commons-logging-1.1.1.jar:/home/christian/Documents/BachelorThesis/YCSB/orientdb/target/dependency/concurrentlinkedhashmap-lru-1.4.1.jar:/home/christian/Documents/BachelorThesis/YCSB/orientdb/target/dependency/core-0.14.0-SNAPSHOT.jar:/home/christian/Documents/BachelorThesis/YCSB/orientdb/target/dependency/gson-2.8.2.jar:/home/christian/Documents/BachelorThesis/YCSB/orientdb/target/dependency/hppc-0.6.0.jar:/home/christian/Documents/BachelorThesis/YCSB/orientdb/target/dependency/htrace-core4-4.1.0-incubating.jar:/home/christian/Documents/BachelorThesis/YCSB/orientdb/target/dependency/jackson-annotations-2.6.0.jar:/home/christian/Documents/BachelorThesis/YCSB/orientdb/target/dependency/jackson-core-2.6.0.jar:/home/christian/Documents/BachelorThesis/YCSB/orientdb/target/dependency/jackson-core-asl-1.9.4.jar:/home/christian/Documents/BachelorThesis/YCSB/orientdb/target/dependency/jackson-databind-2.6.0.jar:/home/christian/Documents/BachelorThesis/YCSB/orientdb/target/dependency/jackson-mapper-asl-1.9.4.jar:/home/christian/Documents/BachelorThesis/YCSB/orientdb/target/dependency/jaxb-api-2.2.2.jar:/home/christian/Documents/BachelorThesis/YCSB/orientdb/target/dependency/jaxb-impl-2.2.3.jar:/home/christian/Documents/BachelorThesis/YCSB/orientdb/target/dependency/jettison-1.3.3.jar:/home/christian/Documents/BachelorThesis/YCSB/orientdb/target/dependency/jna-4.5.0.jar:/home/christian/Documents/BachelorThesis/YCSB/orientdb/target/dependency/jna-platform-4.5.0.jar:/home/christian/Documents/BachelorThesis/YCSB/orientdb/target/dependency/log4j-1.2.17.jar:/home/christian/Documents/BachelorThesis/YCSB/orientdb/target/dependency/mail-1.4.7.jar:/home/christian/Documents/BachelorThesis/YCSB/orientdb/target/dependency/orientdb-client-2.2.33.jar:/home/christian/Documents/BachelorThesis/YCSB/orientdb/target/dependency/orientdb-core-2.2.33.jar:/home/christian/Documents/BachelorThesis/YCSB/orientdb/target/dependency/orientdb-graphdb-2.2.33.jar:/home/christian/Documents/BachelorThesis/YCSB/orientdb/target/dependency/orientdb-server-2.2.33.jar:/home/christian/Documents/BachelorThesis/YCSB/orientdb/target/dependency/orientdb-tools-2.2.33.jar:/home/christian/Documents/BachelorThesis/YCSB/orientdb/target/dependency/slf4j-api-1.6.4.jar:/home/christian/Documents/BachelorThesis/YCSB/orientdb/target/dependency/slf4j-log4j12-1.7.10.jar:/home/christian/Documents/BachelorThesis/YCSB/orientdb/target/dependency/snappy-java-1.1.0.1.jar:/home/christian/Documents/BachelorThesis/YCSB/orientdb/target/dependency/stax-api-1.0-2.jar:/home/christian/Documents/BachelorThesis/YCSB/orientdb/target/dependency/stax-api-1.0.1.jar com.yahoo.ycsb.Client -t -db com.yahoo.ycsb.db.OrientDBClient -P /home/christian/Documents/BachelorThesis/notes/workloads/withFast/4.ResponsivenessNoIndexScan100000Nodes -s -p datasetdirectory=/home/christian/Documents/BachelorThesis/results/dataSet/4.ResponsivenessNoIndexScan100000Nodes -p orientdb.url=plocal:/home/christian/Documents/BachelorThesis/results/database -p sparksee.path=/home/christian/Documents/BachelorThesis/results/database/database.gdb -p measurement.trackjvm=true -p measurement.interval=both -p measurementtype=hdrhistogram -p hdrhistogram.fileoutput=true -p hdrhistogram.output.path=/home/christian/Documents/BachelorThesis/results/orientdb/4.ResponsivenessNoIndexScan100000Nodes/run/3/ -p exportfile=/home/christian/Documents/BachelorThesis/results/orientdb/4.ResponsivenessNoIndexScan100000Nodes/run/3/measure
+Command line: -t -db com.yahoo.ycsb.db.OrientDBClient -P /home/christian/Documents/BachelorThesis/notes/workloads/withFast/4.ResponsivenessNoIndexScan100000Nodes -s -p datasetdirectory=/home/christian/Documents/BachelorThesis/results/dataSet/4.ResponsivenessNoIndexScan100000Nodes -p orientdb.url=plocal:/home/christian/Documents/BachelorThesis/results/database -p sparksee.path=/home/christian/Documents/BachelorThesis/results/database/database.gdb -p measurement.trackjvm=true -p measurement.interval=both -p measurementtype=hdrhistogram -p hdrhistogram.fileoutput=true -p hdrhistogram.output.path=/home/christian/Documents/BachelorThesis/results/orientdb/4.ResponsivenessNoIndexScan100000Nodes/run/3/ -p exportfile=/home/christian/Documents/BachelorThesis/results/orientdb/4.ResponsivenessNoIndexScan100000Nodes/run/3/measureYCSB Client 0.14.0-SNAPSHOT
+
+Loading workload...
+GraphDataGenerator creating RECREATOR.
+RandomGraphComponentGenerator creating RECREATOR.
+OperationOrderGenerator creating RECREATOR.
+Starting test.
+2018-04-28 10:49:20:612 0 sec: 0 operations; est completion in 0 second 
+OrientDB 2.2.33 (build 77584cd6827f647cf4aa231cf27bd6f10bc04e2c, branch 2.2.x) configuration dump:
+- ENVIRONMENT
+  + environment.dumpCfgAtStartup = false
+  + environment.concurrent = true
+  + environment.lockManager.concurrency.level = 64
+  + environment.allowJVMShutdown = true
+- SCRIPT
+  + script.pool.maxSize = 20
+- MEMORY
+  + memory.useUnsafe = true
+  + memory.chunk.size = 2147483647
+  + memory.directMemory.safeMode = true
+  + memory.directMemory.trackMode = false
+  + memory.directMemory.onlyAlignedMemoryAccess = true
+- JVM
+  + jvm.gc.delayForOptimize = 600
+- STORAGE
+  + storage.openFiles.limit = 512
+  + storage.componentsLock.cache = 10000
+  + storage.diskCache.pinnedPages = 20
+  + storage.diskCache.bufferSize = 4096
+  + storage.diskCache.writeCachePart = 15
+  + storage.diskCache.writeCachePageTTL = 86400
+  + storage.diskCache.writeCachePageFlushInterval = 25
+  + storage.diskCache.writeCacheFlushInactivityInterval = 60000
+  + storage.diskCache.writeCacheFlushLockTimeout = -1
+  + storage.diskCache.diskFreeSpaceCheckInterval = 5
+  + storage.diskCache.diskFreeSpaceCheckIntervalInPages = 2048
+  + storage.diskCache.keepState = true
+  + storage.diskCache.checksumMode = StoreAndSwitchReadOnlyMode
+  + storage.configuration.syncOnUpdate = true
+  + storage.compressionMethod = nothing
+  + storage.encryptionMethod = nothing
+  + storage.encryptionKey = <hidden>
+  + storage.makeFullCheckpointAfterCreate = false
+  + storage.makeFullCheckpointAfterOpen = false
+  + storage.makeFullCheckpointAfterClusterCreate = true
+  + storage.trackChangedRecordsInWAL = false
+  + storage.useWAL = true
+  + storage.wal.syncOnPageFlush = true
+  + storage.wal.cacheSize = 3000
+  + storage.wal.fileAutoCloseInterval = 10
+  + storage.wal.maxSegmentSize = 128
+  + storage.wal.maxSize = 4096
+  + storage.wal.commitTimeout = 1000
+  + storage.wal.shutdownTimeout = 10000
+  + storage.wal.fuzzyCheckpointInterval = 300
+  + storage.wal.reportAfterOperationsDuringRestore = 10000
+  + storage.wal.restore.batchSize = 1000
+  + storage.wal.readCacheSize = 1000
+  + storage.wal.fuzzyCheckpointShutdownWait = 600
+  + storage.wal.fullCheckpointShutdownTimeout = 600
+  + storage.wal.path = null
+  + storage.diskCache.pageSize = 64
+  + storage.diskCache.diskFreeSpaceLimit = 256
+  + storage.lowestFreeListBound = 16
+  + storage.lockTimeout = 0
+  + storage.record.lockTimeout = 2000
+  + storage.useTombstones = false
+- RECORD
+  + record.downsizing.enabled = true
+- OBJECT
+  + object.saveOnlyDirty = false
+- DB
+  + db.pool.min = 1
+  + db.pool.max = 100
+  + db.pool.idleTimeout = 0
+  + db.pool.idleCheckDelay = 0
+  + db.mvcc.throwfast = false
+  + db.validation = true
+- NONTX
+  + nonTX.recordUpdate.synch = false
+  + nonTX.clusters.sync.immediately = manindex
+- TX
+  + tx.trackAtomicOperations = false
+  + tx.pageCacheSize = 12
+- INDEX
+  + index.embeddedToSbtreeBonsaiThreshold = 40
+  + index.sbtreeBonsaiToEmbeddedThreshold = -1
+- HASHTABLE
+  + hashTable.slitBucketsBuffer.length = 1500
+- INDEX
+  + index.auto.synchronousAutoRebuild = true
+  + index.auto.lazyUpdates = 10000
+  + index.flushAfterCreate = true
+  + index.manual.lazyUpdates = 1
+  + index.durableInNonTxMode = true
+  + index.ignoreNullValuesDefault = false
+  + index.txMode = FULL
+  + index.cursor.prefetchSize = 10000
+- SBTREE
+  + sbtree.maxDepth = 64
+  + sbtree.maxKeySize = 10240
+  + sbtree.maxEmbeddedValueSize = 40960
+- SBTREEBONSAI
+  + sbtreebonsai.bucketSize = 2
+  + sbtreebonsai.linkBagCache.size = 100000
+  + sbtreebonsai.linkBagCache.evictionSize = 1000
+  + sbtreebonsai.freeSpaceReuseTrigger = 0.5
+- RIDBAG
+  + ridBag.embeddedDefaultSize = 4
+  + ridBag.embeddedToSbtreeBonsaiThreshold = 40
+  + ridBag.sbtreeBonsaiToEmbeddedToThreshold = -1
+- COLLECTIONS
+  + collections.preferSBTreeSet = false
+- FILE
+  + file.trackFileClose = false
+  + file.lock = true
+  + file.deleteDelay = 10
+  + file.deleteRetry = 50
+- SECURITY
+  + security.userPasswordSaltIterations = 65536
+  + security.userPasswordSaltCacheSize = 500
+  + security.userPasswordDefaultAlgorithm = PBKDF2WithHmacSHA256
+- NETWORK
+  + network.maxConcurrentSessions = 1000
+  + network.socketBufferSize = 0
+  + network.lockTimeout = 15000
+  + network.socketTimeout = 15000
+  + network.requestTimeout = 3600000
+  + network.retry.strategy = auto
+  + network.retry = 5
+  + network.retryDelay = 500
+  + network.binary.loadBalancing.enabled = false
+  + network.binary.loadBalancing.timeout = 2000
+  + network.binary.maxLength = 16384
+  + network.binary.readResponse.maxTimes = 20
+  + network.binary.debug = false
+  + network.http.installDefaultCommands = true
+  + network.http.serverInfo = OrientDB Server v.2.2.33 (build 77584cd6827f647cf4aa231cf27bd6f10bc04e2c, branch 2.2.x)
+  + network.http.maxLength = 1000000
+  + network.http.streaming = false
+  + network.http.charset = utf-8
+  + network.http.jsonResponseError = true
+  + network.http.jsonp = false
+  + network.http.sessionExpireTimeout = 300
+  + network.http.useToken = false
+  + network.token.secretKey = 
+  + network.token.encryptionAlgorithm = HmacSHA256
+  + network.token.expireTimeout = 60
+- PROFILER
+  + profiler.enabled = false
+  + profiler.config = null
+  + profiler.autoDump.interval = 0
+  + profiler.autoDump.type = full
+  + profiler.maxValues = 200
+  + profiler.memoryCheckInterval = 120000
+- SEQUENCE
+  + sequence.maxRetry = 100
+  + sequence.retryDelay = 200
+- STORAGEPROFILER
+  + storageProfiler.intervalBetweenSnapshots = 100
+  + storageProfiler.cleanUpInterval = 5000
+- LOG
+  + log.console.level = info
+  + log.file.level = info
+- CLASS
+  + class.minimumClusters = 0
+- LOG
+  + log.console.ansi = auto
+- CACHE
+  + cache.local.impl = com.orientechnologies.orient.core.cache.ORecordCacheWeakRefs
+- COMMAND
+  + command.timeout = 0
+  + command.cache.enabled = false
+  + command.cache.evictStrategy = PER_CLUSTER
+  + command.cache.minExecutionTime = 10
+  + command.cache.maxResultsetSize = 500
+- QUERY
+  + query.useSoftReferencesInResultSet = null
+  + query.parallelAuto = false
+  + query.parallelMinimumRecords = 300000
+  + query.parallelResultQueueSize = 20000
+  + query.scanPrefetchPages = 20
+  + query.scanBatchSize = 1000
+  + query.scanThresholdTip = 50000
+  + query.limitThresholdTip = 10000
+  + query.live.support = true
+  + query.timeout.defaultStrategy = EXCEPTION
+- LUCENE
+  + lucene.query.pageSize = 10000
+- STATEMENT
+  + statement.cacheSize = 100
+- SQL
+  + sql.graphConsistencyMode = tx
+- CLIENT
+  + client.channel.maxPool = 100
+  + client.connectionPool.waitTimeout = 5000
+  + client.channel.dbReleaseWaitTimeout = 10000
+  + client.ssl.enabled = false
+  + client.ssl.keyStore = null
+  + client.ssl.keyStorePass = null
+  + client.ssl.trustStore = null
+  + client.ssl.trustStorePass = null
+- SERVER
+  + server.openAllDatabasesAtStartup = false
+  + server.channel.cleanDelay = 5000
+  + server.cache.staticFile = false
+  + server.log.dumpClientExceptionLevel = FINE
+  + server.log.dumpClientExceptionFullStackTrace = false
+- DISTRIBUTED
+  + distributed.dumpStatsEvery = 0
+  + distributed.crudTaskTimeout = 10000
+  + distributed.maxStartupDelay = 10000
+  + distributed.commandTaskTimeout = 120000
+  + distributed.commandQuickTaskTimeout = 5000
+  + distributed.commandLongTaskTimeout = 86400000
+  + distributed.deployDbTaskTimeout = 1200000
+  + distributed.deployChunkTaskTimeout = 60000
+  + distributed.deployDbTaskCompression = 7
+  + distributed.asynchQueueSize = 0
+  + distributed.asynchResponsesTimeout = 15000
+  + distributed.purgeResponsesTimerDelay = 15000
+  + distributed.conflictResolverRepairerChain = quorum,content,majority,version
+  + distributed.conflictResolverRepairerCheckEvery = 5000
+  + distributed.conflictResolverRepairerBatch = 50
+  + distributed.txAliveTimeout = 30000
+  + distributed.requestChannels = 1
+  + distributed.responseChannels = 1
+  + distributed.queueTimeout = 15000
+  + distributed.heartbeatTimeout = 10000
+  + distributed.checkHealthCanOfflineServer = false
+  + distributed.checkHealthEvery = 10000
+  + distributed.autoRemoveOfflineServers = 0
+  + distributed.publishNodeStatusEvery = 10000
+  + distributed.localQueueSize = 10000
+  + distributed.dbWorkerThreads = 0
+  + distributed.queueMaxSize = 10000
+  + distributed.backupDirectory = ../backup/databases
+  + distributed.backupTryIncrementalFirst = true
+  + distributed.checkIntegrityLastTxs = 16
+  + distributed.concurrentTxMaxAutoRetry = 15
+  + distributed.atomicLockTimeout = 1000
+  + distributed.concurrentTxAutoRetryDelay = 10
+- DB
+  + db.document.serializer = ORecordSerializerBinary
+- CLIENT
+  + client.krb5.config = null
+  + client.krb5.ccname = null
+  + client.krb5.ktname = null
+  + client.credentialinterceptor = null
+  + client.ci.keyalgorithm = AES
+  + client.ci.ciphertransform = AES/CBC/PKCS5Padding
+  + client.ci.keystore.file = null
+  + client.ci.keystore.password = null
+- SECURITY
+  + security.createDefaultUsers = true
+- SERVER
+  + server.security.file = null
+- ORIENT
+  + orient.initInServletContextListener = true
+- JNA
+  + jna.disable.system.library = true
+- DB
+  + db.makeFullCheckpointOnIndexChange = true
+  + db.makeFullCheckpointOnSchemaChange = true
+- CLIENT
+  + client.session.tokenBased = true
+- OAUTH2
+  + oauth2.secretkey = 
+- STORAGE
+  + storage.cluster.usecrc32 = false
+- LAZYSET
+  + lazyset.workOnStream = true
+- DB
+  + db.mvcc = true
+  + db.use.distributedVersion = false
+- MVRBTREE
+  + mvrbtree.timeout = 0
+  + mvrbtree.nodePageSize = 256
+  + mvrbtree.loadFactor = 0.7
+  + mvrbtree.optimizeThreshold = 100000
+  + mvrbtree.entryPoints = 64
+  + mvrbtree.optimizeEntryPointsFactor = 1.0
+  + mvrbtree.entryKeysInMemory = false
+  + mvrbtree.entryValuesInMemory = false
+  + mvrbtree.ridBinaryThreshold = -1
+  + mvrbtree.ridNodePageSize = 64
+  + mvrbtree.ridNodeSaveMemory = false
+- TX
+  + tx.commit.synch = false
+  + tx.autoRetry = 1
+  + tx.log.fileType = classic
+  + tx.log.synch = false
+  + tx.useLog = true
+- INDEX
+  + index.auto.rebuildAfterNotSoftClose = true
+- CLIENT
+  + client.channel.minPool = 1
+- STORAGE
+  + storage.keepOpen = true
+- CACHE
+  + cache.local.enabled = true
+- DISTRIBUTED
+  + distributed.shutdownTimeout = 2000
+2018-04-28 10:49:20 INFO  OrientDBClient:94 - OrientDB loading database url = plocal:/home/christian/Documents/BachelorThesis/results/database
+Apr 28, 2018 10:49:20 AM com.orientechnologies.common.log.OLogManager log
+INFO: Configuration of usage of soft references inside of containers of results of SQL execution
+Apr 28, 2018 10:49:20 AM com.orientechnologies.common.log.OLogManager log
+INFO: Initial or maximum values of heap memory usage are NOT set, containers of results of SQL executors will NOT use soft references by default
+Apr 28, 2018 10:49:20 AM com.orientechnologies.common.log.OLogManager log
+INFO: Auto configuration of disk cache size.
+Apr 28, 2018 10:49:21 AM com.orientechnologies.common.log.OLogManager log
+INFO: 16778174464 B/16000 MB/15 GB of physical memory were detected on machine
+Apr 28, 2018 10:49:21 AM com.orientechnologies.common.log.OLogManager log
+INFO: Soft memory limit for this process is set to -1 B/-1 MB/-1 GB
+Apr 28, 2018 10:49:21 AM com.orientechnologies.common.log.OLogManager log
+INFO: Hard memory limit for this process is set to -1 B/-1 MB/-1 GB
+Apr 28, 2018 10:49:21 AM com.orientechnologies.common.log.OLogManager log
+INFO: Path to 'memory' cgroup is '/'
+Apr 28, 2018 10:49:21 AM com.orientechnologies.common.log.OLogManager log
+INFO: Mounting path for memory cgroup controller is '/sys/fs/cgroup/memory'
+Apr 28, 2018 10:49:21 AM com.orientechnologies.common.log.OLogManager log
+INFO: cgroup soft memory limit is 9223372036854771712 B/8796093022207 MB/8589934591 GB
+Apr 28, 2018 10:49:21 AM com.orientechnologies.common.log.OLogManager log
+INFO: cgroup hard memory limit is 9223372036854771712 B/8796093022207 MB/8589934591 GB
+Apr 28, 2018 10:49:21 AM com.orientechnologies.common.log.OLogManager log
+INFO: Detected memory limit for current process is 16778174464 B/16000 MB/15 GB
+Apr 28, 2018 10:49:21 AM com.orientechnologies.common.log.OLogManager log
+WARNING: Not enough physical memory available for DISKCACHE: 16,000MB (heap=14,564MB direct=14,564MB). Set lower Maximum Heap (-Xmx setting on JVM) and restart OrientDB. Now running with DISKCACHE=256MB
+Apr 28, 2018 10:49:21 AM com.orientechnologies.common.log.OLogManager log
+INFO: OrientDB config DISKCACHE=256MB (heap=14,564MB direct=14,564MB os=16,000MB)
+Apr 28, 2018 10:49:21 AM com.orientechnologies.common.log.OLogManager log
+INFO: Storage 'plocal:/home/christian/Documents/BachelorThesis/results/database' is opened under OrientDB distribution : 2.2.33 (build 77584cd6827f647cf4aa231cf27bd6f10bc04e2c, branch 2.2.x)
+DBWrapper: report latency for each error is false and specific error codes to track for latency are: []
+2018-04-28 10:49:30:612 10 sec: 3937 operations; 393.7 current ops/sec; est completion in 4 minutes [THREAD_COUNT: Count=1, Max=3, Min=3, Avg=3, 90=3, 99=3, 99.9=3, 99.99=3] [SCANEdge: Count=90, Max=6539, Min=252, Avg=2205.86, 90=3407, 99=5883, 99.9=6539, 99.99=6539] [SYS_LOAD_AVG: Count=1, Max=1, Min=1, Avg=1, 90=1, 99=1, 99.9=1, 99.99=1] [SCANNode: Count=91, Max=9615, Min=373, Avg=2838.13, 90=4631, 99=9519, 99.9=9615, 99.99=9615] [INITIALISE: Count=1, Max=1265663, Min=1264640, Avg=1265152, 90=1265663, 99=1265663, 99.9=1265663, 99.99=1265663] [USED_MEM_MB: Count=1, Max=24, Min=24, Avg=24, 90=24, 99=24, 99.9=24, 99.99=24] [GCS_TIME: Count=1, Max=0, Min=0, Avg=0, 90=0, 99=0, 99.9=0, 99.99=0] [GCS: Count=1, Max=0, Min=0, Avg=0, 90=0, 99=0, 99.9=0, 99.99=0] [INSERTNode: Count=3757, Max=164223, Min=43, Avg=1051.49, 90=210, 99=1086, 99.9=133887, 99.99=164223] [INSERT: Count=8765, Max=181631, Min=43, Avg=914.65, 90=215, 99=1066, 99.9=142207, 99.99=179839] [SCAN: Count=181, Max=9615, Min=252, Avg=2523.74, 90=3793, 99=8319, 99.9=9615, 99.99=9615] [INSERTEdge: Count=5012, Max=181631, Min=48, Avg=833.59, 90=218, 99=1066, 99.9=152831, 99.99=179839] [Intended-SCANEdge: Count=92, Max=6539, Min=252, Avg=2228.29, 90=3447, 99=5883, 99.9=6539, 99.99=6539] [Intended-SCANNode: Count=93, Max=9615, Min=374, Avg=2828.19, 90=4631, 99=9519, 99.9=9615, 99.99=9615] [Intended-INITIALISE: Count=1, Max=1265663, Min=1264640, Avg=1265152, 90=1265663, 99=1265663, 99.9=1265663, 99.99=1265663] [Intended-INSERTNode: Count=3811, Max=164223, Min=43, Avg=1037.51, 90=208, 99=1086, 99.9=133887, 99.99=164223] [Intended-INSERT: Count=8892, Max=181631, Min=43, Avg=915.01, 90=211, 99=1066, 99.9=142207, 99.99=179839] [Intended-SCAN: Count=188, Max=9615, Min=252, Avg=2518.68, 90=3787, 99=8319, 99.9=9615, 99.99=9615] [Intended-INSERTEdge: Count=5081, Max=181631, Min=48, Avg=823.12, 90=215, 99=1066, 99.9=152831, 99.99=179839] 
+2018-04-28 10:49:40:612 20 sec: 9460 operations; 552.3 current ops/sec; est completion in 3 minutes [THREAD_COUNT: Count=1, Max=7, Min=7, Avg=7, 90=7, 99=7, 99.9=7, 99.99=7] [SCANEdge: Count=128, Max=9807, Min=113, Avg=3855, 90=6891, 99=9735, 99.9=9807, 99.99=9807] [SYS_LOAD_AVG: Count=1, Max=1, Min=1, Avg=1, 90=1, 99=1, 99.9=1, 99.99=1] [SCANNode: Count=128, Max=11495, Min=849, Avg=4392.97, 90=6719, 99=11463, 99.9=11495, 99.99=11495] [INITIALISE: Count=0, Max=0, Min=9223372036854775807, Avg=?, 90=0, 99=0, 99.9=0, 99.99=0] [USED_MEM_MB: Count=1, Max=183, Min=183, Avg=183, 90=183, 99=183, 99.9=183, 99.99=183] [GCS_TIME: Count=1, Max=72, Min=72, Avg=72, 90=72, 99=72, 99.9=72, 99.99=72] [GCS: Count=1, Max=7, Min=7, Avg=7, 90=7, 99=7, 99.9=7, 99.99=7] [INSERTNode: Count=5267, Max=167039, Min=34, Avg=585.54, 90=62, 99=149, 99.9=124095, 99.99=156671] [INSERT: Count=12290, Max=174975, Min=34, Avg=713.45, 90=66, 99=176, 99.9=134271, 99.99=167039] [SCAN: Count=256, Max=11495, Min=113, Avg=4123.98, 90=6891, 99=10559, 99.9=11495, 99.99=11495] [INSERTEdge: Count=7019, Max=174975, Min=35, Avg=793.96, 90=67, 99=202, 99.9=141439, 99.99=161791] [Intended-SCANEdge: Count=126, Max=9807, Min=114, Avg=3865.25, 90=6891, 99=9735, 99.9=9807, 99.99=9807] [Intended-SCANNode: Count=126, Max=11495, Min=849, Avg=4425.4, 90=6719, 99=11463, 99.9=11495, 99.99=11495] [Intended-INITIALISE: Count=0, Max=0, Min=9223372036854775807, Avg=?, 90=0, 99=0, 99.9=0, 99.99=0] [Intended-INSERTNode: Count=5230, Max=167039, Min=34, Avg=589.26, 90=62, 99=152, 99.9=124095, 99.99=156671] [Intended-INSERT: Count=12214, Max=174975, Min=34, Avg=718.28, 90=66, 99=185, 99.9=134271, 99.99=167039] [Intended-SCAN: Count=250, Max=11495, Min=114, Avg=4184.6, 90=7015, 99=11063, 99.9=11495, 99.99=11495] [Intended-INSERTEdge: Count=6979, Max=174975, Min=35, Avg=815.43, 90=67, 99=211, 99.9=141439, 99.99=161791] 
+2018-04-28 10:49:50:612 30 sec: 14307 operations; 484.7 current ops/sec; est completion in 3 minutes [THREAD_COUNT: Count=1, Max=7, Min=7, Avg=7, 90=7, 99=7, 99.9=7, 99.99=7] [SCANEdge: Count=122, Max=12167, Min=364, Avg=5199.05, 90=8687, 99=9791, 99.9=12167, 99.99=12167] [SYS_LOAD_AVG: Count=1, Max=1, Min=1, Avg=1, 90=1, 99=1, 99.9=1, 99.99=1] [SCANNode: Count=118, Max=12655, Min=823, Avg=5051.49, 90=9231, 99=11575, 99.9=12655, 99.99=12655] [INITIALISE: Count=0, Max=0, Min=9223372036854775807, Avg=?, 90=0, 99=0, 99.9=0, 99.99=0] [USED_MEM_MB: Count=1, Max=160, Min=160, Avg=160, 90=160, 99=160, 99.9=160, 99.99=160] [GCS_TIME: Count=1, Max=32, Min=32, Avg=32, 90=32, 99=32, 99.9=32, 99.99=32] [GCS: Count=1, Max=8, Min=8, Avg=8, 90=8, 99=8, 99.9=8, 99.99=8] [INSERTNode: Count=4607, Max=406271, Min=34, Avg=719.6, 90=60, 99=205, 99.9=134143, 99.99=406271] [INSERT: Count=10748, Max=406271, Min=34, Avg=812.01, 90=64, 99=217, 99.9=144511, 99.99=197887] [SCAN: Count=240, Max=12655, Min=364, Avg=5126.5, 90=8767, 99=11575, 99.9=12655, 99.99=12655] [INSERTEdge: Count=6141, Max=197887, Min=37, Avg=881.33, 90=66, 99=240, 99.9=175487, 99.99=192255] [Intended-SCANEdge: Count=122, Max=12167, Min=364, Avg=5199.11, 90=8687, 99=9791, 99.9=12167, 99.99=12167] [Intended-SCANNode: Count=118, Max=12655, Min=823, Avg=5051.49, 90=9231, 99=11575, 99.9=12655, 99.99=12655] [Intended-INITIALISE: Count=0, Max=0, Min=9223372036854775807, Avg=?, 90=0, 99=0, 99.9=0, 99.99=0] [Intended-INSERTNode: Count=4590, Max=406271, Min=34, Avg=722.11, 90=60, 99=205, 99.9=134143, 99.99=406271] [Intended-INSERT: Count=10697, Max=406271, Min=34, Avg=804.39, 90=64, 99=212, 99.9=144511, 99.99=197887] [Intended-SCAN: Count=239, Max=12655, Min=364, Avg=5118.64, 90=8767, 99=11575, 99.9=12655, 99.99=12655] [Intended-INSERTEdge: Count=6112, Max=197887, Min=37, Avg=865.59, 90=66, 99=232, 99.9=175487, 99.99=192255] 
+2018-04-28 10:50:00:612 40 sec: 19521 operations; 521.4 current ops/sec; est completion in 2 minutes [THREAD_COUNT: Count=1, Max=7, Min=7, Avg=7, 90=7, 99=7, 99.9=7, 99.99=7] [SCANEdge: Count=106, Max=14015, Min=665, Avg=6024.67, 90=8487, 99=13103, 99.9=14015, 99.99=14015] [SYS_LOAD_AVG: Count=1, Max=1, Min=1, Avg=1, 90=1, 99=1, 99.9=1, 99.99=1] [SCANNode: Count=127, Max=14783, Min=536, Avg=5956.49, 90=9703, 99=13695, 99.9=14783, 99.99=14783] [INITIALISE: Count=0, Max=0, Min=9223372036854775807, Avg=?, 90=0, 99=0, 99.9=0, 99.99=0] [USED_MEM_MB: Count=1, Max=219, Min=219, Avg=219, 90=219, 99=219, 99.9=219, 99.99=219] [GCS_TIME: Count=1, Max=30, Min=30, Avg=30, 90=30, 99=30, 99.9=30, 99.99=30] [GCS: Count=1, Max=7, Min=7, Avg=7, 90=7, 99=7, 99.9=7, 99.99=7] [INSERTNode: Count=4980, Max=179711, Min=35, Avg=817.17, 90=78, 99=210, 99.9=136191, 99.99=179711] [INSERT: Count=11623, Max=179711, Min=35, Avg=721.63, 90=84, 99=210, 99.9=134911, 99.99=179199] [SCAN: Count=233, Max=14783, Min=536, Avg=5987.51, 90=9591, 99=13695, 99.9=14783, 99.99=14783] [INSERTEdge: Count=6685, Max=153343, Min=35, Avg=646.24, 90=87, 99=193, 99.9=134143, 99.99=150783] [Intended-SCANEdge: Count=106, Max=14015, Min=665, Avg=6024.67, 90=8487, 99=13103, 99.9=14015, 99.99=14015] [Intended-SCANNode: Count=127, Max=14783, Min=536, Avg=5956.63, 90=9703, 99=13695, 99.9=14783, 99.99=14783] [Intended-INITIALISE: Count=0, Max=0, Min=9223372036854775807, Avg=?, 90=0, 99=0, 99.9=0, 99.99=0] [Intended-INSERTNode: Count=5016, Max=179711, Min=35, Avg=842.39, 90=78, 99=210, 99.9=154239, 99.99=179199] [Intended-INSERT: Count=11707, Max=179711, Min=35, Avg=729.99, 90=84, 99=210, 99.9=136191, 99.99=179199] [Intended-SCAN: Count=234, Max=14783, Min=536, Avg=5991.61, 90=9591, 99=13695, 99.9=14783, 99.99=14783] [Intended-INSERTEdge: Count=6715, Max=153343, Min=35, Avg=643.59, 90=87, 99=193, 99.9=134143, 99.99=150783] 
+2018-04-28 10:50:10:612 50 sec: 23920 operations; 439.9 current ops/sec; est completion in 2 minutes [THREAD_COUNT: Count=1, Max=7, Min=7, Avg=7, 90=7, 99=7, 99.9=7, 99.99=7] [SCANEdge: Count=94, Max=14655, Min=716, Avg=7088.4, 90=11271, 99=14167, 99.9=14655, 99.99=14655] [SYS_LOAD_AVG: Count=1, Max=1, Min=1, Avg=1, 90=1, 99=1, 99.9=1, 99.99=1] [SCANNode: Count=104, Max=15095, Min=721, Avg=6741.45, 90=9943, 99=12855, 99.9=15095, 99.99=15095] [INITIALISE: Count=0, Max=0, Min=9223372036854775807, Avg=?, 90=0, 99=0, 99.9=0, 99.99=0] [USED_MEM_MB: Count=1, Max=312, Min=312, Avg=312, 90=312, 99=312, 99.9=312, 99.99=312] [GCS_TIME: Count=1, Max=25, Min=25, Avg=25, 90=25, 99=25, 99.9=25, 99.99=25] [GCS: Count=1, Max=7, Min=7, Avg=7, 90=7, 99=7, 99.9=7, 99.99=7] [INSERTNode: Count=4201, Max=162431, Min=35, Avg=851.9, 90=87, 99=219, 99.9=135295, 99.99=162431] [INSERT: Count=9802, Max=243583, Min=35, Avg=876.94, 90=92, 99=271, 99.9=138367, 99.99=200191] [SCAN: Count=198, Max=15095, Min=716, Avg=6906.17, 90=10399, 99=14167, 99.9=15095, 99.99=15095] [INSERTEdge: Count=5559, Max=243583, Min=37, Avg=902.12, 90=97, 99=308, 99.9=139647, 99.99=200191] [Intended-SCANEdge: Count=94, Max=14655, Min=716, Avg=7088.4, 90=11271, 99=14167, 99.9=14655, 99.99=14655] [Intended-SCANNode: Count=104, Max=15095, Min=721, Avg=6741.51, 90=9943, 99=12855, 99.9=15095, 99.99=15095] [Intended-INITIALISE: Count=0, Max=0, Min=9223372036854775807, Avg=?, 90=0, 99=0, 99.9=0, 99.99=0] [Intended-INSERTNode: Count=4165, Max=162431, Min=35, Avg=821.91, 90=88, 99=218, 99.9=135167, 99.99=162431] [Intended-INSERT: Count=9718, Max=243583, Min=35, Avg=868.28, 90=92, 99=271, 99.9=136575, 99.99=200191] [Intended-SCAN: Count=197, Max=15095, Min=716, Avg=6906.08, 90=10399, 99=14167, 99.9=15095, 99.99=15095] [Intended-INSERTEdge: Count=5529, Max=243583, Min=37, Avg=906.77, 90=97, 99=317, 99.9=139647, 99.99=200191] 
+2018-04-28 10:50:20:612 60 sec: 27982 operations; 406.2 current ops/sec; est completion in 2 minutes [THREAD_COUNT: Count=1, Max=7, Min=7, Avg=7, 90=7, 99=7, 99.9=7, 99.99=7] [SCANEdge: Count=108, Max=14183, Min=114, Avg=6491.65, 90=9543, 99=12199, 99.9=14183, 99.99=14183] [SYS_LOAD_AVG: Count=1, Max=1, Min=1, Avg=1, 90=1, 99=1, 99.9=1, 99.99=1] [SCANNode: Count=124, Max=16327, Min=1294, Avg=6848.69, 90=9527, 99=13735, 99.9=16327, 99.99=16327] [INITIALISE: Count=0, Max=0, Min=9223372036854775807, Avg=?, 90=0, 99=0, 99.9=0, 99.99=0] [USED_MEM_MB: Count=1, Max=49, Min=49, Avg=49, 90=49, 99=49, 99.9=49, 99.99=49] [GCS_TIME: Count=1, Max=26, Min=26, Avg=26, 90=26, 99=26, 99.9=26, 99.99=26] [GCS: Count=1, Max=7, Min=7, Avg=7, 90=7, 99=7, 99.9=7, 99.99=7] [INSERTNode: Count=3830, Max=244479, Min=34, Avg=1107.6, 90=65, 99=226, 99.9=158719, 99.99=244479] [INSERT: Count=8936, Max=244479, Min=34, Avg=944.07, 90=69, 99=226, 99.9=152703, 99.99=172927] [SCAN: Count=232, Max=16327, Min=114, Avg=6682.48, 90=9527, 99=13735, 99.9=16327, 99.99=16327] [INSERTEdge: Count=5106, Max=164351, Min=36, Avg=821.4, 90=73, 99=215, 99.9=135167, 99.99=162559] [Intended-SCANEdge: Count=108, Max=14183, Min=114, Avg=6491.65, 90=9543, 99=12199, 99.9=14183, 99.99=14183] [Intended-SCANNode: Count=124, Max=16327, Min=1294, Avg=6848.69, 90=9527, 99=13735, 99.9=16327, 99.99=16327] [Intended-INITIALISE: Count=0, Max=0, Min=9223372036854775807, Avg=?, 90=0, 99=0, 99.9=0, 99.99=0] [Intended-INSERTNode: Count=3830, Max=244479, Min=34, Avg=1107.63, 90=65, 99=226, 99.9=158719, 99.99=244479] [Intended-INSERT: Count=8936, Max=244479, Min=34, Avg=944.1, 90=69, 99=226, 99.9=152703, 99.99=172927] [Intended-SCAN: Count=232, Max=16327, Min=114, Avg=6682.48, 90=9527, 99=13735, 99.9=16327, 99.99=16327] [Intended-INSERTEdge: Count=5106, Max=164351, Min=36, Avg=821.43, 90=73, 99=215, 99.9=135167, 99.99=162559] 
+2018-04-28 10:50:30:612 70 sec: 31874 operations; 389.2 current ops/sec; est completion in 2 minutes [THREAD_COUNT: Count=1, Max=7, Min=7, Avg=7, 90=7, 99=7, 99.9=7, 99.99=7] [SCANEdge: Count=90, Max=14039, Min=884, Avg=7151.71, 90=9623, 99=12639, 99.9=14039, 99.99=14039] [SYS_LOAD_AVG: Count=1, Max=2, Min=2, Avg=2, 90=2, 99=2, 99.9=2, 99.99=2] [SCANNode: Count=98, Max=13519, Min=658, Avg=6687.63, 90=9551, 99=12415, 99.9=13519, 99.99=13519] [INITIALISE: Count=0, Max=0, Min=9223372036854775807, Avg=?, 90=0, 99=0, 99.9=0, 99.99=0] [USED_MEM_MB: Count=1, Max=272, Min=272, Avg=272, 90=272, 99=272, 99.9=272, 99.99=272] [GCS_TIME: Count=1, Max=27, Min=27, Avg=27, 90=27, 99=27, 99.9=27, 99.99=27] [GCS: Count=1, Max=6, Min=6, Avg=6, 90=6, 99=6, 99.9=6, 99.99=6] [INSERTNode: Count=3705, Max=150527, Min=35, Avg=798.03, 90=57, 99=162, 99.9=133503, 99.99=150527] [INSERT: Count=8644, Max=315391, Min=35, Avg=992.3, 90=62, 99=212, 99.9=149631, 99.99=219519] [SCAN: Count=188, Max=14039, Min=658, Avg=6909.8, 90=9559, 99=12639, 99.9=14039, 99.99=14039] [INSERTEdge: Count=4939, Max=315391, Min=38, Avg=1138.03, 90=63, 99=239, 99.9=160511, 99.99=315391] [Intended-SCANEdge: Count=90, Max=14039, Min=884, Avg=7151.78, 90=9623, 99=12639, 99.9=14039, 99.99=14039] [Intended-SCANNode: Count=98, Max=13519, Min=658, Avg=6687.63, 90=9551, 99=12415, 99.9=13519, 99.99=13519] [Intended-INITIALISE: Count=0, Max=0, Min=9223372036854775807, Avg=?, 90=0, 99=0, 99.9=0, 99.99=0] [Intended-INSERTNode: Count=3705, Max=150527, Min=35, Avg=798.06, 90=57, 99=162, 99.9=133503, 99.99=150527] [Intended-INSERT: Count=8644, Max=315391, Min=35, Avg=992.33, 90=62, 99=212, 99.9=149631, 99.99=219519] [Intended-SCAN: Count=188, Max=14039, Min=658, Avg=6909.83, 90=9559, 99=12639, 99.9=14039, 99.99=14039] [Intended-INSERTEdge: Count=4939, Max=315391, Min=38, Avg=1138.06, 90=63, 99=239, 99.9=160511, 99.99=315391] 
+2018-04-28 10:50:40:612 80 sec: 35672 operations; 379.8 current ops/sec; est completion in 2 minutes [THREAD_COUNT: Count=1, Max=7, Min=7, Avg=7, 90=7, 99=7, 99.9=7, 99.99=7] [SCANEdge: Count=116, Max=14631, Min=804, Avg=7286.5, 90=10999, 99=14503, 99.9=14631, 99.99=14631] [SYS_LOAD_AVG: Count=1, Max=2, Min=2, Avg=2, 90=2, 99=2, 99.9=2, 99.99=2] [SCANNode: Count=107, Max=14023, Min=2392, Avg=7335.77, 90=9815, 99=13999, 99.9=14023, 99.99=14023] [INITIALISE: Count=0, Max=0, Min=9223372036854775807, Avg=?, 90=0, 99=0, 99.9=0, 99.99=0] [USED_MEM_MB: Count=1, Max=80, Min=80, Avg=80, 90=80, 99=80, 99.9=80, 99.99=80] [GCS_TIME: Count=1, Max=24, Min=24, Avg=24, 90=24, 99=24, 99.9=24, 99.99=24] [GCS: Count=1, Max=7, Min=7, Avg=7, 90=7, 99=7, 99.9=7, 99.99=7] [INSERTNode: Count=3604, Max=211455, Min=35, Avg=931.18, 90=72, 99=197, 99.9=149503, 99.99=211455] [INSERT: Count=8410, Max=229375, Min=35, Avg=991.72, 90=75, 99=270, 99.9=157695, 99.99=211455] [SCAN: Count=225, Max=14631, Min=804, Avg=7308.84, 90=10647, 99=14175, 99.9=14631, 99.99=14631] [INSERTEdge: Count=4821, Max=229375, Min=36, Avg=1034.03, 90=81, 99=304, 99.9=153855, 99.99=229375] [Intended-SCANEdge: Count=119, Max=14631, Min=804, Avg=7231.15, 90=10999, 99=14503, 99.9=14631, 99.99=14631] [Intended-SCANNode: Count=107, Max=14023, Min=2392, Avg=7335.8, 90=9815, 99=13999, 99.9=14023, 99.99=14023] [Intended-INITIALISE: Count=0, Max=0, Min=9223372036854775807, Avg=?, 90=0, 99=0, 99.9=0, 99.99=0] [Intended-INSERTNode: Count=3638, Max=211455, Min=35, Avg=922.88, 90=72, 99=198, 99.9=149503, 99.99=211455] [Intended-INSERT: Count=8490, Max=229375, Min=35, Avg=982.8, 90=75, 99=267, 99.9=157695, 99.99=211455] [Intended-SCAN: Count=226, Max=14631, Min=804, Avg=7280.7, 90=10647, 99=14175, 99.9=14631, 99.99=14631] [Intended-INSERTEdge: Count=4852, Max=229375, Min=36, Avg=1027.73, 90=80, 99=302, 99.9=153855, 99.99=229375] 
+2018-04-28 10:50:50:612 90 sec: 40356 operations; 468.4 current ops/sec; est completion in 2 minutes [THREAD_COUNT: Count=1, Max=7, Min=7, Avg=7, 90=7, 99=7, 99.9=7, 99.99=7] [SCANEdge: Count=117, Max=16623, Min=869, Avg=6736.15, 90=9583, 99=14207, 99.9=16623, 99.99=16623] [SYS_LOAD_AVG: Count=1, Max=1, Min=1, Avg=1, 90=1, 99=1, 99.9=1, 99.99=1] [SCANNode: Count=120, Max=13527, Min=694, Avg=6754.52, 90=9839, 99=13471, 99.9=13527, 99.99=13527] [INITIALISE: Count=0, Max=0, Min=9223372036854775807, Avg=?, 90=0, 99=0, 99.9=0, 99.99=0] [USED_MEM_MB: Count=1, Max=115, Min=115, Avg=115, 90=115, 99=115, 99.9=115, 99.99=115] [GCS_TIME: Count=1, Max=35, Min=35, Avg=35, 90=35, 99=35, 99.9=35, 99.99=35] [GCS: Count=1, Max=10, Min=10, Avg=10, 90=10, 99=10, 99.9=10, 99.99=10] [INSERTNode: Count=4417, Max=289535, Min=35, Avg=835.41, 90=70, 99=135, 99.9=162687, 99.99=289535] [INSERT: Count=10306, Max=289535, Min=35, Avg=804.86, 90=73, 99=177, 99.9=151039, 99.99=212735] [SCAN: Count=235, Max=16623, Min=694, Avg=6741.89, 90=9815, 99=13527, 99.9=16623, 99.99=16623] [INSERTEdge: Count=5874, Max=212735, Min=39, Avg=783.82, 90=77, 99=185, 99.9=134911, 99.99=180607] [Intended-SCANEdge: Count=114, Max=16623, Min=869, Avg=6779.45, 90=9663, 99=14207, 99.9=16623, 99.99=16623] [Intended-SCANNode: Count=120, Max=13527, Min=694, Avg=6754.52, 90=9839, 99=13471, 99.9=13527, 99.99=13527] [Intended-INITIALISE: Count=0, Max=0, Min=9223372036854775807, Avg=?, 90=0, 99=0, 99.9=0, 99.99=0] [Intended-INSERTNode: Count=4383, Max=289535, Min=35, Avg=841.62, 90=70, 99=135, 99.9=162687, 99.99=289535] [Intended-INSERT: Count=10226, Max=289535, Min=35, Avg=810.85, 90=73, 99=179, 99.9=151039, 99.99=212735] [Intended-SCAN: Count=234, Max=16623, Min=694, Avg=6766.67, 90=9815, 99=13527, 99.9=16623, 99.99=16623] [Intended-INSERTEdge: Count=5843, Max=212735, Min=39, Avg=787.77, 90=77, 99=192, 99.9=134911, 99.99=180607] 
+2018-04-28 10:51:00:612 100 sec: 45192 operations; 483.6 current ops/sec; est completion in 2 minutes [THREAD_COUNT: Count=1, Max=7, Min=7, Avg=7, 90=7, 99=7, 99.9=7, 99.99=7] [SCANEdge: Count=123, Max=11999, Min=1160, Avg=6830.32, 90=9423, 99=11271, 99.9=11999, 99.99=11999] [SYS_LOAD_AVG: Count=1, Max=1, Min=1, Avg=1, 90=1, 99=1, 99.9=1, 99.99=1] [SCANNode: Count=129, Max=15263, Min=327, Avg=6679.99, 90=8767, 99=13839, 99.9=15263, 99.99=15263] [INITIALISE: Count=0, Max=0, Min=9223372036854775807, Avg=?, 90=0, 99=0, 99.9=0, 99.99=0] [USED_MEM_MB: Count=1, Max=90, Min=90, Avg=90, 90=90, 99=90, 99.9=90, 99.99=90] [GCS_TIME: Count=1, Max=42, Min=42, Avg=42, 90=42, 99=42, 99.9=42, 99.99=42] [GCS: Count=1, Max=14, Min=14, Avg=14, 90=14, 99=14, 99.9=14, 99.99=14] [INSERTNode: Count=4585, Max=239359, Min=35, Avg=826, 90=61, 99=182, 99.9=134399, 99.99=239359] [INSERT: Count=10699, Max=239359, Min=35, Avg=761.08, 90=66, 99=208, 99.9=139647, 99.99=220927] [SCAN: Count=252, Max=15263, Min=327, Avg=6753.37, 90=8959, 99=11999, 99.9=15263, 99.99=15263] [INSERTEdge: Count=6114, Max=220927, Min=36, Avg=712.39, 90=67, 99=227, 99.9=141823, 99.99=158847] [Intended-SCANEdge: Count=123, Max=11999, Min=1160, Avg=6830.38, 90=9423, 99=11271, 99.9=11999, 99.99=11999] [Intended-SCANNode: Count=129, Max=15263, Min=327, Avg=6679.99, 90=8767, 99=13839, 99.9=15263, 99.99=15263] [Intended-INITIALISE: Count=0, Max=0, Min=9223372036854775807, Avg=?, 90=0, 99=0, 99.9=0, 99.99=0] [Intended-INSERTNode: Count=4585, Max=239359, Min=35, Avg=826.03, 90=61, 99=182, 99.9=134399, 99.99=239359] [Intended-INSERT: Count=10728, Max=239359, Min=35, Avg=767.61, 90=66, 99=214, 99.9=139647, 99.99=220927] [Intended-SCAN: Count=252, Max=15263, Min=327, Avg=6753.4, 90=8959, 99=11999, 99.9=15263, 99.99=15263] [Intended-INSERTEdge: Count=6167, Max=220927, Min=36, Avg=721.46, 90=67, 99=227, 99.9=141823, 99.99=158847] 
+2018-04-28 10:51:10:612 110 sec: 50486 operations; 529.4 current ops/sec; est completion in 1 minute [THREAD_COUNT: Count=1, Max=7, Min=7, Avg=7, 90=7, 99=7, 99.9=7, 99.99=7] [SCANEdge: Count=125, Max=12599, Min=958, Avg=6579.54, 90=8655, 99=12535, 99.9=12599, 99.99=12599] [SYS_LOAD_AVG: Count=1, Max=1, Min=1, Avg=1, 90=1, 99=1, 99.9=1, 99.99=1] [SCANNode: Count=127, Max=13271, Min=854, Avg=6912.54, 90=10103, 99=12751, 99.9=13271, 99.99=13271] [INITIALISE: Count=0, Max=0, Min=9223372036854775807, Avg=?, 90=0, 99=0, 99.9=0, 99.99=0] [USED_MEM_MB: Count=1, Max=114, Min=114, Avg=114, 90=114, 99=114, 99.9=114, 99.99=114] [GCS_TIME: Count=1, Max=46, Min=46, Avg=46, 90=46, 99=46, 99.9=46, 99.99=46] [GCS: Count=1, Max=16, Min=16, Avg=16, 90=16, 99=16, 99.9=16, 99.99=16] [INSERTNode: Count=5042, Max=178175, Min=35, Avg=447.79, 90=62, 99=134, 99.9=126655, 99.99=155903] [INSERT: Count=11764, Max=178175, Min=35, Avg=701.23, 90=66, 99=233, 99.9=126655, 99.99=172031] [SCAN: Count=252, Max=13271, Min=854, Avg=6747.36, 90=9279, 99=12535, 99.9=13271, 99.99=13271] [INSERTEdge: Count=6722, Max=172031, Min=37, Avg=891.32, 90=67, 99=3343, 99.9=124095, 99.99=158463] [Intended-SCANEdge: Count=125, Max=12599, Min=958, Avg=6579.54, 90=8655, 99=12535, 99.9=12599, 99.99=12599] [Intended-SCANNode: Count=127, Max=13271, Min=854, Avg=6912.64, 90=10103, 99=12759, 99.9=13271, 99.99=13271] [Intended-INITIALISE: Count=0, Max=0, Min=9223372036854775807, Avg=?, 90=0, 99=0, 99.9=0, 99.99=0] [Intended-INSERTNode: Count=5042, Max=178175, Min=35, Avg=447.83, 90=62, 99=134, 99.9=126655, 99.99=155903] [Intended-INSERT: Count=11735, Max=178175, Min=35, Avg=695.16, 90=66, 99=233, 99.9=126655, 99.99=172031] [Intended-SCAN: Count=252, Max=13271, Min=854, Avg=6747.41, 90=9279, 99=12535, 99.9=13271, 99.99=13271] [Intended-INSERTEdge: Count=6669, Max=172031, Min=37, Avg=884.4, 90=66, 99=3287, 99.9=124095, 99.99=158463] 
+2018-04-28 10:51:20:612 120 sec: 55514 operations; 502.8 current ops/sec; est completion in 1 minute [THREAD_COUNT: Count=1, Max=7, Min=7, Avg=7, 90=7, 99=7, 99.9=7, 99.99=7] [SCANEdge: Count=113, Max=14431, Min=1258, Avg=7231.38, 90=11087, 99=14175, 99.9=14431, 99.99=14431] [SYS_LOAD_AVG: Count=1, Max=1, Min=1, Avg=1, 90=1, 99=1, 99.9=1, 99.99=1] [SCANNode: Count=122, Max=14831, Min=797, Avg=7070.84, 90=10911, 99=14039, 99.9=14831, 99.99=14831] [INITIALISE: Count=0, Max=0, Min=9223372036854775807, Avg=?, 90=0, 99=0, 99.9=0, 99.99=0] [USED_MEM_MB: Count=1, Max=114, Min=114, Avg=114, 90=114, 99=114, 99.9=114, 99.99=114] [GCS_TIME: Count=1, Max=58, Min=58, Avg=58, 90=58, 99=58, 99.9=58, 99.99=58] [GCS: Count=1, Max=21, Min=21, Avg=21, 90=21, 99=21, 99.9=21, 99.99=21] [INSERTNode: Count=4792, Max=181631, Min=34, Avg=601.89, 90=68, 99=148, 99.9=96511, 99.99=181631] [INSERT: Count=11183, Max=278527, Min=34, Avg=732.15, 90=70, 99=163, 99.9=134527, 99.99=187263] [SCAN: Count=235, Max=14831, Min=797, Avg=7148.04, 90=11087, 99=14175, 99.9=14831, 99.99=14831] [INSERTEdge: Count=6391, Max=278527, Min=35, Avg=829.82, 90=72, 99=178, 99.9=146815, 99.99=187263] [Intended-SCANEdge: Count=113, Max=14431, Min=1258, Avg=7231.38, 90=11087, 99=14175, 99.9=14431, 99.99=14431] [Intended-SCANNode: Count=122, Max=14831, Min=797, Avg=7070.84, 90=10911, 99=14039, 99.9=14831, 99.99=14831] [Intended-INITIALISE: Count=0, Max=0, Min=9223372036854775807, Avg=?, 90=0, 99=0, 99.9=0, 99.99=0] [Intended-INSERTNode: Count=4792, Max=181631, Min=34, Avg=601.92, 90=68, 99=148, 99.9=96511, 99.99=181631] [Intended-INSERT: Count=11183, Max=278527, Min=34, Avg=732.18, 90=70, 99=163, 99.9=134527, 99.99=187263] [Intended-SCAN: Count=235, Max=14831, Min=797, Avg=7148.04, 90=11087, 99=14175, 99.9=14831, 99.99=14831] [Intended-INSERTEdge: Count=6423, Max=278527, Min=35, Avg=826.04, 90=72, 99=178, 99.9=146815, 99.99=187263] 
+2018-04-28 10:51:30:612 130 sec: 61196 operations; 568.2 current ops/sec; est completion in 1 minute [THREAD_COUNT: Count=1, Max=7, Min=7, Avg=7, 90=7, 99=7, 99.9=7, 99.99=7] [SCANEdge: Count=134, Max=13295, Min=1035, Avg=6868.24, 90=9119, 99=13119, 99.9=13295, 99.99=13295] [SYS_LOAD_AVG: Count=1, Max=2, Min=2, Avg=2, 90=2, 99=2, 99.9=2, 99.99=2] [SCANNode: Count=148, Max=12311, Min=689, Avg=6660.26, 90=9039, 99=12167, 99.9=12311, 99.99=12311] [INITIALISE: Count=0, Max=0, Min=9223372036854775807, Avg=?, 90=0, 99=0, 99.9=0, 99.99=0] [USED_MEM_MB: Count=1, Max=97, Min=97, Avg=97, 90=97, 99=97, 99.9=97, 99.99=97] [GCS_TIME: Count=1, Max=63, Min=63, Avg=63, 90=63, 99=63, 99.9=63, 99.99=63] [GCS: Count=1, Max=25, Min=25, Avg=25, 90=25, 99=25, 99.9=25, 99.99=25] [INSERTNode: Count=5400, Max=143999, Min=35, Avg=494.06, 90=67, 99=171, 99.9=94143, 99.99=125439] [INSERT: Count=12600, Max=267519, Min=35, Avg=629.7, 90=69, 99=225, 99.9=100799, 99.99=202239] [SCAN: Count=282, Max=13295, Min=689, Avg=6759.09, 90=9119, 99=12167, 99.9=13295, 99.99=13295] [INSERTEdge: Count=7200, Max=267519, Min=36, Avg=731.43, 90=71, 99=256, 99.9=103231, 99.99=202239] [Intended-SCANEdge: Count=134, Max=13295, Min=1035, Avg=6868.34, 90=9119, 99=13119, 99.9=13295, 99.99=13295] [Intended-SCANNode: Count=148, Max=12311, Min=689, Avg=6660.37, 90=9039, 99=12167, 99.9=12311, 99.99=12311] [Intended-INITIALISE: Count=0, Max=0, Min=9223372036854775807, Avg=?, 90=0, 99=0, 99.9=0, 99.99=0] [Intended-INSERTNode: Count=5438, Max=143999, Min=35, Avg=506.64, 90=67, 99=174, 99.9=94143, 99.99=125439] [Intended-INSERT: Count=12691, Max=267519, Min=35, Avg=632.27, 90=69, 99=225, 99.9=100799, 99.99=202239] [Intended-SCAN: Count=283, Max=13295, Min=689, Avg=6757.45, 90=9119, 99=12167, 99.9=13295, 99.99=13295] [Intended-INSERTEdge: Count=7253, Max=267519, Min=36, Avg=726.37, 90=70, 99=256, 99.9=103231, 99.99=202239] 
+2018-04-28 10:51:40:612 140 sec: 66220 operations; 502.4 current ops/sec; est completion in 1 minute [THREAD_COUNT: Count=1, Max=7, Min=7, Avg=7, 90=7, 99=7, 99.9=7, 99.99=7] [SCANEdge: Count=116, Max=12767, Min=894, Avg=7424.07, 90=9799, 99=12415, 99.9=12767, 99.99=12767] [SYS_LOAD_AVG: Count=1, Max=2, Min=2, Avg=2, 90=2, 99=2, 99.9=2, 99.99=2] [SCANNode: Count=121, Max=13543, Min=146, Avg=6953.15, 90=8943, 99=13447, 99.9=13543, 99.99=13543] [INITIALISE: Count=0, Max=0, Min=9223372036854775807, Avg=?, 90=0, 99=0, 99.9=0, 99.99=0] [USED_MEM_MB: Count=1, Max=96, Min=96, Avg=96, 90=96, 99=96, 99.9=96, 99.99=96] [GCS_TIME: Count=1, Max=64, Min=64, Avg=64, 90=64, 99=64, 99.9=64, 99.99=64] [GCS: Count=1, Max=24, Min=24, Avg=24, 90=24, 99=24, 99.9=24, 99.99=24] [INSERTNode: Count=4787, Max=241919, Min=34, Avg=750.31, 90=61, 99=233, 99.9=103679, 99.99=241919] [INSERT: Count=11168, Max=354047, Min=34, Avg=737.16, 90=67, 99=241, 99.9=107199, 99.99=241919] [SCAN: Count=237, Max=13543, Min=146, Avg=7183.64, 90=9455, 99=12767, 99.9=13543, 99.99=13543] [INSERTEdge: Count=6381, Max=354047, Min=38, Avg=727.3, 90=68, 99=245, 99.9=114687, 99.99=239615] [Intended-SCANEdge: Count=116, Max=12767, Min=894, Avg=7424.14, 90=9799, 99=12415, 99.9=12767, 99.99=12767] [Intended-SCANNode: Count=121, Max=13543, Min=146, Avg=6953.18, 90=8943, 99=13447, 99.9=13543, 99.99=13543] [Intended-INITIALISE: Count=0, Max=0, Min=9223372036854775807, Avg=?, 90=0, 99=0, 99.9=0, 99.99=0] [Intended-INSERTNode: Count=4749, Max=241919, Min=34, Avg=738.02, 90=61, 99=233, 99.9=103679, 99.99=241919] [Intended-INSERT: Count=11077, Max=354047, Min=34, Avg=735.17, 90=67, 99=241, 99.9=107199, 99.99=241919] [Intended-SCAN: Count=236, Max=13543, Min=146, Avg=7187.58, 90=9455, 99=12767, 99.9=13543, 99.99=13543] [Intended-INSERTEdge: Count=6301, Max=354047, Min=38, Avg=736, 90=68, 99=246, 99.9=114687, 99.99=239615] 
+2018-04-28 10:51:50:612 150 sec: 71640 operations; 542 current ops/sec; est completion in 1 minute [THREAD_COUNT: Count=1, Max=7, Min=7, Avg=7, 90=7, 99=7, 99.9=7, 99.99=7] [SCANEdge: Count=134, Max=12495, Min=779, Avg=7072.89, 90=10143, 99=12319, 99.9=12495, 99.99=12495] [SYS_LOAD_AVG: Count=1, Max=1, Min=1, Avg=1, 90=1, 99=1, 99.9=1, 99.99=1] [SCANNode: Count=119, Max=14623, Min=860, Avg=7502.85, 90=10351, 99=13823, 99.9=14623, 99.99=14623] [INITIALISE: Count=0, Max=0, Min=9223372036854775807, Avg=?, 90=0, 99=0, 99.9=0, 99.99=0] [USED_MEM_MB: Count=1, Max=79, Min=79, Avg=79, 90=79, 99=79, 99.9=79, 99.99=79] [GCS_TIME: Count=1, Max=67, Min=67, Avg=67, 90=67, 99=67, 99.9=67, 99.99=67] [GCS: Count=1, Max=29, Min=29, Avg=29, 90=29, 99=29, 99.9=29, 99.99=29] [INSERTNode: Count=5178, Max=133119, Min=35, Avg=528.05, 90=70, 99=158, 99.9=93439, 99.99=122367] [INSERT: Count=12082, Max=161791, Min=35, Avg=667.63, 90=77, 99=200, 99.9=96319, 99.99=150527] [SCAN: Count=256, Max=14623, Min=779, Avg=7270.65, 90=10223, 99=12959, 99.9=14623, 99.99=14623] [INSERTEdge: Count=6917, Max=161791, Min=36, Avg=770.94, 90=81, 99=313, 99.9=102207, 99.99=150527] [Intended-SCANEdge: Count=137, Max=12959, Min=779, Avg=7068.96, 90=10143, 99=12495, 99.9=12959, 99.99=12959] [Intended-SCANNode: Count=119, Max=14623, Min=860, Avg=7502.96, 90=10351, 99=13823, 99.9=14623, 99.99=14623] [Intended-INITIALISE: Count=0, Max=0, Min=9223372036854775807, Avg=?, 90=0, 99=0, 99.9=0, 99.99=0] [Intended-INSERTNode: Count=5187, Max=133119, Min=35, Avg=527.25, 90=70, 99=158, 99.9=93439, 99.99=122367] [Intended-INSERT: Count=12104, Max=161791, Min=35, Avg=666.52, 90=77, 99=200, 99.9=96319, 99.99=150527] [Intended-SCAN: Count=256, Max=14623, Min=779, Avg=7270.7, 90=10223, 99=12959, 99.9=14623, 99.99=14623] [Intended-INSERTEdge: Count=6912, Max=161791, Min=36, Avg=771.47, 90=81, 99=313, 99.9=102207, 99.99=150527] 
+2018-04-28 10:52:00:612 160 sec: 77432 operations; 579.2 current ops/sec; est completion in 47 seconds [THREAD_COUNT: Count=1, Max=7, Min=7, Avg=7, 90=7, 99=7, 99.9=7, 99.99=7] [SCANEdge: Count=129, Max=14295, Min=1221, Avg=7018.95, 90=10247, 99=12959, 99.9=14295, 99.99=14295] [SYS_LOAD_AVG: Count=1, Max=1, Min=1, Avg=1, 90=1, 99=1, 99.9=1, 99.99=1] [SCANNode: Count=126, Max=14607, Min=516, Avg=7433.48, 90=10047, 99=13655, 99.9=14607, 99.99=14607] [INITIALISE: Count=0, Max=0, Min=9223372036854775807, Avg=?, 90=0, 99=0, 99.9=0, 99.99=0] [USED_MEM_MB: Count=1, Max=100, Min=100, Avg=100, 90=100, 99=100, 99.9=100, 99.99=100] [GCS_TIME: Count=1, Max=70, Min=70, Avg=70, 90=70, 99=70, 99.9=70, 99.99=70] [GCS: Count=1, Max=33, Min=33, Avg=33, 90=33, 99=33, 99.9=33, 99.99=33] [INSERTNode: Count=5526, Max=249343, Min=35, Avg=595.64, 90=76, 99=131, 99.9=101887, 99.99=188543] [INSERT: Count=12894, Max=249343, Min=35, Avg=623.67, 90=79, 99=178, 99.9=101887, 99.99=188543] [SCAN: Count=252, Max=14607, Min=516, Avg=7227.71, 90=10239, 99=12783, 99.9=14607, 99.99=14607] [INSERTEdge: Count=7355, Max=126975, Min=37, Avg=645.75, 90=84, 99=254, 99.9=100991, 99.99=126975] [Intended-SCANEdge: Count=126, Max=14295, Min=1221, Avg=7021.94, 90=10239, 99=12063, 99.9=14295, 99.99=14295] [Intended-SCANNode: Count=126, Max=14607, Min=516, Avg=7433.48, 90=10047, 99=13655, 99.9=14607, 99.99=14607] [Intended-INITIALISE: Count=0, Max=0, Min=9223372036854775807, Avg=?, 90=0, 99=0, 99.9=0, 99.99=0] [Intended-INSERTNode: Count=5517, Max=249343, Min=35, Avg=596.57, 90=76, 99=131, 99.9=101887, 99.99=188543] [Intended-INSERT: Count=12872, Max=249343, Min=35, Avg=624.69, 90=79, 99=178, 99.9=101887, 99.99=188543] [Intended-SCAN: Count=252, Max=14607, Min=516, Avg=7227.71, 90=10239, 99=12783, 99.9=14607, 99.99=14607] [Intended-INSERTEdge: Count=7355, Max=126975, Min=37, Avg=645.78, 90=84, 99=254, 99.9=100991, 99.99=126975] 
+2018-04-28 10:52:10:612 170 sec: 83398 operations; 596.6 current ops/sec; est completion in 34 seconds [THREAD_COUNT: Count=1, Max=7, Min=7, Avg=7, 90=7, 99=7, 99.9=7, 99.99=7] [SCANEdge: Count=145, Max=12279, Min=585, Avg=6176.21, 90=7611, 99=11623, 99.9=12279, 99.99=12279] [SYS_LOAD_AVG: Count=1, Max=1, Min=1, Avg=1, 90=1, 99=1, 99.9=1, 99.99=1] [SCANNode: Count=150, Max=15055, Min=5908, Avg=6610.44, 90=8863, 99=11463, 99.9=15055, 99.99=15055] [INITIALISE: Count=0, Max=0, Min=9223372036854775807, Avg=?, 90=0, 99=0, 99.9=0, 99.99=0] [USED_MEM_MB: Count=1, Max=101, Min=101, Avg=101, 90=101, 99=101, 99.9=101, 99.99=101] [GCS_TIME: Count=1, Max=75, Min=75, Avg=75, 90=75, 99=75, 99.9=75, 99.99=75] [GCS: Count=1, Max=34, Min=34, Avg=34, 90=34, 99=34, 99.9=34, 99.99=34] [INSERTNode: Count=5707, Max=390655, Min=35, Avg=809.22, 90=55, 99=239, 99.9=106175, 99.99=200191] [INSERT: Count=13350, Max=390655, Min=35, Avg=600.75, 90=56, 99=163, 99.9=96383, 99.99=248191] [SCAN: Count=295, Max=15055, Min=585, Avg=6397.01, 90=8607, 99=11463, 99.9=15055, 99.99=15055] [INSERTEdge: Count=7629, Max=248191, Min=35, Avg=445.72, 90=58, 99=149, 99.9=89599, 99.99=194047] [Intended-SCANEdge: Count=146, Max=12279, Min=585, Avg=6177.82, 90=7587, 99=11623, 99.9=12279, 99.99=12279] [Intended-SCANNode: Count=150, Max=15055, Min=5908, Avg=6610.47, 90=8863, 99=11463, 99.9=15055, 99.99=15055] [Intended-INITIALISE: Count=0, Max=0, Min=9223372036854775807, Avg=?, 90=0, 99=0, 99.9=0, 99.99=0] [Intended-INSERTNode: Count=5730, Max=390655, Min=35, Avg=806.32, 90=55, 99=239, 99.9=106175, 99.99=200191] [Intended-INSERT: Count=13370, Max=390655, Min=35, Avg=599.94, 90=56, 99=160, 99.9=96383, 99.99=248191] [Intended-SCAN: Count=298, Max=15055, Min=585, Avg=6399.2, 90=8607, 99=11463, 99.9=15055, 99.99=15055] [Intended-INSERTEdge: Count=7644, Max=248191, Min=35, Avg=444.96, 90=58, 99=149, 99.9=89599, 99.99=194047] 
+2018-04-28 10:52:20:612 180 sec: 88810 operations; 541.2 current ops/sec; est completion in 23 seconds [THREAD_COUNT: Count=1, Max=7, Min=7, Avg=7, 90=7, 99=7, 99.9=7, 99.99=7] [SCANEdge: Count=140, Max=14487, Min=1438, Avg=6954.45, 90=9511, 99=13911, 99.9=14487, 99.99=14487] [SYS_LOAD_AVG: Count=1, Max=1, Min=1, Avg=1, 90=1, 99=1, 99.9=1, 99.99=1] [SCANNode: Count=136, Max=14079, Min=2422, Avg=7123.93, 90=9471, 99=14055, 99.9=14079, 99.99=14079] [INITIALISE: Count=0, Max=0, Min=9223372036854775807, Avg=?, 90=0, 99=0, 99.9=0, 99.99=0] [USED_MEM_MB: Count=1, Max=100, Min=100, Avg=100, 90=100, 99=100, 99.9=100, 99.99=100] [GCS_TIME: Count=1, Max=77, Min=77, Avg=77, 90=77, 99=77, 99.9=77, 99.99=77] [GCS: Count=1, Max=27, Min=27, Avg=27, 90=27, 99=27, 99.9=27, 99.99=27] [INSERTNode: Count=5100, Max=237311, Min=35, Avg=585.67, 90=72, 99=144, 99.9=105151, 99.99=228607] [INSERT: Count=11872, Max=266751, Min=35, Avg=668.85, 90=73, 99=187, 99.9=110847, 99.99=237311] [SCAN: Count=277, Max=14487, Min=1438, Avg=7034.31, 90=9511, 99=13911, 99.9=14487, 99.99=14487] [INSERTEdge: Count=6784, Max=266751, Min=36, Avg=730.4, 90=75, 99=246, 99.9=119999, 99.99=222335] [Intended-SCANEdge: Count=139, Max=14487, Min=1438, Avg=6958.51, 90=9511, 99=13911, 99.9=14487, 99.99=14487] [Intended-SCANNode: Count=137, Max=14079, Min=2422, Avg=7116.04, 90=9471, 99=14055, 99.9=14079, 99.99=14079] [Intended-INITIALISE: Count=0, Max=0, Min=9223372036854775807, Avg=?, 90=0, 99=0, 99.9=0, 99.99=0] [Intended-INSERTNode: Count=5079, Max=237311, Min=35, Avg=587.79, 90=71, 99=144, 99.9=105151, 99.99=228607] [Intended-INSERT: Count=11852, Max=266751, Min=35, Avg=669.94, 90=73, 99=187, 99.9=110847, 99.99=237311] [Intended-SCAN: Count=274, Max=14487, Min=1438, Avg=7039.05, 90=9655, 99=13911, 99.9=14487, 99.99=14487] [Intended-INSERTEdge: Count=6769, Max=266751, Min=36, Avg=731.94, 90=75, 99=246, 99.9=119999, 99.99=222335] 
+2018-04-28 10:52:30:612 190 sec: 93619 operations; 480.9 current ops/sec; est completion in 13 seconds [THREAD_COUNT: Count=1, Max=7, Min=7, Avg=7, 90=7, 99=7, 99.9=7, 99.99=7] [SCANEdge: Count=118, Max=14551, Min=3036, Avg=7623.42, 90=10743, 99=14055, 99.9=14551, 99.99=14551] [SYS_LOAD_AVG: Count=1, Max=1, Min=1, Avg=1, 90=1, 99=1, 99.9=1, 99.99=1] [SCANNode: Count=134, Max=14511, Min=5920, Avg=7315.63, 90=10183, 99=12983, 99.9=14511, 99.99=14511] [INITIALISE: Count=0, Max=0, Min=9223372036854775807, Avg=?, 90=0, 99=0, 99.9=0, 99.99=0] [USED_MEM_MB: Count=1, Max=195, Min=195, Avg=195, 90=195, 99=195, 99.9=195, 99.99=195] [GCS_TIME: Count=1, Max=56, Min=56, Avg=56, 90=56, 99=56, 99.9=56, 99.99=56] [GCS: Count=1, Max=22, Min=22, Avg=22, 90=22, 99=22, 99.9=22, 99.99=22] [INSERTNode: Count=4557, Max=181887, Min=35, Avg=607.01, 90=65, 99=188, 99.9=91135, 99.99=181887] [INSERT: Count=10628, Max=183551, Min=35, Avg=748.82, 90=69, 99=287, 99.9=106303, 99.99=181887] [SCAN: Count=251, Max=14551, Min=3036, Avg=7465.46, 90=10527, 99=13287, 99.9=14551, 99.99=14551] [INSERTEdge: Count=6073, Max=183551, Min=38, Avg=855, 90=71, 99=2509, 99.9=123519, 99.99=142335] [Intended-SCANEdge: Count=118, Max=14551, Min=3036, Avg=7623.45, 90=10743, 99=14055, 99.9=14551, 99.99=14551] [Intended-SCANNode: Count=133, Max=14511, Min=5920, Avg=7325.35, 90=10183, 99=12983, 99.9=14511, 99.99=14511] [Intended-INITIALISE: Count=0, Max=0, Min=9223372036854775807, Avg=?, 90=0, 99=0, 99.9=0, 99.99=0] [Intended-INSERTNode: Count=4556, Max=181887, Min=35, Avg=626.03, 90=65, 99=202, 99.9=91135, 99.99=181887] [Intended-INSERT: Count=10630, Max=183551, Min=35, Avg=756.8, 90=69, 99=323, 99.9=106303, 99.99=181887] [Intended-SCAN: Count=252, Max=14551, Min=3036, Avg=7459.91, 90=10527, 99=13287, 99.9=14551, 99.99=14551] [Intended-INSERTEdge: Count=6105, Max=183551, Min=38, Avg=850.76, 90=70, 99=2509, 99.9=123519, 99.99=142335] 
+2018-04-28 10:52:40:612 200 sec: 99296 operations; 567.7 current ops/sec; est completion in 2 second [THREAD_COUNT: Count=1, Max=7, Min=7, Avg=7, 90=7, 99=7, 99.9=7, 99.99=7] [SCANEdge: Count=136, Max=13823, Min=1200, Avg=6563.56, 90=8943, 99=13231, 99.9=13823, 99.99=13823] [SYS_LOAD_AVG: Count=1, Max=1, Min=1, Avg=1, 90=1, 99=1, 99.9=1, 99.99=1] [SCANNode: Count=152, Max=14759, Min=1819, Avg=7004.14, 90=9063, 99=12191, 99.9=14759, 99.99=14759] [INITIALISE: Count=0, Max=0, Min=9223372036854775807, Avg=?, 90=0, 99=0, 99.9=0, 99.99=0] [USED_MEM_MB: Count=1, Max=145, Min=145, Avg=145, 90=145, 99=145, 99.9=145, 99.99=145] [GCS_TIME: Count=1, Max=77, Min=77, Avg=77, 90=77, 99=77, 99.9=77, 99.99=77] [GCS: Count=1, Max=34, Min=34, Avg=34, 90=34, 99=34, 99.9=34, 99.99=34] [INSERTNode: Count=5390, Max=125439, Min=35, Avg=528.3, 90=64, 99=127, 99.9=86015, 99.99=106239] [INSERT: Count=12576, Max=321791, Min=35, Avg=636.27, 90=67, 99=211, 99.9=96383, 99.99=306175] [SCAN: Count=288, Max=14759, Min=1200, Avg=6796.09, 90=8959, 99=13111, 99.9=14759, 99.99=14759] [INSERTEdge: Count=7211, Max=321791, Min=37, Avg=714.92, 90=68, 99=244, 99.9=110527, 99.99=306175] [Intended-SCANEdge: Count=136, Max=13823, Min=1200, Avg=6563.56, 90=8943, 99=13231, 99.9=13823, 99.99=13823] [Intended-SCANNode: Count=153, Max=14759, Min=1819, Avg=7006.9, 90=9063, 99=12191, 99.9=14759, 99.99=14759] [Intended-INITIALISE: Count=0, Max=0, Min=9223372036854775807, Avg=?, 90=0, 99=0, 99.9=0, 99.99=0] [Intended-INSERTNode: Count=5420, Max=125439, Min=35, Avg=509.77, 90=64, 99=126, 99.9=86015, 99.99=106239] [Intended-INSERT: Count=12668, Max=321791, Min=35, Avg=625.22, 90=67, 99=202, 99.9=96383, 99.99=306175] [Intended-SCAN: Count=289, Max=14759, Min=1200, Avg=6798.41, 90=8959, 99=13111, 99.9=14759, 99.99=14759] [Intended-INSERTEdge: Count=7230, Max=321791, Min=37, Avg=713.22, 90=68, 99=244, 99.9=110527, 99.99=306175] 
+2018-04-28 10:52:41:756 201 sec: 100000 operations; 615.38 current ops/sec; [THREAD_COUNT: Count=2, Max=7, Min=6, Avg=6.5, 90=7, 99=7, 99.9=7, 99.99=7] [SCANEdge: Count=15, Max=11351, Min=2098, Avg=6688.13, 90=8959, 99=11351, 99.9=11351, 99.99=11351] [SYS_LOAD_AVG: Count=2, Max=1, Min=1, Avg=1, 90=1, 99=1, 99.9=1, 99.99=1] [SCANNode: Count=14, Max=10039, Min=4600, Avg=7027.57, 90=8695, 99=10039, 99.9=10039, 99.99=10039] [INITIALISE: Count=0, Max=0, Min=9223372036854775807, Avg=?, 90=0, 99=0, 99.9=0, 99.99=0] [USED_MEM_MB: Count=2, Max=186, Min=117, Avg=151.5, 90=186, 99=186, 99.9=186, 99.99=186] [GCS_TIME: Count=2, Max=75, Min=9, Avg=42, 90=75, 99=75, 99.9=75, 99.99=75] [GCS: Count=2, Max=35, Min=4, Avg=19.5, 90=35, 99=35, 99.9=35, 99.99=35] [INSERTNode: Count=674, Max=105215, Min=35, Avg=645.65, 90=87, 99=140, 99.9=97407, 99.99=105215] [CLEANUP: Count=1, Max=74, Min=74, Avg=74, 90=74, 99=74, 99.9=74, 99.99=74] [INSERT: Count=1574, Max=105215, Min=35, Avg=586.18, 90=87, 99=159, 99.9=86207, 99.99=105215] [SCAN: Count=29, Max=11351, Min=2098, Avg=6852, 90=8695, 99=11351, 99.9=11351, 99.99=11351] [INSERTEdge: Count=875, Max=86207, Min=40, Avg=555.85, 90=88, 99=238, 99.9=77695, 99.99=86207] [Intended-SCANEdge: Count=15, Max=11351, Min=2098, Avg=6688.13, 90=8959, 99=11351, 99.9=11351, 99.99=11351] [Intended-SCANNode: Count=13, Max=10047, Min=4600, Avg=6997.54, 90=8695, 99=10047, 99.9=10047, 99.99=10047] [Intended-INITIALISE: Count=0, Max=0, Min=9223372036854775807, Avg=?, 90=0, 99=0, 99.9=0, 99.99=0] [Intended-INSERTNode: Count=643, Max=105215, Min=35, Avg=674.85, 90=88, 99=145, 99.9=97407, 99.99=105215] [Intended-CLEANUP: Count=1, Max=75, Min=75, Avg=75, 90=75, 99=75, 99.9=75, 99.99=75] [Intended-INSERT: Count=1480, Max=105215, Min=35, Avg=620.51, 90=88, 99=166, 99.9=97407, 99.99=105215] [Intended-SCAN: Count=27, Max=11351, Min=2098, Avg=6858.96, 90=8695, 99=11351, 99.9=11351, 99.99=11351] [Intended-INSERTEdge: Count=824, Max=86207, Min=40, Avg=587.25, 90=95, 99=260, 99.9=77695, 99.99=86207] 

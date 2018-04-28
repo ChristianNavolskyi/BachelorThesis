@@ -1,0 +1,6 @@
+#[Logging for: SCANEdge]
+#[Histogram log format version 1.1]
+#[StartTime: 1524875601.126 (seconds since epoch), Sat Apr 28 02:33:21 CEST 2018]
+"StartTimestamp","Interval_Length","Interval_Max","Interval_Compressed_Histogram"
+0.000,4.911,0.128,HISTggAAAYd42u3dTVKDMBgA0HyBegrv4tmcceHei3oC66J2kzEDndLQhPcWMihQku8HmHbq68fXe0o/n+li+lvG5ef5/Pad6F8U67lYnyrr1+3mYhmV40/Feixsnx70+5q8cl5yZVynyv7lftftXyp/X4pTVM5j7bi2ypO00bzHnfunB4+vNu+pkvdR5MNcxH2u1NNcHP90Z/3khTzIN853Xni9cjlX9suVvrK2/uLGeMVG+Rc753c0qsfUqB73qvNneX36vD8CAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAR+X5+QF9ii3jt9f+O5AvgegUAAHgu8bwzwnjC/CIu4iSOAADunwEAAPAcaNwAQ/VD/Zee60H+6g/IB+i5TuJg4wX0R+D2eomDjPNo8Y3G8xiN4xKd54nrlnmErfM51BUD9V95KD+cN3vHe9TPU7R6fyHkEx3NWy/nEfLu3/H7HqVj5IU+C+4HYIu8km/oU4j7MeMhngC4X3C9bxVHeQGgfyKPAAAAAGBE8QurFAdp
+4.911,0.061,0.000,HISTggAAAB142pNpmdzIwMDAwQABzFCaEUoz2X9gQAEAYqkC8g==

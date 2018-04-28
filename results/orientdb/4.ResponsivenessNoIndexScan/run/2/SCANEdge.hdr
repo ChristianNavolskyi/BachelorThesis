@@ -1,0 +1,7 @@
+#[Logging for: SCANEdge]
+#[Histogram log format version 1.1]
+#[StartTime: 1524883665.607 (seconds since epoch), Sat Apr 28 04:47:45 CEST 2018]
+"StartTimestamp","Interval_Length","Interval_Max","Interval_Compressed_Histogram"
+0.001,8.422,0.011,HISTggAAASp42u3auRECMQwF0JVpg15IaYsZMkIapQMIoACOXSzL7yUMAYe/ZVtm2J+vp2W5HJen3esxng+H++G2AJBfiEDO6gSsMwAA0HcjP/kB2GeNt2A+oR6GrCv13Uezz9kneDsveVJpfcfg44w/jzOSz6fzwXm7xvcLOVN4vwz1OfX6HeXzP/1dq6nHkutglj4/uzZI/r1+x4gPnzuvWKOuZqmHKJKf/tU+1fOcmmWerPMcucaP97qt+lK2rY9Y+fVbref25X20971m7ftzG6Su9OtjjKtaP6bOa/dXWcYzSz/jHpArn+z/I47k79vUcan7yL/zVj/gXCbH/JhnsG/Koe/3VzeAfVIfbV7BOpGPvOVA5XrwPxDAOgUAAHBPkgcAOJ8BIM359ACLuQWG
+8.423,7.215,0.009,HISTggAAARR42u3cQRLBQBCF4XlxDYdwA2dT3MBF3YBF7EkVpsd8/yYrMv3670kUsb9cT62dD21l9zxmPRzvx1sDAAAAAAAAAAD4Jin2PnKVDwDAPitvYFw/I+ep1m3/wwj+hd/2uwlzySQ58bHm/tm7nvADrifQH/AT+gbwGPoIHvAcKDtH5nFbLuHTVJ5FffbRL5wn/Hd9ncAzv3/6zFyluOej9TV/5l0m6Zsc1IN+flS5L8qfz436IDf9rXo+zyGZd76oW77yGqHOXz8H9+7nperXk/DJfBZcZz7saTqv79XrF/u7fUcOw9Xv+0/eyrVuPQtleAwedF6P/+vgG8DHMfuiT+ZypvXwHQAA9wW963M/vjG3B4NxBV4=
+15.638,0.045,0.000,HISTggAAAB142pNpmdzIwMDAwQABzFCaEUoz2X9gQAEAYqkC8g==
