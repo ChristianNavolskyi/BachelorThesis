@@ -55,6 +55,15 @@ double: $(MAINFILE).tex
 
 index: $(MAINFILE).ind
 
+new: $(MAINFILE).tex
+	- make clean
+	- pdflatex $(MAINFILE)
+	- bibtex $(MAINFILE)
+	- pdflatex $(MAINFILE)
+	- pdflatex $(MAINFILE)
+	- make clean
+	- open $(MAINFILE).pdf
+
 #makeindex kann keine 8-bit Umlaute richtig sortieren! :-(
 #deswegen setzen wir sie f�r makeindex einfach nochmal um
 $(MAINFILE).ind: $(MAINFILE).idx $(MAINFILE).ist
@@ -75,7 +84,7 @@ fullrun: $(MAINFILE).tex $(TEXSOURCES)
 	- pdflatex $(MAINFILE)
 	- make bbls
 	- pdflatex $(MAINFILE)
-	- $(MAKE) index
+	- make index
 	- pdflatex $(MAINFILE)
 	- make clean
 

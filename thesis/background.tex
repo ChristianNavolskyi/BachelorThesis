@@ -3,37 +3,150 @@
 
 \section{Industrial Data}
 \label{ch:background:se:industrialData}
+Under the term "industrial data" we understand data that is produced by machines during the production.
+That could be the current settings of the machine,
+temperatures or tolerances measured during processing or what product is currently worked on.
+In chapter \ref{ch:analysis:se:data} the possible structure of this data is analysed.
+\note{Clear, that we have to come up with that data?}
 
 \section{Graphs}
+\label{ch:background:se:graphs}
+A graph as the literature tells us \cite[89]{Worsch2011} is a tuple of sets $ G = (V, E) $ with $ E \subseteq V \times V $.
+Elements of $ V $ are called vertices and elements of $ E $ are called edges.
+The set of vertices has to be not empty, but the edge set can be.
+In this thesis we are focusing on directed graphs only,
+although some graph databases are capable of handling undirected graphs too not all are.
+Also there would be no benefit in using undirected edges since our model also uses directed edges.
+In general graphs can have labels or weights on their edges as stated in \cite[99]{Worsch2011}.
+For our purposes we will use labels on the vertices and edges to ease the understanding of our data structure.
+In section \ref{ch:background:se:graphDatabases} we will give reasons why having labels on the graph components is useful.
 
 \section{Graph Databases}
 \label{ch:background:se:graphDatabases}
+There is a variety of database types available the main categories are SQL and NoSQL databases.
+A short description of SQL databases would be
+\blockquote[\cite{ChuaHock-Chuan}]{A relational database organizes data in tables (or relations).
+A table is made up of rows and columns.
+A row is also called a record (or tuple).
+A column is also called a field (or attribute).
+A database table is similar to a spreadsheet.}
 
-\subsection{Triple Stores}
+NoSQL databases on the other hand are able to store any kind of data in any record,
+they don't rely on a specified schema.
+Also they are able to scale horizontally for the cost of consistency. \cite{Yegulalp2017}
 
-\subsubsection{Apache Jena}
+Graph databases are a type of NoSQL databases.
+They use graph theory to store their data as described in \ref{ch:background:se:graphs} with vertices and edges.
+Every vertex has a unique identifier (id) in the database,
+the edges coming from or going to that vertex and it can have properties assigned to it as key/value pairs.
+Edges also have a unique id,
+a start and end vertex and properties just as vertices. \cite{Rouse2016}
+
+The labels mentioned at the end of section \ref{ch:background:se:graphs} can be seen as the properties assigned to a vertex or edge.
+To map a production line in which the elements like machines and products might have their own real world ids these properties can be used to store these real world ids as a key/value pair.
+Later a particular machine for example can be looked up by its id.
+That is critical to find the data stored in the database.
+
+In the following subsections \ref{ch:background:se:rdfTriplestores} through \ref{ch:background:se:graphStores} we will discuss the different types of graph databases and give examples of real databases which operate by that type.
+All databases used in this thesis support the ACID\footnote{\todo{Enter Text}} principle with transactions to ensure data consistency.
+
+\subsection{RDF/Triplestores}
+\label{ch:background:se:rdfTriplestores}
+First in our list are RDF stores also known as triple stores.
+
+RDF (Resource Description Framework) is a model for data interchange on the Web.
+It is able to merge data even with different schemas, it also support the evolution of a schema over time.
+The linking strucutre of the Web is extended by RDF by it using URIs\footnote{\todo{enter text}} to name relationships and resources connected by those. \cite[4]{Ontotext2014}
+
+\blockquote[\cite{W3C2014}]{This linking structure forms a directed, labeled graph, where the edges represent the named link between two resources, represented by the graph nodes.
+This graph view is the easiest possible mental model for RDF and is often used in easy-to-understand visual explanations.}
+
+Triplestores store semantic facts as subject - predicate - object triples,
+also referred to as statements using RDF.
+These statements form a network of data,
+which can also be seen as a graph. \cite[4]{Ontotext2014}
+
+\subsubsection{Apache Jena TDB}
+\blockquote[\cite{Apache2015}]{Apache Jena (or Jena in short) is a free and open source Java framework for building semantic web and Linked Data applications.
+The framework is composed of different APIs interacting together to process RDF data.}
+
+The TDB component in Jena is responsible to store and query RDF data. \cite{Apache}
+
+In section \ref{ch:background:se:graphDatabaseBenchmarks} we will discuss recent studies investigating Apache Jena, among others.
 
 \subsection{Document Stores}
+As the name suggests the data model of document stores consist of documents which can have fields without depending on a defined schema\cite{OrientDB}.
+Its aggregates data in those documents and transforms them internally into an searchable form\cite{Techopedia2017}.
 
 \subsubsection{OrientDB}
+OrientDB is a mix of a document store and a graph store,
+as stated in their manual \textquote[\cite{OrientDB}]{OrientDB is a document-graph database, meaning it has full native graph capabilities coupled with features normally only found in document databases.}
+Its designed as a robust, highly scalable database with a wide possible set of use cases. \cite{OrientDB}
 
 \subsection{Graph Stores}
+\label{ch:background:se:graphStores}
+Graph stores organise their data as graphs.
+References with foreign keys known from relational databases are mapped as relationships in graph databases.
+Each node in the database model contains a list of relationship-records to represent their connection to other nodes. \cite{NeoTechnologyInc.2016}
 
 \subsubsection{Neo4j}
+Neo4j is a native graph database and was build as such from the ground up.
+In their introduction they say \textquote[\cite{Neo4jInc.}]{The architecture is designed for optimizing fast management, storage, and traversal of nodes and relationships.
+In Neo4j, relationships are first class citizens that represent pre-materialized connections between entities.}
 
 \subsubsection{Sparksee}
+The user manual describes Sparksee as follows, \textquote[\cite{SparsityTechnologies}]{Sparksee is an embedded graph database management system tightly integrated with the application at code level.}
+Sparksee is implemented in C++ but provides a low level Java API.
 
 \section{Graph Database Benchmarks}
+\label{ch:background:se:graphDatabaseBenchmarks}
+As the need to compare similar programs exists benchmarks are needed to hand results over certain parameters to aid decision making.
+In the field of graph databases that is no different.
+There exist multiple benchmarks for graph databases and some are outlined shortly in the following subsections \ref{ch:background:se:ldbcGraphalytics}~to~\ref{ch:background:se:ycsb}.
+In in section \ref{ch:analysis:se:benchmark} we choose a benchmark for our work.
 
 \subsection{LDBC: Graphalytics}
+\label{ch:background:se:ldbcGraphalytics}
+Benchmark specifications, practices and results for graph data management systems are established by an industry council called The Linked Data Benchmark Council.
+The Graphalytics benchmark uses a choke-point design to evaluate the crucial technological challenges present in system design,
+one example would be the "large graph memory footprint" as mentioned in \cite[2]{Capota2015c}.
+
+Graphalytics uses Datagen to create social network graphs,
+which are easy to understand for their users \cite[3]{Capota2015c}.
+
+The workloads implemented in Graphalytics represent common graph algorithms such as breadth-first search, weakly connected components or single-source shortest paths to name just a few \cite[7]{Iosup}.
+
+Neo4j was used among others in the study of Capot\u{a} et al. \cite{Capota2015c}, which we will refer to in our evaluation in chapter \ref{ch:evaluation}.
 
 \subsection{XGDBench}
+Is a graph database benchmark for cloud computing systems.
+It is designed to work in the cloud and in future exascale clouds.
+XGDBench is an extension of the Yahoo! Cloud Serving Benchmark for graph databases.
+This benchmark is written in X10,
+a \textquote[\cite{Dayarathna2012}]{programming language that is aimed
+for providing a robust programming model that can withstand the architectural challenges posed by multi-core systems, hardware accelerators, clusters, and supercomputers}.
+
+XGDBench also focuses on social networks for their data structure,
+that is generated by a procedure called Multiplicative Attribute Graph (MAG), see \cite{Kim2012} for more information.
+
+It specifically targets read, update and graph traversal operations for its performance aspects \cite[366]{Dayarathna2012}.
+
+This study featured following graph databases which we are also testing Fuseki, Neo4j and OrientDB \cite[364]{Dayarathna2012}.
+Fuseki is a SPARQL\footnote{\todo{Enter text}} server providing a HTTP interface to Jena \cite{Apache2016},
+so that research covers three of our four databases.
 
 \subsection{YCSB}
+\label{ch:background:se:ycsb}
+The Yahoo! Cloud Serving Benchmark (YCSB) was not designed specifically for graph databases,
+but rather for key-value and cloud stores.
+The project consists of the YCSB client which is responsible for generating the data,
+as well as the Core workloads those are a set of workloads executed by the client.
+The client is extensible to that new workloads,
+new databases and new generators can be integrated. \cite{Yahoo!2010}
 
-\subsection{Conclusion\todo{show features to compare}}
+The core workload is designed to use simple CRUD\footnote{CRUD stands for the basic operations on persistent storage, these are Create, Read, Update, Delete.} operations on any database with no special structure of the generated data.
 
-\section{Related Work}
+\section{Other Related Work \todo{Add if more present/needed}}
 
 \subsection{Graph Database: Anna}
 

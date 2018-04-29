@@ -10,44 +10,41 @@
 % wissdoc Optionen: draft, relaxed, pdf --> siehe wissdoc.cls
 % ------------------------------------------------------------------
 % Weitere packages: (Dokumentation dazu durch "latex <package>.dtx")
-%\usepackage{bibgerm}
-%\usepackage[backend=biber]{biblatex}
-\usepackage{csquotes}
-\usepackage{tabularx}
-\usepackage{booktabs}
-\usepackage{multirow}
-%\usepackage{tocbibind}
-\usepackage{siunitx}
-\usepackage{xcolor}
-\usepackage{textcomp}
-\usepackage{listings}
-\usepackage{newfloat,caption}
-\usepackage{subcaption}
-\usepackage{footnote}
-\usepackage{rotating}
-\usepackage{pgfplots}
-\usepackage{pgfplotstable}
-\usepackage{url}
-\usepackage{boxhandler}
-\usepackage{tabu}
 \usepackage{amssymb}
-%\usepackage{subfig}
-%\usepackage{subcaption}
+%\usepackage{bibgerm}
+\usepackage[backend=bibtex,natbib=true,url=false]{biblatex}
+\usepackage{booktabs}
+\usepackage{boxhandler}
 \usepackage{caption}
-\usepackage{subcaption}
-%\usepackage[plainpages=true]{hyperref}
-\usepackage[space]{grffile}
-%\usepackage[numbers,sort&compress]{natbib}
-\usepackage[backend=biber,natbib=true,hyperref=true,doi=false,url=false]{biblatex}
-% \usepackage{varioref}
-% \usepackage{verbatim}
+\usepackage{csquotes}
+%\usepackage{fancybox} % für schattierte,ovale Boxen etc.
 \usepackage{float}    %z.B. \floatstyle{ruled}\restylefloat{figure}
-%\usepackage[hidelinks]{hyperref}
-% \usepackage{subfigure}
-% \usepackage{fancybox} % für schattierte,ovale Boxen etc.
-% \usepackage{tabularx} % automatische Spaltenbreite
-% \usepackage{supertab} % mehrseitige Tabellen
-% \usepackage[svnon,svnfoot]{svnver} % SVN Versionsinformation
+\usepackage[T1]{fontenc}
+\usepackage[bottom]{footmisc}
+\usepackage[space]{grffile}
+%\usepackage[plainpages=true]{hyperref}
+%\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{multirow}
+%\usepackage[numbers,sort&compress]{natbib}
+\usepackage{newfloat,caption}
+\usepackage{pgfplotstable}
+\usepackage{pgfplots}
+\usepackage{rotating}
+\usepackage{siunitx}
+\usepackage{subcaption}
+%\usepackage{subfig}
+%\usepackage{subfigure}
+%\usepackage{supertab} % mehrseitige Tabellen
+%\usepackage[svnon,svnfoot]{svnver} % SVN Versionsinformation
+\usepackage{tabularx}
+\usepackage{tabu}
+\usepackage{textcomp}
+%\usepackage{tocbibind}
+\usepackage{url}
+%\usepackage{varioref}
+%\usepackage{verbatim}
+\usepackage{xcolor}
 %% ---------------- end of usepackages -------------
 
 %\svnversion{$Id: diplarb.tex 53 2009-12-10 12:23:37Z bless $} % In case that you want to include version information in the footer
@@ -139,19 +136,19 @@
 %%%%%%%%%%%%%% includeonly %%%%%%%%%%%%%%%%%%%
 % Es werden nur die Teile eingebunden, die hier
 % aufgefuehrt sind!
-\includeonly{%
-titlepage,%
-statement,% Ist in KA Pflicht für Diplomarbeiten
-introduction,% Motivation, Zielsetzung, Gliederung
-background,% Grundlagen
-analysis,   % Problembeschreibung (Detail) und Related Work
-design,   % Beschreibung der Problemlösung (Konzepte, allg. Architektur, ...)
-implementation,  % Beschreibung der Umsetzung/Implementierung
-evaluation,      % Nachweis und Auswertung
-futurework,% Future Work
-summary  % Zusammenfassung der Ergebnisse
-}
-\bibliography{Literature, Websites}
+%\includeonly{%
+%titlepage,%
+%statement,% Ist in KA Pflicht für Diplomarbeiten
+%introduction,% Motivation, Zielsetzung, Gliederung
+%background,% Grundlagen
+%analysis,   % Problembeschreibung (Detail) und Related Work
+%design,   % Beschreibung der Problemlösung (Konzepte, allg. Architektur, ...)
+%implementation,  % Beschreibung der Umsetzung/Implementierung
+%evaluation,      % Nachweis und Auswertung
+%futurework,% Future Work
+%summary  % Zusammenfassung der Ergebnisse
+%}
+\bibliography{library,Websites}
 \usepgfplotslibrary{groupplots}
 \usetikzlibrary{pgfplots.groupplots}
 %\addbibresource{diplarb.bib}
