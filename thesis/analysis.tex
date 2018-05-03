@@ -1,22 +1,211 @@
 \chapter{Analysis}
 \label{ch:analysis}
+In this chapter we will analyse the data which could occur in an industrial use case,
+that includes its structure and amount.
+Further we will examine possible workloads for our graph databases in section~\ref{ch:analysis:se:workloads}.
+
+At the end of this chapter in section~\ref{ch:analysis:se:benchmark} we will chose one benchmark for our research.
 
 \section{Data}
 \label{ch:analysis:se:data}
+As described in section~\ref{ch:background:se:industrialData} we have to work with the data coming from production machines.
+Figure~\ref{fig:exampleData} shows us how that data could look like.
 
-\subsection{Data Structure\note{Here or in Design?}}
+Additionally our partners at SICK AG~\cite{SICK} gave us the following key data for a product example.
+A component carrier with up to 64 circuit boards on it each with up to 128 components is produced every three minutes.
+Each component has up to 128 test features.
+
+\subsection{Data Structure}
+Looking at the graph in figure~\ref{fig:exampleData} and the example given by SICK we can see that the data looks much like a tree with some cross edges,
+a root node at the top and multiple children connected to it with multiple children each.
+The given excerpt from figure~\ref{fig:exampleData} shows a part of a testing procedure for a board with components.
+Three properties of each component were observed.
+
+We keep this structure in mind for our design in section~\ref{ch:design:se:dataStructure},
+where we will compose the structure for our implementation and finally our evaluation.
 
 \subsection{Data Amount}
+\label{ch:analysis:se:dataAmount}
+To evaluate the amount of data created during production we need to know how much is produced per time unit.
+With the parameters mentioned in~\ref{ch:analysis:se:data} we can calculate the maximum number of data points produced every three minutes.
+
+\begin{equation}
+  \label{eq:dataAmount}
+  \begin{aligned}
+    n_{total} &= n_{componentCarrier} \\
+    &\quad + n_{componentCarrier} \times n_{circuitBoard} \\
+    &\quad + n_{componentCarrier} \times n_{circuitBoard} \times n_{component} \\
+    &\quad + n_{componentCarrier} \times n_{circuitBoard} \times n_{component} \times n_{test} \\
+    \iff &= 1 + 1 \times 64 + 1 \times 64 \times 128 + 1 \times 64 \times 128 \times 128 \\
+    \iff &= 1 \times (1 + 64 + 64 \times 128 + 64 \times 128 \times 128) \\
+    \iff &= 1 + 64 + 64 \times 128 + 64 \times 128 \times 128 \\
+    \iff &= 1 + 64 \times (1 + 128 + 128 \times 128) \\
+    \iff &= 1 + 64 \times (1 + 128 \times (1 + 128)) \\
+    \iff &= 1 + 64 \times (1 + 128 \times 129) \\
+    \iff &= 1 + 64 \times 16.513 \\
+    \iff &= 1.056.833
+  \end{aligned}
+\end{equation}
+
+Over the course of a hour~\ref{eq:dataAmountHour}, day~\ref{eq:dataAmountDay}, week~\ref{eq:dataAmountWeek}, month~\ref{eq:dataAmountMonth} and year~\ref{eq:dataAmountYear} we get the following number of nodes created by the machines.
+
+\begin{equation}
+  \label{eq:dataAmountHour}
+  \begin{aligned}
+      n_{hourTotal} &= n_{total} \times \frac{n_{minutesPerHour}}{n_{timeForSingleComponentCarrier}} \\
+      \iff &= 1.056.833 \times \frac{60min}{3min} \\
+      \iff &= 1.056.833 \times 20 \\
+      \iff &= 21.136.660
+  \end{aligned}
+\end{equation}
+
+\begin{equation}
+  \label{eq:dataAmountDay}
+  \begin{aligned}
+      n_{dayTotal} &= n_{hourTotal} \times n_{hoursPerDay}\\
+      \iff &= 21.136.660 \times 24 \\
+      \iff &= 507.279.840
+  \end{aligned}
+\end{equation}
+
+\begin{equation}
+  \label{eq:dataAmountWeek}
+  \begin{aligned}
+      n_{weekTotal} &= n_{dayTotal} \times n_{daysPerWeek} \\
+      \iff &= 507.279.840 \times 7 \\
+      \iff &= 3.550.958.880
+  \end{aligned}
+\end{equation}
+
+\begin{equation}
+  \label{eq:dataAmountMonth}
+  \begin{aligned}
+      n_{monthTotal} &= n_{dayTotal} \times n_{daysPerMonth} \\
+      \iff &= 507.279.840 \times 30 \\
+      \iff &= 15.218.395.200
+  \end{aligned}
+\end{equation}
+
+\begin{equation}
+  \label{eq:dataAmountYear}
+  \begin{aligned}
+      n_{yearTotal} &= n_{dayTotal} \times n_{daysPerYear} \\
+      \iff &= 507.279.840 \times 365 \\
+      \iff &= 185.157.141.600
+  \end{aligned}
+\end{equation}
+
+In section~\ref{ch:design:se:productionSimulation} we will use these numbers for our workload design.
+
+We can extract the size of each data point from our given example,
+each measurement is only two to three characters long,
+however the other values range from $ 1 $ to around $ 75 $ characters.
+The size for our workload should therefore be in that range.
 
 \section{Workloads}
+\label{ch:analysis:se:workloads}
+Workloads should represent the mix of operations executed on a database.
+There are two main uses for our database in an industrial environment,
+the first one is described in section~\ref{ch:analysis:se:insertingData}.
+Another one is illustrated in section~\ref{ch:analysis:se:retrievingData}.
+The given examples are based on what we think would represent the industrial use of databases.
+
+In section~\ref{ch:design:se:workloads} we will specify our workloads for our evaluation,
+the following subsections should only motivate the use for these specific use cases.
 
 \subsection{Inserting Data into the Database}
-\note{What is the pattern of insertion}
+\label{ch:analysis:se:insertingData}
+It is not rare that production runs 24h a day,
+therefore data is produced all around the clock.
+This shows,
+that the ability to store data quickly is a decisive point in choosing a database.
+As the machines operate data is continuously written to the database.
 
 \subsection{Retrieving Data from the Database}
-\note{What is the pattern of retrieving}
+\label{ch:analysis:se:retrievingData}
+Besides the previous mentioned continuous writing of data into the database,
+retrieving data from the database would be the next natural use for it.
+That could be in the form of looking up a certain product produced in the past to get its test parameter values or to get all products made by a specific machine to check if some are faulty.
 
-\section{Benchmark - YCSB}
+\section{Benchmark Comparison}
 \label{ch:analysis:se:benchmark}
-\todo{show table or something to compare the different benchmarks}
-\note{Activity diagram in this section. What WAS the workflow.}
+To chose a benchmark for our upcoming research we will look at the following aspects of each benchmark.
+
+\begin{itemize}
+  \item Data Structure - Of what structure is the generated data?
+  \item Workloads - How are the workloads designed?
+  \item Programming Language - Is it written in a well known programming language or do we have to learn it first.
+  \item Community - Is there a community for support?
+\end{itemize}
+
+The results of our comparison are shown in the following table~\ref{tab:benchmarkComparison}.
+
+\begin{table}[!h]
+  \caption{Aspects of the different databases}
+  \label{tab:benchmarkComparison}
+  \begin{minipage}{\textwidth}
+    \begin{tabularx}{\textwidth}{ | l | X | X | X | l | }
+      \hline
+      Benchmark & Data Strucutre & Workloads & Programming Language & Community \\ \hline
+      Graphalytics & Social Network & Algorithm based & Java & small\footnote{8 contributors and 16 forks on GitHub~\cite{LDBC}} \\ \hline
+      XGDBench & Social Network & Read, Update and Graph Traversal & X10 & none\footnote{1 contributor and 1 fork (which is from us) on GitHub~\cite{Miyurud}} \\ \hline
+      YCSB & No specific structure & CRUD based & Java & big\footnote{108 contributors and 1278 forks on GitHub~\cite{Cooper}} \\
+      \hline
+    \end{tabularx}
+  \end{minipage}
+\end{table}
+
+Since we are not using a social network structure for our data the graph generators in Graphalytics and XGDBench do not aid us much,
+as the generators would be difficult to extend because of their use of complex algorithms to create that structure in the created data~(\cite{Erling2015},~\cite{Dayarathna2012}).
+YCSB on the other hand does not serve any particular structure presumably as they are not designed for graph databases and therefore don't need a particular structure on their data.
+So YCSB should be easy to extend with out data model.
+
+For the workload aspect Graphalytics uses common algorithms which does not represent out workload scenario.
+XGDBench fits our needs better but not quite well, as inserting data is very important for us.
+YCSB supports inserting, reading and scanning\footnote{See com.yahoo.ycsb.DB class in the code of~\cite{Cooper}} so it fulfils all our requirements for a benchmark.
+
+Only XGDBench uses another programming language then the other benchmarks namely X10,
+which could take some time to learn.
+
+Lastly the community aspect in which YCSB stands out with many contributors and an overall more active community than the other two.
+
+All observed aspects indicate that YCSB would suit our goal the best.
+The generator and the workloads should be easily extendable, since they has an open design\footnote{See com.yahoo.ycsb.Workload and com.yahoo.ycsb.generator.Generator in the code of~\cite{Cooper}}.
+
+\section{YCSB}
+\todo{Reference figure in explanation of aspects, maybe do subsections and move figure up. Go in more detail about the flow, reading inputs, creating which classes executing what over what class}
+\todo{show how values are generated in the generator class}
+In this section we will describe the internal workflow of a benchmark run in YCSB.
+
+YCSB separated the execution into two parts.
+The first part is the load phase in which the initial data is written to the database.
+Then comes the transaction phase where database operation are performed.
+
+A wrapper class\footnote{See com.yahoo.ycsb.DBWrapper in~\cite{Cooper}} is used to start and end the measurements for each operation executed on the database.
+
+To start a benchmark run you need to specify certain parameters,
+such as the database to use and the workload file to use.
+The client then loads the database,
+sets up the specified workload class and executes the specified amount and kind of operations on the database.
+
+YCSB uses a workload file to specify some parameters about the workload.
+These are among others the workload class to use,
+how much data should be added in the load phase,
+how much operations should be executed in the transaction phase and what percentage of the operations should be inserts, reads, updates, scans or deletes respectively.
+
+The measurements can be saved as histograms each covering on particular operation.
+There is also a summary printed out to the console or a file depending on the parameters you set that additionally lists the overall time for the benchmark, operations per second and some more meta information.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=\textwidth]{images/ycsbArchitecture}
+  \caption{The rough architecture of YCSB. Recreated and modified from~\cite[25]{Abubakar2014}}
+  \label{fig:ycsbArchitecture}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=\textwidth]{images/basicYCSBWorkflow}
+  \caption{Class diagram about the main classes involved in a benchmark run.\todo{reference and explain}}
+  \label{fig:basicYCSBWorkflow}
+\end{figure}

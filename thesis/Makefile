@@ -57,10 +57,10 @@ index: $(MAINFILE).ind
 
 new: $(MAINFILE).tex
 	- make clean
-	- pdflatex $(MAINFILE)
+	- pdflatex -shell-escape $(MAINFILE)
 	- bibtex $(MAINFILE)
-	- pdflatex $(MAINFILE)
-	- pdflatex $(MAINFILE)
+	- pdflatex -shell-escape $(MAINFILE)
+	- pdflatex -shell-escape $(MAINFILE)
 	- make clean
 	- open $(MAINFILE).pdf
 

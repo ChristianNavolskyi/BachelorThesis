@@ -17,7 +17,9 @@ There are multiple analytic algorithms to run on data to extract certain feature
 In the industry those algorithms play an important role too,
 but in this thesis we are looking at different aspects of the industrial use case,
 mainly inserting data and reading data.
-Though we have no direct partner in the industry for this thesis we try to \todo{No industry but trying our best to get good data / structures / workloads}
+
+In section~\ref{ch:background:se:industrialData} we will show an example given by the industry.
+There is no industrial data available publicly so we have to base our design on that given example which is visualised in figure~\ref{fig:exampleData}.
 
 \subsubsection{Inserting Data}
 To digitalise the production processes the data produced by every machine in the production line should be stored for future analysis.
@@ -33,9 +35,9 @@ An example would be to get the time at which a specific product was processes by
 \section{Question}
 This thesis should give an answer to the question, if graph databases are suitable for an industrial application.
 Suitable in this case means that the database can withstand the amount of data written to it during production.
-In chapter \ref{ch:analysis} section \ref{ch:analysis:se:data} we analyse how much data could be written to a database and of which structure that data is.
-We motivate graphs and the use of graph databases in section \ref{ch:background:se:industrialData} and section \ref{ch:background:se:graphDatabases} respectively and will also concentrate on those in this thesis,
-because of the structure of data from production.
+In section~\ref{ch:analysis:se:data} we analyse how much data could be written to a database and of which structure that data is.
+We motivate graphs and the use of graph databases in section~\ref{ch:background:se:industrialData} and section~\ref{ch:background:se:graphDatabases} respectively and will concentrate on those in this thesis,
+because of the structure of the data from production.
 
 \section{Methodology}
 We will chose the databases to use for our testing from other studies covering benchmarking graph databases to be able to compare the results and look to similarities in behaviour.
@@ -53,34 +55,34 @@ Because every manufacturer is different and we cannot cover all scenarios we try
 so that the suitability for the individual case can be estimated.
 
 \section{Structure}
-In chapter \ref{ch:background} we are motivating graph and the use of graph databases.
+In chapter~\ref{ch:background} we are motivating graph and the use of graph databases.
 The different kinds of graph databases are explained and an example database which we are testing is mentioned and shortly described.
 Also in this chapter we are comparing the different available benchmarking programs and their features.
 \note{Maybe mention related work}
 
-In chapter \ref{ch:analysis} the industrial data is modelled and its structure is analysed as well as a reasonable amount of data is determined.
+In chapter~\ref{ch:analysis} the industrial data is modelled and its structure is analysed as well as a reasonable amount of data is determined.
 Then we are figuring out how a workload could look like in an industrial environment.
 At last we further analyse out chosen benchmarking program and give an overview of its procedure.
 
-Chapter \ref{ch:design} is focused on the design of the different extensions for the benchmark and also the concrete data structure.
+Chapter~\ref{ch:design} is focused on the design of the different extensions for the benchmark and also the concrete data structure.
 For the extension we cover the design of the specific workloads,
 the design of classes to create and recreate the dataset,
 the graph workload class managing the graph databases and the graph data and finally the database bindings which are responsible for connecting the database to the benchmarking program.
 
-In chapter \ref{ch:implementation} the implementation of the single components is described.
+In chapter~\ref{ch:implementation} the implementation of the single components is described.
 First we cover the graph data generator which includes the class for creating the graph data as well as the class for recreating it from files.
 Next the bindings are implemented and their individual adaptions to the benchmark are highlighted.
 And lastly we explain the graph workload class which is the mediator between the created graph data and the database bindings.
 
-Chapter \ref{ch:evaluation} focuses on running the benchmark and evaluating the results.
+Chapter~\ref{ch:evaluation} focuses on running the benchmark and evaluating the results.
 First, we define our objective during evaluation.
 Then the configuration of our system is stated, as well as the hardware as the software side.
 Next the procedure of running the benchmarks sequentially is explained following be the different aspects we are testing.
-These are grouped into "maximum load" in section \ref{ch:evaluation:se:maximumLoad}, "throughput" in section \ref{ch:evaluation:se:throughput} and "responsiveness" in section \ref{ch:evaluation:se:responsiveness}.
+These are grouped into "maximum load" in section~\ref{ch:evaluation:se:maximumLoad}, "throughput" in section~\ref{ch:evaluation:se:throughput} and "responsiveness" in section~\ref{ch:evaluation:se:responsiveness}.
 Each group includes multiple benchmarks in which we changed on variable at a time.
 The results are presented directly after each benchmark followed by a discussion to interpret the results.
 
-In chapter \ref{ch:futureWork} we draw a conclusion over out work and give the answer to our question from above.
+In chapter~\ref{ch:futureWork} we draw a conclusion over out work and give the answer to our question from above.
 Also ideas for future research and development in this field are presented.
 
-Finally in chapter \ref{ch:summary} with give a short summary of our work.
+Finally in chapter~\ref{ch:summary} with give a short summary of our work.

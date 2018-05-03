@@ -11,6 +11,7 @@
 % ------------------------------------------------------------------
 % Weitere packages: (Dokumentation dazu durch "latex <package>.dtx")
 \usepackage{amssymb}
+\usepackage{amsmath}
 %\usepackage{bibgerm}
 \usepackage[backend=bibtex,natbib=true,url=false]{biblatex}
 \usepackage{booktabs}
@@ -20,7 +21,9 @@
 %\usepackage{fancybox} % für schattierte,ovale Boxen etc.
 \usepackage{float}    %z.B. \floatstyle{ruled}\restylefloat{figure}
 \usepackage[T1]{fontenc}
-\usepackage[bottom]{footmisc}
+\usepackage{footnote}
+\makesavenoteenv{table}
+\makesavenoteenv{tabularx}
 \usepackage[space]{grffile}
 %\usepackage[plainpages=true]{hyperref}
 %\usepackage{hyperref}

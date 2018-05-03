@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>com.yahoo.ycsb</OriginalElement>
+  <nodes>
+    <node x="127.0" y="12.8828125">com.yahoo.ycsb.DB</node>
+    <node x="190.48958333333331" y="220.8828125">com.yahoo.ycsb.StatusThread</node>
+    <node x="0.0" y="12.8828125">com.yahoo.ycsb.Workload</node>
+    <node x="223.21666666666664" y="141.8828125">com.yahoo.ycsb.DBWrapper</node>
+    <node x="243.0" y="12.8828125">com.yahoo.ycsb.measurements</node>
+    <node x="214.48958333333331" y="299.8828125">com.yahoo.ycsb.Client</node>
+    <node x="32.599999999999994" y="141.8828125">com.yahoo.ycsb.ClientThread</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="com.yahoo.ycsb.ClientThread" target="com.yahoo.ycsb.Workload">
+      <point x="-42.0" y="-14.5" />
+      <point x="0.0" y="14.5" />
+    </edge>
+    <edge source="com.yahoo.ycsb.measurements" target="com.yahoo.ycsb.measurements">
+      <point x="-70.8" y="14.5" />
+      <point x="260.7" y="61.8828125" />
+      <point x="223.0" y="61.8828125" />
+      <point x="223.0" y="34.6328125" />
+      <point x="-88.5" y="7.25" />
+    </edge>
+    <edge source="com.yahoo.ycsb.ClientThread" target="com.yahoo.ycsb.measurements">
+      <point x="42.0" y="-14.5" />
+      <point x="137.6" y="111.8828125" />
+      <point x="331.5" y="111.8828125" />
+      <point x="0.0" y="14.5" />
+    </edge>
+    <edge source="com.yahoo.ycsb.DBWrapper" target="com.yahoo.ycsb.DB">
+      <point x="0.0" y="-14.5" />
+      <point x="282.71666666666664" y="91.8828125" />
+      <point x="182.0" y="91.8828125" />
+      <point x="22.0" y="14.5" />
+    </edge>
+    <edge source="com.yahoo.ycsb.StatusThread" target="com.yahoo.ycsb.ClientThread">
+      <point x="-32.75" y="-14.5" />
+      <point x="223.23958333333331" y="195.8828125" />
+      <point x="95.6" y="195.8828125" />
+      <point x="0.0" y="14.5" />
+    </edge>
+    <edge source="com.yahoo.ycsb.Client" target="com.yahoo.ycsb.StatusThread">
+      <point x="0.0" y="-14.5" />
+      <point x="0.0" y="14.5" />
+    </edge>
+    <edge source="com.yahoo.ycsb.StatusThread" target="com.yahoo.ycsb.measurements">
+      <point x="32.75" y="-14.5" />
+      <point x="288.7395833333333" y="195.8828125" />
+      <point x="375.6020833333333" y="195.8828125" />
+      <point x="375.6020833333333" y="121.8828125" />
+      <point x="402.3" y="121.8828125" />
+      <point x="70.80000000000001" y="14.5" />
+    </edge>
+    <edge source="com.yahoo.ycsb.ClientThread" target="com.yahoo.ycsb.DB">
+      <point x="0.0" y="-14.5" />
+      <point x="95.6" y="101.8828125" />
+      <point x="138.0" y="101.8828125" />
+      <point x="-22.0" y="14.5" />
+    </edge>
+    <edge source="com.yahoo.ycsb.DBWrapper" target="com.yahoo.ycsb.measurements">
+      <point x="39.666666666666686" y="-14.5" />
+      <point x="322.3833333333333" y="121.8828125" />
+      <point x="366.9" y="121.8828125" />
+      <point x="35.39999999999998" y="14.5" />
+    </edge>
+  </edges>
+  <settings layout="Tree" zoom="1.0" x="210.0" y="164.5" />
+  <SelectedNodes />
+  <Categories />
+  <SCOPE>Project Files</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

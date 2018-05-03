@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>com.yahoo.ycsb</OriginalElement>
+  <nodes>
+    <node x="613.2453296703296" y="12.6328125">com.yahoo.ycsb.DB</node>
+    <node x="221.8604395604396" y="222.6328125">com.yahoo.ycsb.StatusThread</node>
+    <node x="0.0" y="142.6328125">com.yahoo.ycsb.workloads.GraphWorkload</node>
+    <node x="915.9" y="142.6328125">com.yahoo.ycsb.db.neo4j.Neo4jClient</node>
+    <node x="574.9" y="142.6328125">com.yahoo.ycsb.db.sparksee.SparkseeClient</node>
+    <node x="735.9" y="142.6328125">com.yahoo.ycsb.db.ApacheJenaClient</node>
+    <node x="1056.9" y="142.6328125">com.yahoo.ycsb.db.OrientDBGraphClient</node>
+    <node x="46.25" y="12.6328125">com.yahoo.ycsb.Workload</node>
+    <node x="433.9" y="142.6328125">com.yahoo.ycsb.DBWrapper</node>
+    <node x="205.25" y="12.6328125">com.yahoo.ycsb.measurements</node>
+    <node x="245.8604395604396" y="302.6328125">com.yahoo.ycsb.Client</node>
+    <node x="285.9" y="142.6328125">com.yahoo.ycsb.ClientThread</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="com.yahoo.ycsb.workloads.GraphWorkload" target="com.yahoo.ycsb.Workload">
+      <point x="0.0" y="-15.0" />
+      <point x="-27.25" y="15.0" />
+    </edge>
+    <edge source="com.yahoo.ycsb.ClientThread" target="com.yahoo.ycsb.Workload">
+      <point x="-42.66666666666663" y="-15.0" />
+      <point x="307.23333333333335" y="112.6328125" />
+      <point x="128.0" y="112.6328125" />
+      <point x="27.25" y="15.0" />
+    </edge>
+    <edge source="com.yahoo.ycsb.measurements" target="com.yahoo.ycsb.measurements">
+      <point x="-35.80000000000001" y="15.0" />
+      <point x="258.95" y="72.6328125" />
+      <point x="175.25" y="72.6328125" />
+      <point x="175.25" y="20.1328125" />
+      <point x="-89.5" y="-7.5" />
+    </edge>
+    <edge source="com.yahoo.ycsb.ClientThread" target="com.yahoo.ycsb.measurements">
+      <point x="0.0" y="-15.0" />
+      <point x="349.9" y="122.6328125" />
+      <point x="330.54999999999995" y="122.6328125" />
+      <point x="35.799999999999955" y="15.0" />
+    </edge>
+    <edge source="com.yahoo.ycsb.DBWrapper" target="com.yahoo.ycsb.DB">
+      <point x="40.33333333333337" y="-15.0" />
+      <point x="534.7333333333333" y="122.6328125" />
+      <point x="637.531043956044" y="122.6328125" />
+      <point x="-9.714285714285666" y="15.0" />
+    </edge>
+    <edge source="com.yahoo.ycsb.StatusThread" target="com.yahoo.ycsb.ClientThread">
+      <point x="33.25" y="-15.0" />
+      <point x="321.6104395604396" y="197.6328125" />
+      <point x="349.9" y="197.6328125" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="com.yahoo.ycsb.Client" target="com.yahoo.ycsb.StatusThread">
+      <point x="0.0" y="-15.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="com.yahoo.ycsb.db.neo4j.Neo4jClient" target="com.yahoo.ycsb.DB">
+      <point x="0.0" y="-15.0" />
+      <point x="976.4" y="112.6328125" />
+      <point x="666.6739010989011" y="112.6328125" />
+      <point x="19.428571428571445" y="15.0" />
+    </edge>
+    <edge source="com.yahoo.ycsb.StatusThread" target="com.yahoo.ycsb.measurements">
+      <point x="-33.25" y="-15.0" />
+      <point x="255.1104395604396" y="197.6328125" />
+      <point x="247.1104395604396" y="197.6328125" />
+      <point x="247.1104395604396" y="122.6328125" />
+      <point x="294.75" y="122.6328125" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="com.yahoo.ycsb.db.OrientDBGraphClient" target="com.yahoo.ycsb.DB">
+      <point x="0.0" y="-15.0" />
+      <point x="1146.4" y="102.6328125" />
+      <point x="676.3881868131867" y="102.6328125" />
+      <point x="29.14285714285711" y="15.0" />
+    </edge>
+    <edge source="com.yahoo.ycsb.db.ApacheJenaClient" target="com.yahoo.ycsb.DB">
+      <point x="0.0" y="-15.0" />
+      <point x="815.9" y="122.6328125" />
+      <point x="656.9596153846153" y="122.6328125" />
+      <point x="9.714285714285666" y="15.0" />
+    </edge>
+    <edge source="com.yahoo.ycsb.ClientThread" target="com.yahoo.ycsb.DB">
+      <point x="42.66666666666663" y="-15.0" />
+      <point x="392.5666666666666" y="102.6328125" />
+      <point x="618.1024725274725" y="102.6328125" />
+      <point x="-29.14285714285711" y="15.0" />
+    </edge>
+    <edge source="com.yahoo.ycsb.db.sparksee.SparkseeClient" target="com.yahoo.ycsb.DB">
+      <point x="0.0" y="-15.0" />
+      <point x="645.4" y="122.6328125" />
+      <point x="647.2453296703296" y="122.6328125" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="com.yahoo.ycsb.DBWrapper" target="com.yahoo.ycsb.measurements">
+      <point x="-40.33333333333337" y="-15.0" />
+      <point x="454.0666666666666" y="92.6328125" />
+      <point x="366.35" y="92.6328125" />
+      <point x="71.60000000000002" y="15.0" />
+    </edge>
+  </edges>
+  <settings layout="Tree" zoom="1.0" x="618.0" y="166.5" />
+  <SelectedNodes />
+  <Categories />
+  <SCOPE>Project Files</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
