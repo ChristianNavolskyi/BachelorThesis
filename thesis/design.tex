@@ -436,10 +436,12 @@ The mapping is also the same as with $ DB::read $ for the $ table $ and $ key $ 
 $ recordcount $ will be set to $ 1000 $ as that is the default value specified by the $ CoreWorkload $\footnote{com.yahoo.ycsb.workloads.CoreWorkload} and that value represents a good amount for scanning.
 
 \textbf{DB::update} \newline
-For this operation we also need an existing graph component picked by the \linebreak
-$ RandomGraphComponentGenerator $ to get a valid key identifier and the kind of graph component we are going to update.
+For this operation we need a randomly picked graph component from the \linebreak
+$ RandomGraphComponentGenerator $ to get a valid key identifier.
 Only the property value should be changed during update,
-not the identifier nor the label.
+not the identifier nor the label,
+that means that only nodes will be changes,
+as edges have no property value assigned to them.
 
 \textbf{DB::delete} \newline
 This takes a random graph component via the $ RandomGraphComponentGenerator $ and calls the $ delete $ method of the database.
@@ -703,7 +705,7 @@ which will be a node or an edge and a key,
 which can be the key in the values map.
 
 \subsection{Summary}
-\todo{Parameters!, where used general workflow.}
+\label{ch:design:se:summary}
 To sum up our design decisions we will give an overview of the different parameters each class should take and why in table~/ref{tab:designOverview}.
 
 \begin{table}[h!]
@@ -714,7 +716,7 @@ To sum up our design decisions we will give an overview of the different paramet
       GraphDataGenerator & folder, "products per order", "components per product", "test parameter count", "no edges" and "node property size" & Return subgraphs that form the data structure described in~\ref{ch:design:se:dataStructure}. \\ \hline
       RandomGraph-\newline ComponentGenerator & folder & Return a randomly chose graph component already in the database. \\ \hline
       OperationOrderGenerator & folder & Return operations to execute on the database. \\ \hline
-      GraphWorkload & folder and "no edges" & Run the workloads on the databases with the help of the different generators. \\ \hline
+      GraphWorkload & folder, recordcount and "no edges" & Run the workloads on the databases with the help of the different generators. \\ \hline
       ApacheJena & dbFolder & Use the Jena TDB API to create and access the database. \\ \hline
       Neo4j & dbFolder and "useIndex" & Use the Neo4j API to create and access the database. \\ \hline
       OrientDB & dbFolder and "useIndex" & Use the OrientDB API to create and access the database. \\ \hline
@@ -728,7 +730,7 @@ To sum up our design decisions we will give an overview of the different paramet
 The workflow of the generators is shown in figure~\ref{fig:generalGeneratorWorkflow}.
 
 \begin{figure}[h!]
-  \includegraphics][width=\textwidth]{images/generalGeneratorWorkflow}
+  \includegraphics[width=\textwidth]{images/generalGeneratorWorkflow}
   \caption{Activity diagram roughly showing how the generators will work.}
   \label{fig:generalGeneratorWorkflow}
 \end{figure}

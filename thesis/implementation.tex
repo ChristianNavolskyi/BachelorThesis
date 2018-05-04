@@ -1,27 +1,225 @@
-\chapter{Implementation of your Project}
+\chapter{Implementation}
 \label{ch:implementation}
+In this chapter we will cover how we implemented the different classes to run our workloads.
+We will start with the graph and its components,
+then move on to the different generators for the graph data,
+the random graph components and the operation order.
+Then we will show the workload class in section~\ref{ch:implementation:se:graphWorkload} and finally describe the database bindings in section~\ref{ch:implementation:se:graphDatabaseBindings}.
+
+The code of our implementation can be seen on GitHub~\cite{Navolskyi2017}.
+
+\todo{Class diagram and introduce the upcoming explanation}
+
+\section{Graph}
+As mentioned in section~\ref{ch:background:se:graphs} a graph simply contains two lists,
+one for nodes and one for edges.
+This class is only a container for the two lists.
+
+To extract some shared values of nodes and edges,
+we added an abstract class $ GraphComponent $,
+that holds the identifier and the label of the graph component.
+
+\subsection{Node}
+The $ Node $ class assigns the identifiers by counting the created nodes and incrementing the counter for every new node.
+If the property value of a node is not set,
+a call to $ Node::getHashMap $ will randomly fill the property with the amount of characters specified by the "node property size" option.
+
+\subsection{Edge}
+As the $ Node $ class the $ Edge $ class also uses a counter field to assign the correct identifier to each edge.
+
 
 \section{Generator}
+\label{ch:implementation:se:generator}
+The general workflow of a generator was mentioned at the end of section~\ref{ch:design:se:summary}.
+Because all three generators share that behaviour we created an abstract class $ StoringGenerator $\footnote{com.yahoo.ycsb.generator.StoringGenerator},
+that extends the generic $ Generator<V> $\footnote{com.yahoo.ycsb.generator.Generator} class and adds methods to check if the files are present for recreation or not.
 
-\subsection{Creator}
+Every generator offers a $ create $ method,
+in which it will check for present files and set up the correct implementation (recorder or recreator) for the $ GraphWorkload $\footnote{com.yahoo.ycsb.workloads.GraphWorkload} to use.
+The generator classes are all abstract and use abstract methods to call the underlying implementation.
+How this is useful will be described in the implementations of the different kinds of generators.
 
-\subsubsection{Graph Data}
+The abstract generator classes also contain the values needed for both implementation types (recorder and recreator),
+to have them all in one place.
 
-\subsubsection{Random Graph Component}
+\subsection{Graph Data}
+The $ nextValue $ call encapsulates the call to get the subgraph from the underlying implementation and also stores the returned identifiers of the created nodes and edges for the $ RandomGraphComponentGenerator $\footnote{com.yahoo.ycsb.generator.graph.randomcomponents.RandomGraphComponentGenerator},
+that needs them to know which values it can return.
 
-\subsubsection{Operation Order}
+The $ Gson $\footnote{com.google.gson.Gson} used in both implementations of this abstract class is initialised here with the $ GraphAdapter $\footnote{com.yahoo.ycsb.generator.graph.GraphAdapter}.
 
-\subsection{Recreator}
+Since there are two phases of the benchmark (see section~\ref{ch:analysis:se:ycsb}) the generator needs to know from which point it should move on with creation,
+therefore if the current phase is the transaction phase,
+it will call the the underlying implementation to create the amount of data that was created during the load phase,
+to equalise the progress of the generator.
+That is also important for the $ RandomGraphComponentGenerator $,
+because the identifiers of the graph components created by the $ GraphDataGenerator $ are kept there for it to use them.
 
-\subsubsection{Graph Data}
+\subsection{Random Graph Component}
+Calling $ nextValue $ on a $ RandomGraphComponentGenerator $ will invoke the implementing class to chose between a node and an edge and then chose a random graph component of that type.
+A random node can also be picked directly,
+that is needed for the $ GraphWorkload::update $ method,
+since it only will use nodes.
 
-\subsubsection{Random Graph Component}
+\subsection{Operation Order}
+Here the generator only holds common fields shared by the recorder and the recreator.
+Besides that it offers the $ OperationOrderGenerator::create $ method,
+which observes the present files and initialises the corresponding implementation for the $ Graph Workload $.
 
-\subsubsection{Operation Order
+\section{Recorder}
+\label{ch:implementation:se:recorder}
+\todo{diagram to show methods used during nextValue call for the specific use of the classe.}
+For every kind we have a creator that creates the initial values for the workload and stores them in a corresponding file for the recreator~\ref{ch:implementation:se:recreator}.
+
+How the creation of the values is implemented in each generator is described in the following subsections~\ref{ch:implementation:se:graphDataRecorder}~to~\ref{ch:implementation:se:operationOrderRecorder}.
+
+\subsection{Graph Data}
+\label{ch:implementation:se:graphDataRecorder}
+As shown in figure~\ref{fig:generalGeneratorWorkflow} when $ GraphDataGenerator::nextValue $\footnote{com.yahoo.ycsb.generator.graph.GraphDataGenerator} is called to create the next subgraph,
+the $ GraphDataRecorder $ is called and creates the subgraph according to the diagram shown in figure~\ref{fig:dataCreation},
+then serialises it and writes the string coming from serialisation into a file line by line.
+\todo{maybe deepen the explanation of how the schema is represented in this class.}
+
+The serialisation process is done in a $ GraphAdapter $ that implements both a $ JsonSerializer $\footnote{com.google.gson.JsonSerializer} and a $ JsonDeserialzer $\footnote{com.google.gson.JsonDeserialzer} with a $ Graph $ as the generic value.
+Since a graph object contains two lists,
+these lists are serialised into a JsonElement,
+which will be retrieved as a string by calling $ Gson::toJson $.
+
+\subsection{Random Graph Component}
+To chose between a node and an edge a random number between zero and one will be picked ($ r \in \mathbb{N}_0 \wedge r \in [ 0, 1 ] $) and stored in a file.
+To select a random graph component the $ GraphDataGenerator $ will be asked what the last id was and then a random value between zero and that number.
+That value will also be stored in a file corresponding to the type of the graph component.
+
+\subsection{Operation Order}
+\label{ch:implementation:se:operationOrderRecorder}
+The $ OperationOrderRecorder $\footnote{com.yahoo.ycsb.generator.operationorder.OperationOrderGenerator} receives a $ DiscreteGenerator $\footnote{com.yahoo.ycsb.generator.DiscreteGenerator},
+which supplies the string values for the operations.
+These values will be taken from the $ DiscreteGenerator $,
+saved in a file and then returned to the caller.
+
+\section{Recreator}
+\label{ch:implementation:se:recreator}
+To retrieve the values stored by the recorder classes described in section~\ref{ch:implementation:se:recorder} the upcoming recreators are needed.
+
+\subsection{Graph Data}
+If the files for the data set are present the $ GraphDataRecreator $ will be called to return the next subgraph.
+It does that by deserialising the next line with the $ Gson::fromJson $ method which uses the $ GraphAdapter $ described in subsection~\ref{ch:implementation:se:graphDataRecorder} together with a $ Type $\footnote{java.lang.reflect.Type}.
+
+This classes uses a $ BufferedReader $\footnote{java.io.BufferedReader} to read the file line by line,
+to avoid extensive memory usage.
+
+\subsection{Random Graph Component}
+\label{ch:implementation:se:randomGraphComponentRecreator}
+At the beginning the files will be read and their values will be stored in three different $ Iterator<String> $s\footnote{java.util.Iterator<E>} one for the type and the other two for the identifiers of the different kinds of graph components.
+
+When a values is required the corresponding $ Iterator<String> $ returns the next value in the list and increments its pointer.
+
+\subsection{Operation Order}
+As the $ RandomGraphComponentRecreator $ from subsection~\ref{ch:implementation:se:randomGraphComponentRecreator},
+this recreator reads the file directly during initialisation and stores the values in an $ Iterator<String> $.
+
+Every time $ OperationOrderRecreator::nextValue $ is called the next line from the $ Iterator<String> $ is returned.
+
+\section{Graph Workload}
+\label{ch:implementation:se:graphWorkload}
+During initialisation the $ GraphWorkload $ creates the three generator mentioned in section~\ref{ch:implementation:se:generator},
+by using the $ create $ method,
+that way we will have the correct type of generator (recorder or recreator).
+It also parses the parameters to get to know if "noEdges" should be used,
+what the "property size" of a node should be,
+how many fields should be scanned ("recordcount") and the "folder".
+The "noEdges" parameter is needed to execute the operations on the correct available graph components.
+"property size" is stored to be retrievable by the $ Node $ to know how much random value it should generate.
+The "recordcount" option is needed for the $ scan $ operation.
+Lastly the "folder" is used to create the folder for the dataset if it is not present and also pass it to the individual generators.
+
+In the load phase the $ Client $\footnote{com.yahoo.ycsb.Client} calls $ GraphWorkload::doInsert $.
+The $ GraphWorkload $ then retrieves a subgraph from the $ GraphDataGenerator $ by calling $ GraphDataGenerator::nextValue $,
+separates it into its core graph components and calls the $ DB::insert $ method with each individual component to add them to the database one by one.
+
+If the $ Client $ calls $ GraphWorkload::doTransaction $ the $ GraphWorkload $ will first get the operation to execute on the database by the $ OperationOrderGenerator $.
+After that it has an implementation for every available database operation.
+
+\textbf{doTransactionInsert} \newline
+Works as in the $ doInsert $ method,
+by taking a subgraph from the $ GraphDataGenerator $ and inserting its components one by one into the database.
+
+\textbf{doTransactionRead}
+Depending on the "noEdges" option the $ RandomGraphComponentGenerator $ will be asked for a graph component,
+if the option is $ false $ or a node if the option is $ true $.
+With the identifier of the graph component,
+its type and its available fields the database is queried to look up those fields of the specified component.
+
+\textbf{doTransactionScan} \newline
+As in the $ doTransactionRead $ method a graph component is chosen from the $ RandomGraphComponentGenerator $ depending on the set "noEdges" option.
+Then the necessary arguments from the graph component will be passed to the $ DB::scan $ method,
+alongside the specified $ recordcount $.
+
+\textbf{doTransactionUpdate} \newline
+The $ update $ method is not used by our workloads,
+but to make the $ GraphWorkload $ accessible to other workloads we implemented it as follows.
+It also pick a random graph component and calls the $ DB::update $ method of the database.
+If the graph component is a node,
+its property value will be randomly assigned.
+
+We did not implement the $ delete $ method of the database,
+as we won't use it in our workloads and the $ CoreWorkload $ that we used as reference also did not use it.
+
+\subsection{DBWrapper}
+During implementation we noticed,
+that the $ DBWrapper $\footnote{com.yahoo.ycsb.DBWrapper},
+which measures the time of each operations on the database,
+could not distinguish between nodes being inserted or edges.
+Therefore we additionally adding a measurement that includes the table name in the measurement name,
+because the database will get the information about the type of the graph component being used by the $ table $ parameter,
+we can use it here to measure the nodes and edges separately.
+
+\subsection{Parameters}
+This subsection covers the naming of the parameters in the code.
+
+\begin{table}[h!]
+  \begin{minipage}{\textwidth}
+    \begin{tabularx}{\textwidth}{ | X | X | }
+      \hline
+      Our name & Name in the code \\ \hline \hline
+      folder & datasetdirectory \\ \hline
+      products per order & productsperorder \\ \hline
+      components per product & componentsperproduct \\ \hline
+      test parameter count & testparametercount \\ \hline
+      recordcount & maxscanlength \\ \hline
+      no edges & onlynodes \\ \hline
+      node property size & fieldlength \\ \hline
+    \end{tabularx}
+  \end{minipage}
+  \caption{This table shows by which name the parameters can be found in the YCSB project.}
+  \label{tab:parameterMapping}
+\end{table}
+
+The $ dbFolder $ option is different for each database and will be mentioned in the corresponding binding subsection.
+The same goes for the $ useIndex $ option.
 
 \section{Graph Database Bindings}
 \label{ch:implementation:se:graphDatabaseBindings}
 \note{Highlight the mapping of data and other specialities}
+In this section we will describe the different binding implementations and their specialities.
+Table~\ref{tab:bindingParameterMapping} shows the options for the different databases.
+
+\begin{table}
+  \begin{minipage}{\textwidth}
+    \begin{tabularx}{\textwidth}{ | X | X | X | }
+      \hline
+      Database & Folder option & Index option \\ \hline \hline
+      Apache Jena & outputdirectory & - \\ \hline
+      Neo4j & neo4j.path & neo4j.index \\ \hline
+      OrientDB & orientdb.url & orientdb.index \\ \hline
+      Sparksee & sparksee.path & sparksee.index \\ \hline
+    \end{tabularx}
+  \end{minipage}
+  \caption{Parameter names of the different databases for the database folder and the index option}
+  \label{tab:bindingParameterMapping}
+\end{table}
+
+
 \subsection{Apache Jena}
 
 \subsection{Neo4j}
@@ -29,11 +227,3 @@
 \subsection{OrientDB}
 
 \subsection{Sparksee}
-
-\section{Graph Workload}
-
-\subsection{Parameters}
-
-\section{Random Graph Data Generator}
-
-\section{Operation Order Generator}
