@@ -36,7 +36,7 @@ The meeting gave us a better understanding of how a production facility could ha
   \label{fig:finalDesignOfSchema}
 \end{figure}
 
-\todo{create graphic and describe its content. Graphic should have numbers on its edges, maybe use puml}
+\todo{create graphic and describe its content. Graphic should have numbers on its edges, maybe use puml. Naming of parameters}
 
 \section{Workloads}
 \label{ch:design:se:workloads}
@@ -279,8 +279,8 @@ For the benchmark to be able to execute our workloads the way we want them to be
 
 \begin{itemize}
   \item Generation of the dataset
-  \item Class to store the order of operations
-  \item Class to get random graph component identifiers
+  \item Generation of rondom graph components
+  \item Generation of a operation order
   \item Workload to use the generated dataset
   \item Database bindings.
 \end{itemize}
@@ -471,10 +471,11 @@ The basic functions we need from our database are
 \end{enumerate}
 
 Generally the $ DB $ operations can then be implemented using these functions.
-A common implementation is shown in listing~\ref{lst:databaseTemplate}.
+A rough implementation is shown in listing~\ref{lst:databaseTemplate}.
+Every database will take a path to a folder in which it will store its internally used files.
+Also if indexing is possible every database should take it as a parameter to set itself up correctly.
 
 We will cover the implementation of the single methods in section~\ref{ch:implementation:se:graphDatabaseBindings}.
-
 The following subsections will only mention specialities regarding the corresponding database.
 
 \begin{lstlisting}[language={Java},label={lst:databaseTemplate},caption={Generic example of a database implementation with the use of graph data.}]
@@ -664,16 +665,84 @@ Neo4j directly supports setting properties with a key and a value,
 therefore we can directly store the values as properties in the graph components of Neo4j.
 
 \subsubsection{OrientDB}
+OrientDB also supports indexing specific keys,
+in contrast to Neo4j the index only needs to be enabled to be used.
 
+Transactions are also part of OrientDB,
+as Neo4j they are initially not read or write specific,
+but adapt as the corresponding methods are called.
+
+OrientDB supports creating a vertex with a key and a map of values directly, but the values of the values map need to be mapped to a $ String $,
+because $ ByteIterator $s are not supported.
+Edges will take the key, a start and end node and a label.
+The label has to be set to a constant value over all edges,
+because edges have to be looked up the the label and the key,
+but the label is only handed in the $ DB::insert $ method.
+The edge properties can be set after creating the edge.
 
 \subsubsection{Sparksee}
+Sparksee only has a very low level API,
+which uses ids for all its contents nodes, edges and attributes.
 
+As with OrienDB the index has only to be activated on the specific fields.
+
+\textbf{key} \newline
+Nodes are created by a type,
+which can be the same for all nodes.
+After creating the node its attributes have to be set,
+here we will add the key to identify the node.
+Edges are created similarly except they need a start and end node during creation.
+The graph components can be retrieved by looking up the component with the attribute identifier and the corresponding value,
+which is the key.
+
+\textbf{values} \newline
+The value can be set as attributes to the graph components,
+by the attribute and its corresponding value.
+An attribute has to be created first with a type it belongs to,
+which will be a node or an edge and a key,
+which can be the key in the values map.
 
 \subsection{Summary}
-\todo{Parameters!!, where used general workflow.}
+\todo{Parameters!, where used general workflow.}
+To sum up our design decisions we will give an overview of the different parameters each class should take and why in table~/ref{tab:designOverview}.
+
+\begin{table}[h!]
+  \begin{minipage}{\textwidth}
+    \begin{tabularx}{\textwidth}{ | X | X | X | }
+      \hline
+      Class & Parameters & Purpose \\ \hline
+      GraphDataGenerator & folder, "products per order", "components per product", "test parameter count", "no edges" and "node property size" & Return subgraphs that form the data structure described in~\ref{ch:design:se:dataStructure}. \\ \hline
+      RandomGraph-\newline ComponentGenerator & folder & Return a randomly chose graph component already in the database. \\ \hline
+      OperationOrderGenerator & folder & Return operations to execute on the database. \\ \hline
+      GraphWorkload & folder and "no edges" & Run the workloads on the databases with the help of the different generators. \\ \hline
+      ApacheJena & dbFolder & Use the Jena TDB API to create and access the database. \\ \hline
+      Neo4j & dbFolder and "useIndex" & Use the Neo4j API to create and access the database. \\ \hline
+      OrientDB & dbFolder and "useIndex" & Use the OrientDB API to create and access the database. \\ \hline
+      Sparksee & dbFolder and "useIndex" & Use the Sparksee API to create and access the database. \\ \hline
+    \end{tabularx}
+  \end{minipage}
+  \caption{Overview of parameters and the of for every class}
+  \label{tab:designOverview}
+\end{table}
+
+The workflow of the generators is shown in figure~\ref{fig:generalGeneratorWorkflow}.
+
+\begin{figure}[h!]
+  \includegraphics][width=\textwidth]{images/generalGeneratorWorkflow}
+  \caption{Activity diagram roughly showing how the generators will work.}
+  \label{fig:generalGeneratorWorkflow}
+\end{figure}
 
 \section{Execution Tool}
 \label{ch:design:se:executionTool}
+YCSB has a script to run one workload on one database.
+We have many workloads and multiple databases,
+therefore it would save us a lot of time during evaluation,
+if the workloads are executed on all databases sequentially.
+
+That could be implemented as a script that takes the databases and their parameters together with the workload description files and executes one after another.
+The results should be saved in a specified folder.
 
 \section{Evaluation Tool}
 \label{ch:design:se:evaluationTool}
+To gather the results another script should iterate through the result folders of each database and workload and collect the results in a file for further evaluation.
