@@ -8,7 +8,7 @@ Then we will show the workload class in section~\ref{ch:implementation:se:graphW
 
 The code of our implementation can be seen on GitHub~\cite{Navolskyi2017}.
 
-\todo{Class diagram and introduce the upcoming explanation}
+\todo{Class diagram of my classes and introduce the upcoming explanation}
 
 \section{Graph}
 As mentioned in section~\ref{ch:background:se:graphs} a graph simply contains two lists,
@@ -26,7 +26,6 @@ a call to $ Node::getHashMap $ will randomly fill the property with the amount o
 
 \subsection{Edge}
 As the $ Node $ class the $ Edge $ class also uses a counter field to assign the correct identifier to each edge.
-
 
 \section{Generator}
 \label{ch:implementation:se:generator}
@@ -110,7 +109,7 @@ to avoid extensive memory usage.
 
 \subsection{Random Graph Component}
 \label{ch:implementation:se:randomGraphComponentRecreator}
-At the beginning the files will be read and their values will be stored in three different $ Iterator<String> $s\footnote{java.util.Iterator<E>} one for the type and the other two for the identifiers of the different kinds of graph components.
+At the beginning the files will be read and their values will be stored in three different $ Iterator<String> $\footnote{java.util.Iterator<E>} one for the type and the other two for the identifiers of the different kinds of graph components.
 
 When a values is required the corresponding $ Iterator<String> $ returns the next value in the list and increments its pointer.
 
@@ -122,6 +121,7 @@ Every time $ OperationOrderRecreator::nextValue $ is called the next line from t
 
 \section{Graph Workload}
 \label{ch:implementation:se:graphWorkload}
+\todo{Activity diagram of the workflow with graph data. Create Activity diagram with database from workload view.}
 During initialisation the $ GraphWorkload $ creates the three generator mentioned in section~\ref{ch:implementation:se:generator},
 by using the $ create $ method,
 that way we will have the correct type of generator (recorder or recreator).
@@ -201,7 +201,7 @@ The same goes for the $ useIndex $ option.
 \section{Graph Database Bindings}
 \label{ch:implementation:se:graphDatabaseBindings}
 \note{Highlight the mapping of data and other specialities}
-In this section we will describe the different binding implementations and their specialities.
+In this section we will describe the different binding implementations, their specialities and how they implemented the different operations mentioned in section~\ref{ch:design:se:bindings}.
 Table~\ref{tab:bindingParameterMapping} shows the options for the different databases.
 
 \begin{table}
@@ -219,11 +219,202 @@ Table~\ref{tab:bindingParameterMapping} shows the options for the different data
   \label{tab:bindingParameterMapping}
 \end{table}
 
-
 \subsection{Apache Jena}
+To modify the database with Jena we need to start a transaction and specify if it is a read or a write transaction.
+After that we retrieve the model of the database to work on the data.
+When we are done with our operation we need to commit or abort the transaction,
+similar to a relational database.
+
+\textbf{creating a node} \newline
+A node is created by calling $ Model::createResource $\footnote{org.apache.jena.rdf.model.Model} with the $ key $ as an $ AnonId $\footnote{org.apache.jena.rdf.model.AnonId}.
+
+\textbf{creating an edge} \newline
+To create an edge we use the $ Model::createProperty $ method with the $ key $ as the argument.
+To connect the edge with their start and end node,
+we have to add this triple to the model by calling $ Model::add $ with the start node,
+the edge and the end node.
+
+\textbf{adding properties to a node} \newline
+Properties are mapped as statements in Jena and to create those we use the $ Model::createStatement $ method that takes the node, the key for the property and the property value as arguments.
+After all statements are created we add them to the model with $ Model::add $ and the list of statements as the argument.
+
+\textbf{adding properties to an edge} \newline
+To add the properties to an edge,
+which is a $ Property $\footnote{org.apache.jena.rdf.model.Property} in Jena,
+we use the $ Property::addProperty $ method on the edge with the key of the property and the value of it as arguments.
+
+\textbf{getting a node by its identifier} \newline
+Retrieving a node is done by creating a resource with the same identifier,
+Jena will look up their database if one already exists and the returned node will be equal to an existing one.
+
+\textbf{getting an edge by its identifier} \newline
+Similar to retrieving a node from the database we create a property with the key,
+that returns a existing edge if one is present with the key.
+
+\textbf{getting the values of a node} \newline
+To get the values associated with a node,
+we create a $ SimpleSelector $\footnote{org.apache.jena.rdf.model.SimpleSelector},
+which acts like a query on the database.
+We supply it the node and the key of the value and leaf the object of the query empty,
+so it look the matching values up.
+
+\textbf{getting the values of an edge} \newline
+The values of an edge are fetched the same way.
+
+\textbf{getting the outgoing edges of a node} \newline
+To get these edges we list the properties of the node,
+which are represented as edges.
+
+\textbf{getting the start node of an edge} \newline
+To do this,
+we take the start property of the edge and look up that node on the dataset.
+
+\textbf{removing a node} \newline
+Removing a node is done by calling $ Model::removeAll $ twice,
+once with the node as the subject and once with the node as the object of the statement.
+That will remove all statements associated with that node,
+which will finally remove the node from the database.
+
+\textbf{removing an edge} \newline
+Here we also call $ Model::removeAll $ but the with edge as the predicate of the statement.
 
 \subsection{Neo4j}
+If an $ Index $\footnote{org.neo4j.graphdb.index.Index<T extends PropertyContainer>} should be used we create two of them,
+one for the $ Node $s\footnote{org.neo4j.graphdb.Node} and one for the $ Relationship $s\footnote{org.neo4j.graphdb.Relationship} (edges).
+Neo4j also uses transaction,
+but we don't need to specify their kind.
+At the end of a transaction we call $ Transaction::success $\footnote{org.neo4j.graphdb.Transaction} to finish the transaction.
+
+\textbf{creating a node} \newline
+We create a node with the $ GraphDatabaseService::createNode $\footnote{org.neo4j.graphdb.GraphDatabaseService} method,
+where we specify the $ key $ as the $ Label $\footnote{org.neo4j.graphdb.Label} of the node.
+If an $ Index $ is used we then add the node to the index.
+After that we specially add the identifier of the node as a property.
+
+\textbf{creating an edge} \newline
+For this we have to first create a $ RelationshipType $\footnote{org.neo4j.graphdb.RelationshipType} with the $ key $ as the name of the relationship.
+Then we create a relationship from the start node to the end node by calling $ Node::createRelationshipTo $.
+Finally we add the edge to the relationship $ Index $.
+
+\textbf{adding properties to a node/an edge} \newline
+Both $ Node $s and edges are $ PropertyContainer $s\footnote{org.neo4j.graphdb.PropertyContainer},
+which support the setting of properties,
+by calling $ PropertyContainer::setProperty $ with the key of the property and its value.
+
+\textbf{getting a node by its identifier} \newline
+When an $ Index $ is used a node can be looked up on it with $ Index::get $ and the key for the identifier and the identifier value.
+Without an $ Index $ we call $ GraphDatabaseService::findNode $ with the label the key for the identifier and the identifier as arguments.
+
+\textbf{getting an edge by its identifier} \newline
+With an $ Index $ a $ Relationship $ can be found similar the a node.
+Without it we have to iterate over all $ Relationship $s in the graph and check their type to match the $ key $.
+
+\textbf{getting the values of a node/an edge} \newline
+The $ ResourceContainer::getAllProperties $ method supplies all values set the node or edge.
+We can simply parse the $ Map<String, Object> $\footnote{java.util.Map<K, V>} returned by it to the needed $ Map<String, ByteIterator> $.
+
+\textbf{getting the outgoing edges of a node} \newline
+$ Node $s offer a method to get their $ Relationships $ in a specified $ Direction $\footnote{org.neo4j.graphdb.Direction}.
+
+\textbf{getting the start node of an edge} \newline
+$ Relationship $s also offer a method to directly get their start node with $ Relationship::getStartNode $
+
+\textbf{removing a node} \newline
+To remove a $ Node $,
+we look it up,
+remove it from the node $ Index $ and then call $ Node::delete $ to remove it from the database.
+
+\textbf{removing an edge} \newline
+Here the procedure is similar,
+except we remove it from the relationship $ Index $.
 
 \subsection{OrientDB}
+To create an index with OrientDB we call $ OrientGraph::createKeyIndex $\footnote{com.tinkerpop.blueprints.impls.orient.OrientGraph} with the key of the identifier and the class of graph components,
+once with $ Vertex $\footnote{com.tinkerpop.blueprints.Vertex} and once with $ Edge $\footnote{com.tinkerpop.blueprints.Edge}.
+As Neo4j OrientDB uses transactions to execute operations on the database,
+which have to be closed when finished with the operation itself by calling $ OrientGraph::shutdown $.
+
+\textbf{creating a node} \newline
+To add a node,
+we simpley call $ OrientGraph::addVertex $ with the $ key $ and the value map we want to put in.
+Before we add the value map,
+we have to transform the $ ByteIterator $\footnote{com.yahoo.ycsb.ByteIterator} values to $ String $s.
+
+\textbf{creating an edge} \newline
+An edge is created by calling $ OrientGraph::addEdge $ with the $ key $,
+the start node,
+the end node and a label,
+which we will simply set to "Edge",
+because the label of our values map will be set as a property.
+
+\textbf{adding properties to a node} \newline
+As mentioned in at "creating a node" the values for the properties are directly passed during creation.
+
+\textbf{adding properties to an edge} \newline
+We can add the values to an edge by calling $ OrientElement::setProperties $\footnote{com.tinkerpop.blueprints.impls.orient.OrientElement} with the map of string values.
+
+\textbf{getting a node by its identifier} \newline
+A node is looked up by $ OrientGraph::getVertices $ with the identifier key and the identifier value.
+
+\textbf{getting an edge by its identifier} \newline
+$ Edge $s can be retrieved similarly,
+but by calling $ OrientGraph::getEdges $ with the according parameters.
+
+\textbf{getting the values of a node/an edge} \newline
+The properties of an $ OrientElement $ can be obtained by calling $ OrientElement::getProperties $.
+The values of the returned map are then casted to $ ByteIterator $s.
+
+\textbf{getting the outgoing edges of a node} \newline
+The edges of a node can be gathered by calling $ OrientVertex::getEdges $ with the specified direction.
+
+\textbf{getting the start node of an edge} \newline
+The procedure is analogous to that of getting the outgoing edge of a node.
+We call $ OrientEdge::getVertex $ with the specified direction.
+
+\textbf{removing a node} \newline
+The $ OrientGraph::removeVertex $ method can be used the the vertex to remove to delete the vertex from the database.
+
+\textbf{removing an edge} \newline
+As to remove a node,
+the $ OrientGraph $ provides a method to remove an edge internally,
+that means the connected nodes are not removed.
 
 \subsection{Sparksee}
+The index can be activated on certain attributes by $ Graph::indexAttribute $\footnote{com.sparsity.sparksee.gdb.Graph} with the attribute and the $ AttributeKind.Indexed $\footnote{com.sparsity.sparksee.gdb.AttributeKind} as its arguments.
+Sparksee uses $ Session $s\footnote{com.sparsity.sparksee.gdb.Session} as transaction,
+these are also closed at the end of the transaction.
+
+\textbf{creating a node} \newline
+To create a node we first are creating a type for the node,
+which is the same for all nodes.
+Then we call $ Graph::newNode $ and set a identifier attribute to store the $ key $ in the node.
+
+\textbf{creating an edge} \newline
+Here we are also first looking up the two corresponding nodes and then we create an edge type,
+that is also the same for all edges.
+Then we create an edge by calling $ Graph::newEdge $ with the type,
+the start and the end node.
+Lastly the identifier for the edge is set as an attribute.
+
+\textbf{adding properties to a node/an edge} \newline
+To add attributes we have to create an attribute in the database with the name of the property.
+Then we call $ Graph::setAttribute $ with that attribute and its value.
+
+\textbf{getting a node/an edge by its identifier} \newline
+Retrieving a graph component works by creating a $ Value $\footnote{com.sparsity.sparksee.gdb.Value} with the key of the component,
+which is then passed to the $ Graph::findObject $ method with the attribute specifying a node or an edge.
+
+\textbf{getting the values of a node/an edge} \newline
+The attributes of a graph component are obtained by calling $ Graph::getAttributes $,
+which hands us an $ AttributeList $\footnote{com.sparsity.sparksee.gdb.AttributeList} that is then looked up for the attributes we want to get.
+
+\textbf{getting the outgoing edges of a node} \newline
+To get the edges connected to a node,
+we call $ Graph::neighbors $ with the node, the type of edge and the direction.
+
+\textbf{getting the start node of an edge} \newline
+The $ EdgeData::getHead $ method serves us that node.
+
+\textbf{removing a node/an edge} \newline
+To remove a graph component from the database we look the component up and then call $ Graph::drop $ on it,
+to delete it from the database.

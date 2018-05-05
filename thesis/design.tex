@@ -387,8 +387,6 @@ Figure~\ref{fig:operationOrderGenerator} visualises the procedure of storing the
 \end{figure}
 
 \subsection{Graph Workload}
-\note{Graph Workload functionality}
-\todo{Activity diagram of the workflow with graph data. Create Activity diagram with database from workload view.}
 The $ GraphWorkload $s task is to coordinate the different generators and to execute the workload as specified.
 To be able to store the generated dataset in a specific folder on the system the workload class should take a path to a folder and instrument the generators to store their data in that folder or recreate it from there respectively.
 
@@ -452,6 +450,7 @@ a parameter which can be set should determine if a random graph component or a r
 Since the client only calls $ Workload::doTransaction $ to execute one of the various database operations the $ OperationOrderGenerator $ should be called to generate the next operation.
 
 \subsection{Bindings}
+\label{ch:design:se:bindings}
 To ensure compatibility with other workloads present in YCSB we will extend the $ DB $ class and implement the methods used for other databases.
 Because graph databases are slightly different we will explain how each database will map the arguments of the $ DB $ methods to their own API in the following subsections.
 
