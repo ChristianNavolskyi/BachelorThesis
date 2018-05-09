@@ -100,7 +100,7 @@ The naming of the workloads is similar to the naming introduced in section~\ref{
         \ref{ch:evaluation:se:productionSuitability} & x.\footnote{Every workload will be evaluated} Suitablitiy & - & Total time & Check if the workload is completed faster then the production period it represents. \\ \hline
         \ref{ch:evaluation:se:retrievingUnderLoad} & 1. Reading & 2. Reading & Reads/second & Observe if there is a difference in using an index. \\ \hline
         \ref{ch:evaluation:se:retrievingUnderLoad} & 1. Scanning & 2. Scanning & Scans/second & See if there is a difference in using an index for scanning. \\ \hline
-        \ref{ch:evaluation:se:retrievingUnderLoad} & 1. Structure & 1. Reading \& Scanning & Operations/second & Investigate if other operations effect inserting data and compare operation throughput. \\ \hline
+        \ref{ch:evaluation:se:retrievingUnderLoad} & 1. Structure & 1. Reading \& 1. Scanning & Operations/second & Investigate if other operations effect inserting data and compare operation throughput. \\ \hline
       \end{tabularx}
     \end{minipage}
     \caption{Overview for the production and retrieval workloads}
@@ -109,7 +109,7 @@ The naming of the workloads is similar to the naming introduced in section~\ref{
 \end{landscape}
 
 \section{Throughput}
-\todo{Tell at the beginning what we want to see.}
+\todo{Tell at the beginning what we want to see. Insert includes edges, which have to look up nodes.}
 \label{ch:evaluation:se:throughput}
 In this section we will examine the combinations of workloads mentioned in table~\ref{tab:throughputOverview}.
 The results from these workloads will give us an understanding of how the databases perform in terms of insertions per seconds depending on different factors.
@@ -123,7 +123,7 @@ The throughput is listed in inserts per seconds,
 which include both inserting nodes and inserting edges.
 
 Apache Jena does not support indexing,
-but it is still shown in most graphics as reference.
+but it is still shown in most diagrams as reference.
 
 \subsubsection{Results}
 The first figure~\ref{fig:withIndexThroughput} shows how the different databases perform with an increasing dataset size.
