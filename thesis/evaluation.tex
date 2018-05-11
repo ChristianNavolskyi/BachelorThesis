@@ -21,8 +21,6 @@ In section~\ref{ch:evaluation:se:overview} we will show which workloads we will 
 \section{Setup}
 In this section we will describe the software and hardware we used to execute the benchmark.
 
-\todo{explain how we evaluated the data, how executed? everything three times. Made average over results.}
-
 \subsection{Hardware}
 The computer used for the benchmark had the specifications shown in table~\ref{tab:hardware}.
 
@@ -44,14 +42,14 @@ The computer used for the benchmark had the specifications shown in table~\ref{t
 \subsection{Software}
 The versions of the software components we used are shown in the following table.
 
-\begin{table}[h!]
+\begin{table}[!h]
   \begin{minipage}{\textwidth}
     \begin{tabularx}{\textwidth}{ | X | X | }
       \hline
       Software & Version \\ \hline \hline
       Ubuntu & 17.10 \\ \hline
-      openjdk & xxx \\ \hline
-      ssh & xxx \\ \hline
+      Java & 1.8.0\_171 \\ \hline
+      OpenSSH & 7.5p1 \\ \hline
       YCSB & 0.14.0-SNAPSHOT \\ \hline
       ApacheJena & 3.6.0 \\ \hline
       Neo4j & 3.3.4 \\ \hline
@@ -63,12 +61,26 @@ The versions of the software components we used are shown in the following table
   \label{tab:software}
 \end{table}
 
-\todo{the script, we stored histograms -> mean, stdD}
-
 \section{Overview}
 \label{ch:evaluation:se:overview}
-\todo{Diagram to show the workflow of the script as the databases are used with the workloads, can be used for the presentation.}
+In figure~\ref{fig:executionWorkflow} the execution process is illustrated.
+From the set of defined workloads,
+one is chosen and a dataset is created with the parameters specified for that workload.
+The execute block takes that dataset,
+the workload file,
+a database from the set of databases and executes the workload on that database three times.
+During each execution the measurements are saved to files in a folder specific to the constellation of workload,
+database and the execution pass.
+After one database has finished the third execution the next database is selected.
+When all databases are finished with the workload the next workload is chosen and the cycle repeats itself until all workloads were executed.
 
+\begin{figure}[!h]
+  \includegraphics[width=\textwidth]{images/executionWorkflow}
+  \caption{Workflow for the execution process.}
+  \label{fig:executionWorkflow}
+\end{figure}
+
+In table~\ref{tab:throughputOverview} and~\ref{tab:productionOverview} the groups of workloads we are comparing with each other are shown.
 The naming of the workloads is similar to the naming introduced in section~\ref{ch:design:se:workloads}.
 
 \begin{landscape}
@@ -88,7 +100,7 @@ The naming of the workloads is similar to the naming introduced in section~\ref{
         \ref{ch:evaluation:se:differenceEdges} & n. With Index & 1. No Edges & Inserts/second & How much does inserting edges cost. \\ \hline
       \end{tabularx}
     \end{minipage}
-    \caption{Overview for the throughput workloads}
+    \caption{Overview for the throughput workloads \todo{remove reason and mention in evaluation}}
     \label{tab:throughputOverview}
   \end{table}
   \begin{table}
@@ -108,24 +120,45 @@ The naming of the workloads is similar to the naming introduced in section~\ref{
   \end{table}
 \end{landscape}
 
+After execution we have to combine the results for further inspection.
+Figure~\ref{fig:evaluationWorkflow} illustrates this process of evaluation.
+With all the results in one place we filtered the measurements for those we wanted,
+then we calculated the average over the three benchmark runs we did with every database and workload.
+Next we grouped the measurements as shown in tables~\ref{tab:throughputOverview} and~\ref{tab:productionOverview}.
+Finally we created the diagrams shown in subsections "Results" of the following sections and interpreted them to draw a conclusion,
+which is presented in the "Discussion" subsections.
+
+\begin{figure}[!h]
+  \includegraphics[width=\textwidth]{images/evaluationProcess}
+  \caption{Workflow of the evaluation process.}
+  \label{fig:evaluationWorkflow}
+\end{figure}
+
 \section{Throughput}
-\todo{Tell at the beginning what we want to see. Insert includes edges, which have to look up nodes.}
 \label{ch:evaluation:se:throughput}
+\todo{Tell at the beginning what we want to see. Insert includes edges, which have to look up nodes.}
+
 In this section we will examine the combinations of workloads mentioned in table~\ref{tab:throughputOverview}.
 The results from these workloads will give us an understanding of how the databases perform in terms of insertions per seconds depending on different factors.
 
+
 \subsection{Probing Node Count}
 \label{ch:evaluation:se:probingNodeCount}
-Here we will compare how the throughput, measured in inserts per second,
+Here we will compare how the throughput,
+measured in inserts per second,
 of the databases is effected by increasing the number of nodes we are inserting into it.
+We will also look at the execution time,
+to determine a reasonable large dataset in terms of execution time for the upcoming benchmark runs.
 
 The throughput is listed in inserts per seconds,
 which include both inserting nodes and inserting edges.
+Note that in order to insert an edge the start and end node has to be looked up.
 
-Apache Jena does not support indexing,
-but it is still shown in most diagrams as reference.
+Apache Jena has no option to turn off indexing as mentioned in section~\ref{ch:background:se:apacheJena},
+but it is still shown in the diagrams as reference.
 
 \subsubsection{Results}
+\todo{maybe include tables with numbers}
 The first figure~\ref{fig:withIndexThroughput} shows how the different databases perform with an increasing dataset size.
 Apache Jena and Neo4j only have values for 1.000 and 10.000 nodes,
 because execution with more than 10.000 nodes would take too much time.
@@ -170,6 +203,34 @@ In figure~\ref{fig:withWithoutIndexThroughputFixNodes} we see a comparison of us
 \end{figure}
 
 \subsubsection{Discussion}
+Figure~\ref{fig:withWithoutIndexThroughputFixNodes} shows us,
+that there is no performance change for Jena, Neo4j and OrientDB in using an index or not.
+Sparksee shows a significant drop in throughput without the use of an index.
+That is what we expected,
+because the throughput also contains insertions of edges,
+which have to look up nodes,
+what is faster with an index.
+For the other databases the lack of difference in performance might by,
+that the benefit of using an index to retrieve the nodes for an edge is equalised by the time they take to insert the nodes into the index.
+
+The execution time grows linearly,
+which is a good sign,
+because that means that the databases do scale for larger amounts of data.
+
+If we compare the archived throughput with out target throughput of \todo{calculate target throughput},
+we see that Sparksee exceeds our target with $ 16435 \frac{inserts}{s} $.
+OrientDB misses our goal slightly,
+at the larges dataset it only archived a throughput of $ 8572 \frac{inserts}{s} $.
+Jena and Neo4j didn't even reach $ 10 \frac{inserts}{s} $.
+These throughput values are measured with another data structure and node size than the one we will use for the suitability workload,
+so we will investigate the factors differentiating this workload from the suitability workload and reference these results again in section~\ref{ch:evaluation:se:suitabilityDiscussion}.
+
+From these results alone,
+without looking at read performance separately we can say,
+that an index is useful,
+even for insert operations,
+because edges need to look up two nodes,
+which is faster when an index is used.
 
 \subsection{Probing Node Size}
 \label{ch:evaluation:se:probingNodeSize}
@@ -177,13 +238,21 @@ In this subsection we will take a look at how the databases perform with differe
 We will pick a dataset size of 10.000 nodes,
 as all database have a reasonable execution time with that amount of nodes.
 
+By investigating the performance under node size variation,
+we will see if the databases can store larger amount of data in one node.
+That can be useful depending on the use case,
+in our example given by the industry only a two digit number is stored,
+but it could be desirable to store longer number or more complex information.
+
 \subsubsection{Results}
 In figure~\ref{fig:nodeSize} we see,
 how an increasing node size has an impact on insert throughput.
 
+Sparksee only has values for node sizes up to $ 1KB $,
+because the property we used to store the value of the node only supports up to 2048 characters/Bytes.
+
 Figure~\ref{fig:sizeDatabaseSize} shows the size of the database folder,
 in which the database stores its files.
-The workload setup is the same as before.
 
 \begin{figure}[h!]
   \begin{minipage}{.5\textwidth}
@@ -201,12 +270,37 @@ The workload setup is the same as before.
 \end{figure}
 
 \subsubsection{Discussion}
+Figure~\ref{fig:nodeSize} show that the throughput of Jena and Neo4j is quite low and it doesn't show much difference with larger node sizes,
+but at $ 1MB $ we can see that the performance decreases even more.
+
+For OrientDB we se good performance up to $ 1KB $,
+it starts to decline for node sizes of $ 10KB $ and above with a significant drop at $ 1MB $.
+
+Sparksee has the highest throughput of all four databases,
+but as it could only handle sized of up to $ 2KB $ or $ 1KB $ in our test scenario.
+In that range the other databases also show no noteworthy change in performance,
+so we can't draw a conclusion about the behaviour of Sparksee with larger node sizes.
+
+In figure~\ref{fig:sizeDatabaseSize} we see that the database size grows linearly with the node size,
+from $ 10KB $ and above.
+So for smaller node values the overhead of the database itself determines the size of the database.
+
+When we look closely at the values of Neo4j,
+we can see that they are above the other database.
+In fact at $ 1MB $ node size,
+which would result in $ 10GB $ data for 10.000 nodes,
+Neo4js database folder had a size of $ 22GB $,
+so the overhead is more than the data itself.
 
 \subsection{Difference without Edges}
 \label{ch:evaluation:se:differenceEdges}
 Here we will investigate how the absents of edges has an impact on performance.
 These workloads to not represent a real world scenario,
-but they will provide us knowledge about how much inserting edges costs compared to nodes.
+but they will provide us knowledge about how much inserting nodes costs compared to edges,
+as for every edge its start and end node have to be looked up.
+
+Apache Jena always uses an index,
+but it is still shown in both parts of the diagram as reference.
 
 \subsubsection{Results}
 Figure~\ref{fig:noEdges} shows us the difference in using an index compared to not doing so,
@@ -234,12 +328,19 @@ as they were able to handle larger dataset within an acceptable time frame.
   \begin{minipage}{.5\textwidth}
     \centering
     \includegraphics[width=\textwidth]{images/throughput/indexNoEdges100000Nodes}
-    \captionof{figure}{Comparison with 100.000 nodes.}
+    \captionof{figure}{Comparison of the insert throughput with 100.000 nodes between using edges and not.}
     \label{fig:indexNoEdges100000Nodes}
   \end{minipage}
 \end{figure}
 
 \subsubsection{Discussion}
+\todo{Do edges effect throughput}
+As expected in figure~\ref{fig:noEdges} we can see,
+that using an index does not benefit the insert performance for nodes.
+Only Neo4j shows a notable difference for the node insert throughput with the use of an index the throughput drop to $ 6,6 \frac{inserts}{s} $ from $ 12 \frac{inserts}{s} $ without an index.
+
+Figure~\ref{fig:indexNoEdges10000Nodes} shows,
+that the insert throughput of Apache Jena is slightly lower when using edges.
 
 \section{Production Simulation}
 \label{ch:evaluation:se:productionSimulation}
@@ -248,8 +349,20 @@ The first one being product complexity and the other one execution time.
 
 \subsection{Product Complexity}
 \label{ch:evaluation:se:productComplexity}
+\todo{From Design: Number of edges could effect the throughput, because of inserts. social networks have much more edges to it than our structure}
+If the throughput is not effected by using no edges compared to using edges,
+we could see,
+that for a graph database the structure of the data has no impact on performance.
+This result is quite important,
+as it would lead to the conclusion,
+that we can use the results of other graph database benchmarks for our industrial use case.
+
 The product complexity describes,
-how much the tree representing our data structure is widened at three different levels.
+how much the tree representing our data structure is widened at three different levels shown in section~\ref{ch:design:se:dataStructure}.
+
+The wider the data structure becomes the less edges we have per node.
+That can be interesting if we want to compare the generalisation of the throughput with different graph structures,
+which we need to determine if the throughput archived in section~\ref{ch:evaluation:se:probingNodeCount} can be used to draw conclusions about the suitability for the industrial environment.
 
 \subsubsection{Results}
 In figure~\ref{fig:structure} we see the impact a different data structure has on the insert throughput.
@@ -262,11 +375,20 @@ In figure~\ref{fig:structure} we see the impact a different data structure has o
 \end{figure}
 
 \subsubsection{Discussion}
+As we see in figure~\ref{fig:structure} the structure of the data as we modelled it,
+doesn't effect the throughput of the databases.
+
+For the "simple" workload the have an edge to node ratio of \todo{calculate} which is dropping to \todo{calculate} for the "most complex" workload.
+We cannot draw a conclusion about the comparability with other related work using social network graphs,
+which have a much higher edge to node ratio,
+in order to do so we would have to investigate higher edge to node ratios.
 
 \subsection{Production Suitability}
 \label{ch:evaluation:se:productionSuitability}
 The production simulations will finally show,
 if the databases we chose are capable of storing the necessary amount of data in a specified time interval.
+
+In the discussion of this section we will also investigate the throughput based on the previous workloads.
 
 \subsubsection{Results}
 Figure~\ref{fig:singleSuitability} show how long OrientDB took,
@@ -278,6 +400,9 @@ The same was done for the results shown in figure~\ref{fig:hourSuitability}.
 
 In figure~\ref{fig:hourSuitability} the same is shown but with a dataset that represents one hour of production,
 which contains 21.136.660 nodes.
+
+Only OrientDB and Sparksee were used in these workloads,
+because Apache Jena and Neo4j would take too long to insert that amount of nodes.
 
 \begin{figure}[h!]
   \begin{minipage}{.5\textwidth}
@@ -295,10 +420,32 @@ which contains 21.136.660 nodes.
 \end{figure}
 
 \subsubsection{Discussion}
-\todo{Target throughput with total operations, see notes.md. Use to compare with workloads from above. With other structure we would need less...}
+\label{ch:evaluation:se:suitabilityDiscussion}
+The figures~\ref{fig:singleSuitability} and~\ref{fig:hourSuitability} show us,
+that OrientDB did not manage to store the three minutes or the one hour of production simulation in the specified time.
+
+Sparksee could theoretically store that amount without exceeding the time limit,
+but since the free license did not allow for the amount of data we used the average util the limit was reached.
+Of course it could be,
+that the throughput of Sparksee drops with an increasing number of elements in the database,
+but we couldn't investigate that.
+
+The difference of this workload compared to the first workload we discussed in section~\ref{ch:evaluation:se:probingNodeCount} is the structure and the node size.
+The results of~\ref{ch:evaluation:se:probingNodeSize} and~\ref{ch:evaluation:se:productComplexity} show,
+that the structure has no impact on the throughput and the node size has no impact below $ 10KB $,
+since we used $ 50B $ we can compare the first measured throughput.
+
+By doing so we see that Sparksee,
+again theoretically,
+reaches our target throughput of \todo{calculate}.
+OrientDB misses our target with $ 8572 \frac{inserts}{s} $.
+These results support our findings for the impact of structure and node size,
+as this workload,
+measuring the time correlates with the numbers from the first workload.
 
 \section{Retrieving under load}
 \label{ch:evaluation:se:retrievingUnderLoad}
+\todo{compare to results of other studies}
 This section will cover the results about retrieving data while the database is under load.
 First we will take a look at how using an index is effecting the read and scan throughput,
 then we will compare the throughput of the different operations~(\ref{fig:operationReadScan}) and their impact on the insert operation~(\ref{fig:insertWithWithoutReadScan}).
@@ -341,3 +488,44 @@ In figure~\ref{fig:insertWithWithoutReadScan} we see the impact of the read and 
 \end{figure}
 
 \subsection{Discussion}
+First we will discuss the results regarding the use of an index and not.
+For read operations figure~\ref{fig:readThroughput10000Nodes} shows,
+that all databases benefit from using an index,
+except Apache Jena which always uses an index and is only presented as reference.
+Sparksee shows the biggest difference in throughput of read operations,
+whereas the others only show a slight decrease in performance without an index.
+That was what we would expect,
+since an index really benefits these kinds of operations,
+although we expected the increase with the use of an index to be higher for Neo4j and OrientDB.
+It could be,
+that the dataset size is too small to show an effect between using an index and not.
+
+Similar results can be seen for the scan operations shown in figure~\ref{fig:scanThroughput10000Nodes}.
+The absents of an index has not much effect here either,
+that could be the case,
+because scan operations only use one read operations for the start node and then traverse the graph,
+which is not effected by the index.
+
+The comparison of the different operations shown in figure~\ref{fig:operationReadScan} shows us where the strengths and weaknesses are in the different databases.
+Apache Jena and Neo4j are the slowest when it comes to inserting nodes,
+but they are much faster in retrieving nodes,
+with Neo4j even being the fastest of all four in graph traversal.
+
+OrientDB and Sparksee seem to be a good choice then inserting and reading is the main concern of the application.
+
+When we compare the results of Apache Jena from its read performance to its scan performance,
+we see almost no difference in performance,
+which means it is even faster than Neo4j in graph traversal,
+but it is limited by the relatively slow read operation at the beginning of the scan operation.
+
+The last figure~\ref{fig:insertWithWithoutReadScan} shows us,
+that using other operations on the database does effect insert throughput,
+except for Sparksee,
+which seems to stay stable in its throughput even when other operations are being used.
+
+Jena and Neo4j are low in throughput anyways,
+but they still suffer from other operations being executed regularly.
+OrientDB has a slightly worse throughput when using read operations and even worse with scan operations,
+that is not good for our industry scenario,
+because in the industry read and scan operations will be used on the database more or less regularly,
+depending on the specific use case.

@@ -2,6 +2,16 @@
 16, 32, 32 - 10000000 - 20018348 => 20018348/10000000
 64, 128, 128 - 10000000 - 20001202 => 20001202/10000000
 
+# Fragen
+Informationen von der Titelseite übernehmen oder direkt einbinden (sieht nicht gut aus)
+Wie Links richtig einbauen? Zitieren, in Klammern oder in Fußnote?
+Tabellen mit den Resultaten?
+
+# Diagrams
+GraphDataRecorder::createGraph
+Random Graph Component Generator
+Graph Workload diagram, process with databases
+
 
 # Hardware
 - cpu
@@ -45,6 +55,9 @@ Also use runs without operations on edges, because some databases don't support 
 This is no problem if written in one language only.
 
 System load (mem, cpu etc.)
+
+
+
 
 
 # Papers

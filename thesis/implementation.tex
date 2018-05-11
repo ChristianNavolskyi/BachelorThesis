@@ -6,9 +6,15 @@ then move on to the different generators for the graph data,
 the random graph components and the operation order.
 Then we will show the workload class in section~\ref{ch:implementation:se:graphWorkload} and finally describe the database bindings in section~\ref{ch:implementation:se:graphDatabaseBindings}.
 
-The code of our implementation can be seen on GitHub~\cite{Navolskyi2017}.
+The code of our implementation can be seen on GitHub\footnote{\url{https://github.com/ChristianNavolskyi/YCSB}}.
 
 \todo{Class diagram of my classes and introduce the upcoming explanation}
+
+\begin{figure}
+  \includegraphics{images/extendedYCSBWorkflow}
+  \caption{Class diagram of YCSB with the classes we added to it. \todo{Reference}}
+  \label{fig:YCSBExtension}
+\end{figure}
 
 \section{Graph}
 As mentioned in section~\ref{ch:background:se:graphs} a graph simply contains two lists,
@@ -59,6 +65,12 @@ Calling $ nextValue $ on a $ RandomGraphComponentGenerator $ will invoke the imp
 A random node can also be picked directly,
 that is needed for the $ GraphWorkload::update $ method,
 since it only will use nodes.
+
+\begin{figure}[h!]
+  \includegraphics{images/randomGraphComponentGenerator}
+  \caption{Workflow of the generator to retrieve the next value.\todo{Reference}}
+  \label{fig:randomGraphComponentGenerator}
+\end{figure}
 
 \subsection{Operation Order}
 Here the generator only holds common fields shared by the recorder and the recreator.

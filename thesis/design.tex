@@ -31,12 +31,14 @@ we had to reiterate over it and get rid of some complexity where we don't need i
 The meeting gave us a better understanding of how a production facility could handle its data and with that in mind and the objective to design a simpler schema that includes to most necessary parts of production the model shown in figure~\ref{fig:finalDesignOfSchema} was created.
 
 \begin{figure}
-  \includegraphics[width=\textwidth]{images/firstDesignOfSchema}
-  \caption{The final design of the data schema.\todo{figure with final data structure as implemented}}
+  \includegraphics[width=\textwidth]{images/dataStructure}
+  \caption{The final design of the data schema.}
   \label{fig:finalDesignOfSchema}
 \end{figure}
 
-\todo{create graphic and describe its content. Graphic should have numbers on its edges, maybe use puml. Naming of parameters}
+\todo{Describe its content. Mention naming of variables in future references.}
+\todo{Calculate target throughput for measurements with exact number of edges.}
+\todo{Put at right position: Number of edges could effect the throughput, because of inserts. social networks have much more edges to it than our structure}
 
 \section{Workloads}
 \label{ch:design:se:workloads}
@@ -119,7 +121,6 @@ We have three layers which we can blow up horizontally by increasing the corresp
 which are
 
 \begin{itemize}
-  \item \note{maybe link to figure if suitable}
   \item productsperorder, this spreads the data graph apart at a level closer to the root
   \item componentsperproduct, this changed the width in the middle of the graph
   \item testparametercount, which widens the graph at the lowest level.
@@ -140,6 +141,7 @@ because indexing these values should be done to later work on that data more eff
 which is necessary for the industry.
 
 \subsubsection{Suitability}
+\todo{restructure to reference target throughput with setup (parameters, size, structure)}
 \todo{number of nodes comes from the structure and time}
 To examine if a database is suitable for the industry it should be able to store the data faster then it is coming from the machines.
 In section~\ref{ch:analysis:se:dataAmount} we calculated that 1.056.833 nodes would be written to the database every three minutes.
@@ -731,7 +733,7 @@ The workflow of the generators is shown in figure~\ref{fig:generalGeneratorWorkf
 
 \begin{figure}[h!]
   \includegraphics[width=\textwidth]{images/generalGeneratorWorkflow}
-  \caption{Activity diagram roughly showing how the generators will work.}
+  \caption{Activity diagram showing how the generators will work.}
   \label{fig:generalGeneratorWorkflow}
 \end{figure}
 

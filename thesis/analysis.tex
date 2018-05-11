@@ -47,6 +47,8 @@ With the parameters mentioned in~\ref{ch:analysis:se:data} we can calculate the 
   \end{aligned}
 \end{equation}
 
+\todo{discard following calculations to reference throughput calculation in design.}
+
 Over the course of a hour~\ref{eq:dataAmountHour}, day~\ref{eq:dataAmountDay}, week~\ref{eq:dataAmountWeek}, month~\ref{eq:dataAmountMonth} and year~\ref{eq:dataAmountYear} we get the following number of nodes created by the machines.
 
 \begin{equation}
@@ -147,9 +149,9 @@ The results of our comparison are shown in the following table~\ref{tab:benchmar
     \begin{tabularx}{\textwidth}{ | l | X | X | X | l | }
       \hline
       Benchmark & Data Strucutre & Workloads & Programming Language & Community \\ \hline
-      Graphalytics & Social Network & Algorithm based & Java & small\footnote{8 contributors and 16 forks on GitHub~\cite{LDBC}} \\ \hline
-      XGDBench & Social Network & Read, Update and Graph Traversal & X10 & none\footnote{1 contributor and 1 fork (which is from us) on GitHub~\cite{Miyurud}} \\ \hline
-      YCSB & No specific structure & CRUD based & Java & big\footnote{108 contributors and 1278 forks on GitHub~\cite{Cooper}} \\
+      Graphalytics & Social Network & Algorithm based & Java & small\footnote{8 contributors and 16 forks on GitHub \url{https://github.com/ldbc/ldbc_graphalytics}} \\ \hline
+      XGDBench & Social Network & Read, Update and Graph Traversal & X10 & none\footnote{1 contributor and 1 fork (which is from us) on GitHub \url{https://github.com/miyurud/XGDBench}} \\ \hline
+      YCSB & No specific structure & CRUD based & Java & big\footnote{108 contributors and 1278 forks on GitHub \url{https://github.com/brianfrankcooper/YCSB}} \\
       \hline
     \end{tabularx}
   \end{minipage}
@@ -175,7 +177,7 @@ The generator and the workloads should be easily extendable, since they has an o
 \section{YCSB}
 \label{ch:analysis:se:ycsb}
 \todo{Reference figure in explanation of aspects, maybe do subsections and move figure up. Go in more detail about the flow, reading inputs, creating which classes executing what over what class}
-\todo{show how values are generated in the generator class}
+
 In this section we will describe the internal workflow of a benchmark run in YCSB.
 
 YCSB separated the execution into two parts.
