@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>com.yahoo.ycsb</OriginalElement>
+  <nodes>
+    <node x="1728.1023809523808" y="330.0">com.yahoo.ycsb.DB</node>
+    <node x="1213.8125" y="570.0">com.yahoo.ycsb.StatusThread</node>
+    <node x="1512.0791666666667" y="160.0">com.yahoo.ycsb.generator.graph.Graph</node>
+    <node x="1477.3291666666667" y="80.0">com.yahoo.ycsb.generator.graph.Edge</node>
+    <node x="1578.3291666666667" y="80.0">com.yahoo.ycsb.generator.graph.Node</node>
+    <node x="639.5625" y="490.0">com.yahoo.ycsb.workloads.GraphWorkload</node>
+    <node x="285.5" y="330.0">com.yahoo.ycsb.generator.graph.randomcomponents.RandomGraphComponentGenerator</node>
+    <node x="709.7434362934362" y="330.0">com.yahoo.ycsb.generator.operationorder.OperationOrderGenerator</node>
+    <node x="1639.7041666666667" y="490.0">com.yahoo.ycsb.db.neo4j.Neo4jClient</node>
+    <node x="1780.7041666666667" y="490.0">com.yahoo.ycsb.db.sparksee.SparkseeClient</node>
+    <node x="2140.7041666666664" y="490.0">com.yahoo.ycsb.db.ApacheJenaClient</node>
+    <node x="0.0" y="490.0">com.yahoo.ycsb.generator.graph.randomcomponents.RandomGraphComponentRecreator</node>
+    <node x="1816.1023809523808" y="330.0">com.yahoo.ycsb.generator.graph.GraphDataRecorder</node>
+    <node x="1941.7041666666667" y="490.0">com.yahoo.ycsb.db.OrientDBGraphClient</node>
+    <node x="1410.1625" y="490.0">com.yahoo.ycsb.DBWrapper</node>
+    <node x="1017.7851029601027" y="330.0">com.yahoo.ycsb.Workload</node>
+    <node x="1272.2041666666667" y="330.0">com.yahoo.ycsb.measurements</node>
+    <node x="656.591184041184" y="160.0">com.yahoo.ycsb.generator.StoringGenerator</node>
+    <node x="1533.1023809523808" y="330.0">com.yahoo.ycsb.generator.graph.GraphDataRecreator</node>
+    <node x="1447.4541666666667" y="240.0">com.yahoo.ycsb.generator.graph.GraphDataGenerator</node>
+    <node x="1437.8291666666667" y="0.0">com.yahoo.ycsb.generator.graph.GraphComponent</node>
+    <node x="289.0" y="490.0">com.yahoo.ycsb.generator.graph.randomcomponents.RandomGraphComponentRecorder</node>
+    <node x="1237.8125" y="650.0">com.yahoo.ycsb.Client</node>
+    <node x="1031.5625" y="490.0">com.yahoo.ycsb.generator.operationorder.OperationOrderRecorder</node>
+    <node x="1253.5625" y="490.0">com.yahoo.ycsb.ClientThread</node>
+    <node x="806.5625" y="490.0">com.yahoo.ycsb.generator.operationorder.OperationOrderRecreator</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="com.yahoo.ycsb.workloads.GraphWorkload" target="com.yahoo.ycsb.Workload">
+      <point x="55.125" y="-15.0" />
+      <point x="768.1875" y="470.0" />
+      <point x="1045.0351029601027" y="470.0" />
+      <point x="-27.25" y="15.0" />
+    </edge>
+    <edge source="com.yahoo.ycsb.workloads.GraphWorkload" target="com.yahoo.ycsb.generator.operationorder.OperationOrderGenerator">
+      <point x="18.375" y="-15.0" />
+      <point x="731.4375" y="470.0" />
+      <point x="744.4101029601028" y="470.0" />
+      <point x="-69.33333333333331" y="15.0" />
+    </edge>
+    <edge source="com.yahoo.ycsb.measurements" target="com.yahoo.ycsb.measurements">
+      <point x="-35.8" y="15.0" />
+      <point x="1325.9041666666667" y="390.0" />
+      <point x="1242.2041666666667" y="390.0" />
+      <point x="1242.2041666666667" y="337.5" />
+      <point x="-89.5" y="-7.5" />
+    </edge>
+    <edge source="com.yahoo.ycsb.DBWrapper" target="com.yahoo.ycsb.DB">
+      <point x="0.0" y="-15.0" />
+      <point x="1470.6625" y="450.0" />
+      <point x="1742.6738095238095" y="450.0" />
+      <point x="-19.42857142857133" y="15.0" />
+    </edge>
+    <edge source="com.yahoo.ycsb.generator.operationorder.OperationOrderRecreator" target="com.yahoo.ycsb.generator.operationorder.OperationOrderGenerator">
+      <point x="0.0" y="-15.0" />
+      <point x="909.0625" y="460.0" />
+      <point x="813.7434362934362" y="460.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="com.yahoo.ycsb.generator.graph.randomcomponents.RandomGraphComponentRecorder" target="com.yahoo.ycsb.generator.graph.randomcomponents.RandomGraphComponentGenerator">
+      <point x="0.0" y="-15.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="com.yahoo.ycsb.generator.graph.GraphDataRecorder" target="com.yahoo.ycsb.generator.graph.GraphDataGenerator">
+      <point x="-42.75" y="-15.0" />
+      <point x="1858.8523809523808" y="300.0" />
+      <point x="1603.2041666666667" y="300.0" />
+      <point x="66.75" y="15.0" />
+    </edge>
+    <edge source="com.yahoo.ycsb.StatusThread" target="com.yahoo.ycsb.ClientThread">
+      <point x="33.25" y="-15.0" />
+      <point x="1313.5625" y="545.0" />
+      <point x="1317.5625" y="545.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="com.yahoo.ycsb.Client" target="com.yahoo.ycsb.StatusThread">
+      <point x="0.0" y="-15.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="com.yahoo.ycsb.workloads.GraphWorkload" target="com.yahoo.ycsb.generator.graph.GraphDataGenerator">
+      <point x="-18.375" y="-15.0" />
+      <point x="694.6875" y="460.0" />
+      <point x="598.5625" y="460.0" />
+      <point x="598.5625" y="310.0" />
+      <point x="1514.2041666666667" y="310.0" />
+      <point x="-22.25" y="15.0" />
+    </edge>
+    <edge source="com.yahoo.ycsb.db.neo4j.Neo4jClient" target="com.yahoo.ycsb.DB">
+      <point x="0.0" y="-15.0" />
+      <point x="1700.2041666666667" y="470.0" />
+      <point x="1762.1023809523808" y="470.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="com.yahoo.ycsb.db.sparksee.SparkseeClient" target="com.yahoo.ycsb.DB">
+      <point x="0.0" y="-15.0" />
+      <point x="1851.2041666666667" y="470.0" />
+      <point x="1771.8166666666666" y="470.0" />
+      <point x="9.71428571428578" y="15.0" />
+    </edge>
+    <edge source="com.yahoo.ycsb.DBWrapper" target="com.yahoo.ycsb.measurements">
+      <point x="-40.33333333333326" y="-15.0" />
+      <point x="1430.3291666666667" y="430.0" />
+      <point x="1433.3041666666666" y="430.0" />
+      <point x="71.59999999999991" y="15.0" />
+    </edge>
+    <edge source="com.yahoo.ycsb.generator.graph.Node" target="com.yahoo.ycsb.generator.graph.GraphComponent">
+      <point x="0.0" y="-15.0" />
+      <point x="1619.8291666666667" y="55.0" />
+      <point x="1571.1625" y="55.0" />
+      <point x="53.33333333333326" y="15.0" />
+    </edge>
+    <edge source="com.yahoo.ycsb.generator.graph.GraphDataGenerator" target="com.yahoo.ycsb.generator.graph.Graph">
+      <point x="22.25" y="-15.0" />
+      <point x="1558.7041666666667" y="215.0" />
+      <point x="1556.0791666666667" y="215.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="com.yahoo.ycsb.generator.graph.randomcomponents.RandomGraphComponentGenerator" target="com.yahoo.ycsb.generator.graph.GraphComponent">
+      <point x="-90.66666666666674" y="-15.0" />
+      <point x="330.83333333333326" y="310.0" />
+      <point x="370.6666666666665" y="310.0" />
+      <point x="370.6666666666665" y="55.0" />
+      <point x="1464.4958333333334" y="55.0" />
+      <point x="-53.33333333333326" y="15.0" />
+    </edge>
+    <edge source="com.yahoo.ycsb.ClientThread" target="com.yahoo.ycsb.Workload">
+      <point x="-42.66666666666674" y="-15.0" />
+      <point x="1274.8958333333333" y="410.0" />
+      <point x="1099.5351029601027" y="410.0" />
+      <point x="27.25" y="15.0" />
+    </edge>
+    <edge source="com.yahoo.ycsb.workloads.GraphWorkload" target="com.yahoo.ycsb.generator.graph.randomcomponents.RandomGraphComponentGenerator">
+      <point x="-55.125" y="-15.0" />
+      <point x="657.9375" y="470.0" />
+      <point x="512.1666666666667" y="470.0" />
+      <point x="90.66666666666674" y="15.0" />
+    </edge>
+    <edge source="com.yahoo.ycsb.ClientThread" target="com.yahoo.ycsb.measurements">
+      <point x="0.0" y="-15.0" />
+      <point x="1317.5625" y="430.0" />
+      <point x="1397.5041666666666" y="430.0" />
+      <point x="35.799999999999955" y="15.0" />
+    </edge>
+    <edge source="com.yahoo.ycsb.generator.graph.randomcomponents.RandomGraphComponentRecreator" target="com.yahoo.ycsb.generator.graph.randomcomponents.RandomGraphComponentGenerator">
+      <point x="0.0" y="-15.0" />
+      <point x="134.5" y="470.0" />
+      <point x="330.83333333333337" y="470.0" />
+      <point x="-90.66666666666663" y="15.0" />
+    </edge>
+    <edge source="com.yahoo.ycsb.generator.operationorder.OperationOrderRecorder" target="com.yahoo.ycsb.generator.operationorder.OperationOrderGenerator">
+      <point x="0.0" y="-15.0" />
+      <point x="1132.0625" y="450.0" />
+      <point x="883.0767696267694" y="450.0" />
+      <point x="69.33333333333331" y="15.0" />
+    </edge>
+    <edge source="com.yahoo.ycsb.generator.graph.Graph" target="com.yahoo.ycsb.generator.graph.Node">
+      <point x="22.0" y="-15.0" />
+      <point x="1578.0791666666667" y="135.0" />
+      <point x="1592.1625" y="135.0" />
+      <point x="-27.666666666666742" y="15.0" />
+    </edge>
+    <edge source="com.yahoo.ycsb.generator.graph.GraphDataGenerator" target="com.yahoo.ycsb.generator.graph.Edge">
+      <point x="-22.25" y="-15.0" />
+      <point x="1514.2041666666667" y="215.0" />
+      <point x="1501.5791666666667" y="215.0" />
+      <point x="1501.5791666666667" y="135.0" />
+      <point x="1497.5791666666667" y="135.0" />
+      <point x="-20.25" y="15.0" />
+    </edge>
+    <edge source="com.yahoo.ycsb.generator.graph.GraphDataGenerator" target="com.yahoo.ycsb.generator.graph.Node">
+      <point x="66.75" y="-15.0" />
+      <point x="1603.2041666666667" y="215.0" />
+      <point x="1619.8291666666667" y="215.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="com.yahoo.ycsb.StatusThread" target="com.yahoo.ycsb.measurements">
+      <point x="-33.25" y="-15.0" />
+      <point x="1247.0625" y="545.0" />
+      <point x="1243.0625" y="545.0" />
+      <point x="1243.0625" y="420.0" />
+      <point x="1361.7041666666667" y="420.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="com.yahoo.ycsb.generator.graph.randomcomponents.RandomGraphComponentGenerator" target="com.yahoo.ycsb.generator.graph.GraphDataGenerator">
+      <point x="90.66666666666663" y="-15.0" />
+      <point x="512.1666666666666" y="300.0" />
+      <point x="1469.7041666666667" y="300.0" />
+      <point x="-66.75" y="15.0" />
+    </edge>
+    <edge source="com.yahoo.ycsb.generator.graph.Graph" target="com.yahoo.ycsb.generator.graph.Edge">
+      <point x="-22.0" y="-15.0" />
+      <point x="1534.0791666666667" y="135.0" />
+      <point x="1538.0791666666667" y="135.0" />
+      <point x="20.25" y="15.0" />
+    </edge>
+    <edge source="com.yahoo.ycsb.generator.operationorder.OperationOrderGenerator" target="com.yahoo.ycsb.generator.StoringGenerator">
+      <point x="0.0" y="-15.0" />
+      <point x="813.7434362934362" y="290.0" />
+      <point x="735.091184041184" y="290.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="com.yahoo.ycsb.db.OrientDBGraphClient" target="com.yahoo.ycsb.DB">
+      <point x="0.0" y="-15.0" />
+      <point x="2031.2041666666667" y="460.0" />
+      <point x="1781.5309523809522" y="460.0" />
+      <point x="19.42857142857133" y="15.0" />
+    </edge>
+    <edge source="com.yahoo.ycsb.generator.graph.randomcomponents.RandomGraphComponentGenerator" target="com.yahoo.ycsb.generator.StoringGenerator">
+      <point x="0.0" y="-15.0" />
+      <point x="421.5" y="310.0" />
+      <point x="381.6666666666665" y="310.0" />
+      <point x="381.6666666666665" y="215.0" />
+      <point x="682.7578507078506" y="215.0" />
+      <point x="-52.33333333333337" y="15.0" />
+    </edge>
+    <edge source="com.yahoo.ycsb.db.ApacheJenaClient" target="com.yahoo.ycsb.DB">
+      <point x="0.0" y="-15.0" />
+      <point x="2220.7041666666664" y="450.0" />
+      <point x="1791.245238095238" y="450.0" />
+      <point x="29.14285714285711" y="15.0" />
+    </edge>
+    <edge source="com.yahoo.ycsb.generator.graph.GraphDataRecorder" target="com.yahoo.ycsb.generator.graph.Node">
+      <point x="42.75" y="-15.0" />
+      <point x="1944.3523809523808" y="135.0" />
+      <point x="1647.4958333333334" y="135.0" />
+      <point x="27.666666666666742" y="15.0" />
+    </edge>
+    <edge source="com.yahoo.ycsb.generator.graph.GraphDataGenerator" target="com.yahoo.ycsb.generator.StoringGenerator">
+      <point x="-66.75" y="-15.0" />
+      <point x="1469.7041666666667" y="215.0" />
+      <point x="787.4245173745173" y="215.0" />
+      <point x="52.33333333333337" y="15.0" />
+    </edge>
+    <edge source="com.yahoo.ycsb.ClientThread" target="com.yahoo.ycsb.DB">
+      <point x="42.66666666666674" y="-15.0" />
+      <point x="1360.2291666666667" y="440.0" />
+      <point x="1732.9595238095237" y="440.0" />
+      <point x="-29.14285714285711" y="15.0" />
+    </edge>
+    <edge source="com.yahoo.ycsb.generator.graph.GraphDataRecreator" target="com.yahoo.ycsb.generator.graph.GraphDataGenerator">
+      <point x="0.0" y="-15.0" />
+      <point x="1620.6023809523808" y="310.0" />
+      <point x="1558.7041666666667" y="310.0" />
+      <point x="22.25" y="15.0" />
+    </edge>
+    <edge source="com.yahoo.ycsb.generator.graph.Edge" target="com.yahoo.ycsb.generator.graph.GraphComponent">
+      <point x="0.0" y="-15.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+  </edges>
+  <settings layout="Tree" zoom="0.9502572898799314" x="1156.0" y="335.0" />
+  <SelectedNodes />
+  <Categories />
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

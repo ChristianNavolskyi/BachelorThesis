@@ -1,0 +1,30 @@
+@startuml
+(*)  --> [nextValue()] "randomNodeOrEdge"
+if file for component is present
+-left-> [Yes] read component from file
+--> get kind of component
+--> if component is
+    -left-> [Node] if file for nodes is present
+        --> [Yes] read node identifier from file
+        --> return component
+        else
+        --> [No] get maximum node identifier from GraphDataGenerator
+        --> pick random node identifier in range [1..maxNodeId]
+        --> return component
+        endif
+    else
+    -right-> [Edge] if file for edges is present
+        --> [No] get maximum edge identifier from GraphDataGenerator
+        --> pick random edge identifier in range [1..maxEdgeId]
+        --> return component
+        else
+        --> [Yes] read edge identifier from file
+        --> return component
+        endif
+    endif
+else
+-right-> [No] pick node or edge randomly
+--> get kind of component
+
+"return component" --> (*)
+@enduml

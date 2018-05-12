@@ -1,6 +1,5 @@
 #!/bin/bash
 
-for file in ./*.svg; do
-  inkscape -D -z --file=$(pwd)/$(basename ${file}) --export-pdf=$(pwd)/$(basename ${file} .svg).pdf
+for file in $(find . -type f -name '*.svg'); do
+  inkscape -D -z --file=$(pwd)/${file} --export-pdf=$(pwd)/${file%.*}.pdf
 done
-	

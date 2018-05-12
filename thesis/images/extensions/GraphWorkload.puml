@@ -1,0 +1,27 @@
+@startuml
+(*) --> [GraphWorkload::init] "load parameters"
+-> "create graphDataGenerator"
+if "files present"
+-left-> [Yes] "return GraphDataRecreator"
+--> "create randomGraphComponentGenerator"
+else
+-right-> [No] "return GraphDataRecorder"
+--> "create randomGraphComponentGenerator"
+endif
+
+if "files present"
+-left-> [Yes] "return RandomGraphComponentRecreator"
+--> "create operationOrderGenerator"
+else
+-right-> [No] "return RandomGraphComponentRecorder"
+--> "create operationOrderGenerator"
+endif
+
+if "files present"
+-left-> [Yes] "return OperationOrderRecreator"
+--> (*)
+else
+-right-> [No] "return OperationOrderRecorder"
+endif
+-->(*)
+@enduml

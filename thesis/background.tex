@@ -196,13 +196,14 @@ it shows the observation of a product.
 
 \begin{figure}
   \centering
-  \includegraphics[width=\textwidth]{images/exampleGraph}
+  \includegraphics[width=\textwidth]{images/design/exampleGraph}
   \caption{An example graph representing the observation of test features in the components of a board.}
   \label{fig:exampleData}
 \end{figure}
 
 \section{Graph Databases}
 \todo{LNCS description information for databases.}
+\todo{Diagrams of architecture of database}
 \label{ch:background:se:graphDatabases}
 \todo{Write about available versions of the databases}
 There is a variety of database types available the main categories are SQL and NoSQL databases.
@@ -284,6 +285,7 @@ Sparksee is implemented in C++ but provides a low level Java API.
 
 \section{Graph Database Benchmarks}
 \label{ch:background:se:graphDatabaseBenchmarks}
+\todo{add results of studies}
 As the need to compare similar programs exists benchmarks are needed to hand results over certain parameters to aid decision making.
 In the field of graph databases that is no different.
 There exist multiple benchmarks for graph databases and some are outlined shortly in the following subsections~\ref{ch:background:se:ldbcGraphalytics}~to~\ref{ch:background:se:ycsb}.
@@ -291,6 +293,7 @@ In in section~\ref{ch:analysis:se:benchmark} we choose a benchmark for our work.
 
 \subsection{LDBC: Graphalytics}
 \label{ch:background:se:ldbcGraphalytics}
+\todo{Add architecture image and explain}
 Benchmark specifications, practices and results for graph data management systems are established by an industry council called The Linked Data Benchmark Council.
 The Graphalytics benchmark facilitates a choke-point design to evaluate the crucial technological challenges present in system design,
 one example would be the "large graph memory footprint" as mentioned in~\cite[2]{Capota2015c}.
@@ -305,6 +308,7 @@ Neo4j was used among others in the study of Capot\u{a} et al.~\cite{Capota2015c}
 which we will refer to in our evaluation in chapter~\ref{ch:evaluation}.
 
 \subsection{XGDBench}
+\todo{Add architecture image and explain}
 Is a graph database benchmark for cloud computing systems.
 It is designed to work in the cloud and in future exascale clouds.
 XGDBench is an extension of the Yahoo! Cloud Serving Benchmark for graph databases.
@@ -326,6 +330,7 @@ so that research covers three of our four databases.
 
 \subsection{YCSB}
 \label{ch:background:se:ycsb}
+\todo{Add architecture image and explain}
 The Yahoo! Cloud Serving Benchmark (YCSB) was not designed specifically for graph databases,
 but rather for key-value and cloud stores.
 The project consists of the YCSB client which is responsible for generating the data,
@@ -335,7 +340,8 @@ new databases and new generators can be integrated.~\cite{Yahoo!2010}
 
 The core workload is designed to use simple CRUD\footnote{CRUD stands for the basic operations on persistent storage, these are Create, Read, Update, Delete.} operations on any database with no special structure of the generated data.
 
-\todo{maybe add~\cite{Abubakar2014}}
+\todo{add~\cite{Abubakar2014}}
 
 \section{Other Related Work}
 \todo{Add Shen benchmark results}
+\todo{}

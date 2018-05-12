@@ -7,15 +7,16 @@
 
 \section{Problem Statement}
 \todo{Highlight that current graph database benchmark papers are not covering our field.}
-With the growing digitalisation of the industry more data is available and can be used to improve production processes.
-The amount of data created depends on the individual use case,
-but still it needs to be stored to be useful.
+With the growing digitalisation of the industry,
+more data is available and can be used to improve production processes.
+The amount of data created depends on the individual use case but still,
+it needs to be stored to be useful.
 Since there are multiple databases available it can be difficult to choose the right one for an individual scenario.
 
 \subsection{Use Case - Industry 4.0}
 There are multiple analytic algorithms to run on data to extract certain features.
-In the industry those algorithms play an important role too,
-but in this thesis we are looking at different aspects of the industrial use case,
+In the industry,
+those algorithms play an important role too but in this thesis we are looking at different aspects of the industrial use case,
 mainly inserting data and reading data.
 
 In section~\ref{ch:background:se:industrialData} we will show an example given by the industry.
@@ -24,16 +25,17 @@ There is no industrial data available publicly so we have to base our design on 
 \subsubsection{Inserting Data}
 To digitalise the production processes the data produced by every machine in the production line should be stored for future analysis.
 And to store that data it needs to be written into a database.
-Since most factories running 24 hours a day the machines are producing a lot of data during the day.
+Since most factories running 24 hours a day,
+the machines are producing a lot of data during the day.
 That will be the base load for the underlying database, to store all that data from the production machines.
 
 \subsubsection{Reading Data}
 Besides using the stored data for analysis algorithms,
 simply reading data from the database is another common use case.
-An example would be to get the time at which a specific product was processes by a specific machine to check if all parameters were set correctly.
+An example would be to get the time at which a specific product was processed by a specific machine to check if all parameters were set correctly.
 
 \section{Question}
-This thesis should give an answer to the question, if graph databases are suitable for an industrial application.
+This thesis should give an answer to the question if graph databases are suitable for an industrial application.
 Suitable in this case means that the database can withstand the amount of data written to it during production.
 In section~\ref{ch:analysis:se:data} we analyse how much data could be written to a database and of which structure that data is.
 We motivate graphs and the use of graph databases in section~\ref{ch:background:se:industrialData} and section~\ref{ch:background:se:graphDatabases} respectively and will concentrate on those in this thesis,

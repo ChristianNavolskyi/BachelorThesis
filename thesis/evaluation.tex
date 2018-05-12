@@ -1,5 +1,7 @@
 \chapter{Evaluation}
 \label{ch:evaluation}
+\todo{Only one graph horizontally}
+\todo{Adapt text size to thesis}
 This chapter will cover the execution and evaluation of our benchmark with the workloads specified in section~\ref{ch:design:se:workloads}.
 We will present the results of each workload and have a discussion on them directly after that.
 
@@ -63,6 +65,7 @@ The versions of the software components we used are shown in the following table
 
 \section{Overview}
 \label{ch:evaluation:se:overview}
+\todo{enumerate steps}
 In figure~\ref{fig:executionWorkflow} the execution process is illustrated.
 From the set of defined workloads,
 one is chosen and a dataset is created with the parameters specified for that workload.
@@ -322,7 +325,7 @@ as they were able to handle larger dataset within an acceptable time frame.
   \begin{minipage}{.5\textwidth}
     \centering
     \includegraphics[width=\textwidth]{images/throughput/indexNoEdges10000Nodes}
-    \captionof{figure}{Comparison of insert throughput between using edges and not.}
+    \captionof{figure}{Comparison of insert throughput between using edges and not.\newline}
     \label{fig:indexNoEdges10000Nodes}
   \end{minipage}
   \begin{minipage}{.5\textwidth}
@@ -501,7 +504,7 @@ It could be,
 that the dataset size is too small to show an effect between using an index and not.
 
 Similar results can be seen for the scan operations shown in figure~\ref{fig:scanThroughput10000Nodes}.
-The absents of an index has not much effect here either,
+The absence of an index has not much effect here either,
 that could be the case,
 because scan operations only use one read operations for the start node and then traverse the graph,
 which is not effected by the index.
@@ -527,5 +530,7 @@ Jena and Neo4j are low in throughput anyways,
 but they still suffer from other operations being executed regularly.
 OrientDB has a slightly worse throughput when using read operations and even worse with scan operations,
 that is not good for our industry scenario,
-because in the industry read and scan operations will be used on the database more or less regularly,
+because in the industry read and scan operations will be used in the database more or less regularly,
 depending on the specific use case.
+
+\section{Related Work and Generalisation}

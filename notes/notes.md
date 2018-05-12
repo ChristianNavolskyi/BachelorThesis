@@ -4,14 +4,17 @@
 
 # Fragen
 Informationen von der Titelseite übernehmen oder direkt einbinden (sieht nicht gut aus)
-Wie Links richtig einbauen? Zitieren, in Klammern oder in Fußnote?
-Tabellen mit den Resultaten?
+Wie Links richtig einbauen? Zitieren, in Klammern oder in Fußnote? 
+Tabellen mit den Resultaten? Ja
 
 # Diagrams
 GraphDataRecorder::createGraph
 Random Graph Component Generator
 Graph Workload diagram, process with databases
 
+
+# Parallelen ziehen von meinem zur allgemeinen Struktur
+Nicht nur dumm die Datenbank getestst sonder festellen ob die Struktur (sozial industry) einen unterschied macht.
 
 # Hardware
 - cpu

@@ -1,0 +1,10 @@
+@startuml
+(*)  --> [getNextOperation()] if files present then
+-left-> [Yes] read next line from file
+--> return operation
+else
+-right-> [No] get next operation from DiscreteGenerator
+--> save operation to file
+--> return operation
+-->(*)
+@enduml

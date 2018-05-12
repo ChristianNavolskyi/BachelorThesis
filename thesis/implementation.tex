@@ -11,8 +11,8 @@ The code of our implementation can be seen on GitHub\footnote{\url{https://githu
 \todo{Class diagram of my classes and introduce the upcoming explanation}
 
 \begin{figure}
-  \includegraphics{images/extendedYCSBWorkflow}
-  \caption{Class diagram of YCSB with the classes we added to it. \todo{Reference}}
+  \includegraphics[width=\textwidth]{images/benchmarks/extendedYCSBWorkflow}
+  \caption{Class diagram of YCSB with the classes we added to it. \todo{Reference AND Recreate with packages}}
   \label{fig:YCSBExtension}
 \end{figure}
 
@@ -65,12 +65,7 @@ Calling $ nextValue $ on a $ RandomGraphComponentGenerator $ will invoke the imp
 A random node can also be picked directly,
 that is needed for the $ GraphWorkload::update $ method,
 since it only will use nodes.
-
-\begin{figure}[h!]
-  \includegraphics{images/randomGraphComponentGenerator}
-  \caption{Workflow of the generator to retrieve the next value.\todo{Reference}}
-  \label{fig:randomGraphComponentGenerator}
-\end{figure}
+\todo{maybe extend description}
 
 \subsection{Operation Order}
 Here the generator only holds common fields shared by the recorder and the recreator.
@@ -85,6 +80,7 @@ For every kind we have a creator that creates the initial values for the workloa
 How the creation of the values is implemented in each generator is described in the following subsections~\ref{ch:implementation:se:graphDataRecorder}~to~\ref{ch:implementation:se:operationOrderRecorder}.
 
 \subsection{Graph Data}
+\todo{Code snippet of serialiser}
 \label{ch:implementation:se:graphDataRecorder}
 As shown in figure~\ref{fig:generalGeneratorWorkflow} when $ GraphDataGenerator::nextValue $\footnote{com.yahoo.ycsb.generator.graph.GraphDataGenerator} is called to create the next subgraph,
 the $ GraphDataRecorder $ is called and creates the subgraph according to the diagram shown in figure~\ref{fig:dataCreation},
@@ -113,6 +109,7 @@ saved in a file and then returned to the caller.
 To retrieve the values stored by the recorder classes described in section~\ref{ch:implementation:se:recorder} the upcoming recreators are needed.
 
 \subsection{Graph Data}
+\todo{Code snippet of deserialiser}
 If the files for the data set are present the $ GraphDataRecreator $ will be called to return the next subgraph.
 It does that by deserialising the next line with the $ Gson::fromJson $ method which uses the $ GraphAdapter $ described in subsection~\ref{ch:implementation:se:graphDataRecorder} together with a $ Type $\footnote{java.lang.reflect.Type}.
 
@@ -212,6 +209,7 @@ The same goes for the $ useIndex $ option.
 
 \section{Graph Database Bindings}
 \label{ch:implementation:se:graphDatabaseBindings}
+\todo{Code snippets for inserting node/edge and retrieving node/edge}
 \note{Highlight the mapping of data and other specialities}
 In this section we will describe the different binding implementations, their specialities and how they implemented the different operations mentioned in section~\ref{ch:design:se:bindings}.
 Table~\ref{tab:bindingParameterMapping} shows the options for the different databases.
