@@ -32,7 +32,7 @@ With the parameters mentioned in~\ref{ch:analysis:se:data} we can calculate the 
 \begin{equation}
   \label{eq:dataAmount}
   \begin{aligned}
-    n_{total} &= n_{componentCarrier} \\
+    n_{nodes} &= n_{componentCarrier} \\
     &\quad + n_{componentCarrier} \times n_{circuitBoard} \\
     &\quad + n_{componentCarrier} \times n_{circuitBoard} \times n_{component} \\
     &\quad + n_{componentCarrier} \times n_{circuitBoard} \times n_{component} \times n_{test} \\
@@ -47,55 +47,9 @@ With the parameters mentioned in~\ref{ch:analysis:se:data} we can calculate the 
   \end{aligned}
 \end{equation}
 
-\todo{discard following calculations to reference throughput calculation in design.}
-
-Over the course of a hour~\ref{eq:dataAmountHour}, day~\ref{eq:dataAmountDay}, week~\ref{eq:dataAmountWeek}, month~\ref{eq:dataAmountMonth} and year~\ref{eq:dataAmountYear} we get the following number of nodes created by the machines.
-
-\begin{equation}
-  \label{eq:dataAmountHour}
-  \begin{aligned}
-      n_{hourTotal} &= n_{total} \times \frac{n_{minutesPerHour}}{n_{timeForSingleComponentCarrier}} \\
-      \iff &= 1.056.833 \times \frac{60min}{3min} \\
-      \iff &= 1.056.833 \times 20 \\
-      \iff &= 21.136.660
-  \end{aligned}
-\end{equation}
-
-\begin{equation}
-  \label{eq:dataAmountDay}
-  \begin{aligned}
-      n_{dayTotal} &= n_{hourTotal} \times n_{hoursPerDay}\\
-      \iff &= 21.136.660 \times 24 \\
-      \iff &= 507.279.840
-  \end{aligned}
-\end{equation}
-
-\begin{equation}
-  \label{eq:dataAmountWeek}
-  \begin{aligned}
-      n_{weekTotal} &= n_{dayTotal} \times n_{daysPerWeek} \\
-      \iff &= 507.279.840 \times 7 \\
-      \iff &= 3.550.958.880
-  \end{aligned}
-\end{equation}
-
-\begin{equation}
-  \label{eq:dataAmountMonth}
-  \begin{aligned}
-      n_{monthTotal} &= n_{dayTotal} \times n_{daysPerMonth} \\
-      \iff &= 507.279.840 \times 30 \\
-      \iff &= 15.218.395.200
-  \end{aligned}
-\end{equation}
-
-\begin{equation}
-  \label{eq:dataAmountYear}
-  \begin{aligned}
-      n_{yearTotal} &= n_{dayTotal} \times n_{daysPerYear} \\
-      \iff &= 507.279.840 \times 365 \\
-      \iff &= 185.157.141.600
-  \end{aligned}
-\end{equation}
+To calculate the throughput the databases have to archive we need to know how many edges are between the different nodes,
+therefore we need a finished data structure.
+In the next chapter in section~\ref{ch:design:se:suitability} we will calculate the target throughput in $ \frac{inserts}{s} $ for the workload design.
 
 In section~\ref{ch:design:se:productionSimulation} we will use these numbers for our workload design.
 
@@ -163,7 +117,7 @@ So YCSB should be easy to extend with out data model.
 
 For the workload aspect Graphalytics uses common algorithms which does not represent out workload scenario.
 XGDBench fits our needs better but not quite well, as inserting data is very important for us.
-YCSB supports inserting, reading and scanning\footnote{See com.yahoo.ycsb.DB class in the code of~\cite{Cooper}} so it fulfils all our requirements for a benchmark.
+YCSB supports inserting, reading and scanning\footnote{See com.yahoo.ycsb.DB} so it fulfils all our requirements for a benchmark.
 
 Only XGDBench uses another programming language then the other benchmarks namely X10,
 which could take some time to learn.
@@ -171,43 +125,34 @@ which could take some time to learn.
 Lastly the community aspect in which YCSB stands out with many contributors and an overall more active community than the other two.
 
 All observed aspects indicate that YCSB would suit our goal the best.
-The generator and the workloads should be easily extendable, since they has an open design\footnote{See com.yahoo.ycsb.Workload and com.yahoo.ycsb.generator.Generator in the code of~\cite{Cooper}}.
+The generator and the workloads should be easily extendable, since they has an open design\footnote{See com.yahoo.ycsb.Workload and com.yahoo.ycsb.generator.Generator in \url{https://github.com/brianfrankcooper/YCSB}}.
 
 \section{YCSB}
 \label{ch:analysis:se:ycsb}
-\todo{Reference figure in explanation of aspects, maybe do subsections and move figure up. Go in more detail about the flow, reading inputs, creating which classes executing what over what class}
-
 In this section we will describe the internal workflow of a benchmark run in YCSB.
 
 YCSB separated the execution into two parts.
 The first part is the load phase in which the initial data is written to the database.
 Then comes the transaction phase where database operation are performed.
 
-A wrapper class\footnote{See com.yahoo.ycsb.DBWrapper in~\cite{Cooper}} is used to start and end the measurements for each operation executed on the database.
+Figure~\ref{fig:basicYCSBWorkflow} shows the classes involved in executing a benchmark run with YCSB.
+The "Client" takes the workload file and command-line parameters to set up the database and create "ClientThreads".
+These "ClientThreads" call the "Workload" class to perform an operation on the database,
+which is wrapped in the "DBWrapper".
+Measurements are made through the "DBWrapper" by stopping the time for every operation made on the database,
+it uses the measurements available in the "measurements" package.
 
-To start a benchmark run you need to specify certain parameters,
-such as the database to use and the workload file to use.
-The client then loads the database,
-sets up the specified workload class and executes the specified amount and kind of operations on the database.
+\begin{figure}
+  \centering
+  \includegraphics[width=.75\textwidth]{images/benchmarks/basicYCSBWorkflow}
+  \caption{Class diagram about the main classes involved in a benchmark run.}
+  \label{fig:basicYCSBWorkflow}
+\end{figure}
 
-YCSB uses a workload file to specify some parameters about the workload.
+The workload file specifies some parameters about the workload.
 These are among others the workload class to use,
 how much data should be added in the load phase,
 how much operations should be executed in the transaction phase and what percentage of the operations should be inserts, reads, updates, scans or deletes respectively.
 
-The measurements can be saved as histograms each covering on particular operation.
+The measurements can be saved as histograms each covering one particular operation.
 There is also a summary printed out to the console or a file depending on the parameters you set that additionally lists the overall time for the benchmark, operations per second and some more meta information.
-
-\begin{figure}
-  \centering
-  \includegraphics[width=\textwidth]{images/benchmarks/ycsbArchitecture}
-  \caption{The rough architecture of YCSB. Recreated and modified from~\cite[25]{Abubakar2014}}
-  \label{fig:ycsbArchitecture}
-\end{figure}
-
-\begin{figure}
-  \centering
-  \includegraphics[width=\textwidth]{images/benchmarks/basicYCSBWorkflow}
-  \caption{Class diagram about the main classes involved in a benchmark run.\todo{reference and explain}}
-  \label{fig:basicYCSBWorkflow}
-\end{figure}

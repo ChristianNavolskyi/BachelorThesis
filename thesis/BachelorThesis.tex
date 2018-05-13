@@ -19,12 +19,14 @@
 \usepackage{boxhandler}
 \usepackage{caption}
 \usepackage{csquotes}
+\usepackage{enumitem}
 %\usepackage{fancybox} % für schattierte,ovale Boxen etc.
 \usepackage{float}    %z.B. \floatstyle{ruled}\restylefloat{figure}
 \usepackage[T1]{fontenc}
 \usepackage{footnote}
 \makesavenoteenv{table}
 \makesavenoteenv{tabularx}
+\usepackage{graphicx}
 \usepackage[space]{grffile}
 %\usepackage[plainpages=true]{hyperref}
 %\usepackage{hyperref}
@@ -88,8 +90,10 @@
 \newcommand{\specialcell}[2][c]{%
   \begin{tabular}[#1]{@{}c@{}}#2\end{tabular}}
 
+%\newcommand\todo[1]{\textcolor{red}{}}
 \newcommand\todo[1]{\textcolor{red}{TODO: #1}}
 
+%\newcommand\note[1]{\textcolor{blue}{}}
 \newcommand\note[1]{\textcolor{blue}{NOTE: #1}}
 
 \newcommand\hlcode[1]{\textcolor{red}{#1}}
@@ -223,7 +227,7 @@
 \include{implementation}    % Implementierung
 \include{evaluation}        % Evaluierung
 \include{futurework}  % Future Work
-\include{summary}   % Zusammenfassung und Ausblick
+%\include{summary}   % Zusammenfassung und Ausblick
 
 %% ++++++++++++++++++++++++++++++++++++++++++
 %% Anhang

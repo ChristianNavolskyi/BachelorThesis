@@ -1,0 +1,12 @@
+@startuml
+(*)  --> [doTransaction(DB db)] "get operation from OperationOrderGenerator"
+if operation is insert
+--> [Yes] get subgraph from GraphDataGenerator
+--> insert nodes from subgraph into db
+--> insert edges from subgraph into db
+--> (*)
+else
+--> [No] get random graph component from RandomGraphComponentGenerator
+--> execution operation on db with graph component
+-->(*)
+@enduml

@@ -6,13 +6,15 @@ then move on to the different generators for the graph data,
 the random graph components and the operation order.
 Then we will show the workload class in section~\ref{ch:implementation:se:graphWorkload} and finally describe the database bindings in section~\ref{ch:implementation:se:graphDatabaseBindings}.
 
-The code of our implementation can be seen on GitHub\footnote{\url{https://github.com/ChristianNavolskyi/YCSB}}.
+The code of our implementation is available on GitHub\footnote{\url{https://github.com/ChristianNavolskyi/YCSB}}.
 
-\todo{Class diagram of my classes and introduce the upcoming explanation}
+In figure~\ref{fig:YCSBExtension} we see a diagram of the YCSB benchmark with our added implementations.
+The classes we added are on the right from "GraphWorkload" and up.
+Also in the "Package db" we added the bindings for our four databases.
 
 \begin{figure}
-  \includegraphics[width=\textheight]{images/benchmarks/extendedYCSBWorkflow}
-  \caption{Class diagram of YCSB with the classes we added to it. \todo{Reference AND Recreate with packages}}
+  \includegraphics[angle=90,height=\textheight]{images/benchmarks/extendedYCSBWorkflow}
+  \caption{Class diagram of YCSB with the most important classes we added to it.}
   \label{fig:YCSBExtension}
 \end{figure}
 
@@ -63,9 +65,8 @@ because the identifiers of the graph components created by the $ GraphDataGenera
 \subsection{Random Graph Component}
 Calling $ nextValue $ on a $ RandomGraphComponentGenerator $ will invoke the implementing class to chose between a node and an edge and then chose a random graph component of that type.
 A random node can also be picked directly,
-that is needed for the $ GraphWorkload::update $ method,
+as is needed for the $ GraphWorkload::update $ method,
 since it only will use nodes.
-\todo{maybe extend description}
 
 \subsection{Operation Order}
 Here the generator only holds common fields shared by the recorder and the recreator.
@@ -80,17 +81,53 @@ For every kind we have a creator that creates the initial values for the workloa
 How the creation of the values is implemented in each generator is described in the following subsections~\ref{ch:implementation:se:graphDataRecorder}~to~\ref{ch:implementation:se:operationOrderRecorder}.
 
 \subsection{Graph Data}
-\todo{Code snippet of serialiser}
 \label{ch:implementation:se:graphDataRecorder}
 As shown in figure~\ref{fig:generalGeneratorWorkflow} when $ GraphDataGenerator::nextValue $\footnote{com.yahoo.ycsb.generator.graph.GraphDataGenerator} is called to create the next subgraph,
-the $ GraphDataRecorder $ is called and creates the subgraph according to the diagram shown in figure~\ref{fig:dataCreation},
+the $ GraphDataRecorder $ is called and creates the subgraph according to the diagram shown in figure~\ref{fig:graphDataRecorder},
 then serialises it and writes the string coming from serialisation into a file line by line.
-\todo{maybe deepen the explanation of how the schema is represented in this class.}
+
+Table~\ref{tab:recorderVariables} show how the parameters x, y and z from the data structure from figure~\ref{fig:finalDesignOfSchema} are implemented in that schema.
+They all effect when the specific if block is executed at the end of figure~\ref{fig:graphDataRecorder}.
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=\textwidth]{images/extensions/GraphDataRecorder}
+  \caption{Activity diagram of the creation process for the dataset.}
+  \label{fig:graphDataRecorder}
+\end{figure}
+
+\begin{table}[h!]
+  \begin{tabularx}{\textwidth}{ | l | X | }
+    \hline
+    Variable & Usage \\ \hline \hline
+    x & Determines after how many products the order is fulfilled \\ \hline
+    y & Determines after how many components a product is finished \\ \hline
+    z & Determines after how many tests all test parameters are finished \\ \hline
+  \end{tabularx}
+  \caption{Implementation of the structure variables in the creation of the dataset.}
+  \label{tab:recorderVariables}
+\end{table}
 
 The serialisation process is done in a $ GraphAdapter $ that implements both a $ JsonSerializer $\footnote{com.google.gson.JsonSerializer} and a $ JsonDeserialzer $\footnote{com.google.gson.JsonDeserialzer} with a $ Graph $ as the generic value.
 Since a graph object contains two lists,
 these lists are serialised into a JsonElement,
 which will be retrieved as a string by calling $ Gson::toJson $.
+The following listing~\ref{lst:serialiseCode} shows the Java code used to implement the serialisation of a graph.
+
+\begin{lstlisting}[language=Java,label={lst:serialiseCode},caption={Serialisation of a graph object.}]
+@Override
+public JsonElement serialize(Graph graph, Type typeOfSrc, JsonSerializationContext context) {
+ JsonObject result = new JsonObject();
+
+ JsonElement nodeJsonElement = gson.toJsonTree(graph.getNodes(), nodeListType);
+ JsonElement edgeJsonElement = gson.toJsonTree(graph.getEdges(), edgeListType);
+
+ result.add(nodes, nodeJsonElement);
+ result.add(edges, edgeJsonElement);
+
+ return result;
+}
+\end{lstlisting}
 
 \subsection{Random Graph Component}
 To chose between a node and an edge a random number between zero and one will be picked ($ r \in \mathbb{N}_0 \wedge r \in [ 0, 1 ] $) and stored in a file.
@@ -109,12 +146,32 @@ saved in a file and then returned to the caller.
 To retrieve the values stored by the recorder classes described in section~\ref{ch:implementation:se:recorder} the upcoming recreators are needed.
 
 \subsection{Graph Data}
-\todo{Code snippet of deserialiser}
 If the files for the data set are present the $ GraphDataRecreator $ will be called to return the next subgraph.
 It does that by deserialising the next line with the $ Gson::fromJson $ method which uses the $ GraphAdapter $ described in subsection~\ref{ch:implementation:se:graphDataRecorder} together with a $ Type $\footnote{java.lang.reflect.Type}.
+The code of the $ GraphAdapter $ to deserialise a graph is shown in listing~\ref{lst:deserialiseGraph}.
+
+\begin{lstlisting}[language=Java,label={lst:deserialiseGraph},caption={Deserialisation of a graph object.}]
+@Override
+public Graph deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext context) throws
+    JsonParseException {
+  Graph graph = new Graph();
+  JsonObject jsonObject = jsonElement.getAsJsonObject();
+
+  JsonElement jsonNodes = jsonObject.get(nodes);
+  JsonElement jsonEdges = jsonObject.get(edges);
+
+  List<Node> nodeList = gson.fromJson(jsonNodes, nodeListType);
+  List<Edge> edgeList = gson.fromJson(jsonEdges, edgeListType);
+
+  nodeList.forEach(graph::addNode);
+  edgeList.forEach(graph::addEdge);
+
+  return graph;
+}
+\end{lstlisting}
 
 This classes uses a $ BufferedReader $\footnote{java.io.BufferedReader} to read the file line by line,
-to avoid extensive memory usage.
+to avoid extensive memory usage with larger datasets.
 
 \subsection{Random Graph Component}
 \label{ch:implementation:se:randomGraphComponentRecreator}
@@ -130,10 +187,17 @@ Every time $ OperationOrderRecreator::nextValue $ is called the next line from t
 
 \section{Graph Workload}
 \label{ch:implementation:se:graphWorkload}
-\todo{Activity diagram of the workflow with graph data. Create Activity diagram with database from workload view.}
 During initialisation the $ GraphWorkload $ creates the three generator mentioned in section~\ref{ch:implementation:se:generator},
 by using the $ create $ method,
 that way we will have the correct type of generator (recorder or recreator).
+This process is shown in figure~\ref{fig:graphWorkloadInit}
+
+\begin{figure}[h!]
+  \includegraphics[width=\textwidth]{images/extensions/GraphWorkload}
+  \caption{Initialisation of the generators used in the graph workload.}
+  \label{fig:graphWorkloadInit}
+\end{figure}
+
 It also parses the parameters to get to know if "noEdges" should be used,
 what the "property size" of a node should be,
 how many fields should be scanned ("recordcount") and the "folder".
@@ -148,6 +212,13 @@ separates it into its core graph components and calls the $ DB::insert $ method 
 
 If the $ Client $ calls $ GraphWorkload::doTransaction $ the $ GraphWorkload $ will first get the operation to execute on the database by the $ OperationOrderGenerator $.
 After that it has an implementation for every available database operation.
+The general workflow for the $ GraphWorkload::doTransaction $ method is shown in figure~\ref{fig:graphWorkloadExecution}.
+
+\begin{figure}[h!]
+  \includegraphics[width=\textwidth]{images/extensions/graphWorkloadExecution}
+  \caption{Overview of the execution of the different database operations separated into insert and other operations.}
+  \label{fig:graphWorkloadExecution}
+\end{figure}
 
 \textbf{doTransactionInsert} \newline
 Works as in the $ doInsert $ method,
@@ -209,8 +280,6 @@ The same goes for the $ useIndex $ option.
 
 \section{Graph Database Bindings}
 \label{ch:implementation:se:graphDatabaseBindings}
-\todo{Code snippets for inserting node/edge and retrieving node/edge}
-\note{Highlight the mapping of data and other specialities}
 In this section we will describe the different binding implementations, their specialities and how they implemented the different operations mentioned in section~\ref{ch:design:se:bindings}.
 Table~\ref{tab:bindingParameterMapping} shows the options for the different databases.
 
@@ -229,7 +298,28 @@ Table~\ref{tab:bindingParameterMapping} shows the options for the different data
   \label{tab:bindingParameterMapping}
 \end{table}
 
+At the beginning of each subsection we will show how we initialised the database and how the instance to work with the database is retrieved.
+
 \subsection{Apache Jena}
+In the following listing~\ref{lst:jenaInit} the initialisation and the beginning of a transaction with the retrieval of a model to work on the data is shown.
+
+\begin{lstlisting}[language=Java,label={lst:jenaInit},caption={Implementation of the initialisation and model retrieval in Jena.}]
+String outputDirectory = getDirectoryFromProperties();
+Dataset dataset = TDBFactory.createDataset(outputDirectory);
+
+dataset.begin(ReadWrite.WRITE); // Starts a write transaction, ReadWrite.READ is used for read operations.
+
+try {
+  Model model = dataset.getDefaultModel();
+
+  performOpertaionOnModel();
+
+  dataset.commit();
+} finally {
+  dataset.end();
+}
+\end{lstlisting}
+
 To modify the database with Jena we need to start a transaction and specify if it is a read or a write transaction.
 After that we retrieve the model of the database to work on the data.
 When we are done with our operation we need to commit or abort the transaction,
@@ -295,6 +385,24 @@ Neo4j also uses transaction,
 but we don't need to specify their kind.
 At the end of a transaction we call $ Transaction::success $\footnote{org.neo4j.graphdb.Transaction} to finish the transaction.
 
+An example of our implementation is shown in the following listing~\ref{lst:neo4jInit}, the start and end of a transaction for an operation is implemented as in the if-block of the listing.
+
+\begin{lstlisting}[language=Java,label={lst:neo4jInit},caption={Implementation of the initialisation and beginning of a transaction.}]
+String path = getPathFromProperties();
+boolean useIndex = shouldUseIndex();
+
+GraphDatabaseService graphDbInstance = new GraphDatabaseFactory().newEmbeddedDatabase(new File(path));
+
+if (useIndex) {
+  try (Transaction transaction = graphDbInstance.beginTx()) {
+    IndexManager index = graphDbInstance.index();
+    nodeIndex = index.forNodes("nodes");
+    relationshipIndex = index.forRelationships("relationships");
+    transaction.success();
+  }
+}
+\end{lstlisting}
+
 \textbf{creating a node} \newline
 We create a node with the $ GraphDatabaseService::createNode $\footnote{org.neo4j.graphdb.GraphDatabaseService} method,
 where we specify the $ key $ as the $ Label $\footnote{org.neo4j.graphdb.Label} of the node.
@@ -343,6 +451,31 @@ To create an index with OrientDB we call $ OrientGraph::createKeyIndex $\footnot
 once with $ Vertex $\footnote{com.tinkerpop.blueprints.Vertex} and once with $ Edge $\footnote{com.tinkerpop.blueprints.Edge}.
 As Neo4j OrientDB uses transactions to execute operations on the database,
 which have to be closed when finished with the operation itself by calling $ OrientGraph::shutdown $.
+
+An example of our implementation covering the implementation an retrieval of a graph for a transaction is shown in listing~\ref{lst:orientdbInit}.
+
+\begin{lstlisting}[language=Java,label={lst:orientdbInit},caption={Implementation of the initialisation and the retrieval of a graph for a transaction.}]
+String url = getURLFromProperties();
+
+OrientGraphFactory factory = new OrientGraphFactory(url, userName, password);
+
+if (useIndex) {
+  OrientGraph graph = factory.getTx();
+  if (graph.getIndexedKeys(Vertex.class).size() == 0) {
+    graph.createKeyIndex(nodeIdIdentifier, Vertex.class);
+  }
+
+  if (graph.getIndexedKeys(com.tinkerpop.blueprints.Edge.class).size() == 0) {
+    graph.createKeyIndex(edgeIdIdentifier, com.tinkerpop.blueprints.Edge.class);
+  }
+}
+
+try {
+  performOperationOnGraph();
+} finally {
+  graph.shutdown();
+}
+\end{lstlisting}
 
 \textbf{creating a node} \newline
 To add a node,
@@ -393,6 +526,40 @@ that means the connected nodes are not removed.
 The index can be activated on certain attributes by $ Graph::indexAttribute $\footnote{com.sparsity.sparksee.gdb.Graph} with the attribute and the $ AttributeKind.Indexed $\footnote{com.sparsity.sparksee.gdb.AttributeKind} as its arguments.
 Sparksee uses $ Session $s\footnote{com.sparsity.sparksee.gdb.Session} as transaction,
 these are also closed at the end of the transaction.
+
+In the following listing~\ref{lst:sparkseeInit} we show how we implemented the initialisation, the activation of an index and the retrieval of a graph instance to work on the database.
+After the graph is retrieved any operations on the database can be executed,
+in our example we initialised the index.
+
+\begin{lstlisting}[language=Java,label={lst:sparkseeInit},caption={Implementation of the initialisation and starting of a session.}]
+String path = getPathFromProperties();
+boolean useIndex = shouldUseIndex();
+
+Sparksee sparksee = new Sparksee(new SparkseeConfig());
+
+if (new File(path).exists()) {
+  database = sparksee.open(path, false);
+} else {
+  database = sparksee.create(path, "SparkseeDB");
+}
+
+try (Session session = database.newSession()) {
+  Graph graph = session.getGraph();
+
+  nodeIdAttribute = getAttribute(graph, getNodeType(graph), "sparksee.nodeId");
+  edgeIdAttribute = getAttribute(graph, getEdgeType(graph), "sparksee.edgeId");
+
+  if (useIndex) {
+    try {
+      graph.indexAttribute(nodeIdAttribute, AttributeKind.Indexed);
+      graph.indexAttribute(edgeIdAttribute, AttributeKind.Indexed);
+    } catch (RuntimeException e) {
+      // The presence of an index cannot be queried, so we will catch and ignore the exception thrown when an index already exists.
+      e.printStackTrace();
+    }
+  }
+}
+\end{lstlisting}
 
 \textbf{creating a node} \newline
 To create a node we first are creating a type for the node,

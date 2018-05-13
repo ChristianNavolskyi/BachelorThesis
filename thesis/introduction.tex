@@ -6,18 +6,21 @@
 \todo{Fix url in bibliography}
 
 \section{Problem Statement}
-\todo{Highlight that current graph database benchmark papers are not covering our field.}
 With the growing digitalisation of the industry,
 more data is available and can be used to improve production processes.
 The amount of data created depends on the individual use case but still,
 it needs to be stored to be useful.
 Since there are multiple databases available it can be difficult to choose the right one for an individual scenario.
 
+Current graph database benchmark only cover social network graphs,
+which differ from the data structure present in the industry in their edge to node ration as well as their cluster coefficient.
+
 \subsection{Use Case - Industry 4.0}
 There are multiple analytic algorithms to run on data to extract certain features.
 In the industry,
 those algorithms play an important role too but in this thesis we are looking at different aspects of the industrial use case,
 mainly inserting data and reading data.
+As far as we know an industrial data structure was not used to examine the performance of graph databases.
 
 In section~\ref{ch:background:se:industrialData} we will show an example given by the industry.
 There is no industrial data available publicly so we have to base our design on that given example which is visualised in figure~\ref{fig:exampleData}.
@@ -35,32 +38,29 @@ simply reading data from the database is another common use case.
 An example would be to get the time at which a specific product was processed by a specific machine to check if all parameters were set correctly.
 
 \section{Question}
-This thesis should give an answer to the question if graph databases are suitable for an industrial application.
-Suitable in this case means that the database can withstand the amount of data written to it during production.
-In section~\ref{ch:analysis:se:data} we analyse how much data could be written to a database and of which structure that data is.
-We motivate graphs and the use of graph databases in section~\ref{ch:background:se:industrialData} and section~\ref{ch:background:se:graphDatabases} respectively and will concentrate on those in this thesis,
-because of the structure of the data from production.
+The question of our research is,
+how well current graph databases are capable of handling the amount of data created in an industrial environment.
+Furthermore we will look at how the structure effects performance to conclude if other research investigating the performance of graph databases can be used to determine the performance these databases would have in an industrial environment.
 
 \section{Methodology}
 We will chose the databases to use for our testing from other studies covering benchmarking graph databases to be able to compare the results and look to similarities in behaviour.
 To evaluate different databases we first will look up existing benchmarks and choose the best fitting one for our research.
 In the benchmarking program we need to look at the creation of data and how it can be stored and retrieved.
 The same exact dataset should be used for all databases equally to eliminate the variation that comes with generating data during each benchmark run.
-Next the workloads should be customisable and be able cover our goals.
-Also the measurements taken during the benchmark need to be useful for us.
-The databases should be able to connect to the benchmark in the same way.
+Workloads will be designed to investigate the performance of graph databases with industrial data and the production environment will be simulated.
+With the databases and benchmark set up we will run the workloads and evaluate the results to conclude if current database are suitable for the industrial internet of things.
 
 \section{Goal of this Thesis}
 With this thesis we want to examine whether and if so,
 how well graph databases are able to stand the load of an production line.
 Because every manufacturer is different and we cannot cover all scenarios we try to cover the most important parameters
 so that the suitability for the individual case can be estimated.
+Besides this specific investigation we will try to conclude if the results of research performed on graph databases with social network graphs can be applied to the industrial use case.
 
 \section{Structure}
 In chapter~\ref{ch:background} we are motivating graph and the use of graph databases.
 The different kinds of graph databases are explained and an example database which we are testing is mentioned and shortly described.
-Also in this chapter we are comparing the different available benchmarking programs and their features.
-\note{Maybe mention related work}
+Also in this chapter we are comparing the different available benchmarking programs and their features and take a look at research done by others in the field of graph database benchmarking.
 
 In chapter~\ref{ch:analysis} the industrial data is modelled and its structure is analysed as well as a reasonable amount of data is determined.
 Then we are figuring out how a workload could look like in an industrial environment.
@@ -86,5 +86,4 @@ The results are presented directly after each benchmark followed by a discussion
 
 In chapter~\ref{ch:futureWork} we draw a conclusion over out work and give the answer to our question from above.
 Also ideas for future research and development in this field are presented.
-
-Finally in chapter~\ref{ch:summary} with give a short summary of our work.
+Finally a summary is given in the end of this chapter.

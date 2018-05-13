@@ -1,7 +1,5 @@
 \chapter{Evaluation}
 \label{ch:evaluation}
-\todo{Only one graph horizontally}
-\todo{Adapt text size to thesis}
 This chapter will cover the execution and evaluation of our benchmark with the workloads specified in section~\ref{ch:design:se:workloads}.
 We will present the results of each workload and have a discussion on them directly after that.
 
@@ -65,17 +63,19 @@ The versions of the software components we used are shown in the following table
 
 \section{Overview}
 \label{ch:evaluation:se:overview}
-\todo{enumerate steps}
-In figure~\ref{fig:executionWorkflow} the execution process is illustrated.
-From the set of defined workloads,
-one is chosen and a dataset is created with the parameters specified for that workload.
-The execute block takes that dataset,
-the workload file,
-a database from the set of databases and executes the workload on that database three times.
-During each execution the measurements are saved to files in a folder specific to the constellation of workload,
-database and the execution pass.
-After one database has finished the third execution the next database is selected.
-When all databases are finished with the workload the next workload is chosen and the cycle repeats itself until all workloads were executed.
+In figure~\ref{fig:executionWorkflow} the execution process is illustrated and explained in the following enumeration.
+
+\begin{enumerate}[label=Step \arabic*:,widest=Step 1,leftmargin=*]
+  \item One workload is chosen from the set of workloads
+  \item The dataset is created for that workload
+  \item One database is chosen from the set of databases
+  \item The workload is executed on the database with the created dataset
+  \item The results of the benchmark run are stored in a folder specific to the constellation of workload,
+  database and execution pass
+  \item Repeat from Step 4 three times
+  \item Repeat from Step 3 until all databases ware benchmarked
+  \item Repeat from Step 1 until all workloads have been executed.
+\end{enumerate}
 
 \begin{figure}[!h]
   \includegraphics[width=\textwidth]{images/executionWorkflow}
@@ -378,8 +378,11 @@ In figure~\ref{fig:structure} we see the impact a different data structure has o
 As we see in figure~\ref{fig:structure} the structure of the data as we modelled it,
 doesn't effect the throughput of the databases.
 
-For the "simple" workload the have an edge to node ratio of \todo{calculate} which is dropping to \todo{calculate} for the "most complex" workload.
-We cannot draw a conclusion about the comparability with other related work using social network graphs,
+For the "simple" workload the have an edge to node ratio of around $ 1.33 $ which is dropping to $ ~1 $ for the "most complex" workload.
+Together with the results from~\ref{ch:evaluation:se:differenceEdges} we can say,
+that the use of edges has almost no impact on performance and the edge to node ratio also doesn't.
+
+ draw a conclusion about the comparability with other related work using social network graphs,
 which have a much higher edge to node ratio,
 in order to do so we would have to investigate higher edge to node ratios.
 
@@ -436,7 +439,7 @@ since we used $ 50B $ we can compare the first measured throughput.
 
 By doing so we see that Sparksee,
 again theoretically,
-reaches our target throughput of \todo{calculate}.
+reaches our target throughput of $ 11743 \frac{inserts}{s} $.
 OrientDB misses our target with $ 8572 \frac{inserts}{s} $.
 These results support our findings for the impact of structure and node size,
 as this workload,
@@ -552,7 +555,7 @@ as we can't tell how much throughput is sacrificed by storing information in the
 \end{figure}
 
 The research of Dayarathna et al.\cite{Dayarathna2012} used a edge to node ration of 22 with a node count of 1024.
-Comparing their results shown in figure~\ref{throughputXGDBench} with our results from figure~\ref{fig:withIndexThroughput} lead to the conclusion,
+Comparing their results shown in figure~\ref{fig:throughputXGDBench} with our results from figure~\ref{fig:withIndexThroughput} lead to the conclusion,
 that the databases perform better with an industrial graph structure and less edges.
 The throughput of OrientDB is split in half compared to our workload at the almost same amount of nodes (1024 vs. 1000 in our research).
 With this observation we come to the conclusion that graph databases would perform even better in an industrial environment,

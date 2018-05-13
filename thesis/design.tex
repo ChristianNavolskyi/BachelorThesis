@@ -28,7 +28,17 @@ we had to reiterate over it and get rid of some complexity where we don't need i
   \label{fig:firstDesignOfSchema}
 \end{figure}
 
-The meeting gave us a better understanding of how a production facility could handle its data and with that in mind and the objective to design a simpler schema that includes to most necessary parts of production the model shown in figure~\ref{fig:finalDesignOfSchema} was created.
+The meeting gave us a better understanding of how a production facility could handle its data and with that in mind and the objective to design a simpler schema that includes to most necessary parts of production the model shown in figure~\ref{fig:finalDesignOfSchema} was created. \\
+At the top is the factory,
+which has a "Orders" node that represents the folder for all orders received by the factory.
+A machine and a design are linked to the factory,
+these represent the production machine and the design template for products made by that machine.
+A product has incoming edges from the design it is made after, the machine it was produced by and the order for which it is created.
+Variable x determines how many products are made for each order.
+The products was made at a specific date and consists of one or multiple components depending on the variable y.
+Every component undergoes a test suite which contains of a number of test parameters,
+which number is defined by z.\\
+For easier reference we will call x productsperorder, y componentsperproduct and z testparametercount in the next sections.
 
 \begin{figure}
   \centering
@@ -37,10 +47,6 @@ The meeting gave us a better understanding of how a production facility could ha
   \label{fig:finalDesignOfSchema}
 \end{figure}
 
-\todo{Describe its content. Mention naming of variables in future references.}
-\todo{Calculate target throughput for measurements with exact number of edges.}
-\todo{Put at right position: Number of edges could effect the throughput, because of inserts. social networks have much more edges to it than our structure}
-
 \section{Workloads}
 \label{ch:design:se:workloads}
 Our workload design will be separated into three part.
@@ -48,6 +54,8 @@ In subsection~\ref{ch:design:se:throughput} we discuss the design of workloads a
 Subsection~\ref{ch:design:se:productionSimulation} will directly investigate the suitability of a database to be used in an industrial use case for storing data.
 We will design workloads to examine the other industrial use case of retrieving data under load in subsection~\ref{ch:design:se:retrievingUnderLoad}.
 Finally we will give a summary over all workloads we are going to run on the databases in subsection~\ref{ch:design:se:summary}
+
+\pagebreak
 
 \subsection{Throughput}
 \label{ch:design:se:throughput}
@@ -78,7 +86,7 @@ Indexing is important to retrieve data more quickly for the cost of write speed,
 with this workload we will see if the sacrifice in write speed is reasonable.
 We will only use an index on the node and edge key,
 which will be used to search that graph component\footnote{a node or an edge of the graph} in the database.
-Indexing the other properties would have no benefit in our example. \note{would have, e.g. temperature of component. Results could be mapped to those.}
+Indexing the other properties would have no benefit in our example.
 
 For this workload we will use a node property size of 10B,
 that is small enough to not have an impact on performance but large enough to represent most of the data stored in the properties of our example.
@@ -142,24 +150,61 @@ because indexing these values should be done to later work on that data more eff
 which is necessary for the industry.
 
 \subsubsection{Suitability}
-\todo{restructure to reference target throughput with setup (parameters, size, structure)}
-\todo{number of nodes comes from the structure and time}
+\label{ch:design:se:suitability}
 To examine if a database is suitable for the industry it should be able to store the data faster then it is coming from the machines.
-In section~\ref{ch:analysis:se:dataAmount} we calculated that 1.056.833 nodes would be written to the database every three minutes.
+In section~\ref{ch:analysis:se:dataAmount} we calculated that 1056833 nodes would be written to the database every three minutes.
+
+Now that we have our data structure we can calculate how many edges are contained in that graph and finally how many inserts have to be performed every second.
+We will count the incoming edges for every node and also use the variables x, y and z from the structure in~\ref{ch:design:se:dataStructure}.
+
+\begin{equation}
+  \label{eq:dataEdges}
+  \begin{aligned}
+    n_{edges} &= n_{Design} + n_{Machine} + n_{Orders} + n_{Order} + 3 \times n_{Product} \\
+    &\quad + n_{Product} \times (n_{Date} + n_{Component} \times (n_{Tests} + n_{TestParameter})) \\
+    \iff &= 1 + 1 + 1 + 1 + 3 \times x + x \times (1 + y \times (1 + z)) \\
+    \iff &= 4 + 3 \times x + x \times (1 + y \times (1 + z)) \quad | x = 64, y = 128, z = 128 \\
+    \implies &= 4 + 3 \times 64 + 64 \times (1 + 128 \times (1 + 128)) \\
+    \iff &= 4 + 192 + 64 \times (1 + 128 \times 129) \\
+    \iff &= 4 + 192 + 64 \times (1 + 16512) \\
+    \iff &= 4 + 192 + 64 \times 16513 \\
+    \iff &= 4 + 192 + 1056832 \\
+    \iff &= 1057028
+  \end{aligned}
+\end{equation}
+
+Together with the amount of nodes we can calculate the total amount of elements being inserted into the database as shown in equation~\ref{eq:dataElements}.
+
+\begin{equation}
+  \label{eq:dataElements}
+  \begin{aligned}
+    n_{total} &= n_{nodes} + n_{edges} \\
+    \iff &= 1056833 + 1057028 \\
+    \iff &= 2113861
+  \end{aligned}
+\end{equation}
+
+To convert that into our target throughput we divide that number by three minutes.
+
+\begin{equation}
+  \label{eq:dataElements}
+  \begin{aligned}
+    n_{target} &= n_{total} \times \frac{1}{3 \times 60s} \\
+    \iff &= 2113861 \times \frac{1}{180s} \\
+    \iff &= 11743,67 \frac{1}{s}
+  \end{aligned}
+\end{equation}
+
 First we will set up a data set with that amount of nodes and insert it into the database,
 that will allow us to compare the time needed to store all data with our three minute limit.
 If the database should take more than three minutes it would not be suitable,
 since data is produced faster than it can be stored.
-
-The next steps would be to repeat that procedure with a node amount that represents a whole hour, day, week, month and year,
-iff the databases are storing the data fast enough to not take up an unreasonable amounts of time in running the benchmark.
 
 We will use the structure with the maximum width,
 because it represents the industrial use case best regarding the information given by our partners at SICK AG~\cite{SICK}.
 
 \subsection{Retrieving under load}
 \label{ch:design:se:retrievingUnderLoad}
-\todo{mention potential to compare to other studies.}
 There would be no point in storing data if it is not retrieved at some point.
 To investigate on the performance of reading and scanning (more on that in subsection~\ref{ch:design:se:scanning}) data from the database the following workloads are designed.
 
@@ -323,16 +368,6 @@ we can always determine the next subgraph to create.
 
 The modify the structure of the graph with our three variables,
 these need to be parsed in this class and used during subgraph creation.
-
-An activity diagram is shown in figure~\ref{fig:graphDataRecorder} to illustrate the creation process with usage of the parameters for tweaking the width of the graph.
-
-\begin{figure}
-  \centering
-  \includegraphics[width=\textwidth]{images/extensions/GraphDataRecorder}
-  \caption{Activity diagram of the creation process for the dataset.\todo{create and describe}}
-  \label{fig:graphDataRecorder}
-\end{figure}
-
 
 To restore that data also one node at a time we will store each created subgraph in a file,
 for that we will serialise the graph and deserialise it when we are restoring the data.

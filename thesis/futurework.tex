@@ -25,3 +25,17 @@ As our investigations on the throughput of graph databases with data from the in
 a study should be conducted that investigates the impact of different edge to node ratios covering also different graph properties as the clustering coefficient for example.
 
 \section{Summary}
+The purpose of this research was to investigate the suitability of current graph databases for the use in an industrial environment and furthermore examine if the results from previous research conducted in the field of graph database benchmarking can be generalised to be applied on the industrial use case.\\
+To do so available database benchmarks have been looked up alongside with graph databases analysed in other studies.
+A lack of results for the industrial data space was found and a data structure was created to represented the industrial use case for a graph database and an available benchmark was extended to produce datasets with that structure.
+Workloads were designed to mirror the use of a graph database in an industrial environment.
+After executing the workloads with the designed data structure of the graph databases,
+their throughput under different situations was measured and compared with other studies.
+
+The results show that most current databases are not suitable for use in the industry.
+Sparksee was the only database able to reach the target throughput for insert operations.
+OrientDB missed our target only slightly,
+whereas Apache Jena and Neo4j are far from being able to store that amount of data in the specified time.
+
+From the results no clear conclusion can be made about the generalisation of benchmark results of graph databases,
+as the result of comparison with other research points in opposite directions.
