@@ -31,7 +31,8 @@ we had to reiterate over it and get rid of some complexity where we don't need i
 The meeting gave us a better understanding of how a production facility could handle its data and with that in mind and the objective to design a simpler schema that includes to most necessary parts of production the model shown in figure~\ref{fig:finalDesignOfSchema} was created.
 
 \begin{figure}
-  \includegraphics[width=\textwidth]{images/design/dataStructure}
+  \centering
+  \includegraphics[width=.75\textwidth]{images/design/dataStructure}
   \caption{The final design of the data schema.}
   \label{fig:finalDesignOfSchema}
 \end{figure}
@@ -323,12 +324,13 @@ we can always determine the next subgraph to create.
 The modify the structure of the graph with our three variables,
 these need to be parsed in this class and used during subgraph creation.
 
-An activity diagram is shown in figure~\ref{fig:dataCreation} to illustrate the creation process with usage of the parameters for tweaking the width of the graph.
+An activity diagram is shown in figure~\ref{fig:graphDataRecorder} to illustrate the creation process with usage of the parameters for tweaking the width of the graph.
 
 \begin{figure}
-  \includegraphics[width=\textwidth]{images/extensions/dataCreation}
+  \centering
+  \includegraphics[width=\textwidth]{images/extensions/GraphDataRecorder}
   \caption{Activity diagram of the creation process for the dataset.\todo{create and describe}}
-  \label{fig:dataCreation}
+  \label{fig:graphDataRecorder}
 \end{figure}
 
 
@@ -367,7 +369,7 @@ For the workload which requires the absents of edges a method should be defined 
 Figure~\ref{fig:randomGraphComponentGenerator} shows an activity diagram of the generator.
 
 \begin{figure}
-  \includegraphics{images/extensions/randomGraphComponentGenerator}
+  \includegraphics[width=\textwidth]{images/extensions/randomGraphComponentGenerator}
   \caption{Activity diagram of the $ RandomGraphComponentGenerator $ showing the process of storing and restoring.\todo{}}
   \label{fig:randomGraphComponentGenerator}
 \end{figure}
@@ -384,7 +386,7 @@ this can be used to get the operations to run on the database.
 Figure~\ref{fig:operationOrderGenerator} visualises the procedure of storing the operation order.
 
 \begin{figure}
-  \includegraphics{images/extensions/OperationOrderGenerator}
+  \includegraphics[width=\textwidth]{images/extensions/OperationOrderGenerator}
   \caption{Activity diagram of the operationOrderGenerator.\todo{}}
   \label{fig:operationOrderGenerator}
 \end{figure}
@@ -732,7 +734,8 @@ To sum up our design decisions we will give an overview of the different paramet
 The workflow of the generators is shown in figure~\ref{fig:generalGeneratorWorkflow}.
 
 \begin{figure}[h!]
-  \includegraphics[width=\textwidth]{images/extensions/generalGeneratorWorkflow}
+  \centering
+  \includegraphics[width=.75\textwidth]{images/extensions/generalGeneratorWorkflow}
   \caption{Activity diagram showing how the generators will work.}
   \label{fig:generalGeneratorWorkflow}
 \end{figure}

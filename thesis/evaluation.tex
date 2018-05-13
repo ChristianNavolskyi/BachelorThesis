@@ -173,36 +173,34 @@ At 10.000 nodes Apache Jena and Neo4j took almost an hour for one run,
 because of that we did not run it with 100.000 nodes or more.
 
 \begin{figure}[h!]
-  \begin{minipage}{.5\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{images/throughput/withIndexThroughput}
-    \captionof{figure}{This figure shows the throughput in inserts/second of every database over different dataset sizes.}
-    \label{fig:withIndexThroughput}
-  \end{minipage}
-  \begin{minipage}{.5\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{images/throughput/withIndexExecutionTime}
-    \captionof{figure}{The execution time of the databases is shown over different dataset sizes.}
-    \label{fig:withIndexExecutionTime}
-  \end{minipage}
+  \centering
+  \includegraphics[width=.75\textwidth]{images/throughput/withIndexThroughput}
+  \captionof{figure}{This figure shows the throughput in inserts/second of every database over different dataset sizes.}
+  \label{fig:withIndexThroughput}
+\end{figure}
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=.75\textwidth]{images/throughput/withIndexExecutionTime}
+  \captionof{figure}{The execution time of the databases is shown over different dataset sizes.}
+  \label{fig:withIndexExecutionTime}
 \end{figure}
 
 Figure~\ref{fig:withoutIndexThroughput} shows the throughput over different dataset sizes without using an index.
 In figure~\ref{fig:withWithoutIndexThroughputFixNodes} we see a comparison of using an index and not with a dataset size of 10.000 nodes.
 
 \begin{figure}[h!]
-  \begin{minipage}{.5\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{images/throughput/withoutIndexThroughput}
-    \captionof{figure}{This diagram shows the throughput in inserts per second while using no index.}
-    \label{fig:withoutIndexThroughput}
-  \end{minipage}
-  \begin{minipage}{.5\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{images/throughput/withWithoutIndexThroughputFixNodes}
-    \captionof{figure}{The throughput at a fixed dataset size to compare between indexing and not.}
-    \label{fig:withWithoutIndexThroughputFixNodes}
-  \end{minipage}
+  \centering
+  \includegraphics[width=.75\textwidth]{images/throughput/withoutIndexThroughput}
+  \captionof{figure}{This diagram shows the throughput in inserts per second while using no index.}
+  \label{fig:withoutIndexThroughput}
+\end{figure}
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=.75\textwidth]{images/throughput/withWithoutIndexThroughputFixNodes}
+  \captionof{figure}{The throughput at a fixed dataset size to compare between indexing and not.}
+  \label{fig:withWithoutIndexThroughputFixNodes}
 \end{figure}
 
 \subsubsection{Discussion}
@@ -258,18 +256,17 @@ Figure~\ref{fig:sizeDatabaseSize} shows the size of the database folder,
 in which the database stores its files.
 
 \begin{figure}[h!]
-  \begin{minipage}{.5\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{images/throughput/nodeSize}
-    \captionof{figure}{Insert throughput over different node sizes with 10.000 nodes total.}
-    \label{fig:nodeSize}
-  \end{minipage}
-  \begin{minipage}{.5\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{images/throughput/sizeDatabaseSize}
-    \captionof{figure}{The size of the databases over growing node sizes.}
-    \label{fig:sizeDatabaseSize}
-  \end{minipage}
+  \centering
+  \includegraphics[width=.75\textwidth]{images/throughput/nodeSize}
+  \captionof{figure}{Insert throughput over different node sizes with 10.000 nodes total.}
+  \label{fig:nodeSize}
+\end{figure}
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=.75\textwidth]{images/throughput/sizeDatabaseSize}
+  \captionof{figure}{The size of the databases over growing node sizes.}
+  \label{fig:sizeDatabaseSize}
 \end{figure}
 
 \subsubsection{Discussion}
@@ -311,7 +308,7 @@ while only inserting nodes.
 
 \begin{figure}[h!]
   \centering
-  \includegraphics[width=.5\textwidth]{images/throughput/noEdges}
+  \includegraphics[width=.75\textwidth]{images/throughput/noEdges}
   \caption{Difference between using an index and not while using no edges.}
   \label{fig:noEdges}
 \end{figure}
@@ -322,18 +319,17 @@ but only between OrientDB and Sparksee,
 as they were able to handle larger dataset within an acceptable time frame.
 
 \begin{figure}[h!]
-  \begin{minipage}{.5\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{images/throughput/indexNoEdges10000Nodes}
-    \captionof{figure}{Comparison of insert throughput between using edges and not.\newline}
-    \label{fig:indexNoEdges10000Nodes}
-  \end{minipage}
-  \begin{minipage}{.5\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{images/throughput/indexNoEdges100000Nodes}
-    \captionof{figure}{Comparison of the insert throughput with 100.000 nodes between using edges and not.}
-    \label{fig:indexNoEdges100000Nodes}
-  \end{minipage}
+  \centering
+  \includegraphics[width=.75\textwidth]{images/throughput/indexNoEdges10000Nodes}
+  \captionof{figure}{Comparison of insert throughput between using edges and not.\newline}
+  \label{fig:indexNoEdges10000Nodes}
+\end{figure}
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=.75\textwidth]{images/throughput/indexNoEdges100000Nodes}
+  \captionof{figure}{Comparison of the insert throughput with 100.000 nodes between using edges and not.}
+  \label{fig:indexNoEdges100000Nodes}
 \end{figure}
 
 \subsubsection{Discussion}
@@ -352,6 +348,7 @@ The first one being product complexity and the other one execution time.
 
 \subsection{Product Complexity}
 \label{ch:evaluation:se:productComplexity}
+\note{Structure has no effect, how the edges are connected between the nodes. But edges count matters as we see in comparison to the other benchmarks}
 \todo{From Design: Number of edges could effect the throughput, because of inserts. social networks have much more edges to it than our structure}
 If the throughput is not effected by using no edges compared to using edges,
 we could see,
@@ -372,7 +369,7 @@ In figure~\ref{fig:structure} we see the impact a different data structure has o
 
 \begin{figure}[h!]
   \centering
-  \includegraphics[width=.5\textwidth]{images/production/structure}
+  \includegraphics[width=.75\textwidth]{images/production/structure}
   \caption{Shows the difference in insert throughput over changing data structure.}
   \label{fig:structure}
 \end{figure}
@@ -408,18 +405,17 @@ Only OrientDB and Sparksee were used in these workloads,
 because Apache Jena and Neo4j would take too long to insert that amount of nodes.
 
 \begin{figure}[h!]
-  \begin{minipage}{.5\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{images/production/singleSuitability}
-    \captionof{figure}{Shows the execution time with a dataset that represents three minutes of production.}
-    \label{fig:singleSuitability}
-  \end{minipage}
-  \begin{minipage}{.5\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{images/production/hourSuitability}
-    \captionof{figure}{Shows the execution time with a dataset that represents one hour of production.}
-    \label{fig:hourSuitability}
-  \end{minipage}
+  \centering
+  \includegraphics[width=.75\textwidth]{images/production/singleSuitability}
+  \captionof{figure}{Shows the execution time with a dataset that represents three minutes of production.}
+  \label{fig:singleSuitability}
+\end{figure}
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=.75\textwidth]{images/production/hourSuitability}
+  \captionof{figure}{Shows the execution time with a dataset that represents one hour of production.}
+  \label{fig:hourSuitability}
 \end{figure}
 
 \subsubsection{Discussion}
@@ -457,37 +453,34 @@ then we will compare the throughput of the different operations~(\ref{fig:operat
 In figure~\ref{fig:readThroughput10000Nodes} and~\ref{fig:scanThroughput10000Nodes} we see the throughput of read and scan operations when using an index or not.
 
 \begin{figure}[h!]
-  \begin{minipage}{.5\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{images/responsiveness/readThroughput10000Nodes}
-    \captionof{figure}{Shows the throughput of read operations with and without the use of an index.}
-    \label{fig:readThroughput10000Nodes}
-  \end{minipage}
-  \begin{minipage}{.5\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{images/responsiveness/scanThroughput10000Nodes}
-    \captionof{figure}{Shows the throughput of read operations with and without the use of an index.}
-    \label{fig:scanThroughput10000Nodes}
-  \end{minipage}
+  \centering
+  \includegraphics[width=.75\textwidth]{images/responsiveness/readThroughput10000Nodes}
+  \captionof{figure}{Shows the throughput of read operations with and without the use of an index.}
+  \label{fig:readThroughput10000Nodes}
+\end{figure}
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=.75\textwidth]{images/responsiveness/scanThroughput10000Nodes}
+  \captionof{figure}{Shows the throughput of read operations with and without the use of an index.}
+  \label{fig:scanThroughput10000Nodes}
 \end{figure}
 
 Figure~\ref{fig:operationReadScan} shows the throughput of the different operations.
 In figure~\ref{fig:insertWithWithoutReadScan} we see the impact of the read and scan operations on the insert operations.
 
 \begin{figure}[h!]
-  \begin{minipage}{.5\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{images/responsiveness/operationReadScan}
-    \captionof{figure}{Shows the throughput of the different operations.\newline
-    }
-    \label{fig:operationReadScan}
-  \end{minipage}
-  \begin{minipage}{.5\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{images/responsiveness/insertWithWithoutReadScan}
-    \captionof{figure}{Shows the throughput of insert operations when using different operations.}
-    \label{fig:insertWithWithoutReadScan}
-  \end{minipage}
+  \centering
+  \includegraphics[width=.75\textwidth]{images/responsiveness/operationReadScan}
+  \captionof{figure}{Shows the throughput of the different operations.\newline}
+  \label{fig:operationReadScan}
+\end{figure}
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=.75\textwidth]{images/responsiveness/insertWithWithoutReadScan}
+  \captionof{figure}{Shows the throughput of insert operations when using different operations.}
+  \label{fig:insertWithWithoutReadScan}
 \end{figure}
 
 \subsection{Discussion}
@@ -533,4 +526,46 @@ that is not good for our industry scenario,
 because in the industry read and scan operations will be used in the database more or less regularly,
 depending on the specific use case.
 
-\section{Related Work and Generalisation}
+\section{Related Work and Generalisability}
+\label{ch:evaluation:se:relatedWorkAndGeneralisability}
+In this section we will compare our results with the findings of our related work as it's suitable.
+Our main goal is to investigate if the difference in structure has an impact on performance,
+when that is not the case we can assume,
+that benchmark results from research on social network graph can be used to evaluate the performance of a graph database in an industrial environment.
+The key point we will investigate is how the number of edges in relation to the number of nodes effects the throughput performance of the databases,
+as for social network graphs that number is quite high at around $ 8 $\cite[41]{TaoShen} to $ 22 $\cite{Dayarathna2012} whereas our graph structure contains a edge to node ratio of $ 1.3 $ to $ ~1 $ (depending on the variables x, y and z; higher variable values lead to a ratio closer to 1).
+
+By comparing our finding with the ones from Dominguez-Sal et al.\cite{TaoShen} which can be seen in figure~\ref{fig:throughputShen} we see,
+that all databases performed much better than in our experiment.
+The throughput of Neo4j and Jena is well above $ 100 \frac{inserts}{s} $ and Sparksee too reaches a higher throughput with $ 29770 \frac{inserts}{s} $.
+This higher performance could be the results from a lack of information stored in the nodes,
+as the paper only mentions weights on the inserted edges we cannot surely tell if that is the case.
+With that in mind we can come to the conclusion,
+that databases perform worse in an industrial environment and the results of graph database benchmarks cannot be transferred into the industrial context,
+as we can't tell how much throughput is sacrificed by storing information in the nodes.
+
+\begin{figure}[!h]
+  \centering
+  \includegraphics[width=.8\textwidth]{images/benchmarks/ShenResultsInsert}
+  \caption{Throughput results from Dominguez-Sal et al.\cite{TaoShen}}
+  \label{fig:throughputShen}
+\end{figure}
+
+The research of Dayarathna et al.\cite{Dayarathna2012} used a edge to node ration of 22 with a node count of 1024.
+Comparing their results shown in figure~\ref{throughputXGDBench} with our results from figure~\ref{fig:withIndexThroughput} lead to the conclusion,
+that the databases perform better with an industrial graph structure and less edges.
+The throughput of OrientDB is split in half compared to our workload at the almost same amount of nodes (1024 vs. 1000 in our research).
+With this observation we come to the conclusion that graph databases would perform even better in an industrial environment,
+but since the dataset size which we can compare is too small we cannot surely tell if that holds true for larger node counts.
+
+\begin{figure}[!h]
+  \centering
+  \includegraphics[width=\textwidth]{images/benchmarks/XGDBenchResultsInsert}
+  \caption{Throughput results from the XGDBench Benchmark\cite{Dayarathna2012}}
+  \label{fig:throughputXGDBench}
+\end{figure}
+
+If we look at our own findings in figure~\ref{fig:indexNoEdges10000Nodes} we can come to the conclusion that the throughput is better when using edges,
+which correlates with the comparison to the research conducted by Dominguez-Sal,
+but the throughput becomes even better as the number of edges compared to the number of nodes increases and as the ratio of edges to nodes is relatively low in an industrial application that again leads the conclusion,
+that graph databases perform worse in the industrial environment and the results of graph benchmarks cannot not be used to determine performance in the industrial internet of things.

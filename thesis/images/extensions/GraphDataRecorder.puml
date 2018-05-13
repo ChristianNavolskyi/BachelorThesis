@@ -1,4 +1,8 @@
 @startuml
+
+skinparam ActivityFontSize 20
+skinparam ArrowFontSize 20
+
 (*) -> [createGraph()] if "Factory present" then
     --> [No] "create Factory"
     --> "Reset parameters if needed"

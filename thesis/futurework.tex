@@ -1,21 +1,27 @@
 \chapter{Conclusion and Future Work}
 \label{ch:futureWork}
+After conducting our experiments and evaluating the results we will finally end with a conclusion and give ideas for future research in this field.
+At the end we will summarise the research we have done.
 
 \section{Conclusion}
 \label{ch:futureWork:se:conclusion}
+In this section we will draw a conclusion regarding the suitability for the industrial data space and the generalisability of graph benchmarking results measured with social graphs.
 
 \subsection{Suitability}
+From our findings we can say,
+that no database is able to store the necessary amount of data as we dimensioned within the corresponding time frame.
 
-\subsection{General Performance of Databases}
+Sparksee could be capable of handling our calculated amount,
+but we couldn't test it at scale,
+because of their license limitations.
+
+\subsection{Generalisability}
+As the conclusions we draw with the research from Dominguez-Sal et al.\cite{TaoShen} and Dayarathna et al.\cite{Dayarathna2012} in section~\ref{ch:evaluation:se:relatedWorkAndGeneralisability} diverge,
+we can not surely say that the results of studies performed on graph databases with social network graph can be transferred to the use in an industrial environment,
+but the tendency goes towards worse performance in an industrial application as mentioned in~\ref{ch:evaluation:se:relatedWorkAndGeneralisability}.
 
 \section{Future Work}
+As our investigations on the throughput of graph databases with data from the industrial internet of things could not lead to solid conclusion about the comparability between performance results measured with social network graphs and industrial graph,
+a study should be conducted that investigates the impact of different edge to node ratios covering also different graph properties as the clustering coefficient for example.
 
-\subsection{More Bindings}
-
-\subsection{Concurrency}
-
-\subsection{Other input methods\note{I only used native Java APIs, to directly test the database.}}
-
-\subsection{Workloads\todo{what kind?}}
-
-\note{Vary RAM amount.}
+\section{Summary}

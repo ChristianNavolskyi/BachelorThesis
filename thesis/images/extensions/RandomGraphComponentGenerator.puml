@@ -1,4 +1,8 @@
 @startuml
+
+skinparam ActivityFontSize 30
+skinparam ArrowFontSize 30
+
 (*)  --> [nextValue()] "randomNodeOrEdge"
 if file for component is present
 -left-> [Yes] read component from file
