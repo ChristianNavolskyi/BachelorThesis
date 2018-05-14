@@ -144,7 +144,6 @@ which is presented in the "Discussion" subsections.
 In this section we will examine the combinations of workloads mentioned in table~\ref{tab:throughputOverview}.
 The results from these workloads will give us an understanding of how the databases perform in terms of insertions per seconds depending on different factors.
 
-
 \subsection{Probing Node Count}
 \label{ch:evaluation:se:probingNodeCount}
 Here we will compare how the throughput,
@@ -171,6 +170,55 @@ because the free license only included database sizes of up to 1.000.000 element
 In figure~\ref{fig:withIndexExecutionTime} we see the execution time of the different databases.
 At 10.000 nodes Apache Jena and Neo4j took almost an hour for one run,
 because of that we did not run it with 100.000 nodes or more.
+
+Table~\ref{tab:withIndexThroughput},
+\ref{tab:withIndexExecutionTime} and~\ref{tab:withoutIndexThroughput} show the measured numbers from the figures~\ref{fig:withIndexThroughput},
+\ref{fig:withIndexExecutionTime} and~\ref{fig:withoutIndexThroughput} respectively.
+
+\begin{table}[h!]
+  \begin{minipage}{\textwidth}
+    \begin{tabularx}{\textwidth}{ | l | X | X | X | X | X | }
+      \hline
+      Database/\# Nodes & 1000 & 10000 & 100000 & 1000000 & 10000000 \\ \hline
+      apachejena & 8,86 & 7,21 & T & T & T \\ \hline
+      neo4j & 11,50 & 8,75 & T & T & T \\ \hline
+      orientdb & 884,1 & 2317,07 & 5672,69 & 10112,36 & 8572,34 \\ \hline
+      sparksee & 15109,17 & 17829,1 & 16425 & L & L \\ \hline
+    \end{tabularx}
+  \end{minipage}
+  \caption{Throughput in inserts/s rounded to two decimal places of the workload using an index for the different dataset sizes. T indicates that too much time would be needed; L indicated license issues.}
+  \label{tab:withIndexThroughput}
+\end{table}
+
+\begin{table}[h!]
+  \begin{minipage}{\textwidth}
+    \begin{tabularx}{\textwidth}{ | l | X | X | X | X | X | }
+      \hline
+      Database/\# Nodes & 1000 & 10000 & 100000 & 1000000 & 10000000 \\ \hline
+      apachejena & 263 & 3238 & T & T & T \\ \hline
+      neo4j & 203 & 2667 & T & T & T \\ \hline
+      orientdb & 3,64 & 10 & 41 & 231 & 2722 \\ \hline
+      sparksee & 0,15 & 1,31 & 14 & L & L \\ \hline
+    \end{tabularx}
+  \end{minipage}
+  \caption{Execution time in seconds of the workload using an index for the different dataset sizes. T indicates that too much time would be needed; L indicated license issues.}
+  \label{tab:withIndexExecutionTime}
+\end{table}
+
+\begin{table}[h!]
+  \begin{minipage}{\textwidth}
+    \begin{tabularx}{\textwidth}{ | l | X | X | X | X | X | }
+      \hline
+      Database/\# Nodes & 1000 & 10000 & 100000 & 1000000 & 10000000 \\ \hline
+      apachejena & 8,79 & 7,41 & T & T & T \\ \hline
+      neo4j & 12,3 & 8,83 & T & T & T \\ \hline
+      orientdb & 1020,81 & 2357,49 & 4616,85 & 9395,86 & 8415,18 \\ \hline
+      sparksee & 4715,63 & 635,17 & 63,37 & L & L \\ \hline
+    \end{tabularx}
+  \end{minipage}
+  \caption{Throughput in inserts/s rounded to two decimal places of the workload using no index for the different dataset sizes. T indicates that too much time would be needed; L indicated license issues.}
+  \label{tab:withoutIndexThroughput}
+\end{table}
 
 \begin{figure}[h!]
   \centering
@@ -255,6 +303,38 @@ because the property we used to store the value of the node only supports up to 
 Figure~\ref{fig:sizeDatabaseSize} shows the size of the database folder,
 in which the database stores its files.
 
+Table~\ref{tab:nodeSize} and~\ref{tab:sizeDatabaseSize} show the numbers used for the figures~\ref{fig:nodeSize} and~\ref{fig:sizeDatabaseSize} respectively.
+
+\begin{table}[h!]
+  \begin{minipage}{\textwidth}
+    \begin{tabularx}{\textwidth}{ | l | X | X | X | X | X | X | }
+      \hline
+      Database/Node Size (Byte) & 10 & 100 & 1000 & 10000 & 100000 & 1000000 \\ \hline
+      apachejena & 7,21 & 9,66 & 7,83 & 7,54 & 6,21 & 4,92 \\ \hline
+      neo4j & 8,75 & 11,47 & 8,31 & 8,59 & 8,17 & 4,06 \\ \hline
+      orientdb & 2317,07 & 2521,90 & 3141,73 & 1976,84 & 487,21 & 14,10 \\ \hline
+      sparksee & 17829,10 & 17155,63 & 15670,67 & x & x & x \\ \hline
+    \end{tabularx}
+  \end{minipage}
+  \caption{Throughput in inserts/s rounded to two decimal places of the workload using different node sizes. x indicates issues with storing large values.}
+  \label{tab:nodeSize}
+\end{table}
+
+\begin{table}[h!]
+  \begin{minipage}{\textwidth}
+    \begin{tabularx}{\textwidth}{ | l | X | X | X | X | X | X | }
+      \hline
+      Database/Node Size (Byte) & 10 & 100 & 1000 & 10000 & 100000 & 1000000 \\ \hline
+      apachejena & 15 & 16 & 25 & 113 & 994 & 9600 \\ \hline
+      neo4j & 24 & 29 & 49 & 244 & 2200 & 22000 \\ \hline
+      orientdb & 75 & 77 & 98 & 172 & 1300 & 9500 \\ \hline
+      sparksee & 4,7 & 6 & 15 & x & x & x \\ \hline
+    \end{tabularx}
+  \end{minipage}
+  \caption{Database sizes of the workload using different node sizes. x indicates issues with storing large values.}
+  \label{tab:sizeDatabaseSize}
+\end{table}
+
 \begin{figure}[h!]
   \centering
   \includegraphics[width=.75\textwidth]{images/throughput/nodeSize}
@@ -305,6 +385,7 @@ but it is still shown in both parts of the diagram as reference.
 \subsubsection{Results}
 Figure~\ref{fig:noEdges} shows us the difference in using an index compared to not doing so,
 while only inserting nodes.
+Table~\ref{tab:noEdges} shows the measured values for this workload.
 
 \begin{figure}[h!]
   \centering
@@ -313,23 +394,28 @@ while only inserting nodes.
   \label{fig:noEdges}
 \end{figure}
 
+\begin{table}[h!]
+  \begin{minipage}{\textwidth}
+    \begin{tabularx}{\textwidth}{ | l | X | X | }
+      \hline
+      Database & Index & No Index \\ \hline
+      apachejena & 9,95 & 9,72 \\ \hline
+      neo4j & 6,66 & 12,27 \\ \hline
+      orientdb & 1425,64 & 1488,03 \\ \hline
+      sparksee & 19592,96 & 20316,55 \\ \hline
+    \end{tabularx}
+  \end{minipage}
+  \caption{Throughput in inserts/s rounded to two decimal places of the workload comparing inserts without edges with and without an index.}
+  \label{tab:noEdges}
+\end{table}
+
 In figure~\ref{fig:indexNoEdges10000Nodes} we see a comparison of all databases between using edges and not with a dataset size of 10.000 nodes.
-Figure~\ref{fig:indexNoEdges100000Nodes} shows a similar comparison with a bigger dataset,
-but only between OrientDB and Sparksee,
-as they were able to handle larger dataset within an acceptable time frame.
 
 \begin{figure}[h!]
   \centering
   \includegraphics[width=.75\textwidth]{images/throughput/indexNoEdges10000Nodes}
   \captionof{figure}{Comparison of insert throughput between using edges and not.\newline}
   \label{fig:indexNoEdges10000Nodes}
-\end{figure}
-
-\begin{figure}[h!]
-  \centering
-  \includegraphics[width=.75\textwidth]{images/throughput/indexNoEdges100000Nodes}
-  \captionof{figure}{Comparison of the insert throughput with 100.000 nodes between using edges and not.}
-  \label{fig:indexNoEdges100000Nodes}
 \end{figure}
 
 \subsubsection{Discussion}
@@ -365,7 +451,24 @@ That can be interesting if we want to compare the generalisation of the throughp
 which we need to determine if the throughput archived in section~\ref{ch:evaluation:se:probingNodeCount} can be used to draw conclusions about the suitability for the industrial environment.
 
 \subsubsection{Results}
-In figure~\ref{fig:structure} we see the impact a different data structure has on the insert throughput.
+In figure~\ref{fig:structure} and table~\ref{tab:structure} we see the impact a different data structure has on the insert throughput.
+"Simple" refers to the structure variables (x, y, z) set to (1, 1, 1),
+"More Complex" represents (16, 32, 32) and "Most Complex" (64, 128, 128).
+
+\begin{table}[h!]
+  \begin{minipage}{\textwidth}
+    \begin{tabularx}{\textwidth}{ | l | X | X | X | }
+      \hline
+      Database & Simple & More Complex & Most Complex \\ \hline
+      apachejena & 9,42 & 8,01 & 7,58 \\ \hline
+      neo4j & 11,44 & 11,64 & 8,5 \\ \hline
+      orientdb & 2606,5 & 2330,12 & 2118,38 \\ \hline
+      sparksee & 17345,38 & 17463,8 & 17576,06 \\ \hline
+    \end{tabularx}
+  \end{minipage}
+  \caption{Throughput in inserts/s rounded to two decimal places of the workload comparing different structure parameters.}
+  \label{tab:structure}
+\end{table}
 
 \begin{figure}[h!]
   \centering
@@ -545,7 +648,9 @@ This higher performance could be the results from a lack of information stored i
 as the paper only mentions weights on the inserted edges we cannot surely tell if that is the case.
 With that in mind we can come to the conclusion,
 that databases perform worse in an industrial environment and the results of graph database benchmarks cannot be transferred into the industrial context,
-as we can't tell how much throughput is sacrificed by storing information in the nodes.
+as we can't tell how much throughput is sacrificed by storing any information in the nodes.
+We investigated the impact of different node sizes,
+but to measure the throughput with absolutely no information in the nodes would require a different implementation that doesn't use the API to store information in the nodes.
 
 \begin{figure}[!h]
   \centering

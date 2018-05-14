@@ -108,7 +108,8 @@ They all effect when the specific if block is executed at the end of figure~\ref
   \label{tab:recorderVariables}
 \end{table}
 
-The serialisation process is done in a $ GraphAdapter $ that implements both a $ JsonSerializer $\footnote{com.google.gson.JsonSerializer} and a $ JsonDeserialzer $\footnote{com.google.gson.JsonDeserialzer} with a $ Graph $ as the generic value.
+The serialisation process is done in a $ GraphAdapter $ that implements both a \linebreak
+$ JsonSerializer $\footnote{com.google.gson.JsonSerializer} and a $ JsonDeserialzer $\footnote{com.google.gson.JsonDeserialzer} with a $ Graph $ as the generic value.
 Since a graph object contains two lists,
 these lists are serialised into a JsonElement,
 which will be retrieved as a string by calling $ Gson::toJson $.
@@ -136,7 +137,8 @@ That value will also be stored in a file corresponding to the type of the graph 
 
 \subsection{Operation Order}
 \label{ch:implementation:se:operationOrderRecorder}
-The $ OperationOrderRecorder $\footnote{com.yahoo.ycsb.generator.operationorder.OperationOrderGenerator} receives a $ DiscreteGenerator $\footnote{com.yahoo.ycsb.generator.DiscreteGenerator},
+The $ OperationOrderRecorder $\footnote{com.yahoo.ycsb.generator.operationorder.OperationOrderGenerator} receives a \linebreak
+$ DiscreteGenerator $\footnote{com.yahoo.ycsb.generator.DiscreteGenerator},
 which supplies the string values for the operations.
 These values will be taken from the $ DiscreteGenerator $,
 saved in a file and then returned to the caller.
@@ -207,7 +209,8 @@ The "recordcount" option is needed for the $ scan $ operation.
 Lastly the "folder" is used to create the folder for the dataset if it is not present and also pass it to the individual generators.
 
 In the load phase the $ Client $\footnote{com.yahoo.ycsb.Client} calls $ GraphWorkload::doInsert $.
-The $ GraphWorkload $ then retrieves a subgraph from the $ GraphDataGenerator $ by calling $ GraphDataGenerator::nextValue $,
+The \linebreak
+$ GraphWorkload $ then retrieves a subgraph from the $ GraphDataGenerator $ by calling $ GraphDataGenerator::nextValue $,
 separates it into its core graph components and calls the $ DB::insert $ method with each individual component to add them to the database one by one.
 
 If the $ Client $ calls $ GraphWorkload::doTransaction $ the $ GraphWorkload $ will first get the operation to execute on the database by the $ OperationOrderGenerator $.
@@ -222,16 +225,19 @@ The general workflow for the $ GraphWorkload::doTransaction $ method is shown in
 
 \textbf{doTransactionInsert} \newline
 Works as in the $ doInsert $ method,
-by taking a subgraph from the $ GraphDataGenerator $ and inserting its components one by one into the database.
+by taking a subgraph from the \linebreak
+$ GraphDataGenerator $ and inserting its components one by one into the database.
 
 \textbf{doTransactionRead}
-Depending on the "noEdges" option the $ RandomGraphComponentGenerator $ will be asked for a graph component,
+Depending on the "noEdges" option the \linebreak
+$ RandomGraphComponentGenerator $ will be asked for a graph component,
 if the option is $ false $ or a node if the option is $ true $.
 With the identifier of the graph component,
 its type and its available fields the database is queried to look up those fields of the specified component.
 
 \textbf{doTransactionScan} \newline
-As in the $ doTransactionRead $ method a graph component is chosen from the $ RandomGraphComponentGenerator $ depending on the set "noEdges" option.
+As in the $ doTransactionRead $ method a graph component is chosen from the \linebreak
+$ RandomGraphComponentGenerator $ depending on the set "noEdges" option.
 Then the necessary arguments from the graph component will be passed to the $ DB::scan $ method,
 alongside the specified $ recordcount $.
 
@@ -421,7 +427,8 @@ by calling $ PropertyContainer::setProperty $ with the key of the property and i
 
 \textbf{getting a node by its identifier} \newline
 When an $ Index $ is used a node can be looked up on it with $ Index::get $ and the key for the identifier and the identifier value.
-Without an $ Index $ we call $ GraphDatabaseService::findNode $ with the label the key for the identifier and the identifier as arguments.
+Without an $ Index $ we call \linebreak
+$ GraphDatabaseService::findNode $ with the label the key for the identifier and the identifier as arguments.
 
 \textbf{getting an edge by its identifier} \newline
 With an $ Index $ a $ Relationship $ can be found similar the a node.
