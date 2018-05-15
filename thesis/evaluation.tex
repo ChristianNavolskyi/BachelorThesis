@@ -8,21 +8,20 @@ A conclusion will be drawn in section~\ref{ch:futureWork:se:conclusion} in the n
 \section{Objective}
 The main goal is to see,
 if the databases are capable of handling the production workloads.
-To test that feature we will also make some other performance benchmarks to be able to evaluate the write speeds of the databases.
+Besides that we will investigate if we can generalise graph database benchmark results by comparing our results with the results of other studies examining the performance of graph databases with social network graphs.
+The generalisation would allow to use benchmark results created with social network graphs for the evaluation of performance of graph databases in an industrial environment.
 
-We want to measure the average time needed for a single insert operation,
+We will measure the time per operation and with the average we can calculate the throughput in $ \frac{operations}{s} $,
 that way we can compare the databases without take into account the overhead of the benchmark itself,
-which will be reflected in the overall run time.
+which would be reflected in the overall run time.
 
-For the workloads including read operations we will also look at the overall run time to get a better view on the impact these operations have on the performance.
-
-In section~\ref{ch:evaluation:se:overview} we will show which workloads we will compare with each other and what we want to evaluate through that comparison.
+In section~\ref{ch:evaluation:se:overview} we will show which workloads we will compare with each other.
 
 \section{Setup}
 In this section we will describe the software and hardware we used to execute the benchmark.
 
 \subsection{Hardware}
-The computer used for the benchmark had the specifications shown in table~\ref{tab:hardware}.
+The machine used for the benchmark had the specifications shown in table~\ref{tab:hardware}.
 
 \begin{table}[!h]
   \begin{minipage}{\textwidth}
@@ -35,12 +34,12 @@ The computer used for the benchmark had the specifications shown in table~\ref{t
       GPU & NVIDIA GeForce GTX 670 \\ \hline
     \end{tabularx}
   \end{minipage}
-  \caption{The hardware specifications of the computer for the benchmark.}
+  \caption{The hardware specifications of the machine used for the benchmark.}
   \label{tab:hardware}
 \end{table}
 
 \subsection{Software}
-The versions of the software components we used are shown in the following table.
+The versions of the software components we used are shown in table~\ref{tab:software}.
 
 \begin{table}[!h]
   \begin{minipage}{\textwidth}
@@ -57,7 +56,7 @@ The versions of the software components we used are shown in the following table
       Sparksee & 5.2.3 \\ \hline
     \end{tabularx}
   \end{minipage}
-  \caption{The software specifications of the computer for the benchmark.}
+  \caption{The software specifications of the machine used for the benchmark.}
   \label{tab:software}
 \end{table}
 
@@ -66,14 +65,14 @@ The versions of the software components we used are shown in the following table
 In figure~\ref{fig:executionWorkflow} the execution process is illustrated and explained in the following enumeration.
 
 \begin{enumerate}[label=Step \arabic*:,widest=Step 1,leftmargin=*]
-  \item One workload is chosen from the set of workloads
-  \item The dataset is created for that workload
-  \item One database is chosen from the set of databases
-  \item The workload is executed on the database with the created dataset
+  \item One workload is chosen from the set of workloads.
+  \item The dataset is created for that workload.
+  \item One database is chosen from the set of databases.
+  \item The workload is executed on the database with the created dataset.
   \item The results of the benchmark run are stored in a folder specific to the constellation of workload,
-  database and execution pass
-  \item Repeat from Step 4 three times
-  \item Repeat from Step 3 until all databases ware benchmarked
+  database and execution pass.
+  \item Repeat from Step 4 three times.
+  \item Repeat from Step 3 until all databases ware benchmarked.
   \item Repeat from Step 1 until all workloads have been executed.
 \end{enumerate}
 
@@ -94,29 +93,29 @@ The naming of the workloads is similar to the naming introduced in section~\ref{
       Section & First workload & Other workload(s) & Units of measurement \\ \hline
       \ref{ch:evaluation:se:probingNodeCount} & 1. With Index & 2.-5. With Index & Inserts/second, total time, database size \\ \hline
       \ref{ch:evaluation:se:probingNodeCount} & 1. Without Index & 2.-5. Without Index & Inserts/second \\ \hline
-      \ref{ch:evaluation:se:probingNodeCount} & n.\footnote{the workload with the largest possible number of nodes in terms of execution time.} With Index & n. Without Index & Inserts/second \\ \hline
+      \ref{ch:evaluation:se:probingNodeCount} & n.\footnote{the workload with the largest possible number of nodes in terms of execution time} With Index & n. Without Index & Inserts/second \\ \hline
       \ref{ch:evaluation:se:probingNodeSize} & 1. Node Size & 2.-5. Node Size & Inserts/second, database size \\ \hline
       \ref{ch:evaluation:se:differenceEdges} & 1. No Edges & 2. No Edges & Inserts/second \\ \hline
       \ref{ch:evaluation:se:differenceEdges} & n. With Index & 1. No Edges & Inserts/second \\ \hline
     \end{tabularx}
   \end{minipage}
-  \caption{Overview for the throughput workloads \todo{remove reason and mention in evaluation}}
+  \caption{Overview for the throughput workloads. \todo{remove reason and mention in evaluation}}
   \label{tab:throughputOverview}
 \end{table}
 \begin{table}
-  \begin{minipage}{\hsize}
+  \begin{minipage}{\textwidth}
     \centering
-    \begin{tabular}{ | l | l | l | l | }
+    \begin{tabularx}{\textwidth}{ | l | l | X | X | }
       \hline
       Section & First workload & Other workload(s) & Units of measurement \\ \hline
       \ref{ch:evaluation:se:productComplexity} & 1. Structure & 2.-3. Structure & Inserts/second \\ \hline
-      \ref{ch:evaluation:se:productionSuitability} & x.\footnote{Every workload will be evaluated} Suitability & - & Total time \\ \hline
+      \ref{ch:evaluation:se:productionSuitability} & x.\footnote{every workload will be evaluated} Suitability & - & Total time \\ \hline
       \ref{ch:evaluation:se:retrievingUnderLoad} & 1. Reading & 2. Reading & Reads/second \\ \hline
       \ref{ch:evaluation:se:retrievingUnderLoad} & 1. Scanning & 2. Scanning & Scans/second \\ \hline
       \ref{ch:evaluation:se:retrievingUnderLoad} & 1. Structure & 1. Reading \& 1. Scanning & Operations/second \\ \hline
-    \end{tabular}
+    \end{tabularx}
   \end{minipage}
-  \caption{Overview for the production and retrieval workloads}
+  \caption{Overview for the production and retrieval workloads.}
   \label{tab:productionOverview}
 \end{table}
 
@@ -127,7 +126,7 @@ then we calculated the average over the three benchmark runs we did with every d
 Next,
 we grouped the measurements as shown in tables~\ref{tab:throughputOverview} and~\ref{tab:productionOverview}.
 And finally,
-we created the diagrams shown in subsections "Results" of the following sections and interpreted them to draw a conclusion,
+we create the diagrams shown in subsections "Results" of the following sections and interpret them to draw a conclusion,
 which is presented in the "Discussion" subsections.
 
 \begin{figure}[!h]
@@ -223,14 +222,14 @@ Table~\ref{tab:withIndexThroughput},
 \begin{figure}[h!]
   \centering
   \includegraphics[width=.75\textwidth]{images/throughput/withIndexThroughput}
-  \captionof{figure}{This figure shows the throughput in inserts/second of every database over different dataset sizes.}
+  \caption{This figure shows the throughput in inserts/second of every database over different dataset sizes.}
   \label{fig:withIndexThroughput}
 \end{figure}
 
 \begin{figure}[h!]
   \centering
   \includegraphics[width=.75\textwidth]{images/throughput/withIndexExecutionTime}
-  \captionof{figure}{The execution time of the databases is shown over different dataset sizes.}
+  \caption{The execution time of the databases is shown over different dataset sizes.}
   \label{fig:withIndexExecutionTime}
 \end{figure}
 
@@ -240,14 +239,14 @@ In figure~\ref{fig:withWithoutIndexThroughputFixNodes} we see a comparison of us
 \begin{figure}[h!]
   \centering
   \includegraphics[width=.75\textwidth]{images/throughput/withoutIndexThroughput}
-  \captionof{figure}{This diagram shows the throughput in inserts per second while using no index.}
+  \caption{This diagram shows the throughput in inserts per second while using no index.}
   \label{fig:withoutIndexThroughput}
 \end{figure}
 
 \begin{figure}[h!]
   \centering
   \includegraphics[width=.75\textwidth]{images/throughput/withWithoutIndexThroughputFixNodes}
-  \captionof{figure}{The throughput at a fixed dataset size to compare between indexing and not.}
+  \caption{The throughput at a fixed dataset size to compare between indexing and not.}
   \label{fig:withWithoutIndexThroughputFixNodes}
 \end{figure}
 
@@ -342,14 +341,14 @@ Table~\ref{tab:nodeSize} and~\ref{tab:sizeDatabaseSize} show the numbers used fo
 \begin{figure}[h!]
   \centering
   \includegraphics[width=.75\textwidth]{images/throughput/nodeSize}
-  \captionof{figure}{Insert throughput over different node sizes with 10.000 nodes total.}
+  \caption{Insert throughput over different node sizes with 10.000 nodes total.}
   \label{fig:nodeSize}
 \end{figure}
 
 \begin{figure}[h!]
   \centering
   \includegraphics[width=.75\textwidth]{images/throughput/sizeDatabaseSize}
-  \captionof{figure}{The size of the databases over growing node sizes.}
+  \caption{The size of the databases over growing node sizes.}
   \label{fig:sizeDatabaseSize}
 \end{figure}
 
@@ -421,7 +420,7 @@ In figure~\ref{fig:indexNoEdges10000Nodes} we see a comparison of all databases 
 \begin{figure}[h!]
   \centering
   \includegraphics[width=.75\textwidth]{images/throughput/indexNoEdges10000Nodes}
-  \captionof{figure}{Comparison of insert throughput between using edges and not.\newline}
+  \caption{Comparison of insert throughput between using edges and not.}
   \label{fig:indexNoEdges10000Nodes}
 \end{figure}
 
@@ -525,7 +524,7 @@ because Apache Jena and Neo4j would take too long to insert that number of nodes
     \end{tabular}
   \end{minipage}
   \caption{Time needed to execute three minutes of simulated production.
-  The value in braces indicates a theoretical value,
+  The value in parentheses indicates a theoretical value,
   which was calculated with the throughput reached until the license ran out of size.}
   \label{tab:singleSuitability}
 \end{table}
@@ -533,7 +532,7 @@ because Apache Jena and Neo4j would take too long to insert that number of nodes
 \begin{figure}[h!]
   \centering
   \includegraphics[width=.75\textwidth]{images/production/singleSuitability}
-  \captionof{figure}{Shows the execution time with a dataset that represents three minutes of production.}
+  \caption{Shows the execution time with a dataset that represents three minutes of production.}
   \label{fig:singleSuitability}
 \end{figure}
 
@@ -611,14 +610,14 @@ In figure~\ref{fig:readThroughput10000Nodes},
 \begin{figure}[h!]
   \centering
   \includegraphics[width=.75\textwidth]{images/responsiveness/readThroughput10000Nodes}
-  \captionof{figure}{Shows the throughput of read operations with and without the use of an index.}
+  \caption{Shows the throughput of read operations with and without the use of an index.}
   \label{fig:readThroughput10000Nodes}
 \end{figure}
 
 \begin{figure}[h!]
   \centering
   \includegraphics[width=.75\textwidth]{images/responsiveness/scanThroughput10000Nodes}
-  \captionof{figure}{Shows the throughput of read operations with and without the use of an index.}
+  \caption{Shows the throughput of read operations with and without the use of an index.}
   \label{fig:scanThroughput10000Nodes}
 \end{figure}
 
@@ -644,14 +643,14 @@ In figure~\ref{fig:insertWithWithoutReadScan} and table~\ref{tab:insertWithWitho
 \begin{figure}[h!]
   \centering
   \includegraphics[width=.75\textwidth]{images/responsiveness/operationReadScan}
-  \captionof{figure}{Shows the throughput of the different operations.\newline}
+  \caption{Shows the throughput of the different operations.}
   \label{fig:operationReadScan}
 \end{figure}
 
 \begin{figure}[h!]
   \centering
   \includegraphics[width=.75\textwidth]{images/responsiveness/insertWithWithoutReadScan}
-  \captionof{figure}{Shows the throughput of insert operations when using different operations.}
+  \caption{Shows the throughput of insert operations when using different operations.}
   \label{fig:insertWithWithoutReadScan}
 \end{figure}
 
@@ -706,7 +705,7 @@ Our main goal is to investigate if the difference in structure has an impact on 
 when that is not the case we can assume,
 that benchmark results from research on social network graph can be used to evaluate the performance of a graph database in an industrial environment.
 The key point we will investigate is how the number of edges in relation to the number of nodes effects the throughput performance of the databases,
-as for social network graphs that number is quite high at around $ 8 $\cite[41]{TaoShen} to $ 22 $\cite{Dayarathna2012} whereas our graph structure contains a edge to node ratio of $ 1.3 $ to $ ~1 $ (depending on the variables x, y and z; higher variable values lead to a ratio closer to 1).
+as for social network graphs that number is quite high at around $ 8 $\cite[41]{TaoShen} to $ 22 $\cite{Dayarathna2012} whereas our graph structure contains a edge to node ratio of $ 1.3 $ to $ \sim1 $ (depending on the variables x, y and z; higher variable values lead to a ratio closer to 1).
 
 By comparing our finding with the ones from Dominguez-Sal et al.\cite{TaoShen} which can be seen in figure~\ref{fig:throughputShen} we see,
 that all databases performed much better than in our experiment.
@@ -722,7 +721,7 @@ but to measure the throughput with absolutely no information in the nodes would 
 \begin{figure}[!h]
   \centering
   \includegraphics[width=.8\textwidth]{images/benchmarks/ShenResultsInsert}
-  \caption{Throughput results from Dominguez-Sal et al.\cite{TaoShen}}
+  \caption{Throughput results from Dominguez-Sal et al.\cite{TaoShen}.}
   \label{fig:throughputShen}
 \end{figure}
 
@@ -736,7 +735,7 @@ but since the dataset size which we can compare is too small we cannot surely te
 \begin{figure}[!h]
   \centering
   \includegraphics[width=\textwidth]{images/benchmarks/XGDBenchResultsInsert}
-  \caption{Throughput results from the XGDBench Benchmark\cite{Dayarathna2012}}
+  \caption{Throughput results from the XGDBench Benchmark\cite{Dayarathna2012}.}
   \label{fig:throughputXGDBench}
 \end{figure}
 

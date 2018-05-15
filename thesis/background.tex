@@ -241,7 +241,7 @@ First on our list are RDF stores also known as triple stores.
 
 RDF (Resource Description Framework) is a model for data interchange on the web.
 It is able to merge data even with different schemas, it also supports the evolution of a schema over time.
-The linking structure of the Web is extended by RDF by it using URIs\footnote{abbreviation of Universal Resource Identifier, used to identify abstract of physical resources.~\cite{Berners-Lee2005}} to name relationships and resources connected by those.~\cite[4]{Ontotext2014}
+The linking structure of the Web is extended by RDF by it using URIs\footnote{abbreviation of Universal Resource Identifier, used to identify abstract of physical resources.~\url{https://tools.ietf.org/html/rfc3986}} to name relationships and resources connected by those.~\cite[4]{Ontotext2014}
 
 \blockquote[\cite{W3C2014}]{This linking structure forms a directed, labeled graph, where the edges represent the named link between two resources, represented by the graph nodes.
 This graph view is the easiest possible mental model for RDF and is often used in easy-to-understand visual explanations.}
@@ -337,7 +337,7 @@ The dataset for the benchmark has to be provided by the user or can be generated
 \begin{figure}[h!]
   \centering
   \includegraphics[width=.75\textwidth]{images/benchmarks/GraphalyticsArchitecture}
-  \caption{The architecture of the Graphalytics benchmark\cite[11]{Iosup}}
+  \caption{The architecture of the Graphalytics benchmark\cite[11]{Iosup}.}
   \label{fig:graphalyticsArchitecture}
 \end{figure}
 
@@ -353,15 +353,15 @@ new databases and new generators can be integrated.~\cite{Yahoo!2010}
 The core workload is designed to use simple CRUD\footnote{CRUD stands for the basic operations on persistent storage, these are Create, Read, Update, Delete.} operations on any database with no special structure of the generated data.
 
 The architecture of YCSB can be seen in figure~\ref{fig:ycsbArchitecture}.
-The client contains a "Workload executor" which uses generators to create a dataset and execute operations on the database.
-Each "Client thread" calls the "Workload executor" to perform an operation on the database.
+The client contains a \texttt{Workload executor} which uses generators to create a dataset and execute operations on the database.
+Each \texttt{Client thread} calls the \texttt{Workload executor} to perform an operation on the database.
 Workload files can be specified to set the amount of data and the mix of operations to use for that workload.
 To tell YCSB which database should be used command-line parameters are passed to the client.
 
 \begin{figure}[h!]
   \centering
   \includegraphics[width=\textwidth]{images/benchmarks/ycsbArchitecture}
-  \caption{The rough architecture of YCSB. Recreated and modified from~\cite[25]{Abubakar2014}}
+  \caption{The rough architecture of YCSB. Recreated and modified from~\cite[25]{Abubakar2014}.}
   \label{fig:ycsbArchitecture}
 \end{figure}
 
@@ -390,7 +390,7 @@ the load phase which fills the database with data and the transaction phase whic
 \begin{figure}[h!]
   \centering
   \includegraphics[width=.75\textwidth]{images/benchmarks/XGDBenchArchitecture}
-  \caption{The architecture of the XGDBench benchmark\cite[367]{Dayarathna2012}}
+  \caption{The architecture of the XGDBench benchmark\cite[367]{Dayarathna2012}.}
   \label{fig:XGDBenchArchitecture}
 \end{figure}
 

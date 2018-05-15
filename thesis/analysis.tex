@@ -98,8 +98,6 @@ To choose a benchmark for our upcoming research we will look at the following as
 The results of our comparison are shown in the following table~\ref{tab:benchmarkComparison}.
 
 \begin{table}[!h]
-  \caption{Aspects of the different databases}
-  \label{tab:benchmarkComparison}
   \begin{minipage}{\textwidth}
     \begin{tabularx}{\textwidth}{ | l | X | X | X | l | }
       \hline
@@ -109,6 +107,8 @@ The results of our comparison are shown in the following table~\ref{tab:benchmar
       XGDBench & Social Network & Read, Update and Graph Traversal & X10 & none\footnote{1 contributor and 1 fork (which is from us) on GitHub \url{https://github.com/miyurud/XGDBench}} \\ \hline
     \end{tabularx}
   \end{minipage}
+  \caption{Aspects of the different databases.}
+  \label{tab:benchmarkComparison}
 \end{table}
 
 Since we are not using a social network structure for our data the graph generators in Graphalytics and XGDBench do not aid us much,
@@ -137,11 +137,11 @@ The first part is the load phase in which the initial data is written to the dat
 Then comes the transaction phase where database operations are performed.
 
 Figure~\ref{fig:basicYCSBWorkflow} shows the classes involved in executing a benchmark run with YCSB.
-The "Client" takes the workload file and command-line parameters to set up the database and create "ClientThreads".
-These "ClientThreads" call the "Workload" class to perform an operation on the database,
-which is wrapped in the "DBWrapper".
-Measurements are made through the "DBWrapper" by stopping the time for every operation made on the database,
-it uses the measurements available in the "measurements" package.
+The \texttt{Client} takes the workload file and command-line parameters to set up the database and create \texttt{ClientThreads}.
+These \texttt{ClientThreads} call the \texttt{Workload} class to perform an operation on the database,
+which is wrapped in the \texttt{DBWrapper}.
+Measurements are made through the \texttt{DBWrapper} by stopping the time for every operation made on the database,
+it uses the measurements available in the \texttt{measurements} package.
 
 \begin{figure}
   \centering

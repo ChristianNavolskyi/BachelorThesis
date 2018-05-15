@@ -9,8 +9,8 @@ Then we will show the workload class in section~\ref{ch:implementation:se:graphW
 The code of our implementation is available on GitHub\footnote{\url{https://github.com/ChristianNavolskyi/YCSB}}.
 
 In figure~\ref{fig:YCSBExtension} we see a diagram of the YCSB benchmark with our added implementations.
-The classes we added are on the right from "GraphWorkload" and up.
-In "Package db" we added the bindings for our four databases.
+The classes we added are on the right from \texttt{GraphWorkload} and up.
+In \texttt{Package db} we added the bindings for our four databases.
 
 \begin{figure}
   \includegraphics[angle=90,height=\textheight]{images/benchmarks/extendedYCSBWorkflow}
@@ -30,7 +30,7 @@ that holds the identifier and the label of the graph component.
 \subsection{Node}
 The \texttt{Node} class assigns the identifiers by counting the created nodes and incrementing the counter for every new node.
 If the property value of a node is not set,
-a call to \texttt{Node::getHashMap} will randomly fill the property with the amount of characters specified by the "node property size" option.
+a call to \texttt{Node::getHashMap} will randomly fill the property with the amount of characters specified by the \texttt{nodePropertySize} option.
 
 \subsection{Edge}
 As the \texttt{Node} class the \texttt{Edge} class also uses a counter field to assign the correct identifier to each edge.
@@ -75,7 +75,6 @@ which observes the present files and initialises the corresponding implementatio
 
 \section{Recorder}
 \label{ch:implementation:se:recorder}
-\todo{diagram to show methods used during nextValue call for the specific use of the classe.}
 For every kind we have a creator that creates the initial values for the workload and stores them in a corresponding file for the recreator~\ref{ch:implementation:se:recreator}.
 
 How the creation of the values is implemented in each generator is described in the following subsections~\ref{ch:implementation:se:graphDataRecorder}~to~\ref{ch:implementation:se:operationOrderRecorder}.
@@ -198,11 +197,11 @@ This process is shown in figure~\ref{fig:graphWorkloadInit}
 
 It also parses the parameters to get to know if "noEdges" should be used,
 what the "property size" of a node should be,
-how many fields should be scanned ("recordcount") and the "folder".
-The "noEdges" parameter is needed to execute the operations on the correct available graph components.
-"property size" is stored to be retrievable by the \texttt{Node} to know how much random value it should generate.
-The "recordcount" option is needed for the \texttt{scan} operation.
-Lastly the "folder" is used to create the folder for the dataset if it is not present and also pass it to the individual generators.
+how many fields should be scanned (\texttt{recordcount}) and the \texttt{folder}.
+The \texttt{noEdges} parameter is needed to execute the operations on the correct available graph components.
+\texttt{property size} is stored to be retrievable by the \texttt{Node} to know how much random value it should generate.
+The \texttt{recordcount} option is needed for the \texttt{scan} operation.
+Lastly the \texttt{folder} is used to create the folder for the dataset if it is not present and also pass it to the individual generators.
 
 In the load phase the \texttt{Client}\footnote{com.yahoo.ycsb.Client} calls \texttt{GraphWorkload::doInsert}.
 The \texttt{GraphWorkload} then retrieves a subgraph from the \texttt{GraphDataGenerator} by calling \texttt{GraphDataGenerator::nextValue},
@@ -223,13 +222,13 @@ Works as in the \texttt{doInsert} method,
 by taking a subgraph from the \texttt{GraphDataGenerator} and inserting its components one by one into the database.
 
 \textbf{doTransactionRead} \newline
-Depending on the "noEdges" option the \texttt{RandomGraphComponentGenerator} will be asked for a graph component,
+Depending on the \texttt{noEdges} option the \texttt{RandomGraphComponentGenerator} will be asked for a graph component,
 if the option is \texttt{false} or a node if the option is \texttt{true}.
 With the identifier of the graph component,
 its type and its available fields the database is queried to look up those fields of the specified component.
 
 \textbf{doTransactionScan} \newline
-As in the \texttt{doTransactionRead} method a graph component is chosen from the \texttt{RandomGraphComponentGenerator} depending on the set "noEdges" option.
+As in the \texttt{doTransactionRead} method a graph component is chosen from the \texttt{RandomGraphComponentGenerator} depending on the set \texttt{noEdges} option.
 Then the necessary arguments from the graph component will be passed to the \texttt{DB::scan} method,
 alongside the specified \texttt{recordcount}.
 
@@ -261,12 +260,12 @@ This subsection covers the naming of the parameters in the code.
       \hline
       Our name & Name in the code \\ \hline \hline
       folder & datasetdirectory \\ \hline
-      products per order & productsperorder \\ \hline
-      components per product & componentsperproduct \\ \hline
-      test parameter count & testparametercount \\ \hline
+      productsPerOrder & productsperorder \\ \hline
+      componentsPerProduct & componentsperproduct \\ \hline
+      testParameterCount & testparametercount \\ \hline
       recordcount & maxscanlength \\ \hline
-      no edges & onlynodes \\ \hline
-      node property size & fieldlength \\ \hline
+      noEdges & onlynodes \\ \hline
+      nodePropertySize & fieldlength \\ \hline
     \end{tabularx}
   \end{minipage}
   \caption{This table shows by which name the parameters can be found in the YCSB project.}

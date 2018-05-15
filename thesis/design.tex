@@ -1,5 +1,6 @@
 \chapter{Design}
 \label{ch:design}
+
 In this chapter we will design the data structure of our test data,
 as well as the workloads to simulate a typical industrial use of our examined databases.
 
@@ -15,7 +16,7 @@ The result of our session can be seen in figure~\ref{fig:firstDesignOfSchema}.
 In the centre left we see "Features of Interest" which could be mapped to the "testFeature" edge in the industrial example of figure~\ref{fig:exampleData} as it depicts an observation of some product.
 At the bottom we see a "M" which stands for "Machine",
 its connection to "P. Schritte"\footnote{german for production steps} shows that this machine does \texttt{1} to \texttt{n} production steps.
-Every production step is associated with a component which consists of a PCB\footnote{short for printed circuit board} what has different parts,
+Every production step is associated with a component which consists of a PCB\footnote{short for printed circuit board} that has different parts,
 a version and a file after which it was created.
 
 As the model shows too much detail in some areas without giving a good overview of an industrial data schema,
@@ -29,16 +30,16 @@ we had to reiterate over it and get rid of some complexity where we don't need i
 \end{figure}
 
 The meeting gave us a better understanding of how a production facility could handle its data and with that in mind and the objective to design a simpler schema that includes to most necessary parts of production the model shown in figure~\ref{fig:finalDesignOfSchema} was created. \\
-At the top is the factory,
-which has a "Orders" node that represents the folder for all orders received by the factory.
-A machine and a design are linked to the factory,
+At the top is the \texttt{Factory},
+which has a \texttt{Orders} node that represents the folder for all \texttt{Order}s received by the \texttt{Factory}.
+A \texttt{Machine} and a \texttt{Design} are linked to the \texttt{Factory},
 these represent the production machine and the design template for products made by that machine.
-A product has incoming edges from the design it is made after, the machine it was produced by and the order for which it is created.
-Variable x determines how many products are made for each order.
-The product was made at a specific date and consists of one or multiple components depending on the variable y.
-Every component undergoes a test suite which contains of a number of test parameters,
+A \texttt{Product} has incoming edges from the \texttt{Design} it is made after, the \texttt{Machine} it was produced by and the \texttt{Order} for which it is created.
+Variable x determines how many \texttt{Product}s are made for each \texttt{Order}.
+The \texttt{Product} was made at a specific \texttt{Date} and consists of one or multiple \texttt{Component}s depending on the value of variable y.
+Every \texttt{Component} undergoes a test suite (\texttt{Tests}) which contains of a number of \texttt{Test Parameter}s,
 which number is defined by z.\\
-For easier reference we will call x productsperorder, y componentsperproduct and z testparametercount in the next sections.
+For easier reference we will call x productsPerOrder, y componentsPerProduct and z testParameterCount.
 
 \begin{figure}
   \centering
@@ -65,7 +66,7 @@ These variables are
 \begin{itemize}
   \item using an index on the key
   \item the size of a single property of the node
-  \item using no edges with an index.
+  \item using no edges with and without an index.
 \end{itemize}
 
 The last variable sounds counter intuitive,
@@ -79,11 +80,13 @@ We will go over the different variables in the following subsections and motivat
 \label{ch:design:se:index}
 For this category we will use different data set sizes in terms of their number of nodes.
 We will use steps of multiplication by 10 from 1.000 nodes to 10.000.000 nodes,
-to examine if there is a linear correlation between the number of nodes and the time needed to store them.
+to examine if the throughput changes,
+as the database is filled with data.
 
-Switching from indexed to not indexed we want to inspect how write speed or operations per second are effected.
+Switching from indexed to not indexed we want to inspect how the throughput is effected by not using an index.
 Indexing is important to retrieve data more quickly for the cost of write speed,
-with this workload we will see if the sacrifice in write speed is reasonable.
+with this workload we will see if there is a sacrifice in write throughput,
+as to store an edge two nodes have to be looked up.
 We will only use an index on the node and edge key,
 which will be used to search that graph component\footnote{a node or an edge of the graph} in the database.
 Indexing the other properties would have no benefit in our example.
@@ -96,6 +99,7 @@ that is small enough to not have an impact on performance but large enough to re
 After retrieving a number of nodes that represents an acceptable execution time we will vary the next variable which is the property size.
 We will go from 10B used in the index benchmarks to up to 1MB,
 again in steps of multiplying by 10 (10B, 100B, 1KB, ..., 1MB).
+We want to examine if there is a drawback for throughput when storing more information in the nodes and at which point the amount is too large.
 
 The typical property size is between 1B (1 character) and roughly 75B (75 characters) according to our example in listing~\ref{lst:exampleData}.
 
@@ -109,6 +113,7 @@ because using an index would represent the use in the industry and since we are 
 \label{ch:design:se:noEdges}
 \note{maybe remove index, as it has no real purpose. Underline importance of investigating the speed difference without edges. Maybe indexing helps, make sure to compare both with the workloads with edges to see if index helps with edges.}
 In subsection~\ref{ch:design:se:throughput} we already justified why we will investigate the throughput with an exclusive use of nodes in the data set.
+To summarise the use of this workload is to see if there is a big difference in using edges and therefore determine how the edge to node ratio effects the throughput.
 
 As this workload does not allow for much variation besides using an index or not,
 it will only include these two workloads.
@@ -130,20 +135,20 @@ We have three layers which we can blow up horizontally by increasing the corresp
 which are
 
 \begin{itemize}
-  \item productsperorder, this spreads the data graph apart at a level closer to the root
-  \item componentsperproduct, this changed the width in the middle of the graph
-  \item testparametercount, which widens the graph at the lowest level.
+  \item productsPerOrder, this spreads the data graph apart at a level closer to the root
+  \item componentsPerProduct, this changed the width in the middle of the graph
+  \item testParameterCount, which widens the graph at the lowest level.
 \end{itemize}
 
 For production simulation we will first examine if the data structure impacts performance of the databases.
 To investigate this aspect,
 we will change the width of the graph with the variables mentioned above.
 We will use the numbers from section~\ref{ch:analysis:se:data} as the maximum width,
-which would be \texttt{productsperorder = 64},
-\texttt{componentsperproduct = 128} and \texttt{testparametercount = 128}.
+which would be \texttt{productsPerOrder = 64},
+\texttt{componentsPerProduct = 128} and \texttt{testParameterCount = 128}.
 In the first workload we will set all variables to one,
-the next one will use \texttt{productsperorder = 16},
-\texttt{componentsperproduct = 32} and \texttt{testparametercount = 32}.
+the next one will use \texttt{productsPerOrder = 16},
+\texttt{componentsPerProduct = 32} and \texttt{testParameterCount = 32}.
 The third and last one will use the maximum width mentioned above.
 By this variation we will cover the minimum and maximum with an additional result in the middle to see if there are any changes in performance.
 
@@ -248,8 +253,8 @@ The number of steps to do during scanning will be $ 1000 $ as that was the defau
 \label{ch:design:se:summary}
 In this subsection we will give an overview over all workloads and their variables.
 
-For the workloads measuring the throughput "Products per Order",
-"Components per Product" and "Test Parameter Count" will all be set to $ 1 $.
+For the workloads measuring the throughput \texttt{productsPerOrder},
+\texttt{componentsPerProduct} and \texttt{testParameterCount} will all be set to $ 1 $.
 Their overview is shown in table~\ref{tab:throughput}
 
 \begin{table}[!h]
@@ -288,7 +293,7 @@ Edges are also used in these workloads to reflect the use in the industry.
   \begin{minipage}{\textwidth}
     \begin{tabularx}{\textwidth}{ | X | X | X | X | X | }
       \hline
-      Aspect & Node Count & Products per Order & Components per Product & Test Parameter Count \\ \hline
+      Aspect & Node Count & products\-Per\-Order & components\-Per\-Product & test\-Parameter\-Count \\ \hline
       1. Structure & x & 1 & 1 & 1 \\ \hline
       2. Structure & x & 16 & 32 & 32 \\ \hline
       3. Structure & x & 64 & 128 & 128 \\ \hline
@@ -307,8 +312,8 @@ Edges are also used in these workloads to reflect the use in the industry.
 The remaining workloads to examine the ability to retrieve data are shown in table~\ref{tab:retrievingUnderLoad}.
 These workloads will use an appropriate data set size regarding execution time and a property size as in the production simulation of 50B.
 A simple structure is used to investigate the basic capabilities of data retrieval,
-that means "Products per Order",
-"Components per Product" and "Test Parameter Count" are set to $ 1 $.
+that means \texttt{productsPerOrder},
+\texttt{componentsPerProduct} and \texttt{testParameterCount} are set to $ 1 $.
 
 \begin{table}[!h]
   \begin{minipage}{\textwidth}
@@ -424,7 +429,7 @@ That can be done by simply storing the name of each operation in a file as it ap
 In YCSB there is already a \texttt{DiscreteGenerator}\footnote{com.yahoo.ycsb.generator.DiscreteGenerator} which take a value and a weight and returns distributed according to the weights a value,
 this can be used to get the operations to run on the database.
 
-Figure~\ref{fig:operationOrderGenerator} visualises the procedure of returning the next operations.
+Figure~\ref{fig:operationOrderGenerator} visualises the procedure to return the next operations.
 
 \begin{figure}
   \includegraphics[width=\textwidth]{images/extensions/OperationOrderGenerator}
@@ -752,17 +757,17 @@ To sum up our design decisions we will give an overview of the different paramet
     \begin{tabularx}{\textwidth}{ | X | X | X | }
       \hline
       Class & Parameters & Purpose \\ \hline
-      GraphDataGenerator & folder, "products per order", "components per product", "test parameter count", "no edges" and "node property size" & Return subgraphs that form the data structure described in~\ref{ch:design:se:dataStructure}. \\ \hline
+      GraphDataGenerator & folder, "productsPerOrder", "componentsPerProduct", "testParameterCount", "noEdges" and "nodePropertySize" & Return subgraphs that form the data structure described in~\ref{ch:design:se:dataStructure}. \\ \hline
       RandomGraph-\newline ComponentGenerator & folder & Return a randomly chosen graph component already in the database. \\ \hline
       OperationOrderGenerator & folder & Return operations to execute on the database. \\ \hline
-      GraphWorkload & folder, recordcount and "no edges" & Run the workloads on the databases with the help of the different generators. \\ \hline
+      GraphWorkload & folder, recordcount and "noEdges" & Run the workloads on the databases with the help of the different generators. \\ \hline
       ApacheJena & dbFolder & Use the Jena TDB API to create and access the database. \\ \hline
       Neo4j & dbFolder and "useIndex" & Use the Neo4j API to create and access the database. \\ \hline
       OrientDB & dbFolder and "useIndex" & Use the OrientDB API to create and access the database. \\ \hline
       Sparksee & dbFolder and "useIndex" & Use the Sparksee API to create and access the database. \\ \hline
     \end{tabularx}
   \end{minipage}
-  \caption{Overview of command line parameters and the use of every class}
+  \caption{Overview of command line parameters and the use of every class.}
   \label{tab:designOverview}
 \end{table}
 
