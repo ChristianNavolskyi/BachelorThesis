@@ -31,7 +31,7 @@ we had to reiterate over it and get rid of some complexity where we don't need i
 
 The meeting gave us a better understanding of how a production facility could handle its data and with that in mind and the objective to design a simpler schema that includes to most necessary parts of production the model shown in figure~\ref{fig:finalDesignOfSchema} was created. \\
 At the top is the \texttt{Factory},
-which has a \texttt{Orders} node that represents the folder for all \texttt{Order}s received by the \texttt{Factory}.
+which has an \texttt{Orders} node that represents the folder for all \texttt{Order}s received by the \texttt{Factory}.
 A \texttt{Machine} and a \texttt{Design} are linked to the \texttt{Factory},
 these represent the production machine and the design template for products made by that machine.
 A \texttt{Product} has incoming edges from the \texttt{Design} it is made after, the \texttt{Machine} it was produced by and the \texttt{Order} for which it is created.
@@ -86,7 +86,8 @@ as the database is filled with data.
 Switching from indexed to not indexed we want to inspect how the throughput is effected by not using an index.
 Indexing is important to retrieve data more quickly for the cost of write speed,
 with this workload we will see if there is a sacrifice in write throughput,
-as to store an edge two nodes have to be looked up.
+as to store an edge,
+two nodes have to be looked up.
 We will only use an index on the node and edge key,
 which will be used to search that graph component\footnote{a node or an edge of the graph} in the database.
 Indexing the other properties would have no benefit in our example.
@@ -111,15 +112,11 @@ because using an index would represent the use in the industry and since we are 
 
 \subsubsection{No Edges}
 \label{ch:design:se:noEdges}
-\note{maybe remove index, as it has no real purpose. Underline importance of investigating the speed difference without edges. Maybe indexing helps, make sure to compare both with the workloads with edges to see if index helps with edges.}
 In subsection~\ref{ch:design:se:throughput} we already justified why we will investigate the throughput with an exclusive use of nodes in the data set.
 To summarise the use of this workload is to see if there is a big difference in using edges and therefore determine how the edge to node ratio effects the throughput.
 
-As this workload does not allow for much variation besides using an index or not,
-it will only include these two workloads.
-
 As in subsection~\ref{ch:design:se:nodePropertySize} we will use a suitable large data set in terms of node count resulting from the first workloads.
-We will use the same node size as in~\ref{ch:design:se:index} to be able to compare the results directly to the corresponding ones from that workload.
+We will use the same node size as in~\ref{ch:design:se:index} and an index to be able to compare the results directly to the corresponding ones from that workload.
 
 \subsection{Production Simulation}
 \label{ch:design:se:productionSimulation}
@@ -203,14 +200,14 @@ To convert that into our target throughput we divide that number by three minute
 \end{equation}
 
 First,
-we will set up a data set with that amount of nodes and insert it into the database,
-that will allow us to compare the time needed to store all data with our three minute limit.
+we will set up a data set with that number of nodes and insert it into the database,
+that will allow us to compare the time needed to store all data with our three-minute limit.
 If the database should take more than three minutes,
 it would not be suitable,
 since data is produced faster than it can be stored.
 
 We will use the structure with the maximum width,
-because it represents the industrial use case best regarding the information given by our partners at SICK AG~\cite{SICK}.
+because it represents the industrial use case the best regarding the information given by our partners at SICK AG~\cite{SICK}.
 
 \subsection{Retrieving under load}
 \label{ch:design:se:retrievingUnderLoad}
@@ -218,7 +215,7 @@ There would be no point in storing data if it is not retrieved at some point.
 To investigate on the performance of reading and scanning (more on that in subsection~\ref{ch:design:se:scanning}) data from the database the following workloads are designed.
 
 As mentioned in section~\ref{ch:design:se:index} indexing is important for retrieving data,
-therefore we will us it as a variable for this workload category.
+therefore we will use it as a variable for this workload category.
 By doing so we want to examine if the price we pay while writing is justified by the performance gain in retrieving data.
 
 The node amount will be determined by the first workload investigating the throughput,
@@ -278,7 +275,6 @@ Their overview is shown in table~\ref{tab:throughput}
       4. Node Size & x & 100KB & True & False \\ \hline
       5. Node Size & x & 1MB & True & False \\ \hline
       1. No Edges & x & 10B & True & True \\ \hline
-      2. No Edges & x & 10B & False & True \\ \hline
     \end{tabularx}
   \end{minipage}
   \caption{Workloads to investigate the throughput. x is a placeholder for a suitable data set size in terms of execution time.}
@@ -305,7 +301,7 @@ Edges are also used in these workloads to reflect the use in the industry.
       6. Suitability (year) & 185.157.141.600 & 64 & 128 & 128 \\ \hline
     \end{tabularx}
   \end{minipage}
-  \caption{Workloads to simulate production. Again x represents a placeholder for a suitable data set size.}
+  \caption{Workloads to simulate production. Again, x represents a placeholder for a suitable data set size.}
   \label{tab:productionSimulation}
 \end{table}
 
@@ -363,7 +359,7 @@ one for nodes and the other one for edges.
 We want the nodes to have a key for identification,
 a label to match it with an object that could exist in the real world and a value,
 which will represent the data stored in the node,
-the size of this value should be directly linked the property size from~\ref{ch:design:se:nodePropertySize}.
+the size of this value should be directly linked to the property size from~\ref{ch:design:se:nodePropertySize}.
 An edge should also have a key for identification,
 a label to add meaning to it and a start and an end node,
 represented by their keys.
@@ -433,7 +429,7 @@ Figure~\ref{fig:operationOrderGenerator} visualises the procedure to return the 
 
 \begin{figure}
   \includegraphics[width=\textwidth]{images/extensions/OperationOrderGenerator}
-  \caption{Activity diagram of the operationOrderGenerator.\todo{}}
+  \caption{Activity diagram of the operationOrderGenerator.}
   \label{fig:operationOrderGenerator}
 \end{figure}
 
@@ -520,7 +516,8 @@ The basic functions we need from our database are
   \item removing an edge
 \end{enumerate}
 
-Generally the \texttt{DB} operations can then be implemented using these functions.
+Generally,
+the \texttt{DB} operations can then be implemented using these functions.
 A rough implementation is shown in listing~\ref{lst:databaseTemplate}.
 Every database will take a path to a folder in which it will store its internally used files.
 Also,
@@ -722,7 +719,7 @@ OrientDB supports creating a vertex with a key and a map of values directly, but
 because \texttt{ByteIterators} are not supported.
 Edges will take the key, a start and end node and a label.
 The label has to be set to a constant value over all edges,
-because edges have to be looked up the label and the key,
+because edges have to be looked up by the label and the key,
 but the label is only handed in the \texttt{DB::insert} method.
 The edge properties can be set after creating the edge.
 
@@ -730,7 +727,7 @@ The edge properties can be set after creating the edge.
 Sparksee only has a very low-level API,
 which uses ids for all its contents nodes, edges and attributes.
 
-As with OrienDB the index has only to be activated on the specific fields.
+As with OrientDB the index has only to be activated on the specific fields.
 
 \textbf{key} \newline
 Nodes are created by a type,

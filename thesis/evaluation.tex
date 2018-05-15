@@ -8,7 +8,8 @@ A conclusion will be drawn in section~\ref{ch:futureWork:se:conclusion} in the n
 \section{Objective}
 The main goal is to see,
 if the databases are capable of handling the production workloads.
-Besides that we will investigate if we can generalise graph database benchmark results by comparing our results with the results of other studies examining the performance of graph databases with social network graphs.
+Besides that,
+we will investigate if we can generalise graph database benchmark results by comparing our results with the results of other studies examining the performance of graph databases with social network graphs.
 The generalisation would allow to use benchmark results created with social network graphs for the evaluation of performance of graph databases in an industrial environment.
 
 We will measure the time per operation and with the average we can calculate the throughput in $ \frac{operations}{s} $,
@@ -95,11 +96,10 @@ The naming of the workloads is similar to the naming introduced in section~\ref{
       \ref{ch:evaluation:se:probingNodeCount} & 1. Without Index & 2.-5. Without Index & Inserts/second \\ \hline
       \ref{ch:evaluation:se:probingNodeCount} & n.\footnote{the workload with the largest possible number of nodes in terms of execution time} With Index & n. Without Index & Inserts/second \\ \hline
       \ref{ch:evaluation:se:probingNodeSize} & 1. Node Size & 2.-5. Node Size & Inserts/second, database size \\ \hline
-      \ref{ch:evaluation:se:differenceEdges} & 1. No Edges & 2. No Edges & Inserts/second \\ \hline
       \ref{ch:evaluation:se:differenceEdges} & n. With Index & 1. No Edges & Inserts/second \\ \hline
     \end{tabularx}
   \end{minipage}
-  \caption{Overview for the throughput workloads. \todo{remove reason and mention in evaluation}}
+  \caption{Overview for the throughput workloads.}
   \label{tab:throughputOverview}
 \end{table}
 \begin{table}
@@ -284,7 +284,7 @@ which is faster when an index is used.
 \label{ch:evaluation:se:probingNodeSize}
 In this subsection we will take a look at how the databases perform with different node property sizes.
 We will pick a dataset size of 10.000 nodes,
-as all database have a reasonable execution time with that amount of nodes.
+as all database have a reasonable execution time with that number of nodes.
 
 By investigating the performance under node size variation,
 we will see if the databases can store larger number of data in one node.
@@ -381,41 +381,27 @@ so the overhead is more than the data itself.
 \label{ch:evaluation:se:differenceEdges}
 Here we will investigate how the absents of edges has an impact on performance.
 These workloads to not represent a real-world scenario,
-but they will provide us knowledge about how much inserting nodes costs compared to edges,
+but they will provide us knowledge about how the edge to node ratio effects throughput,
 as for every edge its start and end node have to be looked up.
 
-Apache Jena always uses an index,
-but it is still shown in both parts of the diagram as reference.
-
 \subsubsection{Results}
-Figure~\ref{fig:noEdges} shows us the difference in using an index compared to not doing so,
-while only inserting nodes.
-Table~\ref{tab:noEdges} shows the measured values for this workload.
+Table~\ref{tab:indexNoEdges10000Nodes} and figure~\ref{fig:indexNoEdges10000Nodes} shows a comparison of all databases between using edges and not with a dataset size of 10.000 nodes.
 
 \begin{table}[h!]
   \begin{minipage}{\textwidth}
     \centering
-    \begin{tabular}{ | l | l | l | }
+    \begin{tabularx}{\textwidth}{ | X | X | X | }
       \hline
-      Database & Index & No Index \\ \hline
-      apachejena & 9,95 & 9,72 \\ \hline
-      neo4j & 6,66 & 12,27 \\ \hline
-      orientdb & 1425,64 & 1488,03 \\ \hline
-      sparksee & 19592,96 & 20316,55 \\ \hline
-    \end{tabular}
+      Database & With Edges & Without Edges \\ \hline
+      apachejena & 7,21 & 9,95 \\ \hline
+      neo4j & 8,75 & 6,66 \\ \hline
+      orientdb & 2317,07 & 1425,64 \\ \hline
+      sparksee & 17829,1 & 19592,96 \\ \hline
+    \end{tabularx}
   \end{minipage}
-  \caption{Throughput in inserts/s rounded to two decimal places of the workload comparing inserts without edges with and without an index.}
-  \label{tab:noEdges}
+  \caption{Comparison of throughputs measured in inserts/s and rounded to two decimal places between using edges and not.}
+  \label{tab:indexNoEdges10000Nodes}
 \end{table}
-
-\begin{figure}[h!]
-  \centering
-  \includegraphics[width=.75\textwidth]{images/throughput/noEdges}
-  \caption{Difference between using an index and not while using no edges.}
-  \label{fig:noEdges}
-\end{figure}
-
-In figure~\ref{fig:indexNoEdges10000Nodes} we see a comparison of all databases between using edges and not with a dataset size of 10.000 nodes.
 
 \begin{figure}[h!]
   \centering
@@ -425,13 +411,12 @@ In figure~\ref{fig:indexNoEdges10000Nodes} we see a comparison of all databases 
 \end{figure}
 
 \subsubsection{Discussion}
-\todo{Do edges effect throughput}
-As expected in figure~\ref{fig:noEdges} we can see,
-that using an index does not benefit the insert performance for nodes.
-Only Neo4j shows a notable difference for the node insert throughput with the use of an index the throughput drop to $ 6,6 \frac{inserts}{s} $ from $ 12 \frac{inserts}{s} $ without an index.
-
-Figure~\ref{fig:indexNoEdges10000Nodes} shows,
-that the insert throughput of Apache Jena is slightly lower when using edges.
+\label{ch:evaluation:se:edgeDiscussion}
+Figure~\ref{fig:indexNoEdges10000Nodes} shows an unexpected behaviour,
+as the throughput of Neo4j and OrientDB is even higher when using edges whereas ApacheJena and Sparksee shows a decrease in performance.
+The largest differences can be seen for OrientDB and Sparksee,
+but as their results point in two different directions we can only say,
+that it depends on the database.
 
 \section{Production Simulation}
 \label{ch:evaluation:se:productionSimulation}
@@ -440,24 +425,14 @@ The first one being product complexity and the other one execution time.
 
 \subsection{Product Complexity}
 \label{ch:evaluation:se:productComplexity}
-\note{Structure has no effect, how the edges are connected between the nodes. But edges count matters as we see in comparison to the other benchmarks}
-\todo{From Design: Number of edges could effect the throughput, because of inserts. social networks have much more edges to it than our structure}
-If the throughput is not effected by using no edges compared to using edges,
-we could see,
-that for a graph database the structure of the data has no impact on performance.
-This result is quite important,
-as it would lead to the conclusion,
-that we can use the results of other graph database benchmarks for our industrial use case.
-
 The product complexity describes,
-how much the tree representing our data structure is widened at three different levels shown in section~\ref{ch:design:se:dataStructure}.
+how much the tree representing our data structure is widened at the three different levels shown in section~\ref{ch:design:se:dataStructure}.
 
-The wider the data structure becomes the less edges we have per node.
-That can be interesting if we want to compare the generalisation of the throughput with different graph structures,
-which we need to determine if the throughput archived in section~\ref{ch:evaluation:se:probingNodeCount} can be used to draw conclusions about the suitability for the industrial environment.
+The wider the data structure becomes the less edges we have per node and also we have more edges coming from one node to other nodes.
+That can be interesting if we want to investigate on the generalisation of the graph structure to see if other benchmark results from workloads with social network graphs can be used in an industrial application.
 
 \subsubsection{Results}
-In figure~\ref{fig:structure} and table~\ref{tab:structure} we see the impact a different data structure has on the insert throughput.
+In figure~\ref{fig:structure} and table~\ref{tab:structure} we see the impact different data structures have on the insert throughput.
 "Simple" refers to the structure variables (x, y, z) set to (1, 1, 1),
 "More Complex" represents (16, 32, 32) and "Most Complex" (64, 128, 128).
 
@@ -486,15 +461,18 @@ In figure~\ref{fig:structure} and table~\ref{tab:structure} we see the impact a 
 
 \subsubsection{Discussion}
 As we see in figure~\ref{fig:structure} the structure of the data as we modelled it,
-doesn't effect the throughput of the databases.
+doesn't affect the throughput of most databases, except OrientDB shows the largest drop in performance.
+That fits into our findings from section~\ref{ch:evaluation:se:edgeDiscussion} where OrientDB showed a higher throughput with edges,
+because the "Most Complex" workload has a lower edge to node ratio.
+Jena also seems to suffer from less edges per nodes,
+what is contradictory to the experiment with no edges,
+as Jena showed there a better performance without edges.
 
-For the "simple" workload the have an edge to node ratio of around $ 1.33 $ which is dropping to $ ~1 $ for the "most complex" workload.
-Together with the results from~\ref{ch:evaluation:se:differenceEdges} we can say,
-that the use of edges has almost no impact on performance and the edge to node ratio also doesn't.
-
- draw a conclusion about the comparability with other related work using social network graphs,
+To draw a conclusion about the comparability with other related work using social network graphs,
 which have a much higher edge to node ratio,
-in order to do so we would have to investigate higher edge to node ratios.
+we can at least say,
+that depending on the database,
+more edges can benefit the performance.
 
 \subsection{Production Suitability}
 \label{ch:evaluation:se:productionSuitability}
@@ -516,11 +494,11 @@ because Apache Jena and Neo4j would take too long to insert that number of nodes
 \begin{table}[h!]
   \begin{minipage}{\textwidth}
     \centering
-    \begin{tabular}{ | l | l | }
+    \begin{tabular}{ | l | l | l | }
       \hline
-      Database & Time (s) \\ \hline
-      orientdb & 263 \\ \hline
-      sparksee & (134) \\ \hline
+      Database & Time (s) & Throughput (ops/sec) \\ \hline
+      orientdb & 263 & 8042,84 \\ \hline
+      sparksee & (134) & 15789,47 \\ \hline
     \end{tabular}
   \end{minipage}
   \caption{Time needed to execute three minutes of simulated production.
@@ -545,26 +523,25 @@ Figure~\ref{fig:singleSuitability} shows us,
 that OrientDB did not manage to store three minutes of production simulation in the specified time.
 
 Sparksee could theoretically store that amount without exceeding the time limit,
-but since the free license did not allow for the amount of data we used the average util the limit was reached.
+but since the free license did not allow for the amount of data we used the average until the limit was reached.
 Of course,
 it could be that the throughput of Sparksee drops with an increasing number of elements in the database,
 but we couldn't investigate that.
 
 The difference of this workload compared to the first workload we discussed in section~\ref{ch:evaluation:se:probingNodeCount} is the structure and the node size.
 The results of~\ref{ch:evaluation:se:probingNodeSize} and~\ref{ch:evaluation:se:productComplexity} show,
-that the structure has no impact on the throughput and the node size has no impact below $ 10KB $,
+that the structure has a slight impact on the throughput and the node size has no impact below $ 10KB $,
 since we used $ 50B $ we can compare the first measured throughput.
 
 By doing so we see that Sparksee,
 again theoretically,
-reaches our target throughput of $ 11743 \frac{inserts}{s} $.
-OrientDB misses it with only $ 8572 \frac{inserts}{s} $.
-These results support our findings for the impact of structure and node size,
-as this workload measuring the time correlates with the numbers from the first workload.
+exceeds our target throughput of $ 11743 \frac{inserts}{s} $.
+OrientDB would have a throughput of $ 101112,36 \frac{inserts}{s} $ with a simple structure,
+but since our "most complex" structure decreases OrientDBs throughput even more to only $ 8042,84 \frac{inserts}{s} $,
+it would be even less suitable.
 
 \section{Retrieving under load}
 \label{ch:evaluation:se:retrievingUnderLoad}
-\todo{compare to results of other studies}
 This section will cover the results about retrieving data while the database is under load.
 First,
 we will take a look at how using an index is effecting the read and scan throughput,
@@ -637,7 +614,7 @@ In figure~\ref{fig:insertWithWithoutReadScan} and table~\ref{tab:insertWithWitho
     \end{tabularx}
   \end{minipage}
   \caption{Throughput in inserts/s of insert operations rounded to two decimal places of the workloads using only insert, read or scan operations.}
-  \label{tab:scanThroughput10000Nodes}
+  \label{tab:insertWithWithoutReadScan}
 \end{table}
 
 \begin{figure}[h!]
@@ -657,6 +634,7 @@ In figure~\ref{fig:insertWithWithoutReadScan} and table~\ref{tab:insertWithWitho
 \subsection{Discussion}
 First,
 we will discuss the results regarding the use of an index and not.
+
 For read operations figure~\ref{fig:readThroughput10000Nodes} shows,
 that all databases benefit from using an index,
 except Apache Jena which always uses an index and is only presented as reference.
@@ -677,7 +655,11 @@ which is not effected by the index.
 The comparison of the different operations shown in figure~\ref{fig:operationReadScan} shows us where the strengths and weaknesses are in the different databases.
 Apache Jena and Neo4j are the slowest when it comes to inserting nodes,
 but they are much faster in retrieving nodes,
-with Neo4j even being the fastest of all four in graph traversal.
+with Neo4j even being the fastest of all four in graph traversal.\\
+This also explains why Neo4j and OrientDB have a higher throughput when using edges,
+because they can look up the edges much faster than they can insert an edge.
+That also concludes,
+that the insertion part of creating an edge is cheap compared to inserting a node.
 
 OrientDB and Sparksee seem to be a good choice then inserting and reading is the main concern of the application.
 
@@ -701,19 +683,26 @@ depending on the specific use case.
 \section{Related Work and Generalisability}
 \label{ch:evaluation:se:relatedWorkAndGeneralisability}
 In this section we will compare our results with the findings of our related work as it's suitable.
-Our main goal is to investigate if the difference in structure has an impact on performance,
+Our main goal is to investigate if the difference in structure and edge to node ratio has an impact on performance,
 when that is not the case we can assume,
 that benchmark results from research on social network graph can be used to evaluate the performance of a graph database in an industrial environment.
 The key point we will investigate is how the number of edges in relation to the number of nodes effects the throughput performance of the databases,
-as for social network graphs that number is quite high at around $ 8 $\cite[41]{TaoShen} to $ 22 $\cite{Dayarathna2012} whereas our graph structure contains a edge to node ratio of $ 1.3 $ to $ \sim1 $ (depending on the variables x, y and z; higher variable values lead to a ratio closer to 1).
+as for social network graphs this number is quite high at around $ 8 $\cite[41]{TaoShen} to $ 22 $\cite{Dayarathna2012} whereas our graph structure contains a edge to node ratio of $ 1.3 $ to $ \sim1 $ (depending on the variables x, y and z; higher variable values lead to a ratio closer to 1) or $ 0 $ if we use the workload without edges.
 
 By comparing our finding with the ones from Dominguez-Sal et al.\cite{TaoShen} which can be seen in figure~\ref{fig:throughputShen} we see,
 that all databases performed much better than in our experiment.
-The throughput of Neo4j and Jena is well above $ 100 \frac{inserts}{s} $ and Sparksee too reaches a higher throughput with $ 29770 \frac{inserts}{s} $.
+The throughput of Neo4j and Jena is well above $ 100 \frac{inserts}{s} $ and Sparksee too reaches a higher throughput with $ 29770 \frac{inserts}{s} $.\\
+Our findings would suggest,
+that their performance for Sparksee and Jena should be lower than ours and Neo4j would perform better,
+but since all databases perform better something else has to be different in their case.\\
 This higher performance could be the results from a lack of information stored in the nodes,
 as the paper only mentions weights on the inserted edges we cannot surely tell if that is the case.
-With that in mind we can come to the conclusion,
-that databases perform worse in an industrial environment and the results of graph database benchmarks cannot be transferred into the industrial context,
+
+With this comparison we would conclude,
+that graph databases perform worse in an industrial environment,
+with graphs that have a lower edge to node ratio compared to a social network graph.
+Therefore,
+the results of other benchmarks executed on graph databases with social network graph cannot be used to determine the throughput in an industrial application,
 as we can't tell how much throughput is sacrificed by storing any information in the nodes.
 We investigated the impact of different node sizes,
 but to measure the throughput with absolutely no information in the nodes would require a different implementation that doesn't use the API to store information in the nodes.
@@ -725,12 +714,12 @@ but to measure the throughput with absolutely no information in the nodes would 
   \label{fig:throughputShen}
 \end{figure}
 
-The research of Dayarathna et al.\cite{Dayarathna2012} used a edge to node ration of 22 with a node count of 1024.
-Comparing their results shown in figure~\ref{fig:throughputXGDBench} with our results from figure~\ref{fig:withIndexThroughput} lead to the conclusion,
-that the databases perform better with an industrial graph structure and less edges.
-The throughput of OrientDB is split in half compared to our workload at the almost same number of nodes (1024 vs. 1000 in our research).
-With this observation we come to the conclusion that graph databases would perform even better in an industrial environment,
-but since the dataset size which we can compare is too small we cannot surely tell if that holds true for larger node counts.
+The research of Dayarathna et al.\cite{Dayarathna2012} used a edge to node ration of 22 with a node count of only 1024.
+Comparing their results shown in figure~\ref{fig:throughputXGDBench} with our results from figure~\ref{fig:withIndexThroughput} leads to the conclusion,
+that the databases perform better with an industrial graph structure and less edges.\\
+But by looking closer at the data and our findings from the workload using no edges in section~\ref{ch:evaluation:se:edgeDiscussion} we would expect that the results would be better for OrientDB and Neo4j, since they both perform better with more nodes.\\
+Overall this comparison leads to the conclusion,
+that graph databases perform better with industrial data structures.
 
 \begin{figure}[!h]
   \centering
@@ -739,7 +728,11 @@ but since the dataset size which we can compare is too small we cannot surely te
   \label{fig:throughputXGDBench}
 \end{figure}
 
-If we look at our own findings in figure~\ref{fig:indexNoEdges10000Nodes} we can come to the conclusion that the throughput is better when using edges,
-which correlates with the comparison to the research conducted by Dominguez-Sal,
-but the throughput becomes even better as the number of edges compared to the number of nodes increases and as the ratio of edges to nodes is relatively low in an industrial application that again leads the conclusion,
-that graph databases perform worse in the industrial environment and the results of graph benchmarks cannot not be used to determine performance in the industrial internet of things.
+If we look at our own findings in figure~\ref{fig:indexNoEdges10000Nodes} we can come to the conclusion that depending on the database and moreover the read performance of it the overall throughput with more edges is better,
+if the read performance is better compared to the insert performance.
+That would correlate with Dominguez-Sal et al.\cite{TaoShen},
+as they have a higher edge to node ration and better throughput in all cases.
+
+To generalise our finding,
+we can say that the overall throughput for insert operations also depends on the read performance.
+With that other research examining the performance of graph databases can be used to determine the suitability of a database for the industrial environment if the insert and read throughputs are listed.

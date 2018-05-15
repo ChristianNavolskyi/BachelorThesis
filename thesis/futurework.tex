@@ -16,13 +16,17 @@ but we couldn't test it at scale,
 because of its license limitations.
 
 \subsection{Generalisability}
-As the conclusions we draw with the research from Dominguez-Sal et al.\cite{TaoShen} and Dayarathna et al.\cite{Dayarathna2012} in section~\ref{ch:evaluation:se:relatedWorkAndGeneralisability} diverge,
-we cannot surely say that the results of studies performed on graph databases with social network graph can be transferred to the use in an industrial environment,
-but the tendency goes towards worse performance in an industrial application as mentioned in~\ref{ch:evaluation:se:relatedWorkAndGeneralisability}.
+With our results and the comparison with other research in this field,
+we can say that the throughput of a graph database depends not only on the insert performance,
+but among others,
+also on read throughput as this is needed to insert edges into the database.\\
+It is indirectly possible to transfer the throughput measured on social network graphs to throughput in an industrial application,
+by taking the read throughput relative to the insert throughput into account and minding the data structure in particular the edge to node ratio.\\
+Besides that, there are other factors effecting throughput as our comparison in section~\ref{ch:evaluation:se:relatedWorkAndGeneralisability} shows.
 
 \section{Future Work}
 As our investigations on the throughput of graph databases with data from the industrial internet of things could not lead to a solid conclusion about the comparability between performance results measured with social network graphs and industrial graphs,
-a study should be conducted that investigates the impact of different edge to node ratios covering also different graph properties as the clustering coefficient for example to evaluate which graph properties effect the throughput of graph databases.
+a study should be conducted that investigates the impact of different edge to node ratios covering also different graph properties as the clustering coefficient for example to evaluate which graph properties effect the throughput of graph databases in which way.
 
 \section{Summary}
 The purpose of this research was to investigate the suitability of current graph databases for the use in an industrial environment and furthermore examine if the results from previous research conducted in the field of graph database benchmarking can be generalised to be applied on the industrial use case.\\

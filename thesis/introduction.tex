@@ -8,8 +8,10 @@ The amount of data created depends on the individual use case but still,
 it needs to be stored to be useful.
 Since there are multiple databases available it can be difficult to choose the right one for an individual scenario.
 
-Current graph database benchmark only cover social network graphs,
-which differ from the data structure present in the industry in their edge to node ration as well as their cluster coefficient.
+Current graph database benchmarks only cover social network graphs,
+which differ from the data structure present in the industry,
+for example,
+in their edge to node ratio.
 
 \subsection{Use Case - Industry 4.0}
 There are multiple analytic algorithms to run on data to extract certain features.
@@ -61,7 +63,8 @@ In chapter~\ref{ch:background} we are motivating graph and the use of graph data
 The different kinds of graph databases are explained and an example database which we are testing is mentioned and shortly described.
 Also in this chapter we are comparing the different available benchmarking programs and their features and take a look at research done by others in the field of graph database benchmarking.
 
-In chapter~\ref{ch:analysis} the industrial data is modelled and its structure is analysed as well as a reasonable amount of data is determined.
+In chapter~\ref{ch:analysis} the industrial data is modelled,
+and its structure is analysed as well as a reasonable amount of data is determined.
 Then we are figuring out how a workload could look like in an industrial environment.
 At last,
 we further analyse out chosen benchmarking program and give an overview of its procedure.
@@ -76,7 +79,7 @@ First we cover the graph data generator which includes the class for creating th
 Next,
 the bindings are implemented and their individual adaptions to the benchmark are highlighted.
 And lastly,
-we explain the graph workload class which is the mediator between the created graph data and the database bindings.
+we explain the graph workload class that is the mediator between the created graph data and the database bindings.
 
 Chapter~\ref{ch:evaluation} focuses on running the benchmark and evaluating the results.
 First, we define our objective during evaluation.
@@ -86,6 +89,6 @@ These are grouped into "throughput" in section~\ref{ch:evaluation:se:throughput}
 Each group includes multiple benchmarks in which we changed one variable at a time.
 The results are presented directly after each benchmark followed by a discussion to interpret the results.
 
-In chapter~\ref{ch:futureWork} we draw a conclusion over out work and give the answer to our question from above.
+In chapter~\ref{ch:futureWork} we draw a conclusion over our work and give the answer to our question from above.
 Also ideas for future research and development in this field are presented.
 Finally a summary is given at the end of this chapter.

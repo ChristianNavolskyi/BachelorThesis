@@ -46,9 +46,12 @@ wohingegen Jena und Neo4j weit davon entfernt waren.\\
 Nachdem wir die Generalisierbarkeit von Resultaten aus Graph-Datenbank Benchmarks ausgewertet haben,
 können wir auch hier keine eindeutige Entscheidung treffen,
 da Vergleiche mit unterschiedlichen Studien zu verschiedenen Schlussfolgerungen führen.
-Allerdings scheinen mehr Argument dafür zu sprechen,
+Wir können allerdings sage,
+das die Performanz beim hinzufügen von Graph Komponenten unter anderem auch vom Lese-Durchsatz abhängt,
+diese Operation gebraucht wird um Kanten zum Graphen hinzuzufügen.
+Schließlich scheinen doch mehr Argument dafür zu sprechen,
 dass Graph-Datenbanken schlechter im industriellen Einsatz abschneiden was dazu führt,
-dass die Resultate aus anderen Studien nicht übernommen werden können.
+dass die Resultate aus anderen Studien nicht direkt übernommen werden können.
 
 \cleardoublepage
 
@@ -81,8 +84,10 @@ whereas Jena and Neo4j were far away from the target throughput.\\
 After evaluating the generalisability of graph database benchmark results we came to no clear conclusion,
 as the comparisons with other research points into two different directions.
 However,
+we can say that the insert throughput also depends on the read performance of the database as inserting edges requires read operations.
+Besides that,
 there were more arguments indicating that graph databases perform worse in an industrial environment,
 which leads to the conclusion,
-that the results of other studies cannot be used to determine the performance in an industrial use case.
+that the results of other studies cannot directly be used to determine the performance in an industrial use case.
 
 \cleardoublepage
