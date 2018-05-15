@@ -40,19 +40,22 @@ An example would be to get the time at which a specific product was processed by
 \section{Question}
 The question of our research is,
 how well current graph databases are capable of handling the amount of data created in an industrial environment.
-Furthermore we will look at how the structure effects performance to conclude if other research investigating the performance of graph databases can be used to determine the performance these databases would have in an industrial environment.
+Furthermore,
+we will look at how the structure effects performance to conclude if other research investigating the performance of graph databases can be used to determine the performance these databases would have in an industrial environment.
 
 \section{Methodology}
-We will chose the databases to use for our testing from other studies covering benchmarking graph databases to be able to compare the results and look to similarities in behaviour.
+We will choose the databases to use for our testing from other studies covering benchmarking graph databases to be able to compare the results and look to similarities in behaviour.
 To evaluate different databases we first will look up existing benchmarks and choose the best fitting one for our research.
 In the benchmarking program we need to look at the creation of data and how it can be stored and retrieved.
 The same exact dataset should be used for all databases equally to eliminate the variation that comes with generating data during each benchmark run.
 Workloads will be designed to investigate the performance of graph databases with industrial data and the production environment will be simulated.
-With the databases and benchmark set up we will run the workloads and evaluate the results to conclude if current database are suitable for the industrial internet of things.
+With the databases and benchmark set up,
+we will run the workloads and evaluate the results to conclude if current databases are suitable for the industrial internet of things.
 
 \section{Goal of this Thesis}
-With this thesis we want to examine whether and if so,
-how well graph databases are able to stand the load of an production line.
+With this thesis,
+we want to examine whether and if so,
+how well graph databases are able to stand the load of a production line.
 Because every manufacturer is different and we cannot cover all scenarios we try to cover the most important parameters
 so that the suitability for the individual case can be estimated.
 Besides this specific investigation we will try to conclude if the results of research performed on graph databases with social network graphs can be applied to the industrial use case.
@@ -64,7 +67,8 @@ Also in this chapter we are comparing the different available benchmarking progr
 
 In chapter~\ref{ch:analysis} the industrial data is modelled and its structure is analysed as well as a reasonable amount of data is determined.
 Then we are figuring out how a workload could look like in an industrial environment.
-At last we further analyse out chosen benchmarking program and give an overview of its procedure.
+At last,
+we further analyse out chosen benchmarking program and give an overview of its procedure.
 
 Chapter~\ref{ch:design} is focused on the design of the different extensions for the benchmark and also the concrete data structure.
 For the extension we cover the design of the specific workloads,
@@ -73,17 +77,19 @@ the graph workload class managing the graph databases and the graph data and fin
 
 In chapter~\ref{ch:implementation} the implementation of the single components is described.
 First we cover the graph data generator which includes the class for creating the graph data as well as the class for recreating it from files.
-Next the bindings are implemented and their individual adaptions to the benchmark are highlighted.
-And lastly we explain the graph workload class which is the mediator between the created graph data and the database bindings.
+Next,
+the bindings are implemented and their individual adaptions to the benchmark are highlighted.
+And lastly,
+we explain the graph workload class which is the mediator between the created graph data and the database bindings.
 
 Chapter~\ref{ch:evaluation} focuses on running the benchmark and evaluating the results.
 First, we define our objective during evaluation.
 Then the configuration of our system is stated, as well as the hardware as the software side.
 Next the procedure of running the benchmarks sequentially is explained following be the different aspects we are testing.
 These are grouped into "throughput" in section~\ref{ch:evaluation:se:throughput}, "production simulation" in section~\ref{ch:evaluation:se:productionSimulation} and "retrieving under load" in section~\ref{ch:evaluation:se:retrievingUnderLoad}.
-Each group includes multiple benchmarks in which we changed on variable at a time.
+Each group includes multiple benchmarks in which we changed one variable at a time.
 The results are presented directly after each benchmark followed by a discussion to interpret the results.
 
 In chapter~\ref{ch:futureWork} we draw a conclusion over out work and give the answer to our question from above.
 Also ideas for future research and development in this field are presented.
-Finally a summary is given in the end of this chapter.
+Finally a summary is given at the end of this chapter.

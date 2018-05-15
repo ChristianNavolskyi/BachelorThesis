@@ -11,10 +11,10 @@ In the end in section~\ref{ch:design:se:executionTool} and~\ref{ch:design:se:eva
 \section{Data Structure}
 \label{ch:design:se:dataStructure}
 To create a schema for our data structure we had a meeting with other researchers at our institute.
-The result of out session can be seen in figure~\ref{fig:firstDesignOfSchema}.
+The result of our session can be seen in figure~\ref{fig:firstDesignOfSchema}.
 In the centre left we see "Features of Interest" which could be mapped to the "testFeature" edge in the industrial example of figure~\ref{fig:exampleData} as it depicts an observation of some product.
 At the bottom we see a "M" which stands for "Machine",
-its connection to "P. Schritte"\footnote{german for production steps} shows that this machine does one to n production steps.
+its connection to "P. Schritte"\footnote{german for production steps} shows that this machine does \texttt{1} to \texttt{n} production steps.
 Every production step is associated with a component which consists of a PCB\footnote{short for printed circuit board} what has different parts,
 a version and a file after which it was created.
 
@@ -35,7 +35,7 @@ A machine and a design are linked to the factory,
 these represent the production machine and the design template for products made by that machine.
 A product has incoming edges from the design it is made after, the machine it was produced by and the order for which it is created.
 Variable x determines how many products are made for each order.
-The products was made at a specific date and consists of one or multiple components depending on the variable y.
+The product was made at a specific date and consists of one or multiple components depending on the variable y.
 Every component undergoes a test suite which contains of a number of test parameters,
 which number is defined by z.\\
 For easier reference we will call x productsperorder, y componentsperproduct and z testparametercount in the next sections.
@@ -49,7 +49,7 @@ For easier reference we will call x productsperorder, y componentsperproduct and
 
 \section{Workloads}
 \label{ch:design:se:workloads}
-Our workload design will be separated into three part.
+Our workload design will be separated into three parts.
 In subsection~\ref{ch:design:se:throughput} we discuss the design of workloads aimed to uncover the ability to store large amounts of data.
 Subsection~\ref{ch:design:se:productionSimulation} will directly investigate the suitability of a database to be used in an industrial use case for storing data.
 We will design workloads to examine the other industrial use case of retrieving data under load in subsection~\ref{ch:design:se:retrievingUnderLoad}.
@@ -70,7 +70,7 @@ These variables are
 
 The last variable sounds counter intuitive,
 since edges add meaning to the data,
-but by eliminating them we want so see if edges could be a cause of delay,
+but by eliminating them we want to see if edges could be a cause of delay,
 because to add an edge the start and end node need to be known and therefore be retrieved at first.
 
 We will go over the different variables in the following subsections and motivate their purpose.
@@ -93,7 +93,7 @@ that is small enough to not have an impact on performance but large enough to re
 
 \subsubsection{Node Property Size}
 \label{ch:design:se:nodePropertySize}
-After retrieving a number of nodes that represents a acceptable execution time we will vary the next variable which is the property size.
+After retrieving a number of nodes that represents an acceptable execution time we will vary the next variable which is the property size.
 We will go from 10B used in the index benchmarks to up to 1MB,
 again in steps of multiplying by 10 (10B, 100B, 1KB, ..., 1MB).
 
@@ -119,7 +119,7 @@ We will use the same node size as in~\ref{ch:design:se:index} to be able to comp
 \subsection{Production Simulation}
 \label{ch:design:se:productionSimulation}
 Related to production we will investigate the impact of the structure and the general suitability for an industrial use.
-The next two subsection will cover those aspects in more detail.
+The next two subsections will cover those aspects in more detail.
 
 The property size will be set to 50B,
 which should be enough to cover on average most values stored in the database.
@@ -136,12 +136,14 @@ which are
 \end{itemize}
 
 For production simulation we will first examine if the data structure impacts performance of the databases.
-To investigate this aspect we will change the width of the graph with the variables mentioned above.
+To investigate this aspect,
+we will change the width of the graph with the variables mentioned above.
 We will use the numbers from section~\ref{ch:analysis:se:data} as the maximum width,
-which would be $ productsperorder = 64 $, \linebreak
-$ componentsperproduct = 128 $ and $ testparametercount = 128 $.
+which would be \texttt{productsperorder = 64},
+\texttt{componentsperproduct = 128} and \texttt{testparametercount = 128}.
 In the first workload we will set all variables to one,
-the next one will use $ productsperorder = 16 $, $ componentsperproduct = 32 $ and $ testparametercount = 32 $.
+the next one will use \texttt{productsperorder = 16},
+\texttt{componentsperproduct = 32} and \texttt{testparametercount = 32}.
 The third and last one will use the maximum width mentioned above.
 By this variation we will cover the minimum and maximum with an additional result in the middle to see if there are any changes in performance.
 
@@ -151,7 +153,7 @@ which is necessary for the industry.
 
 \subsubsection{Suitability}
 \label{ch:design:se:suitability}
-To examine if a database is suitable for the industry it should be able to store the data faster then it is coming from the machines.
+To examine if a database is suitable for the industry it should be able to store the data faster than it is coming from the machines.
 In section~\ref{ch:analysis:se:dataAmount} we calculated that 1056833 nodes would be written to the database every three minutes.
 
 Now that we have our data structure we can calculate how many edges are contained in that graph and finally how many inserts have to be performed every second.
@@ -173,7 +175,7 @@ We will count the incoming edges for every node and also use the variables x, y 
   \end{aligned}
 \end{equation}
 
-Together with the amount of nodes we can calculate the total amount of elements being inserted into the database as shown in equation~\ref{eq:dataElements}.
+Together with the number of nodes we can calculate the total amount of elements being inserted into the database as shown in equation~\ref{eq:dataElements}.
 
 \begin{equation}
   \label{eq:dataElements}
@@ -195,9 +197,11 @@ To convert that into our target throughput we divide that number by three minute
   \end{aligned}
 \end{equation}
 
-First we will set up a data set with that amount of nodes and insert it into the database,
+First,
+we will set up a data set with that amount of nodes and insert it into the database,
 that will allow us to compare the time needed to store all data with our three minute limit.
-If the database should take more than three minutes it would not be suitable,
+If the database should take more than three minutes,
+it would not be suitable,
 since data is produced faster than it can be stored.
 
 We will use the structure with the maximum width,
@@ -232,7 +236,8 @@ the rest will be inserting data.
 Scanning a graph can be done in multiple ways,
 the simplest being depth first search~\cite{Tarjan1972},
 to retrieve values associated with connected nodes.
-For example you could scan from a machine to get the test features of their produced products.
+For example,
+you could scan from a machine to get the test features of their produced products.
 
 As in subsection~\ref{ch:design:se:reading} we will use a mix of $ 5\% $ scan operations with $ 95\% $ insert operations,
 to simulate the constant load present in an industrial environment.
@@ -300,7 +305,7 @@ Edges are also used in these workloads to reflect the use in the industry.
 \end{table}
 
 The remaining workloads to examine the ability to retrieve data are shown in table~\ref{tab:retrievingUnderLoad}.
-These workloads will use a appropriate data set size regarding execution time and a property size as in the production simulation of 50B.
+These workloads will use an appropriate data set size regarding execution time and a property size as in the production simulation of 50B.
 A simple structure is used to investigate the basic capabilities of data retrieval,
 that means "Products per Order",
 "Components per Product" and "Test Parameter Count" are set to $ 1 $.
@@ -328,13 +333,13 @@ For the benchmark to be able to execute our workloads the way we want them to be
 
 \begin{itemize}
   \item Generation of the dataset
-  \item Generation of rondom graph components
-  \item Generation of a operation order
+  \item Generation of random graph components
+  \item Generation of an operation order
   \item Workload to use the generated dataset
   \item Database bindings.
 \end{itemize}
 
-In the following subsections we will go in more detail over the different areas we are planing to modify.
+In the following subsections we will go in more detail over the different areas we are planning to modify.
 
 \subsection{Graph Data Generator}
 YCSB does not include a graph data generator,
@@ -345,14 +350,15 @@ The generator should create a data set with the structure mentioned in section~\
 The two parts of the generator,
 which are creating together with storing the data and recreating the data are designed in subsection~\ref{ch:design:se:storingTheDataset} and~\ref{ch:design:se:restoringTheDataset} respectively.
 
-Generally to represent a graph in YCSB we need some classes to represent nodes, edges and the graph.
+Generally,
+to represent a graph in YCSB we need some classes to represent nodes, edges and the graph.
 In section~\ref{ch:background:se:graphs} we mentioned that a graph is a tuple of a set of nodes and a set of edges.
 That can be directly mapped to a class with two lists,
 one for nodes and the other one for edges.
 We want the nodes to have a key for identification,
 a label to match it with an object that could exist in the real world and a value,
 which will represent the data stored in the node,
-the size of this value should be directly linked the the property size from~\ref{ch:design:se:nodePropertySize}.
+the size of this value should be directly linked the property size from~\ref{ch:design:se:nodePropertySize}.
 An edge should also have a key for identification,
 a label to add meaning to it and a start and an end node,
 represented by their keys.
@@ -361,7 +367,6 @@ The generator of the dataset should decide if it should create a new one or recr
 
 \subsubsection{Storing the Dataset}
 \label{ch:design:se:storingTheDataset}
-\todo{Activity diagram of $ GraphDataRecorder::createGraph() $}
 We want to control the size of the dataset with our variables mentioned in the workload section~\ref{ch:design:se:workloads} so this generator should create small subgraphs with only one node and its corresponding edges every time it is asked for a new value.
 By storing the current state of the created graph in the generator class,
 we can always determine the next subgraph to create.
@@ -388,8 +393,9 @@ Reading and scanning operations require a point to start with in the data,
 that's why we need the key of some component in the graph.
 The kay can be randomly chosen,
 but the node or edge associated with it has to be present in the database.
-Therefore we need to somehow store the keys of the graph components we have already put into the database,
-that could be done in the $ GraphDataGenerator $ created for subsection~\ref{ch:design:se:storingTheDataset},
+Therefore,
+we need to somehow store the keys of the graph components we have already put into the database,
+that could be done in the \texttt{GraphDataGenerator} created for subsection~\ref{ch:design:se:storingTheDataset},
 because it anyway touches all created values.
 
 Because we want to retrieve edges and nodes randomly we have to pick one of the two randomly every time a random component is required.
@@ -397,15 +403,15 @@ As in~\ref{ch:design:se:storingTheDataset} and its subsections,
 every created value needs to be stored to be retrieved later on.
 The data needed for this generator is not as complex as a graph and can therefore be stored directly in a file line by line for easy storing and restoring.
 That also means,
-that we can read the files at the beginning of the run so it is faster accessible during the benchmark without using to much memory.
+that we can read the files at the beginning of the run so it is faster accessible during the benchmark without using too much memory.
 
 For the workload which requires the absents of edges a method should be defined to return only a randomly chosen node.
 
-Figure~\ref{fig:randomGraphComponentGenerator} shows an activity diagram of the generator.
+Figure~\ref{fig:randomGraphComponentGenerator} shows an activity diagram of the generator returning a random graph component.
 
 \begin{figure}
   \includegraphics[width=\textwidth]{images/extensions/randomGraphComponentGenerator}
-  \caption{Activity diagram of the $ RandomGraphComponentGenerator $ showing the process of storing and restoring.\todo{}}
+  \caption{Activity diagram of the \texttt{RandomGraphComponentGenerator} showing the process of storing and restoring.}
   \label{fig:randomGraphComponentGenerator}
 \end{figure}
 
@@ -415,10 +421,10 @@ To fix the execution order of inserting and retrieving data to and from the grap
 we need to store the operations too.
 That can be done by simply storing the name of each operation in a file as it appears and reading it from there when running the benchmark.
 
-In YCSB there is already a $ DiscreteGenerator $\footnote{com.yahoo.ycsb.generator.DiscreteGenerator} which take a value and a weight and returns distributed according to the weights a value,
+In YCSB there is already a \texttt{DiscreteGenerator}\footnote{com.yahoo.ycsb.generator.DiscreteGenerator} which take a value and a weight and returns distributed according to the weights a value,
 this can be used to get the operations to run on the database.
 
-Figure~\ref{fig:operationOrderGenerator} visualises the procedure of storing the operation order.
+Figure~\ref{fig:operationOrderGenerator} visualises the procedure of returning the next operations.
 
 \begin{figure}
   \includegraphics[width=\textwidth]{images/extensions/OperationOrderGenerator}
@@ -427,13 +433,15 @@ Figure~\ref{fig:operationOrderGenerator} visualises the procedure of storing the
 \end{figure}
 
 \subsection{Graph Workload}
-The $ GraphWorkload $s task is to coordinate the different generators and to execute the workload as specified.
+The \texttt{GraphWorkloads} task is to coordinate the different generators and to execute the workload as specified.
 To be able to store the generated dataset in a specific folder on the system the workload class should take a path to a folder and instrument the generators to store their data in that folder or recreate it from there respectively.
 
-This class will be the interface between the client calling $ Workload::doInsert $ and $ Workload::doTransaction $ and the database.
-The $ Workload::doInsert $ method will only insert a subgraph into the database,
+This class will be the interface between the client calling \texttt{Workload::doInsert} and \texttt{Workload::doTransaction} and the database.
+The \texttt{Workload::doInsert} method will only insert a subgraph into the database,
 to do so the workload class needs to get the subgraph from the GraphDataGenerator and redirect its value to the database.
-For the $ Workload::doTransaction $ method the workload has to be able to call the available methods on a database which are
+For the \texttt{Workload::doTransaction} method the workload has to be able to call the available methods on a database which are
+
+\pagebreak
 
 \begin{itemize}
   \item DB::insert(String table, String key, Map<String, ByteIterator> values)
@@ -446,53 +454,49 @@ For the $ Workload::doTransaction $ method the workload has to be able to call t
 We will only use the first three for our workloads,
 but the other ones should be implemented too,
 to support future workloads.
-To determine which operation should be executed the $ OperationOrderGenerator $ from subsection~\ref{ch:design:se:operationOrderGenerator} will be used.
+To determine which operation should be executed the \texttt{OperationOrderGenerator} from subsection~\ref{ch:design:se:operationOrderGenerator} will be used.
 
-In general we see,
-that a $ table $ is given as an argument,
+In general,
+we see that a \texttt{table} is given as an argument,
 in a graph database we don't have tables as in relational databases,
 so we can use it to distinguish between nodes and edges,
 by simply passing the string "node" or "edge" to the database.
-Next is a $ key $,
+Next is a \texttt{key},
 which we can use to pass the key identifier of the graph component to the database.
-The $ values $ map will contain the values of the graph components to insert parsed into a map for compatibility and vice versa for the $ result $ map and vector.
+The \texttt{values} map will contain the values of the graph components to insert parsed into a map for compatibility and vice versa for the \texttt{result} map and vector.
 Our data design does not focus to much on the individual properties the nodes and edges could have,
-therefore we will simply read all $ fields $ of the graph component.
+therefore we will simply read all \texttt{fields} of the graph component.
 
 \textbf{DB::insert} \newline
-As described above the $ DB::insert $ method will get a value from the \linebreak
-$ GraphDataGenerator $ and insert it into the database.
+As described above the \texttt{DB::insert} method will get a value from the \texttt{GraphDataGenerator} and insert it into the database.
 
 \textbf{DB::read} \newline
-The read operation will pick a random graph component with the \linebreak
-$ RandomGraphComponentGenerator $ and use its kind (node or edge) as the $ table $ argument and the key identifier as the $ key $ argument.
+The read operation will pick a random graph component with the \texttt{RandomGraphComponentGenerator} and use its kind (node or edge) as the \texttt{table} argument and the key identifier as the \texttt{key} argument.
 
 \textbf{DB::scan} \newline
-Scanning also requires a random component which will be chosen by the \linebreak
-$ RandomGraphComponentGenerator $.
-The mapping is also the same as with $ DB::read $ for the $ table $ and $ key $ arguments.
-$ recordcount $ will be set to $ 1000 $ as that is the default value specified by the $ CoreWorkload $\footnote{com.yahoo.ycsb.workloads.CoreWorkload} and that value represents a good amount for scanning.
+Scanning also requires a random component which will be chosen by the \texttt{RandomGraphComponentGenerator}.
+The mapping is also the same as with \texttt{DB::read} for the \texttt{table} and \texttt{key} arguments.
+\texttt{recordcount} will be set to $ 1000 $ as that is the default value specified by the \texttt{CoreWorkload}\footnote{com.yahoo.ycsb.workloads.CoreWorkload} and that value represents a good amount for scanning.
 
 \textbf{DB::update} \newline
-For this operation we need a randomly picked graph component from the \linebreak
-$ RandomGraphComponentGenerator $ to get a valid key identifier.
+For this operation we need a randomly picked graph component from the \texttt{RandomGraphComponentGenerator} to get a valid key identifier.
 Only the property value should be changed during update,
 not the identifier nor the label,
 that means that only nodes will be changes,
 as edges have no property value assigned to them.
 
 \textbf{DB::delete} \newline
-This takes a random graph component via the $ RandomGraphComponentGenerator $ and calls the $ delete $ method of the database.
+This takes a random graph component via the \texttt{RandomGraphComponentGenerator} and calls the \texttt{delete} method of the database.
 
 To avoid calling these methods with edges when the workload specifies to not use them,
-a parameter which can be set should determine if a random graph component or a random node should be picked by the $ RandomGraphComponentGenerator $.
+a parameter which can be set should determine if a random graph component or a random node should be picked by the \texttt{RandomGraphComponentGenerator}.
 
-Since the client only calls $ Workload::doTransaction $ to execute one of the various database operations the $ OperationOrderGenerator $ should be called to generate the next operation.
+Since the client only calls \texttt{Workload::doTransaction} to execute one of the various database operations the \texttt{OperationOrderGenerator} should be called to generate the next operation.
 
 \subsection{Bindings}
 \label{ch:design:se:bindings}
-To ensure compatibility with other workloads present in YCSB we will extend the $ DB $ class and implement the methods used for other databases.
-Because graph databases are slightly different we will explain how each database will map the arguments of the $ DB $ methods to their own API in the following subsections.
+To ensure compatibility with other workloads present in YCSB we will extend the \texttt{DB} class and implement the methods used for other databases.
+Because graph databases are slightly different we will explain how each database will map the arguments of the \texttt{DB} methods to their own API in the following subsections.
 
 The basic functions we need from our database are
 
@@ -511,10 +515,11 @@ The basic functions we need from our database are
   \item removing an edge
 \end{enumerate}
 
-Generally the $ DB $ operations can then be implemented using these functions.
+Generally the \texttt{DB} operations can then be implemented using these functions.
 A rough implementation is shown in listing~\ref{lst:databaseTemplate}.
 Every database will take a path to a folder in which it will store its internally used files.
-Also if indexing is possible every database should take it as a parameter to set itself up correctly.
+Also,
+if indexing is possible every database should take it as a parameter to set itself up correctly.
 
 We will cover the implementation of the single methods in section~\ref{ch:implementation:se:graphDatabaseBindings}.
 The following subsections will only mention specialities regarding the corresponding database.
@@ -652,18 +657,13 @@ public class Database extends DB {
 }
 \end{lstlisting}
 
-
-
-\todo{Extend what information will be given}
-\todo{Also extend over sections to exactly tell what information will be given and adapt subsections accordingly.}
-
 \subsubsection{Apache Jena}
 Apache Jena uses transactions to work on the database,
 therefore we will need to open and close them as we insert or retrieve data from the database.
 Transactions can be opened for either read or write operations,
 to guarantee data validity.
 
-To get access to the data over Jena we can use the $ TDBFactory::createDataset $ method.
+To get access to the data over Jena we can use the \texttt{TDBFactory::createDataset} method.
 
 Jena has no option to use an index,
 so we can't use it for the workloads which have the index as their variable,
@@ -678,17 +678,17 @@ To retrieve data the create resource or property method can be used as well,
 because if the passed key is already used on another node the returned node will be equal to the already existing node.
 
 \textbf{values} \newline
-Properties can be stored as so called $ Statement $s,
+Properties can be stored as so-called \texttt{Statements},
 which represent a triple as mentioned above.
 The subject will be the graph component itself,
 the predicate will be the identifier of the value in the map and the value will be the object of the statement.
 
 \subsubsection{Neo4j}
-To index the keys of the nodes and edges we have to create an index with an $ Index Manager $.
-Over this $ Index $ the graph components have to be inserted and retrieved.
+To index the keys of the nodes and edges we have to create an index with an \texttt{Index Manager}.
+Over this \texttt{Index} the graph components have to be inserted and retrieved.
 
 Neo4j also uses transactions,
-but we can not set them as read or write transactions.
+but we cannot set them as read or write transactions.
 That is no disadvantage,
 because it will mark it accordingly after the called methods.
 
@@ -713,16 +713,16 @@ Transactions are also part of OrientDB,
 as Neo4j they are initially not read or write specific,
 but adapt as the corresponding methods are called.
 
-OrientDB supports creating a vertex with a key and a map of values directly, but the values of the values map need to be mapped to a $ String $,
-because $ ByteIterator $s are not supported.
+OrientDB supports creating a vertex with a key and a map of values directly, but the values of the values map need to be mapped to a \texttt{String},
+because \texttt{ByteIterators} are not supported.
 Edges will take the key, a start and end node and a label.
 The label has to be set to a constant value over all edges,
-because edges have to be looked up the the label and the key,
-but the label is only handed in the $ DB::insert $ method.
+because edges have to be looked up the label and the key,
+but the label is only handed in the \texttt{DB::insert} method.
 The edge properties can be set after creating the edge.
 
 \subsubsection{Sparksee}
-Sparksee only has a very low level API,
+Sparksee only has a very low-level API,
 which uses ids for all its contents nodes, edges and attributes.
 
 As with OrienDB the index has only to be activated on the specific fields.
@@ -745,7 +745,7 @@ which can be the key in the values map.
 
 \subsection{Summary}
 \label{ch:design:se:summary}
-To sum up our design decisions we will give an overview of the different parameters each class should take and why in table~/ref{tab:designOverview}.
+To sum up our design decisions we will give an overview of the different parameters each class should take and why in table~\ref{tab:designOverview}.
 
 \begin{table}[h!]
   \begin{minipage}{\textwidth}
@@ -753,7 +753,7 @@ To sum up our design decisions we will give an overview of the different paramet
       \hline
       Class & Parameters & Purpose \\ \hline
       GraphDataGenerator & folder, "products per order", "components per product", "test parameter count", "no edges" and "node property size" & Return subgraphs that form the data structure described in~\ref{ch:design:se:dataStructure}. \\ \hline
-      RandomGraph-\newline ComponentGenerator & folder & Return a randomly chose graph component already in the database. \\ \hline
+      RandomGraph-\newline ComponentGenerator & folder & Return a randomly chosen graph component already in the database. \\ \hline
       OperationOrderGenerator & folder & Return operations to execute on the database. \\ \hline
       GraphWorkload & folder, recordcount and "no edges" & Run the workloads on the databases with the help of the different generators. \\ \hline
       ApacheJena & dbFolder & Use the Jena TDB API to create and access the database. \\ \hline
@@ -762,11 +762,11 @@ To sum up our design decisions we will give an overview of the different paramet
       Sparksee & dbFolder and "useIndex" & Use the Sparksee API to create and access the database. \\ \hline
     \end{tabularx}
   \end{minipage}
-  \caption{Overview of parameters and the of for every class}
+  \caption{Overview of command line parameters and the use of every class}
   \label{tab:designOverview}
 \end{table}
 
-The workflow of the generators is shown in figure~\ref{fig:generalGeneratorWorkflow}.
+The general workflow of the generators is shown in figure~\ref{fig:generalGeneratorWorkflow}.
 
 \begin{figure}[h!]
   \centering

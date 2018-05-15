@@ -4,14 +4,15 @@ In this chapter we will analyse the data which could occur in an industrial use 
 that includes its structure and amount.
 Further we will examine possible workloads for our graph databases in section~\ref{ch:analysis:se:workloads}.
 
-At the end of this chapter in section~\ref{ch:analysis:se:benchmark} we will chose one benchmark for our research.
+At the end of this chapter in section~\ref{ch:analysis:se:benchmark} we will choose one benchmark for our research.
 
 \section{Data}
 \label{ch:analysis:se:data}
 As described in section~\ref{ch:background:se:industrialData} we have to work with the data coming from production machines.
 Figure~\ref{fig:exampleData} shows us how that data could look like.
 
-Additionally our partners at SICK AG~\cite{SICK} gave us the following key data for a product example.
+Additionally,
+our partners at SICK AG~\cite{SICK} gave us the following key data for a product example.
 A component carrier with up to 64 circuit boards on it each with up to 128 components is produced every three minutes.
 Each component has up to 128 test features.
 
@@ -85,12 +86,12 @@ That could be in the form of looking up a certain product produced in the past t
 
 \section{Benchmark Comparison}
 \label{ch:analysis:se:benchmark}
-To chose a benchmark for our upcoming research we will look at the following aspects of each benchmark.
+To choose a benchmark for our upcoming research we will look at the following aspects of each benchmark.
 
 \begin{itemize}
   \item Data Structure - Of what structure is the generated data?
   \item Workloads - How are the workloads designed?
-  \item Programming Language - Is it written in a well known programming language or do we have to learn it first.
+  \item Programming Language - Is it written in a well-known programming language or do we have to learn it first.
   \item Community - Is there a community for support?
 \end{itemize}
 
@@ -102,7 +103,7 @@ The results of our comparison are shown in the following table~\ref{tab:benchmar
   \begin{minipage}{\textwidth}
     \begin{tabularx}{\textwidth}{ | l | X | X | X | l | }
       \hline
-      Benchmark & Data Strucutre & Workloads & Programming Language & Community \\ \hline
+      Benchmark & Data Structure & Workloads & Programming Language & Community \\ \hline
       Graphalytics & Social Network & Algorithm based & Java & small\footnote{8 contributors and 16 forks on GitHub \url{https://github.com/ldbc/ldbc_graphalytics}} \\ \hline
       YCSB & No specific structure & CRUD based & Java & big\footnote{108 contributors and 1278 forks on GitHub \url{https://github.com/brianfrankcooper/YCSB}} \\ \hline
       XGDBench & Social Network & Read, Update and Graph Traversal & X10 & none\footnote{1 contributor and 1 fork (which is from us) on GitHub \url{https://github.com/miyurud/XGDBench}} \\ \hline
@@ -113,7 +114,7 @@ The results of our comparison are shown in the following table~\ref{tab:benchmar
 Since we are not using a social network structure for our data the graph generators in Graphalytics and XGDBench do not aid us much,
 as the generators would be difficult to extend because of their use of complex algorithms to create that structure in the created data~(\cite{Erling2015},~\cite{Dayarathna2012}).
 YCSB on the other hand does not serve any particular structure presumably as they are not designed for graph databases and therefore don't need a particular structure on their data.
-So YCSB should be easy to extend with out data model.
+So YCSB should be easy to extend with our data model.
 
 For the workload aspect Graphalytics uses common algorithms which does not represent out workload scenario.
 XGDBench fits our needs better but not quite well, as inserting data is very important for us.
@@ -125,7 +126,7 @@ which could take some time to learn.
 Lastly the community aspect in which YCSB stands out with many contributors and an overall more active community than the other two.
 
 All observed aspects indicate that YCSB would suit our goal the best.
-The generator and the workloads should be easily extendable, since they has an open design\footnote{See com.yahoo.ycsb.Workload and com.yahoo.ycsb.generator.Generator in \url{https://github.com/brianfrankcooper/YCSB}}.
+The generator and the workloads should be easily extendable, since they have an open design\footnote{See com.yahoo.ycsb.Workload and com.yahoo.ycsb.generator.Generator in \url{https://github.com/brianfrankcooper/YCSB}}.
 
 \section{YCSB}
 \label{ch:analysis:se:ycsb}
@@ -133,7 +134,7 @@ In this section we will describe the internal workflow of a benchmark run in YCS
 
 YCSB separated the execution into two parts.
 The first part is the load phase in which the initial data is written to the database.
-Then comes the transaction phase where database operation are performed.
+Then comes the transaction phase where database operations are performed.
 
 Figure~\ref{fig:basicYCSBWorkflow} shows the classes involved in executing a benchmark run with YCSB.
 The "Client" takes the workload file and command-line parameters to set up the database and create "ClientThreads".

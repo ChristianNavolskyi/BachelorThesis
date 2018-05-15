@@ -18,15 +18,15 @@ Karlsruhe, den 14.05.2018
 In dem derzeitigen Wandel der Industrie in Richtung Industrie 4.0 kommt es auch dazu,
 dass viele Daten produziert werden,
 welche wertvoll sind,
-da sie für Verbesserungen in der Production verwendet werden können.
+da sie für Verbesserungen in der Produktion verwendet werden können.
 Die anfallenden Daten können als Graph repräsentiert werden,
 deswegen macht es Sinn Graph-Datenbanken zu untersuchen.\\
-In dieser Arbeit werden wir die Performanz von Graph-Datenbanken in einem industiellen Umfeld untersuchen.
+In dieser Arbeit werden wir die Performanz von Graph-Datenbanken in einem industriellen Umfeld untersuchen.
 Unser Ziel ist es,
 herauszufinden ob die Resultate aus bestehender Forschung in diesem Gebiet herangezogen werden können um die Tauglichkeit der Graph-Datenbanken in der Industrie zu prüfen.
 Anstatt Graphen ähnlich zu denen in sozialen Netzen für die Untersuchungen zu nutzen,
 wie es die meisten Studien in diesem Gebiet tun,
-werden wir eine Daten-Struktur entwerfen die den industiellen Datenraum repräsentiert und schauen uns ebenso die Besonderheiten eines industriellen Einsatzes einer Graph-Datenbank an um unsere Arbeitslasten entsprechend zu entwerfen.
+werden wir eine Daten-Struktur entwerfen die den industriellen Datenraum repräsentiert und schauen uns ebenso die Besonderheiten eines industriellen Einsatzes einer Graph-Datenbank an um unsere Arbeitslasten entsprechend zu entwerfen.
 
 Der YCSB Benchmark wird erweitert um Datensätze mit der von uns entworfenen Datenstruktur zu generieren.
 Für die Auswertung haben wir vier allgemein bekannte Graph-Datenbanken ausgewählt,
@@ -38,12 +38,12 @@ dass aktuelle Graph-Datenbanken nicht für den industriellen Einsatz geeignet si
 Sparksee konnte nicht mit dem Datensatz in voller Größe getestet werden,
 da die kostenlose Lizenz diese Datenmenge nicht unterstützt,
 doch wenn es den erreichten Durchsatz halten könnte,
-würde es auch mit dem Datenaufkommen aus der Industrie klar kommen,
+würde es auch mit dem Datenaufkommen aus der Industrie klarkommen,
 da wir das nicht direkt testen konnten,
 können wir keine fundierte Entscheidung diesbezüglich treffen.
-OrientDB verfehlter unser gesetztes Zeil für den Durchsatz nur knapp,
+OrientDB verfehlter unser gesetztes Ziel für den Durchsatz nur knapp,
 wohingegen Jena und Neo4j weit davon entfernt waren.\\
-Nachdem wir die Generalisierbarkeit von Resultaten aus Graph-Datebank Benchmarks ausgewertet haben,
+Nachdem wir die Generalisierbarkeit von Resultaten aus Graph-Datenbank Benchmarks ausgewertet haben,
 können wir auch hier keine eindeutige Entscheidung treffen,
 da Vergleiche mit unterschiedlichen Studien zu verschiedenen Schlussfolgerungen führen.
 Allerdings scheinen mehr Argument dafür zu sprechen,
@@ -54,16 +54,19 @@ dass die Resultate aus anderen Studien nicht übernommen werden können.
 
 \chapter*{Abstract}
 
-In the current transition happening in the industry towards Industry 4.0 a lot of data is produced,
+In the current transition happening in the industry towards Industry 4.0,
+a lot of data is produced,
 which is valuable as it can be used for all kinds of improvements in the production process.
 The accruing data can be represented in a graph and therefore it is worth examining graph databases.\\
-In this thesis we will investigate the performance of graph database in an industrial environment.
+In this thesis,
+we will investigate the performance of graph database in an industrial environment.
 Our goal is to examine if the results of other research in the field of graph databases can be used to determine the performance of a graph database in the industrial internet of things.
 Instead of using social network graphs as other research in this field does,
 we will design a data structure that represents the industrial data space and also look at the peculiarities of an industrial use to design our workloads accordingly.
 
 The YCSB benchmark will be extended to create datasets with our desired data structure.
-For the benchmark we chose four commonly known graph databases, which are Apache Jena, Neo4j, OrientDB and Sparksee (also known as former DEX).
+For the benchmark,
+we chose four commonly known graph databases, which are Apache Jena, Neo4j, OrientDB and Sparksee (also known as former DEX).
 Their Java APIs were used to integrate them into YCSB.
 
 We evaluated the databases with our data structure on a single machine with an i7-3770K processor and 16GB of RAM and came to the conclusion,
@@ -77,7 +80,8 @@ OrientDB missed the target throughput slightly,
 whereas Jena and Neo4j were far away from the target throughput.\\
 After evaluating the generalisability of graph database benchmark results we came to no clear conclusion,
 as the comparisons with other research points into two different directions.
-However there were more arguments indicating that graph database perform worse in an industrial environment,
+However,
+there were more arguments indicating that graph databases perform worse in an industrial environment,
 which leads to the conclusion,
 that the results of other studies cannot be used to determine the performance in an industrial use case.
 

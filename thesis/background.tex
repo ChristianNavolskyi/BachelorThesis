@@ -1,6 +1,7 @@
 \chapter{Background \& Related Work}
 \label{ch:background}
-In this chapter we will give a introduction into the different fields touched by our research.
+In this chapter,
+we will give an introduction to the different fields touched by our research.
 Related work is mentioned primarily in section~\ref{ch:background:se:graphDatabaseBenchmarks} as it covers the different benchmarks and their findings.
 
 \section{Graphs}
@@ -27,7 +28,7 @@ An equivalent representation of that graph would be
 \begin{figure}[h]
   \centering
   \includegraphics[width=\textwidth/4]{images/simpleGraph}
-  \caption{A directed graph with three labeled vertices and four edges.}
+  \caption{A directed graph with three labelled vertices and four edges.}
   \label{fig:simpleGraph}
 \end{figure}
 
@@ -203,7 +204,7 @@ it shows the observation of a product.
 
 \section{Graph Databases}
 \label{ch:background:se:graphDatabases}
-There is a variety of database types available the main categories are SQL and NoSQL databases.
+There is a variety of database types available and the main categories are SQL and NoSQL databases.
 A short description of SQL databases would be
 \blockquote[\cite{ChuaHock-Chuan}]{A relational database organizes data in tables (or relations).
 A table is made up of rows and columns.
@@ -211,7 +212,9 @@ A row is also called a record (or tuple).
 A column is also called a field (or attribute).
 A database table is similar to a spreadsheet.}
 
-NoSQL databases on the other hand are able to store any kind of data in any record,
+NoSQL databases,
+on the other hand,
+are able to store any kind of data in any record,
 they don't rely on a specified schema.
 Also they are able to scale horizontally for the cost of consistency.~\cite{Yegulalp2017}
 
@@ -223,8 +226,10 @@ Edges also have a unique id,
 a start and end vertex and properties just as vertices.~\cite{Rouse2016}
 
 The labels mentioned at the end of section~\ref{ch:background:se:graphs} can be seen as the properties assigned to a vertex or edge.
-To map a production line in which the elements like machines and products might have their own real world ids these properties can be used to store these real world ids as a key/value pair.
-Later a particular machine for example can be looked up by its id.
+To map a production line in which the elements like machines and products might have their own real-world ids these properties can be used to store these real world ids as a key/value pair.
+Later a particular machine,
+for example,
+can be looked up by its id.
 That is critical to find the data stored in the database.
 
 In the following subsections~\ref{ch:background:se:rdfTriplestores} through~\ref{ch:background:se:graphStores} we will discuss the different types of graph databases and give examples of real databases which operate by that type.
@@ -232,11 +237,11 @@ All databases used in this thesis support the ACID\footnote{short for atomicity,
 
 \subsection{RDF/Triplestores}
 \label{ch:background:se:rdfTriplestores}
-First in our list are RDF stores also known as triple stores.
+First on our list are RDF stores also known as triple stores.
 
-RDF (Resource Description Framework) is a model for data interchange on the Web.
-It is able to merge data even with different schemas, it also support the evolution of a schema over time.
-The linking strucutre of the Web is extended by RDF by it using URIs\footnote{abbreviation of Universal Resource Identifier, used to identify abstract of physical resources.~\cite{Berners-Lee2005}} to name relationships and resources connected by those.~\cite[4]{Ontotext2014}
+RDF (Resource Description Framework) is a model for data interchange on the web.
+It is able to merge data even with different schemas, it also supports the evolution of a schema over time.
+The linking structure of the Web is extended by RDF by it using URIs\footnote{abbreviation of Universal Resource Identifier, used to identify abstract of physical resources.~\cite{Berners-Lee2005}} to name relationships and resources connected by those.~\cite[4]{Ontotext2014}
 
 \blockquote[\cite{W3C2014}]{This linking structure forms a directed, labeled graph, where the edges represent the named link between two resources, represented by the graph nodes.
 This graph view is the easiest possible mental model for RDF and is often used in easy-to-understand visual explanations.}
@@ -257,14 +262,14 @@ This structure can be seen as a graph, with the subject and the object being ver
 Jena TDBs dataset consists of the node table, triple and quad indexes and the prefix table.
 The node table contains the representation of RDF terms and provides a mapping from Node to NodeId and the other way around.
 Triple and quad indexes are indexes for the default graph and named graphs respectively.
-The triple indexes contains three indexes for the three parts of a statement.
+The triple indexes contain three indexes for the three parts of a statement.
 Each index has all information about the triple,
 there is no secondary index.
 Prefixes table used mainly used in presentation and serialisation of the triples in RDF/XML or Turtle.~\cite{ApacheTDB}
 
 \subsection{Document Stores}
 As the name suggests the data model of document stores consist of documents which can have fields without depending on a defined schema~\cite{OrientDB}.
-Its aggregates data in those documents and transforms them internally into an searchable form~\cite{Techopedia2017}.
+Its aggregates data in those documents and transforms them internally into a searchable form~\cite{Techopedia2017}.
 
 \subsubsection{OrientDB}
 OrientDB is a mix of a document store and a graph store,
@@ -272,7 +277,9 @@ as stated in their manual \textquote[\cite{OrientDB}]{OrientDB is a document-gra
 Its designed as a robust, highly scalable database with a wide possible set of use cases.~\cite{OrientDB}
 OrientDB does not require a fixed schema and therefore supports schema-less and schema-mixed models.
 It uses an indexing algorithm called MVRB-Tree,
-which derived from the Red-Black Tree and the B+ Tree and it therefore supports fast insertions as well as fast lookups.\cite{Abubakar2014}
+which derived from the Red-Black Tree and the B+ Tree and it,
+therefore,
+supports fast insertions as well as fast lookups.\cite{Abubakar2014}
 
 \subsection{Graph Stores}
 \label{ch:background:se:graphStores}
@@ -281,8 +288,8 @@ References with foreign keys known from relational databases are mapped as relat
 Each node in the database model contains a list of relationship-records to represent their connection to other nodes.~\cite{NeoTechnologyInc.2016}
 
 \subsubsection{Neo4j}
-Neo4j is a native graph database and was build as such from the ground up.
-It organises its data in a graph structure and has nodes, relationships and attributes as direct accessible data structures.
+Neo4j is a native graph database and was built as such from the ground up.
+It organises its data in a graph structure and has nodes, relationships and attributes as directly accessible data structures.
 It can assign attributes to both nodes and edges.
 Neo4j is transactional and fulfils the ACID properties.~\cite{Neo4jInc.2006}
 
@@ -304,7 +311,8 @@ Two maps are used, one which maps the object id to the attribute and the other o
 As the need to compare similar programs exists benchmarks are needed to hand results over certain parameters to aid decision making.
 In the field of graph databases that is no different.
 There exist multiple benchmarks for graph databases and some are outlined shortly in the following subsections~\ref{ch:background:se:ldbcGraphalytics}~to~\ref{ch:background:se:ycsb}.
-In in section~\ref{ch:analysis:se:benchmark} we choose a benchmark for our work.
+In section~\ref{ch:analysis:se:benchmark},
+we choose a benchmark for our work.
 
 \subsection{LDBC: Graphalytics}
 \label{ch:background:se:ldbcGraphalytics}
@@ -321,8 +329,7 @@ weakly connected components or single-source shortest paths to name just a few~\
 Figure~\ref{fig:graphalyticsArchitecture} shows the architecture of the Graphalytics benchmarking software.
 The user can configure the available benchmarks inside Graphalytics with a benchmark configuration (2).
 Parameters for the algorithm included in (1) can be set and the system under test (4) can be set up.
-The system on which the benchmark runs,
-has to be provided by the user.
+The system on which the benchmark runs has to be provided by the user.
 The harness service (5) coordinated the benchmark configuration and the benchmarking process.
 The dataset for the benchmark has to be provided by the user or can be generated by using the available workload generators.\cite[11]{Iosup}
 \pagebreak
@@ -347,7 +354,7 @@ The core workload is designed to use simple CRUD\footnote{CRUD stands for the ba
 
 The architecture of YCSB can be seen in figure~\ref{fig:ycsbArchitecture}.
 The client contains a "Workload executor" which uses generators to create a dataset and execute operations on the database.
-Each "Client thread" calls the "Workload executor" to perform a operation on the database.
+Each "Client thread" calls the "Workload executor" to perform an operation on the database.
 Workload files can be specified to set the amount of data and the mix of operations to use for that workload.
 To tell YCSB which database should be used command-line parameters are passed to the client.
 
@@ -375,8 +382,7 @@ It specifically targets read,
 update and graph traversal operations for its performance aspects~\cite[366]{Dayarathna2012}.
 
 In figure~\ref{fig:XGDBenchArchitecture} the architecture of the XGDBench benchmark is illustrated.
-The general workflow is similar to the one from YCSB,
-since this benchmark is based on YCSB.
+The general workflow is similar to the one from YCSB since this benchmark is based on YCSB.
 The data generator used in XGDBench uses the MAG algorithm to create the data set.
 The workload is the executed in two phases,
 the load phase which fills the database with data and the transaction phase which executes operations on the database.
@@ -397,7 +403,7 @@ Abubakar et al. have not focused their research on graph databases,
 but the used OrientDBs document API among others.
 They compared the following NoSQL databases MongoDB, ElasticSearch, OrientDB and Redis.
 Three different workloads were used in their study,
-each concentrating on one operations,
+each concentrating on one operation,
 which were inserts, reads and updates.
 The dataset size was varied between 1.000 and 100.000 records with a record size of 1KB.
 Their insert workload showed that OrientDB was the slowest among the examined database across all dataset sizes whereas Redis was the fastest in this category.
@@ -413,14 +419,15 @@ The largest dataset they used was $ 2^20 = 1048576 $ nodes,
 because most databases would not finish execution within 24 hours for larger sets.
 They found that DEX was over one order of magnitude faster for insert and scan then the second best database,
 which was Neo4j.
-Besides that they found out that Neo4j had scalability problems for some operations on larger data sets.
+Besides that,
+they found out that Neo4j had scalability problems for some operations on larger datasets.
 Overall DEX performed best for most operations and was close to Neo4j where it was the fastest.\cite{TaoShen}
 
 \subsection{XGDBench}
 Dayarathna et al. introduced a benchmark for cloud computing systems called XGDBench.
 They used the MAG algorithm for their dataset generation,
 which outperforms the R-MAT in terms of creating a realistic network structure.
-They focus their research on the examination on online social networks and used workloads based on read, update and traversal operations.
+They focus their research on the examination of online social networks and used workloads based on read, update and traversal operations.
 Five workloads were specified, three of which focus on read operations, one has a mix of $ 50\% $ read and $ 50\% $ update operations and the last one reads the neighbours of a vertex trying to mimic the loading of a friend list from a person.
 The evaluation of their implementation of the MAG algorithm shows that it had a high cluster prominence which means it represents the social affinities found in real social networks and the graphs created by it follow the power-law distribution which is good for realistic benchmarking scenarios.
 A performance evaluation was executed on these graph databases,
@@ -434,11 +441,11 @@ as some databases performed very poorly which made execution with more vertices 
 
 \subsection{Graphalytics}
 Capot\ua et al. created a data generator, chose workloads based on choke-points and also conducted a benchmark on four graph databases.
-The choke-points are technological challenged the graph databases are struggling with.
+The choke-points are technological challenges the graph databases are struggling with.
 They designed the data generator to create datasets that can help evaluate those choke-points.
 The data generator supports specification of the clustering coefficient,
 which is important for social networks,
-as they indicate the presence communities in the graph.
+as they indicate the presence of communities in the graph.
 Datagen, as the data generator they developed is called,
 is able to create a graph with 1.3 billion edges in 3 hours on their machine and the creation of large datasets should also be archivable with relatively cheap hardware.
 They implemented five algorithms,
@@ -447,5 +454,4 @@ Those were executed on the following platforms,
 Hadoop MapReduce, Giraph, GraphX and Neo4j.
 MapReduce is capable of performing all workloads if given enough time,
 but it was up to two orders of magnitude slower than Giraph and GraphX.
-Neo4j performed best at breadth-first search on a dataset with many edges compared to the number of nodes,
-but failed at all workloads using the dataset created by their date generator.\cite{Capota2015}
+Neo4j performed best at breadth-first search on a dataset with many edges compared to the number of nodes but failed at all workloads using the dataset created by their date generator.\cite{Capota2015}
