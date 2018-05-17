@@ -1,6 +1,6 @@
 \chapter{Implementation}
 \label{ch:implementation}
-In this chapter we will cover how we implemented the different classes to run our workloads.
+In this chapter we will cover how we implemented the different classes to execute our workloads.
 We will start with the graph and its components,
 then move on to the different generators for the graph data,
 the random graph components and the operation order.
@@ -21,7 +21,7 @@ In \texttt{Package db} we added the bindings for our four databases.
 \section{Graph}
 As mentioned in section~\ref{ch:background:se:graphs} a graph simply contains two lists,
 one for nodes and one for edges.
-This class is only a container for the two lists.
+This class is only a container for those two lists.
 
 To extract some shared values of nodes and edges,
 we added an abstract class \texttt{GraphComponent},
@@ -29,11 +29,12 @@ that holds the identifier and the label of the graph component.
 
 \subsection{Node}
 The \texttt{Node} class assigns the identifiers by counting the created nodes and incrementing the counter for every new node.
-If the property value of a node is not set,
-a call to \texttt{Node::getHashMap} will randomly fill the property with the amount of characters specified by the \texttt{nodePropertySize} option.
+If the property value of a node isn't set,
+a call to \texttt{Node::getHashMap} will randomly fill the property with the amount of characters specified by the \texttt{nodePropertySize} parameter.
 
 \subsection{Edge}
 As the \texttt{Node} class the \texttt{Edge} class also uses a counter field to assign the correct identifier to each edge.
+Additionally the ids of the start and end \texttt{Node} are stored in fields.
 
 \section{Generator}
 \label{ch:implementation:se:generator}
@@ -42,51 +43,51 @@ Because all three generators share that behaviour we created an abstract class \
 that extends the generic \texttt{Generator<V>}\footnote{com.yahoo.ycsb.generator.Generator} class and adds methods to check if the files are present for recreation or not.
 
 Every generator offers a \texttt{create} method,
-in which it will check for present files and set up the correct implementation (recorder or recreator) for the \texttt{GraphWorkload}\footnote{com.yahoo.ycsb.workloads.GraphWorkload} to use.
+in which it will check for present files and set up the correct implementation (recorder or recreator) for the \texttt{GraphWorkload}\footnote{com.yahoo.ycsb.workloads.GraphWorkload}.
 The generator classes are all abstract and use abstract methods to call the underlying implementation.
 How this is useful will be described in the implementations of the different kinds of generators.
 
 The abstract generator classes also contain the values needed for both implementation types (recorder and recreator),
-to have them all in one place.
+to avoid code duplication.
 
 \subsection{Graph Data}
-The \texttt{nextValue} call encapsulates the call to get the subgraph from the underlying implementation and also stores the returned identifiers of the created nodes and edges for the \texttt{RandomGraphComponentGenerator}\footnote{com.yahoo.ycsb.generator.graph.randomcomponents.RandomGraphComponentGenerator},
-that needs them to know which values it can return.
+The \texttt{nextValue} call encapsulates the call to get the subgraph from the underlying implementation and also stores the returned identifiers of the created nodes and edges for the \texttt{RandomGraphComponentGenerator}\footnote{com.yahoo.ycsb.generator.graph.randomcomponents.RandomGraphComponentGenerator}.
 
 The \texttt{Gson}\footnote{com.google.gson.Gson} used in both implementations of this abstract class is initialised here with the \texttt{GraphAdapter}\footnote{com.yahoo.ycsb.generator.graph.GraphAdapter}.
 
-Since there are two phases of the benchmark (see section~\ref{ch:analysis:se:ycsb}) the generator needs to know from which point it should move on with creation,
-therefore if the current phase is the transaction phase,
+Since there are two phases of the benchmark (see section~\ref{ch:analysis:se:ycsb}) the generator needs to know from what point it should move on with creation.
+When the current phase is the transaction phase,
 it will call the underlying implementation to create the amount of data that was created during the load phase,
 to equalise the progress of the generator.
 That is also important for the \texttt{RandomGraphComponentGenerator},
 because the identifiers of the graph components created by the \texttt{GraphDataGenerator} are kept there for it to use them.
 
 \subsection{Random Graph Component}
-Calling \texttt{nextValue} on a \texttt{RandomGraphComponentGenerator} will invoke the implementing class to choose between a node and an edge and then choose a random graph component of that type.
+Calling \texttt{nextValue} on a \texttt{RandomGraphComponentGenerator} will invoke the implementing class to choose between a node and an edge.
+Then a random graph component of that type is chosen.
 A random node can also be picked directly,
-as is needed for the \texttt{GraphWorkload::update} method,
+as it's needed for the \texttt{GraphWorkload::update} method,
 since it only will use nodes.
 
 \subsection{Operation Order}
 Here the generator only holds common fields shared by the recorder and the recreator.
-Besides that it offers the \texttt{OperationOrderGenerator::create} method,
-which observes the present files and initialises the corresponding implementation for the \texttt{Graph Workload}.
 
 \section{Recorder}
 \label{ch:implementation:se:recorder}
-For every kind we have a creator that creates the initial values for the workload and stores them in a corresponding file for the recreator~\ref{ch:implementation:se:recreator}.
+For every generator we have a creator that creates the initial values for the workload and stores them in a corresponding file for the recreator presented in section~\ref{ch:implementation:se:recreator}.
 
 How the creation of the values is implemented in each generator is described in the following subsections~\ref{ch:implementation:se:graphDataRecorder}~to~\ref{ch:implementation:se:operationOrderRecorder}.
 
 \subsection{Graph Data}
 \label{ch:implementation:se:graphDataRecorder}
 As shown in figure~\ref{fig:generalGeneratorWorkflow} when \texttt{GraphDataGenerator::nextValue}\footnote{com.yahoo.ycsb.generator.graph.GraphDataGenerator} is called to create the next subgraph,
-the \texttt{GraphDataRecorder} is called and creates the subgraph according to the diagram shown in figure~\ref{fig:graphDataRecorder},
-then serialises it and writes the string coming from serialisation into a file line by line.
+the \texttt{GraphDataRecorder} is called and creates the subgraph according to the diagram shown in figure~\ref{fig:graphDataRecorder}.
+Each subgraph is then serialised and the string coming from serialisation is written into a file line by line.
 
-Table~\ref{tab:recorderVariables} show how the parameters x, y and z from the data structure from figure~\ref{fig:finalDesignOfSchema} are implemented in that schema.
-They all effect when the specific if block is executed at the end of figure~\ref{fig:graphDataRecorder}.
+Table~\ref{tab:recorderVariables} shows how the parameters x, y and z of the data structure from figure~\ref{fig:finalDesignOfSchema} are implemented in that schema.
+They all affect when the specific if block is executed at the end of figure~\ref{fig:graphDataRecorder} to reset the corresponding values for the if blocks above.\\
+The creation of a subgraph can be seen in a loop,
+in every iteration another if-condition is fulfilled to return the next value.
 
 \begin{figure}[h!]
   \centering
@@ -107,13 +108,13 @@ They all effect when the specific if block is executed at the end of figure~\ref
   \label{tab:recorderVariables}
 \end{table}
 
-The serialisation process is done in a \texttt{GraphAdapter} that implements both a \texttt{JsonSerializer}\footnote{com.google.gson.JsonSerializer} and a \texttt{JsonDeserialzer}\footnote{com.google.gson.JsonDeserialzer} with a \texttt{Graph} as the generic value.
+The serialisation process is done in the \texttt{GraphAdapter} that implements both a \texttt{JsonSerializer}\footnote{com.google.gson.JsonSerializer} and a \texttt{JsonDeserialzer}\footnote{com.google.gson.JsonDeserialzer} with a \texttt{Graph} as the generic argument.
 Since a graph object contains two lists,
-these lists are serialised into a JsonElement,
-which will be retrieved as a string by calling \texttt{Gson::toJson}.
+these lists are serialised into \texttt{JsonElement}s\footnote{com.google.gson.JsonElement},
+which will be retrieved as a string by calling \texttt{Gson::toJsonTree}.
 The following listing~\ref{lst:serialiseCode} shows the Java code used to implement the serialisation of a graph.
 
-\begin{lstlisting}[language=Java,label={lst:serialiseCode},caption={Serialisation of a graph object.},captionpos=b]
+\begin{lstlisting}[language=Java,label={lst:serialiseCode},caption={Serialisation of a \texttt{Graph} object.},captionpos=b]
 @Override
 public JsonElement serialize(Graph graph, Type typeOfSrc, JsonSerializationContext context) {
  JsonObject result = new JsonObject();
@@ -130,7 +131,7 @@ public JsonElement serialize(Graph graph, Type typeOfSrc, JsonSerializationConte
 
 \subsection{Random Graph Component}
 To choose between a node and an edge a random number between zero and one will be picked ($ r \in \mathbb{N}_0 \wedge r \in [ 0, 1 ] $) and stored in a file.
-To select a random graph component the \texttt{GraphDataGenerator} will be asked what the last id was and then a random value between zero and that number.
+To select a random graph component the \texttt{GraphDataGenerator} will be asked what the last id was and then a random value between zero and that number will be generated.
 That value will also be stored in a file corresponding to the type of the graph component.
 
 \subsection{Operation Order}
@@ -143,11 +144,11 @@ which supplies the string values for the operations that will be saved in a file
 To retrieve the values stored by the recorder classes described in section~\ref{ch:implementation:se:recorder} the upcoming recreators are needed.
 
 \subsection{Graph Data}
-If the files for the data set are present the \texttt{GraphDataRecreator} will be called to return the next subgraph.
+If the files for the dataset are present the \texttt{GraphDataRecreator} will be called to return the next subgraph.
 It does that by deserialising the next line with the \texttt{Gson::fromJson} method which uses the \texttt{GraphAdapter} described in subsection~\ref{ch:implementation:se:graphDataRecorder} together with a \texttt{Type}\footnote{java.lang.reflect.Type}.
-The code of the \texttt{GraphAdapter} to deserialise a graph is shown in listing~\ref{lst:deserialiseGraph}.
+The code of the \texttt{GraphAdapter} to deserialise a \texttt{Graph} is shown in listing~\ref{lst:deserialiseGraph}.
 
-\begin{lstlisting}[language=Java,label={lst:deserialiseGraph},caption={Deserialisation of a graph object.},captionpos=b]
+\begin{lstlisting}[language=Java,label={lst:deserialiseGraph},caption={Deserialisation of a \texttt{Graph} object.},captionpos=b]
 @Override
 public Graph deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext context) throws
     JsonParseException {
@@ -167,12 +168,13 @@ public Graph deserialize(JsonElement jsonElement, Type type, JsonDeserialization
 }
 \end{lstlisting}
 
-This classes uses a \texttt{BufferedReader}\footnote{java.io.BufferedReader} to read the file line by line,
+This class uses a \texttt{BufferedReader}\footnote{java.io.BufferedReader} to read the file line by line,
 to avoid extensive memory usage with larger datasets.
 
 \subsection{Random Graph Component}
 \label{ch:implementation:se:randomGraphComponentRecreator}
-At the beginning the files will be read and their values will be stored in three different \texttt{Iterator<String>}\footnote{java.util.Iterator<E>} one for the type and the other two for the identifiers of the different kinds of graph components.
+At the beginning the files will be read and their values will be stored in three different \texttt{Iterator<String>}s\footnote{java.util.Iterator<E>},
+one for the type and the other two for the identifiers of the different kinds of graph components.
 
 When a value is required the corresponding \texttt{Iterator<String>} returns the next value in the list and increments its pointer.
 
@@ -185,27 +187,27 @@ Every time \texttt{OperationOrderRecreator::nextValue} is called the next line f
 \section{Graph Workload}
 \label{ch:implementation:se:graphWorkload}
 During initialisation the \texttt{GraphWorkload} creates the three generators mentioned in section~\ref{ch:implementation:se:generator},
-by using the \texttt{create} method,
-that way we will have the correct type of generator (recorder or recreator).
+by using the \texttt{create} method.
+That way it will receive the correct type (recorder or recreator) for each generator.
 This process is shown in figure~\ref{fig:graphWorkloadInit}
 
 \begin{figure}[h!]
   \includegraphics[width=\textwidth]{images/extensions/GraphWorkload}
-  \caption{Initialisation of the generators used in the graph workload.}
+  \caption{Initialisation of the generators used in the \texttt{GraphWorkload}.}
   \label{fig:graphWorkloadInit}
 \end{figure}
 
-It also parses the parameters to get to know if "noEdges" should be used,
-what the "property size" of a node should be,
+It also parses the parameters to get the values for \texttt{noEdges},
+the \texttt{property size} of a node,
 how many fields should be scanned (\texttt{recordcount}) and the \texttt{folder}.
 The \texttt{noEdges} parameter is needed to execute the operations on the correct available graph components.
-\texttt{property size} is stored to be retrievable by the \texttt{Node} to know how much random value it should generate.
+The \texttt{property size} is stored to be retrievable by the \texttt{Node} to know how many random characters it should generate.
 The \texttt{recordcount} option is needed for the \texttt{scan} operation.
-Lastly the \texttt{folder} is used to create the folder for the dataset if it is not present and also pass it to the individual generators.
+Lastly the \texttt{folder} is used to create the folder for the dataset if it isn't present and also pass it to the individual generators.
 
 In the load phase the \texttt{Client}\footnote{com.yahoo.ycsb.Client} calls \texttt{GraphWorkload::doInsert}.
 The \texttt{GraphWorkload} then retrieves a subgraph from the \texttt{GraphDataGenerator} by calling \texttt{GraphDataGenerator::nextValue},
-separates it into its core graph components and calls the \texttt{DB::insert} method with each individual component to add them to the database one by one.
+separates it into its graph components and calls the \texttt{DB::insert} method with each individual component to add them to the database one by one.
 
 If the \texttt{Client} calls \texttt{GraphWorkload::doTransaction} the \texttt{GraphWorkload} will first get the operation to execute on the database by the \texttt{OperationOrderGenerator}.
 After that it has an implementation for every available database operation.
@@ -223,7 +225,7 @@ by taking a subgraph from the \texttt{GraphDataGenerator} and inserting its comp
 
 \textbf{doTransactionRead} \newline
 Depending on the \texttt{noEdges} option the \texttt{RandomGraphComponentGenerator} will be asked for a graph component,
-if the option is \texttt{false} or a node if the option is \texttt{true}.
+if the option is \texttt{false} and a node if the option is \texttt{true}.
 With the identifier of the graph component,
 its type and its available fields the database is queried to look up those fields of the specified component.
 
@@ -233,23 +235,13 @@ Then the necessary arguments from the graph component will be passed to the \tex
 alongside the specified \texttt{recordcount}.
 
 \textbf{doTransactionUpdate} \newline
-The \texttt{update} method is not used by our workloads,
+The \texttt{update} method isn't used by our workloads,
 but to make the \texttt{GraphWorkload} accessible to other workloads we implemented it as follows.
-It also picks a random graph component and calls the \texttt{DB::update} method of the database.
+A random graph component is picked and the \texttt{DB::update} method of the database is called.
 If the graph component is a node its property value will be randomly assigned.
 
-We did not implement the \texttt{delete} method of the database,
-as we won't use it in our workloads and the \texttt{CoreWorkload} that we used as reference also did not use it.
-
-\subsection{DBWrapper}
-During implementation we noticed,
-that the \texttt{DBWrapper}\footnote{com.yahoo.ycsb.DBWrapper},
-which measures the time of each operation on the database,
-could not distinguish between nodes being inserted or edges.
-Therefore,
-we additionally adding a measurement that includes the table name in the measurement name,
-because the database will get the information about the type of the graph component being used by the \texttt{table} parameter,
-we can use it here to measure the nodes and edges separately.
+We didn't implement the \texttt{delete} method of the database,
+as we won't use it in our workloads and the \texttt{CoreWorkload} that we used as reference also didn't use it.
 
 \subsection{Parameters}
 This subsection covers the naming of the parameters in the code.
@@ -268,7 +260,7 @@ This subsection covers the naming of the parameters in the code.
       nodePropertySize & fieldlength \\ \hline
     \end{tabularx}
   \end{minipage}
-  \caption{This table shows by which name the parameters can be found in the YCSB project.}
+  \caption{This table shows the name the parameters as they can be found in the YCSB project.}
   \label{tab:parameterMapping}
 \end{table}
 
@@ -278,9 +270,9 @@ The same goes for the \texttt{useIndex} option.
 \section{Graph Database Bindings}
 \label{ch:implementation:se:graphDatabaseBindings}
 In this section we will describe the different binding implementations, their specialities and how they implemented the different operations mentioned in section~\ref{ch:design:se:bindings}.
-Table~\ref{tab:bindingParameterMapping} shows the options for the different databases.
+Table~\ref{tab:bindingParameterMapping} shows the available options for the different databases.
 
-\begin{table}
+\begin{table}[h!]
   \begin{minipage}{\textwidth}
     \begin{tabularx}{\textwidth}{ | X | X | X | }
       \hline
@@ -302,28 +294,28 @@ In the following listing~\ref{lst:jenaInit} the initialisation and the beginning
 
 \begin{lstlisting}[language=Java,label={lst:jenaInit},caption={Implementation of the initialisation and model retrieval in Jena.},captionpos=b]
 String outputDirectory = getDirectoryFromProperties();
-Dataset dataset = TDBFactory.createDataset(outputDirectory);
+Dataset dataset = TDBFactory.createDataset(outputDirectory); // Create dataset, represents the database.
 
 dataset.begin(ReadWrite.WRITE); // Starts a write transaction, ReadWrite.READ is used for read operations.
 
 try {
-  Model model = dataset.getDefaultModel();
+  Model model = dataset.getDefaultModel(); // Needed to access the database.
 
   performOpertaionOnModel();
 
   dataset.commit();
 } finally {
-  dataset.end();
+  dataset.end(); // Finish transaction.
 }
 \end{lstlisting}
 
-To modify the database with Jena we need to start a transaction and specify if it is a read or a write transaction.
+To modify the database with Jena we need to start a transaction and specify whether it is a read or a write transaction.
 After that we retrieve the model of the database to work on the data.
-When we are done with our operation we need to commit or abort the transaction,
+After we are done with our operation we need to commit or abort the transaction,
 similar to a relational database.
 
 \textbf{creating a node} \newline
-A node is created by calling \texttt{Model::createResource}\footnote{org.apache.jena.rdf.model.Model} with the \texttt{key} as an \texttt{AnonId}\footnote{org.apache.jena.rdf.model.AnonId}.
+A node is created by calling \texttt{Model::createResource}\footnote{org.apache.jena.rdf.model.Model} with an \texttt{AnonId}\footnote{org.apache.jena.rdf.model.AnonId} that receives the \texttt{key} as an argument.
 
 \textbf{creating an edge} \newline
 To create an edge we use the \texttt{Model::createProperty} method with the \texttt{key} as the argument.
@@ -332,36 +324,31 @@ we have to add this triple to the model by calling \texttt{Model::add} with the 
 the edge and the end node.
 
 \textbf{adding properties to a node} \newline
-Properties are mapped as statements in Jena and to create those we use the \linebreak
-\texttt{Model::createStatement} method that takes the node, the key for the property and the property value as arguments.
+Properties are mapped as statements in Jena and to create those we use the
+\texttt{Model::\allowbreak createStatement} method that takes the node, the key for the property and the property value as arguments.
 After all statements are created we add them to the model with \texttt{Model::add} and the list of statements as the argument.
 
 \textbf{adding properties to an edge} \newline
-To add the properties to an edge,
-which is a \texttt{Property}\footnote{org.apache.jena.rdf.model.Property} in Jena,
-we use the \texttt{Property::addProperty} method on the edge with the key of the property and the value of it as arguments.
+To add properties to an edge,
+we use the \texttt{Property::addProperty} method on it with the key of the property and its value as the arguments.
 
 \textbf{getting a node by its identifier} \newline
-Retrieving a node is done by creating a resource with the same identifier,
-Jena will look up their database if one already exists and the returned node will be equal to an existing one.
+Retrieving a node is done by creating a resource with the same identifier.
+Jena will look up the database whether one already exists and the returned node will be equal to an existing one.
 
 \textbf{getting an edge by its identifier} \newline
-Similar to retrieving a node from the database we create a property with the key,
-that returns an existing edge if one is present with the key.
+Similar to retrieving a node from the database we create a property with the \texttt{key},
+that returns an existing edge if one exists for that \texttt{key}.
 
-\textbf{getting the values of a node} \newline
+\textbf{getting the values of a node/an edge} \newline
 To get the values associated with a node,
 we create a \texttt{SimpleSelector}\footnote{org.apache.jena.rdf.model.SimpleSelector},
-which acts like a query on the database.
-We supply it the node and the key of the value and leaf the object of the query empty,
-so it looks the matching values up.
-
-\textbf{getting the values of an edge} \newline
-The values of an edge are fetched the same way.
+which can be used as a query on the database.
+We supply it the node and the key of the value and leave the object of the query empty,
+so it looks up the matching values for the object.
 
 \textbf{getting the outgoing edges of a node} \newline
-To get these edges we list the properties of the node,
-which are represented as edges.
+To get these edges we list the properties of the node.
 
 \textbf{getting the start node of an edge} \newline
 To do this,
@@ -371,32 +358,33 @@ we take the start property of the edge and look up that node on the dataset.
 Removing a node is done by calling \texttt{Model::removeAll} twice,
 once with the node as the subject and once with the node as the object of the statement.
 That will remove all statements associated with that node,
-which will finally remove the node from the database.
+which effectively removes the node from the database.
 
 \textbf{removing an edge} \newline
 Here we also call \texttt{Model::removeAll} but the with edge as the predicate of the statement.
 
 \subsection{Neo4j}
 If an \texttt{Index}\footnote{org.neo4j.graphdb.index.Index<T extends PropertyContainer>} should be used we create two of them,
-one for the \texttt{Node}s\footnote{org.neo4j.graphdb.Node} and one for the \texttt{Relationships}\footnote{org.neo4j.graphdb.Relationship} (edges).
+one for \texttt{Node}s\footnote{org.neo4j.graphdb.Node} and one for \texttt{Relationship}s\footnote{org.neo4j.graphdb.Relationship} (edges).
 Neo4j also uses transaction,
 but we don't need to specify their kind.
 At the end of a transaction we call \texttt{Transaction::success}\footnote{org.neo4j.graphdb.Transaction} to finish the transaction.
 
-An example of our implementation is shown in the following listing~\ref{lst:neo4jInit}, the start and end of a transaction for an operation is implemented as in the if-block of the listing.
+An example of our implementation is shown in the following listing~\ref{lst:neo4jInit}.
+The start and end of a transaction for an operation are implemented as in the if-block of the listing.
 
 \begin{lstlisting}[language=Java,label={lst:neo4jInit},caption={Implementation of the initialisation and beginning of a transaction.},captionpos=b]
 String path = getPathFromProperties();
 boolean useIndex = shouldUseIndex();
 
-GraphDatabaseService graphDbInstance = new GraphDatabaseFactory().newEmbeddedDatabase(new File(path));
+GraphDatabaseService graphDbInstance = new GraphDatabaseFactory().newEmbeddedDatabase(new File(path)); // Creates to object to access the database.
 
 if (useIndex) {
-  try (Transaction transaction = graphDbInstance.beginTx()) {
+  try (Transaction transaction = graphDbInstance.beginTx()) { // Start a transaction.
     IndexManager index = graphDbInstance.index();
     nodeIndex = index.forNodes("nodes");
     relationshipIndex = index.forRelationships("relationships");
-    transaction.success();
+    transaction.success(); // End a transaction.
   }
 }
 \end{lstlisting}
@@ -405,8 +393,8 @@ if (useIndex) {
 We create a node with the \texttt{GraphDatabaseService::createNode}\footnote{org.neo4j.graphdb.GraphDatabaseService} method,
 where we specify the \texttt{key} as the \texttt{Label}\footnote{org.neo4j.graphdb.Label} of the node.
 If an \texttt{Index} is used,
-we then add the node to the index.
-After that we specially add the identifier of the node as a property.
+we add the node to the index after creation.
+After that we add the identifier of the node as a property to be able to look the node up by its identifier.
 
 \textbf{creating an edge} \newline
 For this we have to first create a \texttt{RelationshipType}\footnote{org.neo4j.graphdb.RelationshipType} with the \texttt{key} as the name of the relationship.
@@ -415,52 +403,51 @@ Finally,
 we add the edge to the relationship \texttt{Index}.
 
 \textbf{adding properties to a node/an edge} \newline
-Both \texttt{Nodes} and edges are \texttt{PropertyContainers}\footnote{org.neo4j.graphdb.PropertyContainer},
+Both \texttt{Node}s and edges are \texttt{PropertyContainer}s\footnote{org.neo4j.graphdb.PropertyContainer},
 which support the setting of properties,
 by calling \texttt{PropertyContainer::setProperty} with the key of the property and its value.
 
 \textbf{getting a node by its identifier} \newline
-When an \texttt{Index} is used a node can be looked up on it with \texttt{Index::get} and the key for the identifier and the identifier value.
-Without an \texttt{Index} we call \texttt{GraphDatabaseService::findNode} with the label the key for the identifier and the identifier as arguments.
+When an \texttt{Index} is used a node can be looked up on it with \texttt{Index::get},
+the key for the identifier and the identifier value.
+Without an \texttt{Index} we call \texttt{GraphDatabaseService::findNode} with the \texttt{Label},
+the key for the identifier and the identifier as arguments.
 
 \textbf{getting an edge by its identifier} \newline
 With an \texttt{Index} a \texttt{Relationship} can be found similar to a node.
-Without an index we have to iterate over all \texttt{Relationships} in the graph and check their type to match the \texttt{key}.
+Without an index we have to iterate over all \texttt{Relationship}s in the graph and check their types to match the \texttt{key}.
 
 \textbf{getting the values of a node/an edge} \newline
-The \texttt{ResourceContainer::getAllProperties} method supplies all values set the node or edge.
+The \texttt{PropertyContainer::getAllProperties} method supplies all values set to the node or edge.
 We can simply parse the \texttt{Map<String, Object>}\footnote{java.util.Map<K, V>} returned by it to the needed \texttt{Map<String, ByteIterator>}.
 
 \textbf{getting the outgoing edges of a node} \newline
-\texttt{Nodes} offer a method to get their \texttt{Relationships} in a specified \texttt{Direction}\footnote{org.neo4j.graphdb.Direction}.
+\texttt{Node}s offer a method to get their \texttt{Relationship}s in a specified \texttt{Direction}\footnote{org.neo4j.graphdb.Direction} with \texttt{Node::getRelationships}.
 
 \textbf{getting the start node of an edge} \newline
-\texttt{Relationships} also offer a method to directly get their start node with \texttt{Relationship::getStartNode}.
+\texttt{Relationship}s also offer a method to directly get their start node with \texttt{Relationship::getStartNode}.
 
-\textbf{removing a node} \newline
-To remove a \texttt{Node},
+\textbf{removing a node/an edge} \newline
+To remove a \texttt{Node} or a \texttt{Relationship},
 we look it up,
-remove it from the node \texttt{Index} and then call \texttt{Node::delete} to remove it from the database.
-
-\textbf{removing an edge} \newline
-Here the procedure is similar,
-except we remove it from the relationship \texttt{Index}.
+remove it from the corresponding \texttt{Index} and then call \texttt{Node::delete} or \texttt{Relationship::delete} respectively,
+to remove it from the database.
 
 \subsection{OrientDB}
-To create an index with OrientDB we call \texttt{OrientGraph::createKeyIndex}\footnote{com.tinkerpop.blueprints.impls.orient.OrientGraph} with the key of the identifier and the class of graph components,
+To create an index in OrientDB we call \texttt{OrientGraph::createKeyIndex}\footnote{com.tinkerpop.blueprints.impls.orient.OrientGraph} with the key of the identifier and the graph component classes,
 once with \texttt{Vertex}\footnote{com.tinkerpop.blueprints.Vertex} and once with \texttt{Edge}\footnote{com.tinkerpop.blueprints.Edge}.
 As Neo4j OrientDB uses transactions to execute operations on the database,
-which have to be closed when finished with the operation itself by calling \texttt{OrientGraph::shutdown}.
+which have to be closed after finishing the operation by calling \texttt{OrientGraph::shutdown}.
 
-An example of our implementation covering the implementation a retrieval of a graph for a transaction is shown in listing~\ref{lst:orientdbInit}.
+An example of our implementation covering the initialisation and retrieval of an \texttt{OrientGraph} for a transaction is shown in listing~\ref{lst:orientdbInit}.
 
-\begin{lstlisting}[language=Java,label={lst:orientdbInit},caption={Implementation of the initialisation and the retrieval of a graph for a transaction.},captionpos=b]
+\begin{lstlisting}[language=Java,label={lst:orientdbInit},caption={Implementation of the initialisation and the retrieval of an \texttt{OrientGraph} for a transaction.},captionpos=b]
 String url = getURLFromProperties();
 
-OrientGraphFactory factory = new OrientGraphFactory(url, userName, password);
+OrientGraphFactory factory = new OrientGraphFactory(url, userName, password); // Create object to access database.
 
 if (useIndex) {
-  OrientGraph graph = factory.getTx();
+  OrientGraph graph = factory.getTx(); // Start a transaction.
   if (graph.getIndexedKeys(Vertex.class).size() == 0) {
     graph.createKeyIndex(nodeIdIdentifier, Vertex.class);
   }
@@ -473,40 +460,41 @@ if (useIndex) {
 try {
   performOperationOnGraph();
 } finally {
-  graph.shutdown();
+  graph.shutdown(); // End a transaction.
 }
 \end{lstlisting}
 
 \textbf{creating a node} \newline
 To add a node,
-we simply call \texttt{OrientGraph::addVertex} with the \texttt{key} and the value map we want to put in.
+we simply call \texttt{OrientGraph::addVertex} with the \texttt{key} and the \texttt{value} map we want to put in.
 Before we add the value map,
-we have to transform the \texttt{ByteIterator}\footnote{com.yahoo.ycsb.ByteIterator} values to \texttt{Strings}.
+we have to transform the \texttt{ByteIterator}\footnote{com.yahoo.ycsb.ByteIterator} values to \texttt{String}s with the \texttt{Object::toString} method.
 
 \textbf{creating an edge} \newline
 An edge is created by calling \texttt{OrientGraph::addEdge} with the \texttt{key},
 the start node,
 the end node and a label,
 which we will simply set to "Edge",
-because the label of our values map will be set as a property.
+because the label of our \texttt{values} map will be set as a property.
 
 \textbf{adding properties to a node} \newline
-As mentioned in at "creating a node" the values for the properties are directly passed during creation.
+As mentioned in "creating a node",
+the values for the properties are directly passed during creation.
 
 \textbf{adding properties to an edge} \newline
-We can add the values to an edge by calling \texttt{OrientElement::setProperties}\footnote{com.tinkerpop.blueprints.impls.orient.OrientElement} with the map of string values.
+We can add the \texttt{values} to an edge by calling \texttt{OrientElement::setProperties}\footnote{com.tinkerpop.blueprints.impls.orient.OrientElement} with the map of string values.
 
 \textbf{getting a node by its identifier} \newline
 A node is looked up by \texttt{OrientGraph::getVertices} with the identifier key and the identifier value.
 
 \textbf{getting an edge by its identifier} \newline
-\texttt{Edges} can be retrieved similarly,
-but by calling \texttt{OrientGraph::getEdges} with the according parameters.
+\texttt{Edge}s can be retrieved similarly,
+by calling \texttt{OrientGraph::getEdges} with the according parameters.
 
 \textbf{getting the values of a node/an edge} \newline
-The properties of an \texttt{OrientElement} can be obtained by calling \linebreak
-\texttt{OrientElement::getProperties}.
-The values of the returned map are then casted to \texttt{ByteIterators}.
+The properties of an \texttt{OrientElement} can be obtained by calling
+\texttt{OrientElement::\allowbreak getProperties}.
+The values of the returned map are then cast to \texttt{ByteIterator}s.
 
 \textbf{getting the outgoing edges of a node} \newline
 The edges of a node can be gathered by calling \texttt{OrientVertex::getEdges} with the specified direction.
@@ -516,17 +504,17 @@ The procedure is analogous to that of getting the outgoing edge of a node.
 We call \texttt{OrientEdge::getVertex} with the specified direction.
 
 \textbf{removing a node} \newline
-The \texttt{OrientGraph::removeVertex} method can be used to delete the vertex from the database.
+The \texttt{OrientGraph::removeVertex} method can be used to delete a vertex from the database.
 
 \textbf{removing an edge} \newline
 As to remove a node,
 the \texttt{OrientGraph} provides a method to remove an edge internally,
-that means the connected nodes are not removed.
+that means the connected nodes aren't removed.
 
 \subsection{Sparksee}
-The index can be activated on certain attributes by \texttt{Graph::indexAttribute}\footnote{com.sparsity.sparksee.gdb.Graph} with the attribute and the \texttt{AttributeKind.Indexed}\footnote{com.sparsity.sparksee.gdb.AttributeKind} as its arguments.
-Sparksee uses \texttt{Sessions}\footnote{com.sparsity.sparksee.gdb.Session} as transaction,
-these are also closed at the end of the transaction.
+The index can be activated on certain attributes by calling \texttt{Graph::indexAttribute}\footnote{com.sparsity.sparksee.gdb.Graph} with the attribute and \texttt{AttributeKind.Indexed}\footnote{com.sparsity.sparksee.gdb.AttributeKind} as arguments.
+Sparksee uses \texttt{Session}s\footnote{com.sparsity.sparksee.gdb.Session} as transaction,
+these have to be closed at the end of a transaction.
 
 In the following listing~\ref{lst:sparkseeInit} we show how we implemented the initialisation, the activation of an index and the retrieval of a graph instance to work on the database.
 After the graph is retrieved any operations on the database can be executed,
@@ -536,7 +524,7 @@ in our example we initialised the index.
 String path = getPathFromProperties();
 boolean useIndex = shouldUseIndex();
 
-Sparksee sparksee = new Sparksee(new SparkseeConfig());
+Sparksee sparksee = new Sparksee(new SparkseeConfig()); // Create object for database access.
 
 if (new File(path).exists()) {
   database = sparksee.open(path, false);
@@ -544,8 +532,8 @@ if (new File(path).exists()) {
   database = sparksee.create(path, "SparkseeDB");
 }
 
-try (Session session = database.newSession()) {
-  Graph graph = session.getGraph();
+try (Session session = database.newSession()) { // Start a transaction. The try-with-resource block closes the session automatically at the end.
+  Graph graph = session.getGraph(); // Obtain Graph to work on the database.
 
   nodeIdAttribute = getAttribute(graph, getNodeType(graph), "sparksee.nodeId");
   edgeIdAttribute = getAttribute(graph, getEdgeType(graph), "sparksee.edgeId");
@@ -555,7 +543,7 @@ try (Session session = database.newSession()) {
       graph.indexAttribute(nodeIdAttribute, AttributeKind.Indexed);
       graph.indexAttribute(edgeIdAttribute, AttributeKind.Indexed);
     } catch (RuntimeException e) {
-      // The presence of an index cannot be queried, so we will catch and ignore the exception thrown when an index already exists.
+      // The presence of an index cannot be queried, so we will catch and ignore the exception that is thrown when an index already exists.
       e.printStackTrace();
     }
   }
@@ -564,14 +552,14 @@ try (Session session = database.newSession()) {
 
 \textbf{creating a node} \newline
 To create a node,
-we first are creating a type for the node,
+we first create a type for the node,
 which is the same for all nodes.
 Then we call \texttt{Graph::newNode} and set a identifier attribute to store the \texttt{key} in the node.
 
 \textbf{creating an edge} \newline
-Here we are also first looking up the two corresponding nodes and then we create an edge type,
-that is also the same for all edges.
-Then we create an edge by calling \texttt{Graph::newEdge} with the type,
+Here we have to look up the two corresponding nodes and then create an edge type,
+that is the same for all edges.
+We then create an edge by calling \texttt{Graph::newEdge} with the type,
 the start and the end node.
 Lastly the identifier for the edge is set as an attribute.
 
@@ -582,18 +570,18 @@ Then we call \texttt{Graph::setAttribute} with that attribute and its value.
 
 \textbf{getting a node/an edge by its identifier} \newline
 Retrieving a graph component works by creating a \texttt{Value}\footnote{com.sparsity.sparksee.gdb.Value} with the key of the component,
-which is then passed to the \texttt{Graph::findObject} method with the attribute specifying a node or an edge.
+which is then passed to the \texttt{Graph::findObject} method with the attribute specifying a node or an edge identifier.
 
 \textbf{getting the values of a node/an edge} \newline
 The attributes of a graph component are obtained by calling \texttt{Graph::getAttributes},
-which hands us an \texttt{AttributeList}\footnote{com.sparsity.sparksee.gdb.AttributeList} that is then looked up for the attributes we want to get.
+which hands us an \texttt{AttributeList}\footnote{com.sparsity.sparksee.gdb.AttributeList} that is then looked up for the attributes we want.
 
 \textbf{getting the outgoing edges of a node} \newline
 To get the edges connected to a node,
 we call \texttt{Graph::neighbors} with the node, the type of edge and the direction.
 
 \textbf{getting the start node of an edge} \newline
-The \texttt{EdgeData::getHead} method serves us that node.
+The \texttt{EdgeData::getHead} method serves us the start node.
 
 \textbf{removing a node/an edge} \newline
 To remove a graph component from the database we look the component up and then call \texttt{Graph::drop} on it,

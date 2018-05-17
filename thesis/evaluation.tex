@@ -129,7 +129,7 @@ we grouped the measurements as shown in tables~\ref{tab:throughputOverview} and~
 Finally,
 we create the diagrams shown in subsections "Results" of the following sections and interpret them to draw a conclusion,
 which is presented in the "Discussion" subsections.
-The standard derivation is not shown in the diagrams,
+The standard derivation isn't shown in the diagrams,
 as it is around 5\% for OrientDB and below 1\% for the other databases,
 which is too small to be seen in the figures.
 
@@ -169,7 +169,7 @@ because the free license only included database sizes of up to 1.000.000 element
 
 In figure~\ref{fig:withIndexExecutionTime} we see the execution time of the different databases.
 At 10.000 nodes Apache Jena and Neo4j took almost an hour for one run,
-because of that we did not run it with 100.000 nodes or more.
+because of that we didn't run it with 100.000 nodes or more.
 
 Table~\ref{tab:withIndexThroughput},
 \ref{tab:withIndexExecutionTime} and~\ref{tab:withoutIndexThroughput} show the measured numbers from the figures~\ref{fig:withIndexThroughput},
@@ -269,7 +269,7 @@ The execution time grows linearly,
 which is a good sign,
 because that means that the databases do scale for larger amounts of data.
 
-If we compare the archived throughput with our target throughput of $ 11743,67 \frac{inserts}{s} $,
+If we compare the archived throughput with our target throughput of $ 11743,66 \frac{inserts}{s} $,
 we see that Sparksee exceeds our target with $ 16435 \frac{inserts}{s} $.
 OrientDB misses our goal slightly,
 at the larges dataset it only archived a throughput of $ 8572 \frac{inserts}{s} $.
@@ -521,13 +521,13 @@ because Apache Jena and Neo4j would take too long to insert that number of nodes
 \subsubsection{Discussion}
 \label{ch:evaluation:se:suitabilityDiscussion}
 We only executed three minutes of production simulation,
-because the throughput of OrientDB does not grow anymore above 1000000 nodes the one-hour workload would not succeed either.
+because the throughput of OrientDB doesn't grow anymore above 1000000 nodes the one-hour workload wouldn't succeed either.
 
 Figure~\ref{fig:singleSuitability} shows us,
-that OrientDB did not manage to store three minutes of production simulation in the specified time.
+that OrientDB didn't manage to store three minutes of production simulation in the specified time.
 
 Sparksee could theoretically store that amount without exceeding the time limit,
-but since the free license did not allow for the amount of data we used the average until the limit was reached.
+but since the free license didn't allow for the amount of data we used the average until the limit was reached.
 Of course,
 it could be that the throughput of Sparksee drops with an increasing number of elements in the database,
 but we couldn't investigate that.
@@ -651,10 +651,10 @@ It could be,
 that the dataset size is too small to show an effect between using an index and not.
 
 Similar results can be seen for the scan operations shown in figure~\ref{fig:scanThroughput10000Nodes}.
-The absence of an index has not much effect here either,
+The absence of an index hasn't much effect here either,
 that could be the case,
 because scan operations only use one read operations for the start node and then traverse the graph,
-which is not effected by the index.
+which isn't effected by the index.
 
 The comparison of the different operations shown in figure~\ref{fig:operationReadScan} shows us where the strengths and weaknesses are in the different databases.
 Apache Jena and Neo4j are the slowest when it comes to inserting nodes,
@@ -680,7 +680,7 @@ which seems to stay stable in its throughput even when other operations are bein
 Jena and Neo4j are low in throughput anyways,
 but they still suffer from other operations being executed regularly.
 OrientDB has a slightly worse throughput when using read operations and even worse with scan operations,
-that is not good for our industry scenario,
+that isn't good for our industry scenario,
 because in the industry read and scan operations will be used in the database more or less regularly,
 depending on the specific use case.
 
@@ -688,7 +688,7 @@ depending on the specific use case.
 \label{ch:evaluation:se:relatedWorkAndGeneralisability}
 In this section we will compare our results with the findings of our related work as it's suitable.
 Our main goal is to investigate if the difference in structure and edge to node ratio has an impact on performance,
-when that is not the case we can assume,
+when that isn't the case we can assume,
 that benchmark results from research on social network graph can be used to evaluate the performance of a graph database in an industrial environment.
 The key point we will investigate is how the number of edges in relation to the number of nodes effects the throughput performance of the databases,
 as for social network graphs this number is quite high at around $ 8 $\cite[41]{TaoShen} to $ 22 $\cite{Dayarathna2012} whereas our graph structure contains a edge to node ratio of $ 1.3 $ to $ \sim1 $ (depending on the variables x, y and z; higher variable values lead to a ratio closer to 1) or $ 0 $ if we use the workload without edges.

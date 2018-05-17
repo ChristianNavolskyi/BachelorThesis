@@ -68,40 +68,41 @@ The size for our workload should therefore be in that range.
 \section{Workloads}
 \label{ch:analysis:se:workloads}
 Workloads should represent the mix of operations executed on a database.
-There are two main uses for our database in an industrial environment,
+There are two main uses for a database in an industrial environment,
 the first one is described in section~\ref{ch:analysis:se:insertingData}.
 Another one is presented in section~\ref{ch:analysis:se:retrievingData}.
 The given examples are based on what we think would represent the industrial use of databases.
 
-In section~\ref{ch:design:se:workloads} we will specify our workloads for our evaluation,
-the following subsections should only motivate the use for these specific use cases.
+In section~\ref{ch:design:se:workloads} we will specify the workloads for our evaluation,
+the following subsections should only motivate the specific use cases.
 
 \subsection{Inserting Data into the Database}
 \label{ch:analysis:se:insertingData}
-It is not rare that production runs 24h a day,
+It isn't rare that production runs 24h a day,
 therefore data is produced all around the clock.
-This shows,
-that the ability to store data quickly is a decisive point in choosing a database.
-As the machines operate data is continuously written to the database.
+Because of that the ability to store data quickly is a decisive point in choosing a database.
+As the machines operate,
+data is continuously written to the database.
 
 \subsection{Retrieving Data from the Database}
 \label{ch:analysis:se:retrievingData}
 Besides the previous mentioned continuous writing of data into the database,
-retrieving data from the database would be the next natural use for it.
-That could be in the form of looking up a certain product produced in the past to get its test parameter values or to get all products made by a specific machine to check if some are faulty.
+retrieving data from the database would be the next common use for it.
+That could be in the form of looking up a certain product produced in the past,
+to retrieve its test parameter values or to get all products made by a specific machine to check if some are faulty.
 
 \section{Benchmark Comparison}
 \label{ch:analysis:se:benchmark}
 To choose a benchmark for our upcoming research we will look at the following aspects of each benchmark.
 
 \begin{itemize}
-  \item Data Structure - Of what structure is the generated data?
-  \item Workloads - How are the workloads designed?
+  \item Data Structure - What is the structure of the generated data?
+  \item Workloads - What are the workload operations?
   \item Programming Language - Is it written in a well-known programming language or do we have to learn it first.
   \item Community - Is there a community for support?
 \end{itemize}
 
-The results of our comparison are shown in the following table~\ref{tab:benchmarkComparison}.
+The result of our comparison is shown in the following table~\ref{tab:benchmarkComparison}.
 
 \begin{table}[!h]
   \begin{minipage}{\textwidth}
@@ -117,19 +118,19 @@ The results of our comparison are shown in the following table~\ref{tab:benchmar
   \label{tab:benchmarkComparison}
 \end{table}
 
-Since we are not using a social network structure for our data the graph generators in Graphalytics and XGDBench do not aid us much,
-as the generators would be difficult to extend because of their use of complex algorithms to create that structure in the created data~(\cite{Erling2015},~\cite{Dayarathna2012}).
-YCSB on the other hand does not serve any particular structure presumably as they are not designed for graph databases and therefore don't need a particular structure on their data.
+Since we aren't using a social network structure for our data the graph generators in Graphalytics and XGDBench don't aid us much,
+as the generators would be difficult to extend because of their use of complex algorithms to create that structure in the generated data~(\cite{Erling2015},~\cite{Dayarathna2012}).
+YCSB on the other hand doesn't serve any particular structure presumably as they aren't designed for graph databases and therefore don't need a particular structure on their data.
 So YCSB should be easy to extend with our data model.
 
-For the workload aspect Graphalytics uses common algorithms which does not represent out workload scenario.
-XGDBench fits our needs better but not quite well, as inserting data is very important for us.
-YCSB supports inserting, reading and scanning\footnote{See com.yahoo.ycsb.DB} so it fulfils all our requirements for a benchmark.
+For the workload aspect Graphalytics uses common algorithms which doesn't represent out workload scenario.
+XGDBench  and YCSB offer a good set of operations, with insert, read, and scan operations.
 
 Only XGDBench uses another programming language then the other benchmarks namely X10,
-which could take some time to learn.
+which has to be learned from the ground up and therefore the code quality would suffer.
 
-Lastly the community aspect in which YCSB stands out with many contributors and an overall more active community than the other two.
+Lastly the community aspect.
+Here YCSB stands out with many contributors and an overall more active community than the other two.
 
 All observed aspects indicate that YCSB would suit our goal the best.
 The generator and the workloads should be easily extendable since they have an open design\footnote{See com.yahoo.ycsb.Workload and com.yahoo.ycsb.generator.Generator in \url{https://github.com/brianfrankcooper/YCSB}}.
@@ -143,23 +144,24 @@ The first part is the load phase in which the initial data is written to the dat
 Then comes the transaction phase where database operations are performed.
 
 Figure~\ref{fig:basicYCSBWorkflow} shows the classes involved in executing a benchmark run with YCSB.
-The \texttt{Client} takes the workload file and command-line parameters to set up the database and create \texttt{ClientThreads}.
-These \texttt{ClientThreads} call the \texttt{Workload} class to perform an operation on the database,
+The \texttt{Client} takes the workload file and command-line parameters to set up the database and create \texttt{ClientThread}s.
+These \texttt{ClientThread}s call the \texttt{Workload} class to perform an operation on the database,
 which is wrapped in the \texttt{DBWrapper}.
-Measurements are made through the \texttt{DBWrapper} by stopping the time for every operation made on the database,
-it uses the measurements available in the \texttt{measurements} package.
+Measurements are made through the \texttt{DBWrapper} by stopping the time for every operation made on the database.
+To store the measurements classes from the \texttt{measurements} package are used.
 
 \begin{figure}
   \centering
   \includegraphics[width=.75\textwidth]{images/benchmarks/basicYCSBWorkflow}
-  \caption{Class diagram about the main classes involved in a benchmark run.}
+  \caption{Class diagram about the main classes involved in YCSB.}
   \label{fig:basicYCSBWorkflow}
 \end{figure}
 
-The workload file specifies some parameters about the workload.
-These are among others the workload class to use,
+The workload file specifies some parameters of the workload.
+These are among others,
+the workload class to use,
 how much data should be added in the load phase,
-how much operations should be executed in the transaction phase and what percentage of the operations should be inserts, reads, updates, scans or deletes respectively.
+how much operations should be executed in the transaction phase and what percentage of the operations should be inserts, reads, updates, scans or deletes.
 
 The measurements can be saved as histograms each covering one particular operation.
-There is also a summary printed out to the console or a file depending on the parameters you set that additionally lists the overall time for the benchmark, operations per second and some more meta information.
+There is also a summary printed out to the console or a file depending on the parameters you set that additionally lists the overall time for the benchmark, times of the individual operations and some more meta information.

@@ -1,5 +1,5 @@
 @startuml
-(*)  --> [StoringGenerator::nextValue] if "instance is Recorder"
+(*)  --> [StoringGenerator::nextValue()] if "instance is Recorder"
 -> [Yes] "Create value according to schema"
 --> "Store value in file"
 --> "return value"
