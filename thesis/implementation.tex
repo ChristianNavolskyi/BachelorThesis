@@ -9,12 +9,12 @@ Then we will show the workload class in section~\ref{ch:implementation:se:graphW
 The code of our implementation is available on GitHub\footnote{\url{https://github.com/ChristianNavolskyi/YCSB}}.
 
 In figure~\ref{fig:YCSBExtension} we see a diagram of the YCSB benchmark with our added implementations.
-The classes we added are on the right from \texttt{GraphWorkload} and up.
+The classes we added are inside the red border on the right side.
 In \texttt{Package db} we added the bindings for our four databases.
 
 \begin{figure}
   \includegraphics[angle=90,height=\textheight]{images/benchmarks/extendedYCSBWorkflow}
-  \caption{Class diagram of YCSB with the most important classes we added to it.}
+  \caption{Class diagram of YCSB with the most important classes we added to it placed inside the red border.}
   \label{fig:YCSBExtension}
 \end{figure}
 
@@ -113,7 +113,7 @@ these lists are serialised into a JsonElement,
 which will be retrieved as a string by calling \texttt{Gson::toJson}.
 The following listing~\ref{lst:serialiseCode} shows the Java code used to implement the serialisation of a graph.
 
-\begin{lstlisting}[language=Java,label={lst:serialiseCode},caption={Serialisation of a graph object.}]
+\begin{lstlisting}[language=Java,label={lst:serialiseCode},caption={Serialisation of a graph object.},captionpos=b]
 @Override
 public JsonElement serialize(Graph graph, Type typeOfSrc, JsonSerializationContext context) {
  JsonObject result = new JsonObject();
@@ -147,7 +147,7 @@ If the files for the data set are present the \texttt{GraphDataRecreator} will b
 It does that by deserialising the next line with the \texttt{Gson::fromJson} method which uses the \texttt{GraphAdapter} described in subsection~\ref{ch:implementation:se:graphDataRecorder} together with a \texttt{Type}\footnote{java.lang.reflect.Type}.
 The code of the \texttt{GraphAdapter} to deserialise a graph is shown in listing~\ref{lst:deserialiseGraph}.
 
-\begin{lstlisting}[language=Java,label={lst:deserialiseGraph},caption={Deserialisation of a graph object.}]
+\begin{lstlisting}[language=Java,label={lst:deserialiseGraph},caption={Deserialisation of a graph object.},captionpos=b]
 @Override
 public Graph deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext context) throws
     JsonParseException {
@@ -300,7 +300,7 @@ At the beginning of each subsection we will show how we initialised the database
 \subsection{Apache Jena}
 In the following listing~\ref{lst:jenaInit} the initialisation and the beginning of a transaction with the retrieval of a model to work on the data is shown.
 
-\begin{lstlisting}[language=Java,label={lst:jenaInit},caption={Implementation of the initialisation and model retrieval in Jena.}]
+\begin{lstlisting}[language=Java,label={lst:jenaInit},caption={Implementation of the initialisation and model retrieval in Jena.},captionpos=b]
 String outputDirectory = getDirectoryFromProperties();
 Dataset dataset = TDBFactory.createDataset(outputDirectory);
 
@@ -385,7 +385,7 @@ At the end of a transaction we call \texttt{Transaction::success}\footnote{org.n
 
 An example of our implementation is shown in the following listing~\ref{lst:neo4jInit}, the start and end of a transaction for an operation is implemented as in the if-block of the listing.
 
-\begin{lstlisting}[language=Java,label={lst:neo4jInit},caption={Implementation of the initialisation and beginning of a transaction.}]
+\begin{lstlisting}[language=Java,label={lst:neo4jInit},caption={Implementation of the initialisation and beginning of a transaction.},captionpos=b]
 String path = getPathFromProperties();
 boolean useIndex = shouldUseIndex();
 
@@ -454,7 +454,7 @@ which have to be closed when finished with the operation itself by calling \text
 
 An example of our implementation covering the implementation a retrieval of a graph for a transaction is shown in listing~\ref{lst:orientdbInit}.
 
-\begin{lstlisting}[language=Java,label={lst:orientdbInit},caption={Implementation of the initialisation and the retrieval of a graph for a transaction.}]
+\begin{lstlisting}[language=Java,label={lst:orientdbInit},caption={Implementation of the initialisation and the retrieval of a graph for a transaction.},captionpos=b]
 String url = getURLFromProperties();
 
 OrientGraphFactory factory = new OrientGraphFactory(url, userName, password);
@@ -532,7 +532,7 @@ In the following listing~\ref{lst:sparkseeInit} we show how we implemented the i
 After the graph is retrieved any operations on the database can be executed,
 in our example we initialised the index.
 
-\begin{lstlisting}[language=Java,label={lst:sparkseeInit},caption={Implementation of the initialisation and starting of a session.}]
+\begin{lstlisting}[language=Java,label={lst:sparkseeInit},caption={Implementation of the initialisation and starting of a session.},captionpos=b]
 String path = getPathFromProperties();
 boolean useIndex = shouldUseIndex();
 

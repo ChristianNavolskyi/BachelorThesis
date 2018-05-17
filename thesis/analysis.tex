@@ -1,7 +1,7 @@
 \chapter{Analysis}
 \label{ch:analysis}
-In this chapter we will analyse the data which could occur in an industrial use case,
-that includes its structure and amount.
+In this chapter we will analyse the data that could occur in an industrial use case,
+including its structure and amount.
 Further we will examine possible workloads for our graph databases in section~\ref{ch:analysis:se:workloads}.
 
 At the end of this chapter in section~\ref{ch:analysis:se:benchmark} we will choose one benchmark for our research.
@@ -9,21 +9,28 @@ At the end of this chapter in section~\ref{ch:analysis:se:benchmark} we will cho
 \section{Data}
 \label{ch:analysis:se:data}
 As described in section~\ref{ch:background:se:industrialData} we have to work with the data coming from production machines.
-Figure~\ref{fig:exampleData} shows us how that data could look like.
+Figure~\ref{fig:exampleData} shows how that data could look like.
 
 Additionally,
-our partners at SICK AG~\cite{SICK} gave us the following key data for a product example.
-A component carrier with up to 64 circuit boards on it each with up to 128 components is produced every three minutes.
-Each component has up to 128 test features.
+our partners at SICK AG~\cite{SICK} gave us the following key data of a product example.
+
+\begin{itemize}
+  \item A component carrier is produced every three minutes.
+  \item A component carrier has up to 64 circuit boards.
+  \item A circuit board has up to 128 components.
+  \item A component is tested for up to 128 test features.
+\end{itemize}
+
+With this information we will calculate the amount of data in subsection~\ref{ch:analysis:se:dataAmount}
 
 \subsection{Data Structure}
-Looking at the graph in figure~\ref{fig:exampleData} and the example given by SICK we can see that the data looks much like a tree with some cross edges,
-a root node at the top and multiple children connected to it with multiple children each.
+Looking at the graph in figure~\ref{fig:exampleData} and the example given by SICK we can see that the data looks much like a tree with some cross edges.
+A root node at the top and multiple children connected to it with multiple children each.
 The given excerpt from figure~\ref{fig:exampleData} shows a part of a testing procedure for a board with components.
 Three properties of each component were observed.
 
 We keep this structure in mind for our design in section~\ref{ch:design:se:dataStructure},
-where we will compose the structure for our implementation and finally our evaluation.
+where we will compose the data structure for our implementation and evaluation.
 
 \subsection{Data Amount}
 \label{ch:analysis:se:dataAmount}
@@ -48,14 +55,13 @@ With the parameters mentioned in~\ref{ch:analysis:se:data} we can calculate the 
   \end{aligned}
 \end{equation}
 
-To calculate the throughput the databases have to archive we need to know how many edges are between the different nodes.
+To calculate the target throughput the databases have to archive,
+we need to know how many edges are between the different nodes.
 Therefore we need a finished data structure.
 In the next chapter in section~\ref{ch:design:se:suitability} we will calculate the target throughput in $ \frac{inserts}{s} $ for the workload design.
 
-In section~\ref{ch:design:se:productionSimulation} we will use these numbers for our workload design.
-
-We can extract the size of each data point from our given example,
-each measurement is only two to three characters long,
+We can extract the size of each data point from our given example.
+Each measurement is only two to three characters long,
 however the other values range from $ 1 $ to around $ 75 $ characters.
 The size for our workload should therefore be in that range.
 
@@ -64,7 +70,7 @@ The size for our workload should therefore be in that range.
 Workloads should represent the mix of operations executed on a database.
 There are two main uses for our database in an industrial environment,
 the first one is described in section~\ref{ch:analysis:se:insertingData}.
-Another one is illustrated in section~\ref{ch:analysis:se:retrievingData}.
+Another one is presented in section~\ref{ch:analysis:se:retrievingData}.
 The given examples are based on what we think would represent the industrial use of databases.
 
 In section~\ref{ch:design:se:workloads} we will specify our workloads for our evaluation,

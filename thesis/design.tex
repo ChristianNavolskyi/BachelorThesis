@@ -56,8 +56,6 @@ Subsection~\ref{ch:design:se:productionSimulation} will directly investigate the
 We will design workloads to examine the other industrial use case of retrieving data under load in subsection~\ref{ch:design:se:retrievingUnderLoad}.
 Finally we will give a summary over all workloads we are going to run on the databases in subsection~\ref{ch:design:se:summary}
 
-\pagebreak
-
 \subsection{Throughput}
 \label{ch:design:se:throughput}
 To explore the throughput of the databases we will have some variables we will change over the course of the different workloads.
@@ -442,8 +440,6 @@ The \texttt{Workload::doInsert} method will only insert a subgraph into the data
 to do so the workload class needs to get the subgraph from the GraphDataGenerator and redirect its value to the database.
 For the \texttt{Workload::doTransaction} method the workload has to be able to call the available methods on a database which are
 
-\pagebreak
-
 \begin{itemize}
   \item DB::insert(String table, String key, Map<String, ByteIterator> values)
   \item DB::read(String table, String key, Set<String> fields, Map<String, ByteIterator> result)
@@ -526,7 +522,7 @@ if indexing is possible every database should take it as a parameter to set itse
 We will cover the implementation of the single methods in section~\ref{ch:implementation:se:graphDatabaseBindings}.
 The following subsections will only mention specialities regarding the corresponding database.
 
-\begin{lstlisting}[language={Java},label={lst:databaseTemplate},caption={Generic example of a database implementation with the use of graph data.}]
+\begin{lstlisting}[language={Java},label={lst:databaseTemplate},caption={Generic example of a database implementation with the use of graph data.},captionpos=b]
 public class Database extends DB {
   private Node creatingANode(String key);
   private Edge creatingAnEdge(String key, Node startNode, Node endNode);

@@ -17,8 +17,8 @@ in their edge to node ratio.
 There are multiple analytic algorithms to run on data to extract certain features.
 In the industry,
 those algorithms play an important role too but in this thesis we are looking at different aspects of the industrial use case,
-mainly inserting data and reading data.
-As far as we know an industrial data structure was not used to examine the performance of graph databases.
+mainly inserting and reading data.
+As far as we know an industrial data structure wasn't used to examine the performance of graph databases before.
 
 In section~\ref{ch:background:se:industrialData} we will show an example given by the industry.
 There is no industrial data available publicly so we have to base our design on that given example which is visualised in figure~\ref{fig:exampleData}.
@@ -26,29 +26,29 @@ There is no industrial data available publicly so we have to base our design on 
 \subsubsection{Inserting Data}
 To digitalise the production processes the data produced by every machine in the production line should be stored for future analysis.
 And to store that data it needs to be written into a database.
-Since most factories running 24 hours a day,
-the machines are producing a lot of data during the day.
-That will be the base load for the underlying database, to store all that data from the production machines.
+Since most factories are running 24 hours a day,
+the machines are producing a lot of data.
+Storing the data from production will be the base load for the underlying databases.
 
 \subsubsection{Reading Data}
 Besides using the stored data for analysis algorithms,
-simply reading data from the database is another common use case.
+simply reading data from the database is another common task.
 An example would be to get the time at which a specific product was processed by a specific machine to check if all parameters were set correctly.
 
 \section{Question}
 The question of our research is,
 how well current graph databases are capable of handling the amount of data created in an industrial environment.
 Furthermore,
-we will look at how the structure effects performance to conclude if other research investigating the performance of graph databases can be used to determine the performance these databases would have in an industrial environment.
+we will look at how the structure effects performance to conclude whether other research investigating the performance of graph databases can be used to determine the performance these databases would have in an industrial environment.
 
 \section{Methodology}
-We will choose the databases to use for our testing from other studies covering benchmarking graph databases to be able to compare the results and look to similarities in behaviour.
-To evaluate different databases we first will look up existing benchmarks and choose the best fitting one for our research.
+We will choose the databases to use for our testing from other studies covering benchmarking graph databases to be able to compare the results and look at similarities in behaviour.
+To evaluate different databases we first will look up existing benchmarks and choose the best one for our research.
 In the benchmarking program we need to look at the creation of data and how it can be stored and retrieved.
 The same exact dataset should be used for all databases equally to eliminate the variation that comes with generating data during each benchmark run.
 Workloads will be designed to investigate the performance of graph databases with industrial data and the production environment will be simulated.
 With the databases and benchmark set up,
-we will run the workloads and evaluate the results to conclude if current databases are suitable for the industrial internet of things.
+we will run the workloads and evaluate the results to conclude whether current databases are suitable for the industrial internet of things.
 
 \section{Goal of this Thesis}
 With this thesis,
@@ -56,7 +56,7 @@ we want to examine whether and if so,
 how well graph databases are able to stand the load of a production line.
 Because every manufacturer is different and we cannot cover all scenarios we try to cover the most important parameters
 so that the suitability for the individual case can be estimated.
-Besides this specific investigation we will try to conclude if the results of research performed on graph databases with social network graphs can be applied to the industrial use case.
+Besides this specific investigation we will try to conclude whether the results of research performed on graph databases with social network graphs can be applied to the industrial use case.
 
 \section{Structure}
 In chapter~\ref{ch:background} we are motivating graph and the use of graph databases.
@@ -67,10 +67,10 @@ In chapter~\ref{ch:analysis} the industrial data is modelled,
 and its structure is analysed as well as a reasonable amount of data is determined.
 Then we are figuring out how a workload could look like in an industrial environment.
 At last,
-we further analyse out chosen benchmarking program and give an overview of its procedure.
+we further analyse our chosen benchmarking program and give an overview of its procedure.
 
 Chapter~\ref{ch:design} is focused on the design of the different extensions for the benchmark and also the concrete data structure.
-For the extension we cover the design of the specific workloads,
+For the extensions we cover the design of the specific workloads,
 the design of classes to create and recreate the dataset,
 the graph workload class managing the graph databases and the graph data and finally the database bindings which are responsible for connecting the database to the benchmarking program.
 
@@ -83,12 +83,12 @@ we explain the graph workload class that is the mediator between the created gra
 
 Chapter~\ref{ch:evaluation} focuses on running the benchmark and evaluating the results.
 First, we define our objective during evaluation.
-Then the configuration of our system is stated, as well as the hardware as the software side.
-Next the procedure of running the benchmarks sequentially is explained following be the different aspects we are testing.
+Then the configuration of our system is stated, as well as the hardware and the software side.
+Next the procedure of running the benchmarks sequentially is explained following the different aspects we are testing.
 These are grouped into "throughput" in section~\ref{ch:evaluation:se:throughput}, "production simulation" in section~\ref{ch:evaluation:se:productionSimulation} and "retrieving under load" in section~\ref{ch:evaluation:se:retrievingUnderLoad}.
 Each group includes multiple benchmarks in which we changed one variable at a time.
 The results are presented directly after each benchmark followed by a discussion to interpret the results.
 
-In chapter~\ref{ch:futureWork} we draw a conclusion over our work and give the answer to our question from above.
+In chapter~\ref{ch:futureWork} we draw a conclusion over our work and give the answer to our research question from above.
 Also ideas for future research and development in this field are presented.
 Finally a summary is given at the end of this chapter.

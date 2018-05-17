@@ -6,11 +6,12 @@ Related work is mentioned primarily in section~\ref{ch:background:se:graphDataba
 
 \section{Graphs}
 \label{ch:background:se:graphs}
-A graph as the literature tells us~\cite[89]{Worsch2011} is a tuple of sets $ G = (V, E) $ where $ E \subseteq V \times V $.
+A graph as the literature tells us~\cite[89]{Worsch2011} is a tuple $ G = (V, E) $ where $ E \subseteq V \times V $.
 Elements of $ V $ are called vertices and elements of $ E $ are called edges.
-The set of vertices has to be not empty, but the edge set can be.
+The set of vertices has to be non-empty,
+but the edge set can be.
 In this thesis we are focusing on directed graphs only,
-although some graph databases are capable of handling undirected graphs too not all are.
+although some graph databases are capable of handling undirected graphs too.
 Also there would be no benefit in using undirected edges since our model also uses directed edges.
 In general graphs can have labels or weights on their edges as stated in~\cite[99]{Worsch2011}.
 For our purposes we will use labels on the vertices and edges to ease the understanding of our data structure.
@@ -21,7 +22,7 @@ An equivalent representation of that graph would be
 \begin{equation}
   \begin{aligned}
     V &= \{1, 2, 3\} \\
-    E &= \{(1, 2), (1, 3), (2, 3), (3, 2)\}.
+    E &= \{(1, 2), (1, 3), (2, 1), (3, 2)\}.
   \end{aligned}
 \end{equation}
 
@@ -34,7 +35,7 @@ An equivalent representation of that graph would be
 
 \section{Industrial Data}
 \label{ch:background:se:industrialData}
-Under the term "industrial data" we understand data that is produced by machines during the production.
+Under the term "industrial data" we understand data which is produced by machines during the production.
 That could be the current settings of the machine,
 temperatures or tolerances measured during processing or what product is currently worked on.
 In chapter~\ref{ch:analysis:se:data} the possible structure of this data is analysed.
@@ -43,7 +44,7 @@ As there is no publicly available information about how industrial data should l
 
 Listing~\ref{lst:exampleData} shows the graph excerpt of our given example.
 
-\begin{lstlisting}[language={XML},label={lst:exampleData},caption={An excerpt showing the observation of components.}]
+\begin{lstlisting}[language={XML},label={lst:exampleData},caption={An excerpt showing the observation of components.},captionpos=b]
 "@graph": [
   {
     "@id": "http://localhost:3000/observations/185",
@@ -192,13 +193,13 @@ Listing~\ref{lst:exampleData} shows the graph excerpt of our given example.
 ]
 \end{lstlisting}
 
-In figure~\ref{fig:exampleData} the provided example is visualised partially,
-it shows the observation of a product.
+In figure~\ref{fig:exampleData} the provided example is visualised partially.
+It shows the observation of a product.
 
 \begin{figure}
   \centering
   \includegraphics[width=\textwidth]{images/design/exampleGraph}
-  \caption{An example graph representing the observation of test features in the components of a board.}
+  \caption{An example graph representing the observation of a board created after the example shown in listing~\ref{lst:exampleData}.}
   \label{fig:exampleData}
 \end{figure}
 
@@ -214,26 +215,25 @@ A database table is similar to a spreadsheet.}
 
 NoSQL databases,
 on the other hand,
-are able to store any kind of data in any record,
-they don't rely on a specified schema.
-Also they are able to scale horizontally for the cost of consistency.~\cite{Yegulalp2017}
+are able to store any kind of data in any record.
+They don't rely on a specified schema and they are able to scale horizontally at the expense of consistency.~\cite{Yegulalp2017}
 
 Graph databases are a type of NoSQL databases.
-They use graph theory to store their data as described in~\ref{ch:background:se:graphs} with vertices and edges.
-Every vertex has a unique identifier (id) in the database,
-the edges coming from or going to that vertex and it can have properties assigned to it as key/value pairs.
-Edges also have a unique id,
-a start and end vertex and properties just as vertices.~\cite{Rouse2016}
+They use graph theory to store their data as described in section~\ref{ch:background:se:graphs}.
+Every vertex and every edge has an unique identifier (id) in the database.
+Properties can be assigned to edges and nodes as key/value pairs.
+Additionally edges store a reference to the start and end node they are attached to.~\cite{Rouse2016}
 
 The labels mentioned at the end of section~\ref{ch:background:se:graphs} can be seen as the properties assigned to a vertex or edge.
-To map a production line in which the elements like machines and products might have their own real-world ids these properties can be used to store these real-world ids as a key/value pair.
+To map a production line in which the elements like machines and products have their own real-world ids,
+a property can be used to store these ids as key/value pairs.
 Later a particular machine,
 for example,
 can be looked up by its id.
-That is critical to find the data stored in the database.
+That is crucial to find the data stored in the database.
 
 In the following subsections~\ref{ch:background:se:rdfTriplestores} through~\ref{ch:background:se:graphStores} we will discuss the different types of graph databases and give examples of real databases which operate by that type.
-All databases used in this thesis support the ACID\footnote{short for atomicity, consistency, isolation, durability. It should guarantee data validity.} principle with transactions to ensure data consistency.
+All databases used in this thesis support the ACID\footnote{short for atomicity, consistency, isolation, durability. It should guarantee data validity.} principle and transactions.
 
 \subsection{RDF/Triplestores}
 \label{ch:background:se:rdfTriplestores}
@@ -241,7 +241,7 @@ First on our list are RDF stores also known as triple stores.
 
 RDF (Resource Description Framework) is a model for data interchange on the web.
 It is able to merge data even with different schemas, it also supports the evolution of a schema over time.
-The linking structure of the Web is extended by RDF by it using URIs\footnote{abbreviation of Universal Resource Identifier, used to identify abstract of physical resources.~\url{https://tools.ietf.org/html/rfc3986}} to name relationships and resources connected by those.~\cite[4]{Ontotext2014}
+The linking structure of the web is extended by RDF by it using URIs\footnote{abbreviation of Universal Resource Identifier, used to identify abstract of physical resources.~\url{https://tools.ietf.org/html/rfc3986}} to name relationships and resources connected by those relationships.~\cite[4]{Ontotext2014}
 
 \blockquote[\cite{W3C2014}]{This linking structure forms a directed, labelled graph, where the edges represent the named link between two resources, represented by the graph nodes.
 This graph view is the easiest possible mental model for RDF and is often used in easy-to-understand visual explanations.}
@@ -259,27 +259,25 @@ The framework is composed of different APIs interacting together to process RDF 
 Jena stores its information in statements as triples of subject, predicate and object.
 This structure can be seen as a graph, with the subject and the object being vertices and the predicate as an edge between them.
 
-Jena TDBs dataset consists of the node table, triple and quad indexes and the prefix table.
+Jena TDBs dataset consists of the node table, triple and quad indices and the prefix table.
 The node table contains the representation of RDF terms and provides a mapping from Node to NodeId and the other way around.
-Triple and quad indexes are indexes for the default graph and named graphs respectively.
-The triple indexes contain three indexes for the three parts of a statement.
+Triple and quad indices are indices for the default graph and named graphs respectively.
+The triple indices contain three indices for the three parts of a statement.
 Each index has all information about the triple,
 there is no secondary index.
-Prefixes table used mainly used in presentation and serialisation of the triples in RDF/XML or Turtle.~\cite{ApacheTDB}
+Prefixes table are mainly used in presentation and serialisation of the triples in RDF/XML or Turtle.~\cite{ApacheTDB}
 
 \subsection{Document Stores}
-As the name suggests the data model of document stores consist of documents which can have fields without depending on a defined schema~\cite{OrientDB}.
-Its aggregates data in those documents and transforms them internally into a searchable form~\cite{Techopedia2017}.
+As the name suggests the data model of document stores consist of documents which can have fields without depending on a defined schema.~\cite{OrientDB}
+It aggregates data in those documents and transforms them internally into a searchable form.~\cite{Techopedia2017}
 
 \subsubsection{OrientDB}
 OrientDB is a mix of a document store and a graph store,
 as stated in their manual \textquote[\cite{OrientDB}]{OrientDB is a document-graph database, meaning it has full native graph capabilities coupled with features normally only found in document databases.}
-Its designed as a robust, highly scalable database with a wide possible set of use cases.~\cite{OrientDB}
+It's designed as a robust, highly scalable database with a wide possible set of use cases.~\cite{OrientDB}
 OrientDB does not require a fixed schema and therefore supports schema-less and schema-mixed models.
 It uses an indexing algorithm called MVRB-Tree,
-which derived from the Red-Black Tree and the B+ Tree and it,
-therefore,
-supports fast insertions as well as fast lookups.~\cite{Abubakar2014}
+which derived from the Red-Black Tree and the B+ Tree and therefore it supports fast insertions as well as fast lookups.~\cite{Abubakar2014}
 
 \subsection{Graph Stores}
 \label{ch:background:se:graphStores}
@@ -299,45 +297,47 @@ Sparksee is implemented in C++ and provides a Java API.
 
 Sparksee encodes its nodes and edges as collections of objects, which all have a unique identifier.
 It implements two types of structures, bitmaps and maps.
-Adjacency matrices are converted into multiple small indexes,
-which improves the out-of-core workloads and it uses efficient I/O and cache policies.
-The bitmaps in which the adjacency list of each node is stored ware typically sparse in graphs and they are therefore compressed to save space compared to regular adjacency matrices.
-Attributes are supported for both nodes and edges,
-these are stored in a B-Tree.
-Two maps are used, one which maps the object id to the attribute and the other one mapping the attribute value to the object ids that have that value.~\cite{TaoShen}
+Adjacency matrices are converted into multiple small indices,
+which improves the out-of-core workloads.
+Sparksee uses also efficient I/O and cache policies.
+The bitmaps in which the adjacency list of each node is stored are typically sparse in graphs and they are therefore compressed to save space.
+Attributes,
+which are stored in a B-Tree,
+are supported for both nodes and edges.
+Two maps are used.
+One which maps the object id to the attribute and the other one mapping the attribute value to the object ids that have that value.~\cite{TaoShen}
 
 \section{Graph Database Benchmarks}
 \label{ch:background:se:graphDatabaseBenchmarks}
-As the need to compare similar programs exists benchmarks are needed to hand results over certain parameters to aid decision making.
+As the need to compare similar programs exists benchmarks are needed to hand results over certain aspects to aid decision making.
 In the field of graph databases that is no different.
-There exist multiple benchmarks for graph databases and some are outlined shortly in the following subsections~\ref{ch:background:se:ldbcGraphalytics}~to~\ref{ch:background:se:ycsb}.
+There exist multiple benchmarks for graph databases and some are outlined shortly in the following subsections~\ref{ch:background:se:ldbcGraphalytics}~to~\ref{ch:background:se:XGDBench}.
 In section~\ref{ch:analysis:se:benchmark},
 we choose a benchmark for our work.
 
 \subsection{LDBC: Graphalytics}
 \label{ch:background:se:ldbcGraphalytics}
-Benchmark specifications, practices and results for graph data management systems are established by an industry council called The Linked Data Benchmark Council.
-The Graphalytics benchmark facilitates a choke-point design to evaluate the crucial technological challenges present in system design,
-one example would be the "large graph memory footprint" as mentioned in~\cite[2]{Capota2015c}.
+Benchmark specifications, practices and results for graph data management systems are established by an industry council called "The Linked Data Benchmark Council".
+The Graphalytics benchmark facilitates a choke-point design to evaluate the crucial technological challenges present in system design.
+One example would be the "large graph memory footprint" as mentioned in~\cite[2]{Capota2015}.
 
 Graphalytics uses Datagen to create social network graphs,
-which are easy to understand for their users~\cite[3]{Capota2015c}.
+which are easy to understand for their users.~\cite[3]{Capota2015}
 
-The workloads implemented in Graphalytics represent common graph algorithms such as breadth-first search,
-weakly connected components or single-source shortest paths to name just a few~\cite[7]{Iosup}.
+The workloads implemented in Graphalytics represent common graph algorithms such as "breadth-first search",
+"weakly connected components" or "single-source shortest paths" to name just a few.~\cite[7]{Iosup}
 
 Figure~\ref{fig:graphalyticsArchitecture} shows the architecture of the Graphalytics benchmarking software.
 The user can configure the available benchmarks inside Graphalytics with a benchmark configuration (2).
-Parameters for the algorithm included in (1) can be set and the system under test (4) can be set up.
+Parameters for the algorithm included in (1) can be specified and the system under test (4) can be set up.
 The system on which the benchmark runs has to be provided by the user.
-The harness service (5) coordinated the benchmark configuration and the benchmarking process.
+The harness service (5) coordinates the benchmark configuration and the benchmarking process.
 The dataset for the benchmark has to be provided by the user or can be generated by using the available workload generators.~\cite[11]{Iosup}
-\pagebreak
 
 \begin{figure}[h!]
   \centering
   \includegraphics[width=.75\textwidth]{images/benchmarks/GraphalyticsArchitecture}
-  \caption{The architecture of the Graphalytics benchmark~\cite[11]{Iosup}.}
+  \caption{The architecture of the Graphalytics benchmark.~\cite[11]{Iosup}}
   \label{fig:graphalyticsArchitecture}
 \end{figure}
 
@@ -345,58 +345,60 @@ The dataset for the benchmark has to be provided by the user or can be generated
 \label{ch:background:se:ycsb}
 The Yahoo! Cloud Serving Benchmark (YCSB) was not designed specifically for graph databases,
 but rather for key-value and cloud stores.
-The project consists of the YCSB client which is responsible for generating the data,
-as well as the Core workloads those are a set of workloads executed by the client.
-The client is extensible to that new workloads,
-new databases and new generators can be integrated.~\cite{Yahoo!2010}
+The client is extensible so that new workloads,
+databases and generators can be integrated.~\cite{Yahoo!2010}
 
 The core workload is designed to use simple CRUD\footnote{CRUD stands for the basic operations on persistent storage, these are Create, Read, Update, Delete.} operations on any database with no special structure of the generated data.
 
 The architecture of YCSB can be seen in figure~\ref{fig:ycsbArchitecture}.
-The client contains a \texttt{Workload executor} which uses generators to create a dataset and execute operations on the database.
+The client contains a \texttt{Workload executor} that uses \texttt{Generators} to create a dataset and executes operations on the database.
 Each \texttt{Client thread} calls the \texttt{Workload executor} to perform an operation on the database.
 Workload files can be specified to set the amount of data and the mix of operations to use for that workload.
 To tell YCSB which database should be used command-line parameters are passed to the client.
+The benchmark supports to phases,
+a load phase to fill the database with initial data and a transaction phase to execute operations on the database.
 
 \begin{figure}[h!]
   \centering
   \includegraphics[width=\textwidth]{images/benchmarks/ycsbArchitecture}
-  \caption{The rough architecture of YCSB. Recreated and modified from~\cite[25]{Abubakar2014}.}
+  \caption{The architecture of YCSB. Recreated and modified from~\cite[25]{Abubakar2014}.}
   \label{fig:ycsbArchitecture}
 \end{figure}
 
 \subsection{XGDBench}
+\label{ch:background:se:XGDBench}
 Is a graph database benchmark for cloud computing systems.
 It is designed to work in the cloud and in future exascale clouds.
-XGDBench is an extension of the Yahoo! Cloud Serving Benchmark for graph databases.
+XGDBench is an extension of YCSB for graph databases.
 This benchmark is written in X10,
 a \textquote[\cite{Dayarathna2012}]{programming language that is aimed
 for providing a robust programming model that can withstand the architectural challenges posed by multi-core systems,
 hardware accelerators, clusters, and supercomputers}.
 
-XGDBench also focuses on social networks for their data structure,
-that is generated by a procedure called Multiplicative Attribute Graph (MAG),
+XGDBench also focuses on social networks for their data structure.
+The data is generated by a procedure called "Multiplicative Attribute Graph" (MAG),
 see~\cite{Kim2012} for more information.
 
 It specifically targets read,
-update and graph traversal operations for its performance aspects~\cite[366]{Dayarathna2012}.
+update and graph traversal operations for its performance aspects.~\cite[366]{Dayarathna2012}
 
 In figure~\ref{fig:XGDBenchArchitecture} the architecture of the XGDBench benchmark is illustrated.
-The general workflow is similar to the one from YCSB since this benchmark is based on YCSB.
-The data generator used in XGDBench uses the MAG algorithm to create the data set.
-The workload is the executed in two phases,
-the load phase which fills the database with data and the transaction phase which executes operations on the database.
+The general workflow is similar to the one from YCSB,
+because this benchmark is based on YCSB.
+The workload is executed in two phases,
+the load phase fills the database with data and the transaction phase executes operations on the database.
 
 \begin{figure}[h!]
   \centering
   \includegraphics[width=.75\textwidth]{images/benchmarks/XGDBenchArchitecture}
-  \caption{The architecture of the XGDBench benchmark~\cite[367]{Dayarathna2012}.}
+  \caption{The architecture of the XGDBench benchmark.~\cite[367]{Dayarathna2012}}
   \label{fig:XGDBenchArchitecture}
 \end{figure}
 
 \section{Related Work}
-A number of studies have been conducted to test the performance of databases,
+A number of studies have been conducted to test the performance of NoSQL databases,
 which we will discuss in this section.
+\todo{Revisit}
 
 \subsection{Evaluation of NoSQL Systems using YCSB}
 Abubakar et al. have not focused their research on graph databases,
@@ -432,7 +434,7 @@ Five workloads were specified, three of which focus on read operations, one has 
 The evaluation of their implementation of the MAG algorithm shows that it had a high cluster prominence which means it represents the social affinities found in real social networks and the graphs created by it follow the power-law distribution which is good for realistic benchmarking scenarios.
 A performance evaluation was executed on these graph databases,
 Allegrograph, Neo4j, OrientDB and Fuseki,
-which is a SPARQL\footnote{SPARQL is a language to query and manipulate RDF data.~\cite{Harris2013}} server providing a HTTP interface to Jena.
+which is a SPARQL\footnote{SPARQL is a language to query and manipulate RDF data.~\url{https://www.w3.org/TR/2013/REC-sparql11-overview-20130321/}} server providing a HTTP interface to Jena.
 Their performance evaluation of the databases shows that the graph databases perform really badly,
 except OrientDB,
 which was at least double as fast as the next best database for any workload.
