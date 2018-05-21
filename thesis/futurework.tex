@@ -1,7 +1,8 @@
 \chapter{Conclusion and Future Work}
 \label{ch:futureWork}
-After conducting our experiments and evaluating the results we will finally end with a conclusion and give ideas for future research in this field.
-At the end we will summarise the research we have done.
+After conducting our experiments and evaluating the results,
+we will finally end with a conclusion and give ideas for future research in this field.
+At the end a summary is given about the research we have done.
 
 \section{Conclusion}
 \label{ch:futureWork:se:conclusion}
@@ -9,7 +10,8 @@ In this section we will draw a conclusion regarding the suitability for the indu
 
 \subsection{Suitability}
 From our findings we can say,
-that no database is able to store the necessary amount of data as we dimensioned within the corresponding time frame.
+that no database is able to store the necessary amount of data as we dimensioned it,
+within the specified time frame.
 
 Sparksee could be capable of handling our calculated amount,
 but we couldn't test it at scale,
@@ -19,29 +21,33 @@ because of its license limitations.
 With our results and the comparison with other research in this field,
 we can say that the throughput of a graph database depends not only on the insert performance,
 but among others,
-also on read throughput as this is needed to insert edges into the database.\\
-It is indirectly possible to transfer the throughput measured on social network graphs to throughput in an industrial application,
-by taking the read throughput relative to the insert throughput into account and minding the data structure in particular the edge to node ratio.\\
-Besides that, there are other factors effecting throughput as our comparison in section~\ref{ch:evaluation:se:relatedWorkAndGeneralisability} shows.
+also on read throughput as it is needed to insert edges into the database.\\
+It is indirectly possible to transfer the throughput measured on social network graphs to throughput in an industrial application.
+For this the read throughput relative to the insert throughput has to be taken into account as well as the e/n ratio.\\
+Besides that, there are other factors affecting throughput,
+as our comparison in section~\ref{ch:evaluation:se:relatedWorkAndGeneralisability} shows.
 
 \section{Future Work}
-As our investigations on the throughput of graph databases with data from the industrial internet of things couldn't lead to a solid conclusion about the comparability between performance results measured with social network graphs and industrial graphs,
-a study should be conducted that investigates the impact of different edge to node ratios covering also different graph properties as the clustering coefficient for example to evaluate which graph properties effect the throughput of graph databases in which way.
+Our investigations on the throughput of graph databases with data from the industrial internet of things couldn't lead to a solid conclusion about the comparability between performance results measured with social network graphs and industrial graphs.\\
+Therefore,
+a study should be conducted that investigates the impact of different e/n ratios covering also different graph properties as the clustering coefficient for example to evaluate which graph properties effect the throughput of graph databases in which way.
 
 \section{Summary}
-The purpose of this research was to investigate the suitability of current graph databases for the use in an industrial environment and furthermore examine if the results from previous research conducted in the field of graph database benchmarking can be generalised to be applied on the industrial use case.\\
+The purpose of this thesis was to investigate the suitability of current graph databases for the use in an industrial environment and furthermore examine whether the results from graph database benchmarks can be generalised to be applied on the industrial use case.\\
 To do so available database benchmarks have been looked up alongside with graph databases analysed in other studies.
-A lack of results for the industrial data space was found and a data structure was created to represent the industrial use case for a graph database and an available benchmark was extended to produce datasets with that structure.
+A lack of results for the industrial data space was found and a data structure was designed to represent the industrial use case for a graph database.
+Also,
+an available benchmark was extended to produce datasets with that structure.
 Workloads were designed to mirror the use of a graph database in an industrial environment.
-After executing the workloads with the designed data structure of the graph databases,
+During execution of the workloads with the designed data structure on the graph databases,
 their throughput under different situations was measured and compared with other studies.
 
-The results show that most current databases aren't suitable for use in the industry.
+The results show that most current databases aren't suitable for application in the industry.
 Sparksee was the only database able to reach the target throughput for insert operations.
-OrientDB missed our target only slightly,
-whereas Apache Jena and Neo4j are far from being able to store that amount of data in the specified time.
+OrientDB missed the target only slightly,
+whereas Apache Jena and Neo4j were far from being able to store the amount of data in the specified time.
 
-From the results no clear conclusion can be made about the generalisation of benchmark results of graph databases,
-as the result of comparison with other research points in opposite directions.
-However more arguments suggest,
-that graph databases perform worse in an industrial application and therefore the results of other studies cannot be applied to determine the performance of a graph database in an industrial environment.
+No clear conclusion can be made about the generalisation of benchmark results of graph databases,
+as the comparison with other research points in opposite directions.
+However,
+by considering the read throughput relative to the insert throughput an estimation can be made about the performance of a graph database in an industrial application.

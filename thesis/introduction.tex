@@ -11,7 +11,7 @@ Since there are multiple databases available it can be difficult to choose the r
 Current graph database benchmarks only cover social network graphs,
 which differ from the data structure present in the industry,
 for example,
-in their edge to node ratio.
+in their edge to node (e/n) ratio.
 
 \subsection{Use Case - Industry 4.0}
 There are multiple analytic algorithms to run on data to extract certain features.
@@ -43,7 +43,8 @@ we will look at how the structure effects performance to conclude whether other 
 
 \section{Methodology}
 We will choose the databases to use for our testing from other studies covering benchmarking graph databases to be able to compare the results and look at similarities in behaviour.
-To evaluate different databases we first will look up existing benchmarks and choose the best one for our research.
+To evaluate different databases,
+we first will look up existing benchmarks and choose the best one for our research.
 In the benchmarking program we need to look at the creation of data and how it can be stored and retrieved.
 The same exact dataset should be used for all databases equally to eliminate the variation that comes with generating data during each benchmark run.
 Workloads will be designed to investigate the performance of graph databases with industrial data and the production environment will be simulated.
@@ -61,7 +62,8 @@ Besides this specific investigation we will try to conclude whether the results 
 \section{Structure}
 In chapter~\ref{ch:background} we are motivating graph and the use of graph databases.
 The different kinds of graph databases are explained and an example database which we are testing is mentioned and shortly described.
-Also in this chapter we are comparing the different available benchmarking programs and their features and take a look at research done by others in the field of graph database benchmarking.
+Also,
+in this chapter we are comparing the different available benchmarking programs and their features and take a look at research done by others in the field of graph database benchmarking.
 
 In chapter~\ref{ch:analysis} the industrial data is modelled,
 and its structure is analysed as well as a reasonable amount of data is determined.
@@ -75,7 +77,8 @@ the design of classes to create and recreate the dataset,
 the graph workload class managing the graph databases and the graph data and finally the database bindings which are responsible for connecting the database to the benchmarking program.
 
 In chapter~\ref{ch:implementation} the implementation of the single components is described.
-First we cover the graph data generator which includes the class for creating the graph data as well as the class for recreating it from files.
+First,
+we cover the graph data generator which includes the class for creating the graph data as well as the class for recreating it from files.
 Next,
 the bindings are implemented and their individual adaptions to the benchmark are highlighted.
 And lastly,
@@ -90,5 +93,7 @@ Each group includes multiple benchmarks in which we changed one variable at a ti
 The results are presented directly after each benchmark followed by a discussion to interpret the results.
 
 In chapter~\ref{ch:futureWork} we draw a conclusion over our work and give the answer to our research question from above.
-Also ideas for future research and development in this field are presented.
-Finally a summary is given at the end of this chapter.
+Also,
+ideas for future research and development in this field are presented.
+Finally,
+a summary is given at the end of this chapter.

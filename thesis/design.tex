@@ -54,7 +54,8 @@ Our workload design will be separated into three parts.
 In subsection~\ref{ch:design:se:throughput} we discuss the design of workloads aimed to reveal the ability to store large amounts of data.
 Subsection~\ref{ch:design:se:productionSimulation} will investigate the suitability of a database to be used in an industrial use case for storing data.
 We will design workloads to examine how well the databases can retrieve data under load in subsection~\ref{ch:design:se:retrievingUnderLoad}.
-Finally we will give a summary over all workloads we are going to run on the databases in subsection~\ref{ch:design:se:summary}
+Finally,
+we will give a summary over all workloads we are going to run on the databases in subsection~\ref{ch:design:se:summary}
 
 \subsection{Throughput}
 \label{ch:design:se:throughput}
@@ -77,7 +78,7 @@ We will go over the different variables in the following subsections and motivat
 \subsubsection{Index}
 \label{ch:design:se:index}
 For this category we will use different dataset sizes in terms of their number of nodes.
-We will use steps of multiplication by 10 from 1.000 nodes to 10.000.000 nodes,
+We will use steps of multiplication by 10 from 1000 nodes to 10000000 nodes,
 to examine if the throughput changes,
 as the database is filled with data.
 
@@ -95,7 +96,7 @@ That is small enough to not have an impact on performance but large enough to re
 
 \subsubsection{Node Property Size}
 \label{ch:design:se:nodePropertySize}
-After retrieving the amount of nodes that represents an acceptable execution time,
+After retrieving the number of nodes that represents an acceptable execution time,
 we will vary the next variable which is the property size.
 We will go from 10B used in the index benchmarks to up to 1MB,
 again in steps of multiplying by 10 (10B, 100B, 1KB, ..., 1MB).
@@ -113,7 +114,7 @@ because that represents the use in the industry and since we aren't indexing the
 \label{ch:design:se:noEdges}
 In subsection~\ref{ch:design:se:throughput} we already justified why we will investigate the throughput with an exclusive use of nodes in the dataset.
 To summarise,
-the use of this workload is to see if there is a big difference in using edges and therefore determine how the edge to node ratio effects the throughput.
+the use of this workload is to see if there is a big difference in using edges and therefore determine how the e/n ratio effects the throughput.
 
 As in subsection~\ref{ch:design:se:nodePropertySize} we will use a suitable large dataset in terms of node count resulting from the first workloads.
 We will use the same node size as in~\ref{ch:design:se:index} and an index to be able to compare the result directly to the corresponding one from that workload.
@@ -128,7 +129,7 @@ which should be enough to cover on average most values stored in the database.
 
 \subsubsection{Structure}
 For production we have some variables to investigate,
-which affect the structure of our data and the edge to node ratio.
+which affect the structure of our data and the e/n ratio.
 We have three layers which we can scale up horizontally by increasing the corresponding parameters,
 which are
 
@@ -261,16 +262,16 @@ Their overview is shown in table~\ref{tab:throughput}
     \begin{tabularx}{\textwidth}{ | X | X | X | X | X | }
       \hline
       Aspect & Node Count & Node Size & Index & Only Nodes \\ \hline
-      1. With Index & 1.000 & 10B & True & False \\ \hline
-      2. With Index & 10.000 & 10B & True & False \\ \hline
-      3. With Index & 100.000 & 10B & True & False \\ \hline
-      4. With Index & 1.000.000 & 10B & True & False \\ \hline
-      5. With Index & 10.000.000 & 10B & True & False \\ \hline
-      1. Without Index & 1.000 & 10B & False & False \\ \hline
-      2. Without Index & 10.000 & 10B & False & False \\ \hline
-      3. Without Index & 100.000 & 10B & False & False \\ \hline
-      4. Without Index & 1.000.000 & 10B & False & False \\ \hline
-      5. Without Index & 10.000.000 & 10B & False & False \\ \hline
+      1. With Index & 1000 & 10B & True & False \\ \hline
+      2. With Index & 10000 & 10B & True & False \\ \hline
+      3. With Index & 100000 & 10B & True & False \\ \hline
+      4. With Index & 1000000 & 10B & True & False \\ \hline
+      5. With Index & 10000000 & 10B & True & False \\ \hline
+      1. Without Index & 1000 & 10B & False & False \\ \hline
+      2. Without Index & 10000 & 10B & False & False \\ \hline
+      3. Without Index & 100000 & 10B & False & False \\ \hline
+      4. Without Index & 1000000 & 10B & False & False \\ \hline
+      5. Without Index & 10000000 & 10B & False & False \\ \hline
       1. Node Size & x & 100B & True & False \\ \hline
       2. Node Size & x & 1KB & True & False \\ \hline
       3. Node Size & x & 10KB & True & False \\ \hline
@@ -295,12 +296,12 @@ Edges are also used in these workloads to reflect the use in the industry.
       1. Structure & x & 1 & 1 & 1 \\ \hline
       2. Structure & x & 16 & 32 & 32 \\ \hline
       3. Structure & x & 64 & 128 & 128 \\ \hline
-      1. Suitability (three minutes) & 1.056.833 & 64 & 128 & 128 \\ \hline
-      2. Suitability (hour) & 21.136.660 & 64 & 128 & 128 \\ \hline
-      3. Suitability (day) & 507.279.840 & 64 & 128 & 128 \\ \hline
-      4. Suitability (week) & 3.550.958.880 & 64 & 128 & 128 \\ \hline
-      5. Suitability (month) & 15.218.395.200 & 64 & 128 & 128 \\ \hline
-      6. Suitability (year) & 185.157.141.600 & 64 & 128 & 128 \\ \hline
+      1. Suitability (three minutes) & 1056833 & 64 & 128 & 128 \\ \hline
+      2. Suitability (hour) & 21136660 & 64 & 128 & 128 \\ \hline
+      3. Suitability (day) & 507279840 & 64 & 128 & 128 \\ \hline
+      4. Suitability (week) & 3550958880 & 64 & 128 & 128 \\ \hline
+      5. Suitability (month) & 15218395200 & 64 & 128 & 128 \\ \hline
+      6. Suitability (year) & 185157141600 & 64 & 128 & 128 \\ \hline
     \end{tabularx}
   \end{minipage}
   \caption{Workloads to simulate production. Again, x represents a placeholder for a suitable dataset size.}
@@ -411,7 +412,8 @@ As in~\ref{ch:design:se:storingTheDataset} and its subsections,
 every created value needs to be stored to be retrieved later on.
 The data needed for this generator isn't as complex as a graph and can therefore be stored directly in a file line by line for easy storing and restoring.
 That also means,
-that we can read the files at the beginning of the run so it is faster accessible during the benchmark without using too much memory.
+that we can read the files at the beginning of the run,
+so it is more quickly accessible during the benchmark without using too much memory.
 
 For the workload which requires the absence of edges a method should be defined to return only a randomly chosen node.
 
@@ -429,7 +431,7 @@ To fix the execution order of inserting and retrieving data to and from the grap
 we need to save the operations too.
 That can be done by simply storing the name of each operation in a file as it appears and reading it from there when running the benchmark.
 
-In YCSB there is already a \texttt{DiscreteGenerator}\footnote{com.yahoo.ycsb.generator.DiscreteGenerator} that takes pairs of wights and values and returns,
+In YCSB there is already a \texttt{DiscreteGenerator}\footnote{com.yahoo.ycsb.generator.DiscreteGenerator} that takes pairs of weights and values and returns,
 distributed according to the weights,
 a value.
 This can be used to get the operations to run on the database.

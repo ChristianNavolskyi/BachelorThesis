@@ -12,7 +12,8 @@ The set of vertices has to be non-empty,
 but the edge set can be.
 In this thesis we are focusing on directed graphs only,
 although some graph databases are capable of handling undirected graphs too.
-Also there would be no benefit in using undirected edges since our model also uses directed edges.
+Also,
+there would be no benefit in using undirected edges since our model also uses directed edges.
 In general graphs can have labels or weights on their edges as stated in~\cite[99]{Worsch2011}.
 For our purposes we will use labels on the vertices and edges to ease the understanding of our data structure.
 In section~\ref{ch:background:se:graphDatabases} we will give reasons why having labels on the graph components is useful.
@@ -222,7 +223,8 @@ Graph databases are a type of NoSQL databases.
 They use graph theory to store their data as described in section~\ref{ch:background:se:graphs}.
 Every vertex and every edge has an unique identifier (id) in the database.
 Properties can be assigned to edges and nodes as key/value pairs.
-Additionally edges store a reference to the start and end node they are attached to.~\cite{Rouse2016}
+Additionally,
+edges store a reference to the start and end node they are attached to.~\cite{Rouse2016}
 
 The labels mentioned at the end of section~\ref{ch:background:se:graphs} can be seen as the properties assigned to a vertex or edge.
 To map a production line in which the elements like machines and products have their own real-world ids,
@@ -249,7 +251,7 @@ This graph view is the easiest possible mental model for RDF and is often used i
 Triplestores store semantic facts as subject - predicate - object triples,
 also referred to as statements using RDF.
 These statements form a network of data,
-which can also be seen as a graph.~\cite[4]{Ontotext2014}
+which can be seen as a graph.~\cite[4]{Ontotext2014}
 
 \subsubsection{Apache Jena TDB}
 \label{ch:background:se:apacheJena}
@@ -300,7 +302,9 @@ It implements two types of structures, bitmaps and maps.
 Adjacency matrices are converted into multiple small indices,
 which improves the out-of-core workloads.
 Sparksee uses also efficient I/O and cache policies.
-The bitmaps in which the adjacency list of each node is stored are typically sparse in graphs and they are therefore compressed to save space.
+The bitmaps,
+in which the adjacency list of each node is stored,
+are typically sparse in graphs and they are compressed to save space.
 Attributes,
 which are stored in a B-Tree,
 are supported for both nodes and edges.
@@ -309,16 +313,17 @@ One which maps the object id to the attribute and the other one mapping the attr
 
 \section{Graph Database Benchmarks}
 \label{ch:background:se:graphDatabaseBenchmarks}
-As the need to compare similar programs exists benchmarks are needed to hand results over certain aspects to aid decision making.
-In the field of graph databases that is no different.
-There exist multiple benchmarks for graph databases and some are outlined shortly in the following subsections~\ref{ch:background:se:ldbcGraphalytics}~to~\ref{ch:background:se:XGDBench}.
+As the need to compare similar programs exists,
+benchmarks are needed to hand results over certain aspects of the program to aid decision making.
+Graph databases are no exception to that.
+There are multiple benchmarks for graph databases available and some are outlined shortly in the following subsections~\ref{ch:background:se:ldbcGraphalytics} to~\ref{ch:background:se:XGDBench}.
 In section~\ref{ch:analysis:se:benchmark},
 we choose a benchmark for our work.
 
 \subsection{LDBC: Graphalytics}
 \label{ch:background:se:ldbcGraphalytics}
-Benchmark specifications, practices and results for graph data management systems are established by an industry council called "The Linked Data Benchmark Council".
-The Graphalytics benchmark facilitates a choke-point design to evaluate the crucial technological challenges present in system design.
+Benchmark specifications, practices and results for graph data management systems are established by an industry council called "The Linked Data Benchmark Council" (LDBC).
+Their Graphalytics benchmark facilitates a choke-point design to evaluate the crucial technological challenges present in system design.
 One example would be the "large graph memory footprint" as mentioned in~\cite[2]{Capota2015}.
 
 Graphalytics uses Datagen to create social network graphs,
@@ -344,11 +349,12 @@ The dataset for the benchmark has to be provided by the user or can be generated
 \subsection{YCSB}
 \label{ch:background:se:ycsb}
 The Yahoo! Cloud Serving Benchmark (YCSB) wasn't designed specifically for graph databases,
-but rather for key-value and cloud stores.
+but rather for key/value and cloud stores.
 The client is extensible so that new workloads,
 databases and generators can be integrated.~\cite{Yahoo!2010}
 
-The core workload is designed to use simple CRUD\footnote{CRUD stands for the basic operations on persistent storage, these are Create, Read, Update, Delete.} operations on any database with no special structure of the generated data.
+The core workload is designed to use simple CRUD\footnote{CRUD stands for the basic operations on persistent storage,
+these are Create, Read, Update, Delete.} operations on any database with no special structure of the generated data.
 
 The architecture of YCSB can be seen in figure~\ref{fig:ycsbArchitecture}.
 The client contains a \texttt{Workload executor} that uses \texttt{Generator}s to create a dataset and executes operations on the database.
@@ -367,7 +373,7 @@ a load phase to fill the database with initial data and a transaction phase to e
 
 \subsection{XGDBench}
 \label{ch:background:se:XGDBench}
-Is a graph database benchmark for cloud computing systems.
+It is a graph database benchmark for cloud computing systems.
 It is designed to work in the cloud and in future exascale clouds.
 XGDBench is an extension of YCSB for graph databases.
 This benchmark is written in X10,
@@ -376,17 +382,17 @@ for providing a robust programming model that can withstand the architectural ch
 hardware accelerators, clusters, and supercomputers}.
 
 XGDBench also focuses on social networks for their data structure.
-The data is generated by a procedure called "Multiplicative Attribute Graph" (MAG),
-see~\cite{Kim2012} for more information.
+The data is generated by a procedure called "Multiplicative Attribute Graph" (MAG).
+See~\cite{Kim2012} for more information.
 
-It specifically targets read,
+This benchmark specifically targets read,
 update and graph traversal operations for its performance aspects.~\cite[366]{Dayarathna2012}
 
 In figure~\ref{fig:XGDBenchArchitecture} the architecture of the XGDBench benchmark is illustrated.
 The general workflow is similar to the one from YCSB,
 because this benchmark is based on YCSB.
-The workload is executed in two phases,
-the load phase fills the database with data and the transaction phase executes operations on the database.
+The workload is executed in two phases.
+The load phase fills the database with data and the transaction phase executes operations on the database.
 
 \begin{figure}[h!]
   \centering
@@ -401,16 +407,16 @@ which we will discuss in this section.
 \todo{Revisit}
 
 \subsection{Evaluation of NoSQL Systems using YCSB}
-Abubakar et al. haven't focused their research on graph databases,
-but the used OrientDBs document API among others.
-They compared the following NoSQL databases MongoDB, ElasticSearch, OrientDB and Redis.
+Abubakar et al.~\cite{Abubakar2014} haven't focused their research on graph databases,
+but they used OrientDBs document API.
+They compared the NoSQL databases MongoDB, ElasticSearch, OrientDB and Redis.
 Three different workloads were used in their study,
 each concentrating on one operation,
 which were inserts, reads and updates.
-The dataset size was varied between 1.000 and 100.000 records with a record size of 1KB.
-Their insert workload showed that OrientDB was the slowest among the examined database across all dataset sizes whereas Redis was the fastest in this category.
-The read workload had no consistent order for the databases,
-for every dataset size another database was the best with ElasticSearch as the fastest for the largest dataset.~\cite{Abubakar2014}
+The dataset size has been varied between 1000 and 100000 records with a record size of 1KB.
+Their insert workload showed that OrientDB was the slowest among the examined databases across all dataset sizes whereas Redis was the fastest in this category.
+The read workload had no consistent order for the databases.
+For every dataset size a different database was the best with ElasticSearch as the fastest for the largest dataset.
 
 \subsection{HPC Scalable Graph Analysis Benchmark}
 Dominguez-Sal et al. implemented the HPC Scalable Graph Analysis Benchmark and tested the performance of four different graph databases.
@@ -419,7 +425,7 @@ They used a dataset generated by the R-MAT algorithm with the parameters $ a = 0
 The final dataset had a composition of nodes to edges of $ N = 2^(scale) $ and $ E = 8 \times N $ with weights on the edges uniformly distributed with a maximum value of $ 2^(scale) $.
 The largest dataset they used was $ 2^20 = 1048576 $ nodes,
 because most databases wouldn't finish execution within 24 hours for larger sets.
-They found that DEX was over one order of magnitude faster for insert and scan then the second best database,
+They found that DEX was over one order of magnitude faster for insert and scan then the second-best database,
 which was Neo4j.
 Besides that,
 they found out that Neo4j had scalability problems for some operations on larger datasets.

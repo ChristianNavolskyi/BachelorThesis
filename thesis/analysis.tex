@@ -50,14 +50,15 @@ With the parameters mentioned in~\ref{ch:analysis:se:data} we can calculate the 
     \iff &= 1 + 64 \times (1 + 128 + 128 \times 128) \\
     \iff &= 1 + 64 \times (1 + 128 \times (1 + 128)) \\
     \iff &= 1 + 64 \times (1 + 128 \times 129) \\
-    \iff &= 1 + 64 \times 16.513 \\
-    \iff &= 1.056.833
+    \iff &= 1 + 64 \times 16513 \\
+    \iff &= 1056833
   \end{aligned}
 \end{equation}
 
 To calculate the target throughput the databases have to archive,
 we need to know how many edges are between the different nodes.
-Therefore we need a finished data structure.
+Therefore,
+we need a finished data structure.
 In the next chapter in section~\ref{ch:design:se:suitability} we will calculate the target throughput in $ \frac{inserts}{s} $ for the workload design.
 
 We can extract the size of each data point from our given example.
@@ -124,7 +125,7 @@ YCSB on the other hand doesn't serve any particular structure presumably as they
 So YCSB should be easy to extend with our data model.
 
 For the workload aspect Graphalytics uses common algorithms which doesn't represent out workload scenario.
-XGDBench  and YCSB offer a good set of operations, with insert, read, and scan operations.
+XGDBench and YCSB offer a good set of operations, with insert, read, and scan operations.
 
 Only XGDBench uses another programming language then the other benchmarks namely X10,
 which has to be learned from the ground up and therefore the code quality would suffer.

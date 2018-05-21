@@ -34,7 +34,8 @@ a call to \texttt{Node::getHashMap} will randomly fill the property with the amo
 
 \subsection{Edge}
 As the \texttt{Node} class the \texttt{Edge} class also uses a counter field to assign the correct identifier to each edge.
-Additionally the ids of the start and end \texttt{Node} are stored in fields.
+Additionally,
+the ids of the start and end \texttt{Node} are stored in fields.
 
 \section{Generator}
 \label{ch:implementation:se:generator}
@@ -334,7 +335,8 @@ we use the \texttt{Property::addProperty} method on it with the key of the prope
 
 \textbf{getting a node by its identifier} \newline
 Retrieving a node is done by creating a resource with the same identifier.
-Jena will look up the database whether one already exists and the returned node will be equal to an existing one.
+Jena will look up the database whether one already exists,
+and the returned node will be equal to an existing one.
 
 \textbf{getting an edge by its identifier} \newline
 Similar to retrieving a node from the database we create a property with the \texttt{key},
