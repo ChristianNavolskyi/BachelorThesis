@@ -1,5 +1,0 @@
-#[Interval percentile log between 0.000 and <Infinite> seconds (relative to StartTime)]
-#[StartTime: 1524282600.766 (seconds since epoch), Sat Apr 21 05:50:00 CEST 2018]
-Time: IntervalPercentiles:count ( 50% 90% Max ) TotalPercentiles:count ( 50% 90% 99% 99.9% 99.99% Max )
-2.091: I:23332 (   0.058   0.066   1.327 ) T:23332 (   0.058   0.066   0.104   0.192   1.316   1.327 )
-2.117: I:0 (   0.000   0.000   0.000 ) T:23332 (   0.058   0.066   0.104   0.192   1.316   1.327 )

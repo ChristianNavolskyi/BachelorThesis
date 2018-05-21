@@ -1,6 +1,0 @@
-#[Logging for: Intended-INSERT]
-#[Histogram log format version 1.1]
-#[StartTime: 1524282615.222 (seconds since epoch), Sat Apr 21 05:50:15 CEST 2018]
-"StartTimestamp","Interval_Length","Interval_Max","Interval_Compressed_Histogram"
-0.000,2.152,0.019,HISTggAAAa542u3YvWoUURzG4TO7a0z8AJFEBAUFFRG/BRULjZWWYqMgFuJF2KqQytZbsLNQrGwULKy8AC/CxtJOi3nH4g/DLoYY0OdpfuzkzMeZ2Zxd9vDGy+etvfrRetO06/P05/r3xuJy39rOdF/6uc/kRbq379KXviu7cvuf5e/30lkOm/26tRzvQ5rt7XF6K72ZHk/PpG9y3E8539e+s1zf8sH0Uba/zviP6Ub6NtfzLb2b479P36VP0uzX7qQP05yn3U8fpLfL+GFe6+n59EJ6usz31Mjrc2X8ifRYeiBdTddGtud5tf3pofRoerKc53J6Nr1YntOVsv16eqOMG+Z/Nb1Unu+1Mt9hfkfK+3G1XPewfXfpnjLflXRHulReD52UDuOW01kZPyvju7LfZKTdnNbxZX37bVrGtZHXY//vY110vZj+4TrTRuY7b7/JgvOYd75uk9fdtnj/zZ5vqz8n4G++vxZdp7w/+Z/Xxc59YBueg+cO/OvroHUOAPD9ALBeAeBzAADA9xoAAACAgd8rAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAYPt1vwAKFSBn
-2.152,0.024,0.000,HISTggAAAB142pNpmdzIwMDAwQABzFCaEUoz2X9gQAEAYqkC8g==
