@@ -332,6 +332,8 @@ that means \texttt{productsPerOrder},
   \label{tab:retrievingUnderLoad}
 \end{table}
 
+\pagebreak
+
 \section{Extension of the Benchmark}
 \label{ch:design:se:extensionOfTheBenchmark}
 To be able to execute the introduced workloads and use the data structure designed above,
@@ -453,6 +455,8 @@ The \texttt{Workload::doInsert} method will only insert a subgraph into the data
 To do so the workload class needs to get the subgraph from the \texttt{GraphDataGenerator} and redirect its value to the database.
 For the \texttt{Workload::doTransaction} method,
 the workload has to be able to call the available methods on a database which are
+
+\pagebreak
 
 \begin{itemize}
   \item DB::insert(String table, String key, Map<String, ByteIterator> values)

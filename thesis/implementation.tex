@@ -375,6 +375,8 @@ At the end of a transaction we call \texttt{Transaction::success}\footnote{org.n
 An example of our implementation is shown in the following listing~\ref{lst:neo4jInit}.
 The start and end of a transaction for an operation are implemented as in the if-block of the listing.
 
+\pagebreak
+
 \begin{lstlisting}[language=Java,label={lst:neo4jInit},caption={Implementation of the initialisation and beginning of a transaction.},captionpos=b]
 String path = getPathFromProperties();
 boolean useIndex = shouldUseIndex();

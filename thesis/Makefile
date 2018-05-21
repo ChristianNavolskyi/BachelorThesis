@@ -61,7 +61,10 @@ new: $(MAINFILE).tex
 	- bibtex $(MAINFILE)
 	- pdflatex -shell-escape $(MAINFILE)
 	- pdflatex -shell-escape $(MAINFILE)
-	- make clean
+	- open $(MAINFILE).pdf
+
+update: $(MAINFILE).tex
+	- pdflatex -shell-escape $(MAINFILE)
 	- open $(MAINFILE).pdf
 
 #makeindex kann keine 8-bit Umlaute richtig sortieren! :-(
