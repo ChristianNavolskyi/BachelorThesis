@@ -8,7 +8,7 @@ The results of the experiment are located in the ```results/``` folder.
 
 ## Execution
 To execute the benchmark yourself your first have to build YCSB.
-To do so go to the ```YCSB/``` folder and run ```mvn clean package -DskipTests=true```.
+To do so go to the ```YCSB/``` folder and run ```mvn clean package -DskipTests=true -Dcheckstyle.skip```.
 Now move into the ```bin/``` folder and execute the workloads with ```./multi-db-runner.sh -d <database> -w <workloadFolder>```.
 This scipt is a shell script and will therefore only work on UNIX systems. You can specify multiple databases with multiple ```-d``` options.
 
